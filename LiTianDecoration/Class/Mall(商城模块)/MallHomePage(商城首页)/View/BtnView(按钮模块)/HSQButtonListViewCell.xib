@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="HSQButtonListViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="191"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="200" height="191"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="领券中心" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kPU-ES-90d">
+                        <rect key="frame" x="0.0" y="166" width="200" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="ecq-ku-TEM"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="3-1P106112Q1-51" translatesAutoresizingMaskIntoConstraints="NO" id="6k1-2P-dNY">
+                        <rect key="frame" x="22" y="5" width="156" height="156"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="6k1-2P-dNY" secondAttribute="height" multiplier="1:1" id="AD1-Im-cjG"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="kPU-ES-90d" secondAttribute="trailing" id="6EC-iC-Z98"/>
+                <constraint firstAttribute="bottom" secondItem="kPU-ES-90d" secondAttribute="bottom" constant="5" id="91p-G2-eaK"/>
+                <constraint firstItem="kPU-ES-90d" firstAttribute="top" secondItem="6k1-2P-dNY" secondAttribute="bottom" constant="5" id="CWv-Uc-ZO9"/>
+                <constraint firstItem="6k1-2P-dNY" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="Cne-3Y-OQG"/>
+                <constraint firstItem="kPU-ES-90d" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="hNu-i5-Cm3"/>
+                <constraint firstItem="6k1-2P-dNY" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="vc5-d0-mHP"/>
+            </constraints>
+            <size key="customSize" width="200" height="191"/>
+            <connections>
+                <outlet property="IconImageView" destination="6k1-2P-dNY" id="WcS-2v-nIG"/>
+                <outlet property="NameLabel" destination="kPU-ES-90d" id="E4w-QL-Iz4"/>
+            </connections>
+            <point key="canvasLocation" x="-73" y="-44"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="3-1P106112Q1-51" width="355" height="253"/>
+    </resources>
+</document>

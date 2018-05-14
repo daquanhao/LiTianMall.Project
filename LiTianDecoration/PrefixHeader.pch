@@ -1,0 +1,262 @@
+//
+//  PrefixHeader.pch
+//  LiTianDecoration
+//
+//  Created by administrator on 2018/4/8.
+//  Copyright © 2018年 administrator. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#define KScreenHeight [UIScreen mainScreen].bounds.size.height 
+
+#define KScreenWidth [UIScreen mainScreen].bounds.size.width
+
+// 客户端类型
+#define KClientType @"ios"
+
+#define RGB(r, g, b) [UIColor colorWithRed:r / 255.0 green:g/255.0 blue:b/255.0 alpha:1.0]
+
+#define KTextFont_(X)  X * KScreenWidth / 375 // 根据屏幕的宽度自适应文字的大小
+
+#define KViewBackGroupColor  [UIColor colorWithRed:240 / 255.0 green:242 / 255.0 blue:245 / 255.0 alpha:1.0] // 默认的背景色
+
+#define KImageName(name)  [UIImage imageNamed:name] // 简化加载图片的名字
+
+#define KIphoneX_Y ([UIScreen mainScreen].bounds.size.height == 812.0 ? 24 : 0)  // iphonex 头部的安全距离
+
+#define KSafeTopeHeight ([UIScreen mainScreen].bounds.size.height == 812.0 ? 88 : 64)  // iphonex 头部的安全距离
+
+#define KSafeBottomHeight ([UIScreen mainScreen].bounds.size.height == 812.0 ? 34 : 0)  // iphonex 底部的安全距离
+
+#define KPersonHeight ([UIScreen mainScreen].bounds.size.height == 812.0 ? 164 : 150)  // 我的界面顶部显示头像的那个View的高度
+
+#define KBtnViewH 60  // 我的界面带有按钮的视图的高度
+
+#define KSecondViewHeight 200  // 秒杀专区的高度
+
+#ifdef DEBUG  // 调式环境下的打印
+
+#define HSQLog(...) NSLog(__VA_ARGS__)
+
+#else         // 正式环境下的打印
+
+#define HSQLog(...)
+
+#endif
+
+// 当ios是11.0版本以上的时候，系统会自动为视图设置安全区域，如果不想要的话，可以添加一下代码取消
+#define KCancelSafeSet(view)  if (@available(iOS 11.0, *)){if ([view respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]){view.contentInsetAdjustmentBehavior =UIScrollViewContentInsetAdjustmentNever;}}
+
+// 头像的替代图片
+#define KIconPlacherImage [UIImage imageNamed:@"icon4"]
+
+// 商品的替代图片
+#define KGoodsPlacherImage [UIImage imageNamed:@"icon4"]
+
+
+
+
+
+#import <SDAutoLayout.h>
+#import "NSString+HSQ.h"
+#import "UIImage+HSQImage.h"
+#import "HSQNavigationController.h"
+#import <AFNetworking.h>
+#import <MJRefresh.h>
+#import <MJExtension.h>
+#import <MBProgressHUD.h>
+#import "HSQProgressHUDManger.h"
+#import <UIImageView+WebCache.h>
+#import <UIButton+WebCache.h>
+#import <JSONModel.h>
+#import "NSTimer+Addtions.h"
+#import "AFNetworkRequestTool.h"
+#import <SDCycleScrollView.h>
+#import "UIDevice+IPhoneModel.h"
+#import "HSQNoDataView.h"
+
+/****************************** 全局通用的接口 *****************************/
+ 
+ // 获取图片验证码标示
+ #define KGetCodeBiaoShiUrl @"/captcha/makecaptchakey"
+
+// 获取图片验证码图片
+#define KGetCodeImageUrl @"/captcha/makecaptcha"
+
+//用户注册的协议
+#define KUserRegisterUrl @"/register/agreement"
+
+// 获取地区列表
+#define KGetAdressInfoUrl @"/area/list"
+
+//获取短信动态码（并验证图片验证码） 1表示注册 2表示登录 3表示找回密码 4表示绑定手机 5表示手机安全认证
+#define KValidationBtnCodeImageUrl @"/loginconnect/smscode/send"
+
+// 验证短信动态码  1表示注册 2表示登录 3表示找回密码 4表示绑定手机 5表示手机安全认证
+#define KVaildationSMSUrl @"/loginconnect/smscode/check"
+
+// 图片上传
+#define KUpLoadPictureUrl @"/member/image/upload"
+
+// 猜你喜欢的Url
+#define KYouLikeUrl @"/goods/guess/like"
+
+/************************************************* 接口文档 ***************************************/
+
+// 完整的接口 
+#define UrlAdress(url) [NSString stringWithFormat:@"%@%@",@"http://10.1.8.238/api",url] 
+
+// 普通登录接口
+#define KNormalLoginUrl @"/login"
+
+// 手机号登录的接口
+#define KMobileLoginUrl @" /loginconnect/mobile/login"
+
+// 普通注册的接口
+#define KNormalRegisterUrl @"/register/general"
+
+// 手机号注册的接口
+#define KMobileRegisterUrl @"/loginconnect/mobile/register"
+
+// 手机找回密码
+#define KMobilForgetPassWordUrl @" /loginconnect/mobile/findpwd"
+
+// 退出登录的接口
+#define KLoginOutUrl @"/logout"
+
+// 用户个人中心的首页的接口
+#define KUserCenterDataUrl @"/member/index"
+
+// 会员详情的数据
+#define KPersonDetailUrl @"/member/detail"
+
+// 会员修改头像
+#define KChangeIconImageUrl @"/member/avatar/edit"
+
+// 会员修改真实名字
+#define KChangeTrueNameUrl @"/member/truename/edit"
+
+// 会员修改性别
+#define KChangeSexUrl @"/member/sex/edit"
+
+// 会员修改出生日期
+#define KChangebirthdayUrl @"/member/birthday/edit"
+
+// 会员修改所在地
+#define KMembersModifyTheLocation @"/member/memberaddress/edit"
+
+// 会员收货地址添加
+#define KAddNewAdressUrl @"/member/address/add"
+
+// 会员地址列表的数据
+#define KadressListUrl @"/member/address/list"
+
+// 会员地址列表的删除
+#define kDeleteAdressListUrl @"/member/address/delete"
+
+// 会员地址列表的编辑
+#define kEditAdressListUrl @"/member/address/edit"
+
+// 会员消息接收
+#define KMessagedReceiveListUrl @"/member/message/setting"
+
+// 会员消息接收状态的改变
+#define KChangeMessageStateUrl @"/member/message/setting/save"
+
+// 查看手机绑定状态
+#define KLookMobileBandStateUrl @"/member/mobile/bind/state"
+
+// 会员改变手机号
+#define KBandPhoneUrl @"/member/security/edit/mobile"
+
+// 我的足迹
+#define KMineFootprintUrl @"/member/goodsbrowse/list"
+
+// 新增浏览足迹
+#define KNewBrowsingFootprintUrl @"/goodsbrowse/add"
+
+// 清空浏览足迹
+#define KClearMineBrownerFootUrl @" /member/goodsbrowse/clearall"
+
+// 会员的财产
+#define KMineMoneryUrl @"/member/asset"
+
+// 会员的积分列表
+#define KIntegralListCell @"/member/points/log"
+
+// 会员的经验值
+#define KExperienceValueUrl @"/member/exppoints/log"
+
+// 会员是否收藏某商品
+#define KCheckIsCollectionGoodsUrl @"/goods/favorite/member/exist"
+
+// 会员收藏某商品
+#define KAddCollectionGoodsUrl @"/member/goods/favorite/add"
+
+// 会员取消收藏商品
+#define KCancelCollectionGoodsUrl @"/member/goods/favorite/delete"
+
+// 商品电脑版描述、手机版描述、属性参数、售后保障(和拼团共用)
+#define KGoodsDetailAftersalesUrl @"/goods/extend/"
+
+// 电脑版详情
+#define KComputerGoodsDetailUrl @"/goods/body/"
+
+// 商品的评论列表
+#define KGoodsRateListUrl @"/goods/evaluate/queryGoodsEvaluate"
+
+/******************** 分类相关的接口  *****************/
+#define KClassDataUrl @"/category/list"
+
+// 搜索框默认显示词
+#define KSearchPlacherUrl @"/search/hot/keyword"
+
+// 热搜的关键词
+#define KHotSearchUrl @"/search/default/keyword"
+
+// 拼团的列表数据
+#define KPinTuanListDataUrl @"/group/list"
+
+// 拼团详情的数据
+#define KPinTuanDetailDataUrl @"/group"
+
+// 为你推荐的商品
+#define KWeiNiTuiJianGoodsUrl @"/goods/combo"
+
+/******************** 发现相关的接口  *****************/
+
+// 获取晒宝编辑精选
+#define KGetSunTreasureListDataUrl @"/showorders/list"
+
+// 获取试用列表de数据
+#define KGetTrialListDataUrl @"/trys/report/list"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#endif /* PrefixHeader_pch */

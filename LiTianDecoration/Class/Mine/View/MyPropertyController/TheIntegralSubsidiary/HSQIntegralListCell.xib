@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="HSQIntegralListCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="64.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+50000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UNa-d3-vFX">
+                        <rect key="frame" x="254.5" y="10" width="55.5" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2019-09-09 10:12:10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hze-Bb-TJq">
+                        <rect key="frame" x="190.5" y="40" width="119.5" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.5450980392" green="0.5450980392" blue="0.5450980392" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="会员登录" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYY-wn-a2Z">
+                        <rect key="frame" x="10" y="10" width="62" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注册有会员" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C9G-7z-65A">
+                        <rect key="frame" x="10" y="39" width="71.5" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="hze-Bb-TJq" firstAttribute="centerY" secondItem="C9G-7z-65A" secondAttribute="centerY" id="F0f-ab-yf3"/>
+                    <constraint firstAttribute="trailing" secondItem="UNa-d3-vFX" secondAttribute="trailing" constant="10" id="JjC-vg-L1A"/>
+                    <constraint firstAttribute="trailing" secondItem="hze-Bb-TJq" secondAttribute="trailing" constant="10" id="KHN-OF-VEG"/>
+                    <constraint firstItem="UNa-d3-vFX" firstAttribute="top" secondItem="qYY-wn-a2Z" secondAttribute="top" id="PMB-A8-yqC"/>
+                    <constraint firstItem="UNa-d3-vFX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="kEC-hw-uqQ"/>
+                    <constraint firstAttribute="bottom" secondItem="hze-Bb-TJq" secondAttribute="bottom" constant="10" id="kfa-sh-Hbz"/>
+                    <constraint firstItem="qYY-wn-a2Z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="kfw-bU-m06"/>
+                    <constraint firstItem="C9G-7z-65A" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="v2W-dB-kUf"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="CountLabel" destination="UNa-d3-vFX" id="zPf-dW-iYA"/>
+                <outlet property="DateTimeLabel" destination="hze-Bb-TJq" id="Ll6-om-tey"/>
+                <outlet property="DescribeLabel" destination="C9G-7z-65A" id="e1N-dn-6ik"/>
+                <outlet property="NameLabel" destination="qYY-wn-a2Z" id="1Ar-68-BAH"/>
+            </connections>
+            <point key="canvasLocation" x="-365" y="-64"/>
+        </tableViewCell>
+    </objects>
+</document>

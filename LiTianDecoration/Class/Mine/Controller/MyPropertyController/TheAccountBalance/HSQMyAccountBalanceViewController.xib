@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HSQMyAccountBalanceViewController">
+            <connections>
+                <outlet property="MyMonery_Label" destination="NhK-YI-As5" id="Wji-Q8-EoA"/>
+                <outlet property="TopViewHeight" destination="gnw-EQ-oij" id="lbt-ow-q1N"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gyI-J9-eFb">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥100.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NhK-YI-As5">
+                            <rect key="frame" x="10" y="32" width="355" height="32"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="预存款账户" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HMg-32-54E">
+                            <rect key="frame" x="10" y="0.0" width="355" height="32"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="HMg-32-54E" firstAttribute="leading" secondItem="gyI-J9-eFb" secondAttribute="leading" constant="10" id="ACP-lW-feb"/>
+                        <constraint firstItem="NhK-YI-As5" firstAttribute="top" secondItem="HMg-32-54E" secondAttribute="bottom" id="AFD-34-bCo"/>
+                        <constraint firstAttribute="trailing" secondItem="HMg-32-54E" secondAttribute="trailing" constant="10" id="B7r-RM-YSm"/>
+                        <constraint firstItem="HMg-32-54E" firstAttribute="trailing" secondItem="NhK-YI-As5" secondAttribute="trailing" id="BbU-f0-aj1"/>
+                        <constraint firstAttribute="bottom" secondItem="NhK-YI-As5" secondAttribute="bottom" id="Tc3-2o-7VW"/>
+                        <constraint firstItem="HMg-32-54E" firstAttribute="height" secondItem="NhK-YI-As5" secondAttribute="height" id="Xc0-J6-Q1o"/>
+                        <constraint firstItem="HMg-32-54E" firstAttribute="leading" secondItem="NhK-YI-As5" secondAttribute="leading" id="YWT-ua-CDB"/>
+                        <constraint firstAttribute="height" constant="64" id="gnw-EQ-oij"/>
+                        <constraint firstItem="HMg-32-54E" firstAttribute="top" secondItem="gyI-J9-eFb" secondAttribute="top" id="v4A-dQ-CKT"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.53258323669999996" green="0.15963962879999999" blue="0.27296977100000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <constraints>
+                <constraint firstItem="gyI-J9-eFb" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="KTR-Zv-FTX"/>
+                <constraint firstItem="gyI-J9-eFb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="SHO-IN-Haq"/>
+                <constraint firstAttribute="trailing" secondItem="gyI-J9-eFb" secondAttribute="trailing" id="v7h-8p-wkX"/>
+            </constraints>
+            <point key="canvasLocation" x="-396.5" y="47.5"/>
+        </view>
+    </objects>
+</document>

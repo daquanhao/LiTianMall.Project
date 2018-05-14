@@ -7,25 +7,577 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C33851232079BA0B0030320C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C33851222079BA0B0030320C /* AppDelegate.m */; };
-		C33851262079BA0B0030320C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33851252079BA0B0030320C /* ViewController.m */; };
+		9452C3F63637F9AA3BC00694 /* libPods-LiTianDecoration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 77A920C6BBD31099245ADB64 /* libPods-LiTianDecoration.a */; };
+		C303946D20A2886800B2A0FA /* UIDevice+IPhoneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C303946B20A2886700B2A0FA /* UIDevice+IPhoneModel.m */; };
+		C303947420A28BF100B2A0FA /* HSQCouponsCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C303947320A28BF100B2A0FA /* HSQCouponsCenterViewController.m */; };
+		C303948720A295D300B2A0FA /* HSQPinTuanDetailHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C303948520A295D300B2A0FA /* HSQPinTuanDetailHomeViewController.m */; };
+		C303948820A295D300B2A0FA /* HSQPinTuanDetailHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C303948620A295D300B2A0FA /* HSQPinTuanDetailHomeViewController.xib */; };
+		C305F2F2207AEA68005301EE /* HSQCustomShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = C305F2F1207AEA68005301EE /* HSQCustomShareView.m */; };
+		C313EE972089982300D15B00 /* HSQSetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C313EE952089982300D15B00 /* HSQSetingViewController.m */; };
+		C313EE982089982300D15B00 /* HSQSetingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C313EE962089982300D15B00 /* HSQSetingViewController.xib */; };
+		C313EE9B2089E06500D15B00 /* RightGoodsClassModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C313EE9A2089E06500D15B00 /* RightGoodsClassModel.m */; };
+		C313EE9E2089E68300D15B00 /* HSQLeftCategoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C313EE9D2089E68300D15B00 /* HSQLeftCategoryModel.m */; };
+		C318F8C42091642A0056F8A3 /* HSQMessageSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C318F8C32091642A0056F8A3 /* HSQMessageSetViewController.m */; };
+		C318F8C82091652A0056F8A3 /* HSQMessageSetListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C318F8C62091652A0056F8A3 /* HSQMessageSetListCell.m */; };
+		C318F8C92091652A0056F8A3 /* HSQMessageSetListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C318F8C72091652A0056F8A3 /* HSQMessageSetListCell.xib */; };
+		C318F8CC209170850056F8A3 /* HSQMessageReceiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C318F8CB209170850056F8A3 /* HSQMessageReceiveModel.m */; };
+		C318F8D4209175110056F8A3 /* HSQHeadMessageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C318F8D3209175110056F8A3 /* HSQHeadMessageView.m */; };
+		C318F8D82091AAC50056F8A3 /* HSQBandMobileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C318F8D62091AAC50056F8A3 /* HSQBandMobileViewController.m */; };
+		C318F8D92091AAC50056F8A3 /* HSQBandMobileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C318F8D72091AAC50056F8A3 /* HSQBandMobileViewController.xib */; };
+		C318F8DD2091BF9F0056F8A3 /* HSQNextBandPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C318F8DB2091BF9F0056F8A3 /* HSQNextBandPhoneViewController.m */; };
+		C318F8DE2091BF9F0056F8A3 /* HSQNextBandPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C318F8DC2091BF9F0056F8A3 /* HSQNextBandPhoneViewController.xib */; };
+		C318F8E32091C1430056F8A3 /* HSQYanZhengMobileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C318F8E12091C1430056F8A3 /* HSQYanZhengMobileViewController.m */; };
+		C318F8E42091C1430056F8A3 /* HSQYanZhengMobileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C318F8E22091C1430056F8A3 /* HSQYanZhengMobileViewController.xib */; };
+		C324CC6920804EC90030CEE7 /* HSQPublicMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = C324CC6820804EC90030CEE7 /* HSQPublicMenuView.m */; };
+		C324CC6D208084AD0030CEE7 /* HSQTheTrialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C324CC6C208084AD0030CEE7 /* HSQTheTrialViewController.m */; };
+		C324CC7B2080A2F20030CEE7 /* HSQToPromoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C324CC792080A2F20030CEE7 /* HSQToPromoteViewController.m */; };
+		C324CC7C2080A2F20030CEE7 /* HSQToPromoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C324CC7A2080A2F20030CEE7 /* HSQToPromoteViewController.xib */; };
+		C324CC812080A3D90030CEE7 /* HSQIntegralCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C324CC7F2080A3D90030CEE7 /* HSQIntegralCenterViewController.m */; };
+		C324CC822080A3D90030CEE7 /* HSQIntegralCenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C324CC802080A3D90030CEE7 /* HSQIntegralCenterViewController.xib */; };
+		C324CC862080A5E50030CEE7 /* HSQToPromoteListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C324CC842080A5E50030CEE7 /* HSQToPromoteListCell.m */; };
+		C324CC872080A5E50030CEE7 /* HSQToPromoteListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C324CC852080A5E50030CEE7 /* HSQToPromoteListCell.xib */; };
+		C324E72C20881F3D00D133F0 /* HSQAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = C324E72B20881F3D00D133F0 /* HSQAccount.m */; };
+		C324E72F208820D000D133F0 /* HSQAccountTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C324E72E208820D000D133F0 /* HSQAccountTool.m */; };
+		C324E7312088932400D133F0 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = C324E7302088932300D133F0 /* Foundation+Log.m */; };
+		C3281FEF209A9BF2007C3909 /* HSQSearchBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3281FED209A9BF2007C3909 /* HSQSearchBarViewController.m */; };
+		C3281FF0209A9BF2007C3909 /* HSQSearchBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3281FEE209A9BF2007C3909 /* HSQSearchBarViewController.xib */; };
+		C3281FF3209AAEB8007C3909 /* HSQSearchListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3281FF2209AAEB8007C3909 /* HSQSearchListCell.m */; };
+		C3281FF7209B19DC007C3909 /* HSQScreeningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3281FF5209B19DC007C3909 /* HSQScreeningViewController.m */; };
+		C3281FF8209B19DC007C3909 /* HSQScreeningViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3281FF6209B19DC007C3909 /* HSQScreeningViewController.xib */; };
+		C3284E4D20A3F59B00C90290 /* HSQPinTuanGoodsDetailHomeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3284E4B20A3F59B00C90290 /* HSQPinTuanGoodsDetailHomeCell.m */; };
+		C3284E4E20A3F59B00C90290 /* HSQPinTuanGoodsDetailHomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3284E4C20A3F59B00C90290 /* HSQPinTuanGoodsDetailHomeCell.xib */; };
+		C3284E5120A4255E00C90290 /* HSQGuiGeAndCouperView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3284E5020A4255E00C90290 /* HSQGuiGeAndCouperView.m */; };
+		C3284E5520A427F800C90290 /* HSQCoupterListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3284E5320A427F800C90290 /* HSQCoupterListCell.m */; };
+		C3284E5620A427F800C90290 /* HSQCoupterListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3284E5420A427F800C90290 /* HSQCoupterListCell.xib */; };
+		C3284E5A20A43C6700C90290 /* HSQGoodsDetailRateHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3284E5920A43C6700C90290 /* HSQGoodsDetailRateHeadView.m */; };
+		C3284E5D20A445AD00C90290 /* HSQGoodsDetailFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3284E5C20A445AD00C90290 /* HSQGoodsDetailFooterView.m */; };
+		C3284E6220A44ABD00C90290 /* HSQStoreHeadIntroCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3284E6020A44ABD00C90290 /* HSQStoreHeadIntroCell.m */; };
+		C3284E6320A44ABD00C90290 /* HSQStoreHeadIntroCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3284E6120A44ABD00C90290 /* HSQStoreHeadIntroCell.xib */; };
+		C3284E6620A4724000C90290 /* HSQRecommendGoodslListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3284E6520A4724000C90290 /* HSQRecommendGoodslListCell.m */; };
+		C32A866220A2A9A900260912 /* HSQPinTuanDetailGoodsListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C32A866120A2A9A900260912 /* HSQPinTuanDetailGoodsListModel.m */; };
+		C32A866520A2DA0200260912 /* HSQPinTuanDataDealTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C32A866420A2DA0200260912 /* HSQPinTuanDataDealTool.m */; };
+		C32A866E20A2EB0C00260912 /* HSQGoodsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C32A866D20A2EB0C00260912 /* HSQGoodsDetailViewController.m */; };
+		C32A867120A2EE8300260912 /* HSQGoodsImageDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C32A867020A2EE8300260912 /* HSQGoodsImageDetailViewController.m */; };
+		C32A867520A2F8D400260912 /* HSQGoodsDetailImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C32A867320A2F8D400260912 /* HSQGoodsDetailImageCell.m */; };
+		C32A867620A2F8D400260912 /* HSQGoodsDetailImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32A867420A2F8D400260912 /* HSQGoodsDetailImageCell.xib */; };
+		C32A867C20A2FDCA00260912 /* HSQGoodsImageDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32A867B20A2FDCA00260912 /* HSQGoodsImageDetailViewController.xib */; };
+		C32A868020A3210400260912 /* HSQComputerGoodsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C32A867E20A3210400260912 /* HSQComputerGoodsDetailViewController.m */; };
+		C32A868420A326C800260912 /* HSQGoodsDetailHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C32A868320A326C800260912 /* HSQGoodsDetailHeadCell.m */; };
+		C32C25102092BE4200076F10 /* NSTimer+Addtions.m in Sources */ = {isa = PBXBuildFile; fileRef = C32C250F2092BE4100076F10 /* NSTimer+Addtions.m */; };
+		C32C25142092C34800076F10 /* HSQChangePassWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C32C25122092C34800076F10 /* HSQChangePassWordViewController.m */; };
+		C32C25152092C34800076F10 /* HSQChangePassWordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32C25132092C34800076F10 /* HSQChangePassWordViewController.xib */; };
+		C32C25182092CFC500076F10 /* HSQMessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C32C25172092CFC500076F10 /* HSQMessageListViewController.m */; };
+		C32C252B20930AF800076F10 /* HSQMyCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C32C252A20930AF800076F10 /* HSQMyCollectionHeaderView.m */; };
+		C32C252F2093154B00076F10 /* BrowseFootprintViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C32C252E2093154B00076F10 /* BrowseFootprintViewController.m */; };
+		C32C25342093179000076F10 /* BrowseFootprintListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C32C25322093179000076F10 /* BrowseFootprintListCell.m */; };
+		C32C2538209322B800076F10 /* BrowseFootprintListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C32C2537209322B800076F10 /* BrowseFootprintListModel.m */; };
+		C32EDFFD209417A6004F85F0 /* HSQMobileRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C32EDFFB209417A6004F85F0 /* HSQMobileRegisterViewController.m */; };
+		C32EDFFE209417A6004F85F0 /* HSQMobileRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32EDFFC209417A6004F85F0 /* HSQMobileRegisterViewController.xib */; };
+		C32EE006209445EB004F85F0 /* MobileVerificationLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C32EE004209445EB004F85F0 /* MobileVerificationLoginViewController.m */; };
+		C32EE007209445EB004F85F0 /* MobileVerificationLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32EE005209445EB004F85F0 /* MobileVerificationLoginViewController.xib */; };
+		C32EE00C20945706004F85F0 /* HSQMyPropertyHomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = C32EE00B20945706004F85F0 /* HSQMyPropertyHomeController.m */; };
+		C32EE01520945B60004F85F0 /* HSQMyPropertyHomeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C32EE01320945B60004F85F0 /* HSQMyPropertyHomeListCell.m */; };
+		C32EE01620945B60004F85F0 /* HSQMyPropertyHomeListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32EE01420945B60004F85F0 /* HSQMyPropertyHomeListCell.xib */; };
+		C32EE01920945E79004F85F0 /* MyPropertyListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C32EE01820945E79004F85F0 /* MyPropertyListModel.m */; };
+		C32EE01E20946E24004F85F0 /* HSQIntegralListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C32EE01C20946E24004F85F0 /* HSQIntegralListViewController.m */; };
+		C32EE01F20946E24004F85F0 /* HSQIntegralListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32EE01D20946E24004F85F0 /* HSQIntegralListViewController.xib */; };
+		C32EE02420947385004F85F0 /* HSQIntegralListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C32EE02220947385004F85F0 /* HSQIntegralListCell.m */; };
+		C32EE02520947385004F85F0 /* HSQIntegralListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C32EE02320947385004F85F0 /* HSQIntegralListCell.xib */; };
+		C32EE02820947774004F85F0 /* HSQIntegralListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C32EE02720947774004F85F0 /* HSQIntegralListModel.m */; };
+		C332805A207DD99300AA6ACF /* HSQCustomViewWithButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C3328059207DD99300AA6ACF /* HSQCustomViewWithButton.m */; };
+		C332805D207DE8E400AA6ACF /* HSQGoodsCollectionListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C332805C207DE8E400AA6ACF /* HSQGoodsCollectionListCell.m */; };
+		C3328060207DF29000AA6ACF /* HSQShaiBaoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C332805F207DF29000AA6ACF /* HSQShaiBaoViewController.m */; };
+		C3328064207DFA4D00AA6ACF /* HSQPubShaiBaoView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3328063207DFA4D00AA6ACF /* HSQPubShaiBaoView.m */; };
+		C3328069207E089D00AA6ACF /* HSQLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3328067207E089D00AA6ACF /* HSQLoginViewController.m */; };
+		C332806A207E089D00AA6ACF /* HSQLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3328068207E089D00AA6ACF /* HSQLoginViewController.xib */; };
+		C332806E207E0BC800AA6ACF /* HSQRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C332806C207E0BC800AA6ACF /* HSQRegisterViewController.m */; };
+		C332806F207E0BC800AA6ACF /* HSQRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C332806D207E0BC800AA6ACF /* HSQRegisterViewController.xib */; };
+		C334664D2086D37000B8AD0A /* HSQPersonCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C334664B2086D37000B8AD0A /* HSQPersonCenterViewController.m */; };
+		C334664E2086D37000B8AD0A /* HSQPersonCenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C334664C2086D37000B8AD0A /* HSQPersonCenterViewController.xib */; };
+		C33466522086E0B200B8AD0A /* HSQRealNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33466502086E0B200B8AD0A /* HSQRealNameViewController.m */; };
+		C33466532086E0B200B8AD0A /* HSQRealNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33466512086E0B200B8AD0A /* HSQRealNameViewController.xib */; };
+		C33466562086E97800B8AD0A /* HSQUserGenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C33466552086E97800B8AD0A /* HSQUserGenderView.m */; };
+		C334665B20871E0900B8AD0A /* HSQSelectDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C334665A20871E0900B8AD0A /* HSQSelectDatePickerView.m */; };
+		C334666220872CD500B8AD0A /* HSQPublicAdressView.m in Sources */ = {isa = PBXBuildFile; fileRef = C334666120872CD500B8AD0A /* HSQPublicAdressView.m */; };
+		C3346665208736D300B8AD0A /* HSQAddressView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3346664208736D300B8AD0A /* HSQAddressView.m */; };
+		C33466682087423E00B8AD0A /* HSQAdressListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C33466672087423E00B8AD0A /* HSQAdressListModel.m */; };
+		C334666C2087431C00B8AD0A /* AddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33466692087431B00B8AD0A /* AddressTableViewCell.xib */; };
+		C334666D2087431C00B8AD0A /* AddressTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C334666A2087431B00B8AD0A /* AddressTableViewCell.m */; };
 		C33851292079BA0B0030320C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C33851272079BA0B0030320C /* Main.storyboard */; };
 		C338512B2079BA140030320C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C338512A2079BA140030320C /* Assets.xcassets */; };
 		C338512E2079BA140030320C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C338512C2079BA140030320C /* LaunchScreen.storyboard */; };
 		C33851312079BA140030320C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C33851302079BA140030320C /* main.m */; };
+		C338513F2079BB810030320C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C338513E2079BB810030320C /* AppDelegate.m */; };
+		C33851442079BD770030320C /* HSQCustomTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = C33851432079BD770030320C /* HSQCustomTextView.m */; };
+		C338514E207A121A0030320C /* HSQCustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C338514D207A121A0030320C /* HSQCustomButton.m */; };
+		C33A3C872096B5ED00944632 /* HSQReturnGoodsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33A3C862096B5ED00944632 /* HSQReturnGoodsViewController.m */; };
+		C33A3C8B2096B82C00944632 /* HSQReturnGoodsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33A3C8A2096B82C00944632 /* HSQReturnGoodsListViewController.m */; };
+		C33A3C912096C01B00944632 /* HSQClassSecondGoodsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C33A3C902096C01B00944632 /* HSQClassSecondGoodsListCell.m */; };
+		C33A3C972096ECF600944632 /* HSQClassGoodsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33A3C952096ECF600944632 /* HSQClassGoodsListViewController.m */; };
+		C33A3C982096ECF600944632 /* HSQClassGoodsListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33A3C962096ECF600944632 /* HSQClassGoodsListViewController.xib */; };
+		C33A3C9B2096FB6B00944632 /* HSQDropdownMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = C33A3C9A2096FB6B00944632 /* HSQDropdownMenuView.m */; };
+		C33A3C9F2097026800944632 /* HSQMenuListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C33A3C9D2097026800944632 /* HSQMenuListCell.m */; };
+		C33A3CA02097026800944632 /* HSQMenuListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33A3C9E2097026800944632 /* HSQMenuListCell.xib */; };
+		C33F4AD2209554550032B9A1 /* HSQMyAccountBalanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33F4AD0209554550032B9A1 /* HSQMyAccountBalanceViewController.m */; };
+		C33F4AD3209554550032B9A1 /* HSQMyAccountBalanceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33F4AD1209554550032B9A1 /* HSQMyAccountBalanceViewController.xib */; };
+		C33F4AD62095577B0032B9A1 /* MyBalanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33F4AD52095577B0032B9A1 /* MyBalanceViewController.m */; };
+		C33F4AD92095579D0032B9A1 /* TopUpDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33F4AD82095579D0032B9A1 /* TopUpDetailViewController.m */; };
+		C33F4ADC209557BC0032B9A1 /* HSQWithdrawalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33F4ADB209557BC0032B9A1 /* HSQWithdrawalViewController.m */; };
+		C33F4AE120955F340032B9A1 /* HSQMemberPrizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33F4ADF20955F340032B9A1 /* HSQMemberPrizeViewController.m */; };
+		C33F4AE220955F340032B9A1 /* HSQMemberPrizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33F4AE020955F340032B9A1 /* HSQMemberPrizeViewController.xib */; };
+		C33F4AE6209560360032B9A1 /* HSQCouponsHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33F4AE5209560360032B9A1 /* HSQCouponsHomeViewController.m */; };
+		C33F4AE92095608F0032B9A1 /* HSQLeftCouponsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33F4AE82095608F0032B9A1 /* HSQLeftCouponsViewController.m */; };
+		C33F4AED209560A20032B9A1 /* HSQRightCouponsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33F4AEB209560A20032B9A1 /* HSQRightCouponsViewController.m */; };
+		C33F4AEE209560A20032B9A1 /* HSQRightCouponsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C33F4AEC209560A20032B9A1 /* HSQRightCouponsViewController.xib */; };
+		C33F4AF12095A3870032B9A1 /* HSQMyCollectionHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33F4AF02095A3870032B9A1 /* HSQMyCollectionHomeViewController.m */; };
+		C33F4AF42095A39A0032B9A1 /* HSQGoodsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33F4AF32095A39A0032B9A1 /* HSQGoodsCollectionViewController.m */; };
+		C33F4AF72095A3A90032B9A1 /* HSQStoreCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33F4AF62095A3A90032B9A1 /* HSQStoreCollectionViewController.m */; };
+		C33F4AFA2095ACA30032B9A1 /* HSQTopNavtionView.m in Sources */ = {isa = PBXBuildFile; fileRef = C33F4AF92095ACA30032B9A1 /* HSQTopNavtionView.m */; };
+		C33F4AFD2095C1F50032B9A1 /* HSQMyOrderHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33F4AFC2095C1F50032B9A1 /* HSQMyOrderHomeViewController.m */; };
+		C33F4B012095C5120032B9A1 /* HSQMyOrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C33F4B002095C5120032B9A1 /* HSQMyOrderListViewController.m */; };
+		C3425BCA208472AA00869438 /* HSQProgressHUDManger.m in Sources */ = {isa = PBXBuildFile; fileRef = C3425BC9208472AA00869438 /* HSQProgressHUDManger.m */; };
+		C34D514D2085A18A00C28016 /* HSQTrialReportListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C34D514C2085A18A00C28016 /* HSQTrialReportListModel.m */; };
+		C34D51502085A45000C28016 /* HSQPhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = C34D514F2085A45000C28016 /* HSQPhotosView.m */; };
+		C34D51532085C13800C28016 /* HSQUsingTheReportCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C34D51522085C13800C28016 /* HSQUsingTheReportCell.m */; };
+		C34D51562085C47800C28016 /* HSQCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = C34D51552085C47800C28016 /* HSQCollectionViewLayout.m */; };
+		C34D51592085E34900C28016 /* HWStatusPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = C34D51582085E34900C28016 /* HWStatusPhotoView.m */; };
+		C34D515C2085E40600C28016 /* HWPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = C34D515B2085E40600C28016 /* HWPhoto.m */; };
+		C34D515F2085E5DF00C28016 /* HSQTrialReportFrameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C34D515E2085E5DF00C28016 /* HSQTrialReportFrameModel.m */; };
+		C34D51622085F47E00C28016 /* HSQUsingReportDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C34D51612085F47E00C28016 /* HSQUsingReportDetailViewController.m */; };
+		C3546DC6209FDE040071294C /* MallHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3546DC5209FDE040071294C /* MallHomeViewController.m */; };
+		C3546DCC209FE27E0071294C /* HSQMallHomeHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3546DCB209FE27E0071294C /* HSQMallHomeHeadView.m */; };
+		C3546DCF209FF78B0071294C /* HSQMallHomeDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C3546DCE209FF78B0071294C /* HSQMallHomeDataModel.m */; };
+		C3546DD520A020B30071294C /* HSQModelViewReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3546DD420A020B30071294C /* HSQModelViewReusableView.m */; };
+		C3546DD820A035980071294C /* HSQSecondsKillReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3546DD720A035980071294C /* HSQSecondsKillReusableView.m */; };
+		C3546DE120A041880071294C /* HSQHeadImageReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3546DE020A041880071294C /* HSQHeadImageReusableView.m */; };
+		C3546DE420A06CAB0071294C /* HSQMiaoShaGoodsView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3546DE320A06CAB0071294C /* HSQMiaoShaGoodsView.m */; };
+		C3546DE820A070300071294C /* HSQMiaoShaGoodsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3546DE620A070300071294C /* HSQMiaoShaGoodsListCell.m */; };
+		C3546DE920A070300071294C /* HSQMiaoShaGoodsListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3546DE720A070300071294C /* HSQMiaoShaGoodsListCell.xib */; };
+		C3581240207AF0C600BC26B4 /* HSQHomeTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = C358123F207AF0C600BC26B4 /* HSQHomeTabBarController.m */; };
+		C3581243207AF8BB00BC26B4 /* HSQNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3581242207AF8BB00BC26B4 /* HSQNavigationController.m */; };
+		C3581246207B005C00BC26B4 /* UIImage+HSQImage.m in Sources */ = {isa = PBXBuildFile; fileRef = C3581245207B005C00BC26B4 /* UIImage+HSQImage.m */; };
+		C36F5702207C96BE0086C2FA /* HSQDiscoverHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = C36F5701207C96BE0086C2FA /* HSQDiscoverHeadView.m */; };
+		C36F5709207CAAA50086C2FA /* HSQMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C36F5708207CAAA50086C2FA /* HSQMineViewController.m */; };
+		C36F570C207CB0E80086C2FA /* HSQCustomNavBar.m in Sources */ = {isa = PBXBuildFile; fileRef = C36F570B207CB0E80086C2FA /* HSQCustomNavBar.m */; };
+		C36F5710207CBC540086C2FA /* HSQHeaderCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C36F570E207CBC540086C2FA /* HSQHeaderCollectionReusableView.m */; };
+		C36F5711207CBC540086C2FA /* HSQHeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C36F570F207CBC540086C2FA /* HSQHeaderCollectionReusableView.xib */; };
+		C375FBBA20A68D65000BA8BA /* HSQNoDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = C375FBB920A68D65000BA8BA /* HSQNoDataView.m */; };
+		C375FBBD20A699B9000BA8BA /* HSQStarsView.m in Sources */ = {isa = PBXBuildFile; fileRef = C375FBBC20A699B9000BA8BA /* HSQStarsView.m */; };
+		C375FBC020A6BFD7000BA8BA /* HSQGoodsRateListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C375FBBF20A6BFD7000BA8BA /* HSQGoodsRateListCollectionViewCell.m */; };
+		C375FBC320A6C281000BA8BA /* HSQGoodsRateImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C375FBC220A6C281000BA8BA /* HSQGoodsRateImageView.m */; };
+		C375FBC620A6C789000BA8BA /* HSQGoodsRateListFrameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C375FBC520A6C789000BA8BA /* HSQGoodsRateListFrameModel.m */; };
+		C375FBC920A6EA7A000BA8BA /* HSQGoodsDetailRateListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C375FBC820A6EA7A000BA8BA /* HSQGoodsDetailRateListCell.m */; };
+		C37A9987207EF24A00A55AA0 /* HSQWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C37A9986207EF24A00A55AA0 /* HSQWebViewController.m */; };
+		C37A998D207F075B00A55AA0 /* HSQForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C37A998B207F075B00A55AA0 /* HSQForgotPasswordViewController.m */; };
+		C37A998E207F075B00A55AA0 /* HSQForgotPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C37A998C207F075B00A55AA0 /* HSQForgotPasswordViewController.xib */; };
+		C37A9994207F34C800A55AA0 /* HSQClassViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C37A9993207F34C800A55AA0 /* HSQClassViewController.m */; };
+		C37A9997207F373500A55AA0 /* HSQClassHomeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C37A9996207F373500A55AA0 /* HSQClassHomeListCell.m */; };
+		C37A999A207F443C00A55AA0 /* HSQClassHeadCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C37A9999207F443C00A55AA0 /* HSQClassHeadCollectionReusableView.m */; };
+		C37A999D207F47A800A55AA0 /* HSQClassGoodsListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C37A999C207F47A800A55AA0 /* HSQClassGoodsListCell.m */; };
+		C37A99A3207F502D00A55AA0 /* HSQPinTuanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C37A99A1207F502D00A55AA0 /* HSQPinTuanViewController.m */; };
+		C37A99A4207F502D00A55AA0 /* HSQPinTuanViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C37A99A2207F502D00A55AA0 /* HSQPinTuanViewController.xib */; };
+		C37A99A7207F52BE00A55AA0 /* HSQPinTuanListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C37A99A6207F52BE00A55AA0 /* HSQPinTuanListCell.m */; };
+		C38EF4A8207B4A2E0094B16B /* AFNetworkRequestTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C38EF4A7207B4A2E0094B16B /* AFNetworkRequestTool.m */; };
+		C38EF4B5207B4CE50094B16B /* HSQHomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C38EF4B4207B4CE50094B16B /* HSQHomePageViewController.m */; };
+		C38EF4BF207B4DDE0094B16B /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C38EF4BE207B4DDE0094B16B /* DiscoverViewController.m */; };
+		C38EF4C2207B51850094B16B /* DiscoverHomeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C38EF4C1207B51850094B16B /* DiscoverHomeListCell.m */; };
+		C38EF4C5207B59760094B16B /* DiscoverListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C38EF4C4207B59760094B16B /* DiscoverListModel.m */; };
+		C38EF4C8207B6A240094B16B /* NSString+HSQ.m in Sources */ = {isa = PBXBuildFile; fileRef = C38EF4C7207B6A240094B16B /* NSString+HSQ.m */; };
+		C3BF692B209033A400726EEA /* HSQAdressListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BF692A209033A400726EEA /* HSQAdressListViewController.m */; };
+		C3BF692F2090363100726EEA /* HSQNewAdressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BF692D2090363100726EEA /* HSQNewAdressViewController.m */; };
+		C3BF69302090363100726EEA /* HSQNewAdressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3BF692E2090363100726EEA /* HSQNewAdressViewController.xib */; };
+		C3BF693320906AEF00726EEA /* HSQAdressListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BF693220906AEF00726EEA /* HSQAdressListCell.m */; };
+		C3BF69392090717E00726EEA /* HSQAcceptAddressListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BF69382090717E00726EEA /* HSQAcceptAddressListModel.m */; };
+		C3BF693C20907AC500726EEA /* HSQAdressListFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BF693B20907AC500726EEA /* HSQAdressListFooterView.m */; };
+		C3BF694020908B4B00726EEA /* HSQLoginBandViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3BF693E20908B4B00726EEA /* HSQLoginBandViewController.m */; };
+		C3BF694120908B4B00726EEA /* HSQLoginBandViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3BF693F20908B4B00726EEA /* HSQLoginBandViewController.xib */; };
+		C3DD2B4820A1ABDD004FC2F3 /* HSQMallShopCarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3DD2B4720A1ABDD004FC2F3 /* HSQMallShopCarViewController.m */; };
+		C3DD2B5220A1C121004FC2F3 /* HSQPinTuanListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C3DD2B5120A1C121004FC2F3 /* HSQPinTuanListModel.m */; };
+		C3E2983220A12E57001E1EBE /* TXScrollLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3E2982F20A12E56001E1EBE /* TXScrollLabelView.m */; };
+		C3E2983320A12E57001E1EBE /* UIView+TXFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = C3E2983020A12E56001E1EBE /* UIView+TXFrame.m */; };
+		C3E2983620A13338001E1EBE /* HSQMallHomePageController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3E2983520A13338001E1EBE /* HSQMallHomePageController.m */; };
+		C3E2983920A13521001E1EBE /* HSQMallHeiperTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C3E2983820A13521001E1EBE /* HSQMallHeiperTool.m */; };
+		C3E2984820A173F3001E1EBE /* HSQImageListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3E2984620A173F3001E1EBE /* HSQImageListCollectionViewCell.m */; };
+		C3E2984920A173F3001E1EBE /* HSQImageListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3E2984720A173F3001E1EBE /* HSQImageListCollectionViewCell.xib */; };
+		C3E2984E20A18D0C001E1EBE /* HSQButtonListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3E2984C20A18D0C001E1EBE /* HSQButtonListViewCell.m */; };
+		C3E2984F20A18D0C001E1EBE /* HSQButtonListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3E2984D20A18D0C001E1EBE /* HSQButtonListViewCell.xib */; };
+		C3F8BB4D20A535180087B6A0 /* PublieTuiJianGoodsListView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F8BB4C20A535180087B6A0 /* PublieTuiJianGoodsListView.m */; };
+		C3F8BB5220A573810087B6A0 /* HSQContactTheMerchantController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F8BB5020A573810087B6A0 /* HSQContactTheMerchantController.m */; };
+		C3F8BB5320A573810087B6A0 /* HSQContactTheMerchantController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3F8BB5120A573810087B6A0 /* HSQContactTheMerchantController.xib */; };
+		C3F8BB5820A578300087B6A0 /* HSQStoreDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F8BB5620A578300087B6A0 /* HSQStoreDetailViewController.m */; };
+		C3F8BB5920A578300087B6A0 /* HSQStoreDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3F8BB5720A578300087B6A0 /* HSQStoreDetailViewController.xib */; };
+		C3F8BB5D20A578C60087B6A0 /* HSQGoodsDetailCommentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F8BB5B20A578C60087B6A0 /* HSQGoodsDetailCommentsViewController.m */; };
+		C3F8BB5E20A578C60087B6A0 /* HSQGoodsDetailCommentsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3F8BB5C20A578C60087B6A0 /* HSQGoodsDetailCommentsViewController.xib */; };
+		C3F8BB6120A58C750087B6A0 /* HSQGoodsRateListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F8BB6020A58C750087B6A0 /* HSQGoodsRateListModel.m */; };
+		C3F8BB6620A590390087B6A0 /* HSQGoodsRateHeadCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F8BB6420A590390087B6A0 /* HSQGoodsRateHeadCollectionReusableView.m */; };
+		C3F8BB6B20A590670087B6A0 /* HSQGoodsRateFootCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F8BB6920A590670087B6A0 /* HSQGoodsRateFootCollectionReusableView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		77A920C6BBD31099245ADB64 /* libPods-LiTianDecoration.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiTianDecoration.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B85D559E6035A6FAD00F8BF1 /* Pods-LiTianDecoration.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiTianDecoration.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LiTianDecoration/Pods-LiTianDecoration.debug.xcconfig"; sourceTree = "<group>"; };
+		C303946B20A2886700B2A0FA /* UIDevice+IPhoneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+IPhoneModel.m"; sourceTree = "<group>"; };
+		C303946C20A2886700B2A0FA /* UIDevice+IPhoneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+IPhoneModel.h"; sourceTree = "<group>"; };
+		C303947220A28BF100B2A0FA /* HSQCouponsCenterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQCouponsCenterViewController.h; sourceTree = "<group>"; };
+		C303947320A28BF100B2A0FA /* HSQCouponsCenterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQCouponsCenterViewController.m; sourceTree = "<group>"; };
+		C303948420A295D300B2A0FA /* HSQPinTuanDetailHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQPinTuanDetailHomeViewController.h; sourceTree = "<group>"; };
+		C303948520A295D300B2A0FA /* HSQPinTuanDetailHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQPinTuanDetailHomeViewController.m; sourceTree = "<group>"; };
+		C303948620A295D300B2A0FA /* HSQPinTuanDetailHomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQPinTuanDetailHomeViewController.xib; sourceTree = "<group>"; };
+		C305F2F0207AEA68005301EE /* HSQCustomShareView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQCustomShareView.h; sourceTree = "<group>"; };
+		C305F2F1207AEA68005301EE /* HSQCustomShareView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQCustomShareView.m; sourceTree = "<group>"; };
+		C313EE942089982300D15B00 /* HSQSetingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQSetingViewController.h; sourceTree = "<group>"; };
+		C313EE952089982300D15B00 /* HSQSetingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQSetingViewController.m; sourceTree = "<group>"; };
+		C313EE962089982300D15B00 /* HSQSetingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQSetingViewController.xib; sourceTree = "<group>"; };
+		C313EE992089E06500D15B00 /* RightGoodsClassModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RightGoodsClassModel.h; sourceTree = "<group>"; };
+		C313EE9A2089E06500D15B00 /* RightGoodsClassModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RightGoodsClassModel.m; sourceTree = "<group>"; };
+		C313EE9C2089E68300D15B00 /* HSQLeftCategoryModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQLeftCategoryModel.h; sourceTree = "<group>"; };
+		C313EE9D2089E68300D15B00 /* HSQLeftCategoryModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQLeftCategoryModel.m; sourceTree = "<group>"; };
+		C318F8C22091642A0056F8A3 /* HSQMessageSetViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQMessageSetViewController.h; sourceTree = "<group>"; };
+		C318F8C32091642A0056F8A3 /* HSQMessageSetViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQMessageSetViewController.m; sourceTree = "<group>"; };
+		C318F8C52091652A0056F8A3 /* HSQMessageSetListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQMessageSetListCell.h; sourceTree = "<group>"; };
+		C318F8C62091652A0056F8A3 /* HSQMessageSetListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQMessageSetListCell.m; sourceTree = "<group>"; };
+		C318F8C72091652A0056F8A3 /* HSQMessageSetListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQMessageSetListCell.xib; sourceTree = "<group>"; };
+		C318F8CA209170850056F8A3 /* HSQMessageReceiveModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQMessageReceiveModel.h; sourceTree = "<group>"; };
+		C318F8CB209170850056F8A3 /* HSQMessageReceiveModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQMessageReceiveModel.m; sourceTree = "<group>"; };
+		C318F8D2209175110056F8A3 /* HSQHeadMessageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQHeadMessageView.h; sourceTree = "<group>"; };
+		C318F8D3209175110056F8A3 /* HSQHeadMessageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQHeadMessageView.m; sourceTree = "<group>"; };
+		C318F8D52091AAC50056F8A3 /* HSQBandMobileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQBandMobileViewController.h; sourceTree = "<group>"; };
+		C318F8D62091AAC50056F8A3 /* HSQBandMobileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQBandMobileViewController.m; sourceTree = "<group>"; };
+		C318F8D72091AAC50056F8A3 /* HSQBandMobileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQBandMobileViewController.xib; sourceTree = "<group>"; };
+		C318F8DA2091BF9F0056F8A3 /* HSQNextBandPhoneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQNextBandPhoneViewController.h; sourceTree = "<group>"; };
+		C318F8DB2091BF9F0056F8A3 /* HSQNextBandPhoneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQNextBandPhoneViewController.m; sourceTree = "<group>"; };
+		C318F8DC2091BF9F0056F8A3 /* HSQNextBandPhoneViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQNextBandPhoneViewController.xib; sourceTree = "<group>"; };
+		C318F8E02091C1430056F8A3 /* HSQYanZhengMobileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQYanZhengMobileViewController.h; sourceTree = "<group>"; };
+		C318F8E12091C1430056F8A3 /* HSQYanZhengMobileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQYanZhengMobileViewController.m; sourceTree = "<group>"; };
+		C318F8E22091C1430056F8A3 /* HSQYanZhengMobileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQYanZhengMobileViewController.xib; sourceTree = "<group>"; };
+		C324CC6720804EC90030CEE7 /* HSQPublicMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQPublicMenuView.h; sourceTree = "<group>"; };
+		C324CC6820804EC90030CEE7 /* HSQPublicMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQPublicMenuView.m; sourceTree = "<group>"; };
+		C324CC6B208084AD0030CEE7 /* HSQTheTrialViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQTheTrialViewController.h; sourceTree = "<group>"; };
+		C324CC6C208084AD0030CEE7 /* HSQTheTrialViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQTheTrialViewController.m; sourceTree = "<group>"; };
+		C324CC782080A2F20030CEE7 /* HSQToPromoteViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQToPromoteViewController.h; sourceTree = "<group>"; };
+		C324CC792080A2F20030CEE7 /* HSQToPromoteViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQToPromoteViewController.m; sourceTree = "<group>"; };
+		C324CC7A2080A2F20030CEE7 /* HSQToPromoteViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQToPromoteViewController.xib; sourceTree = "<group>"; };
+		C324CC7E2080A3D90030CEE7 /* HSQIntegralCenterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQIntegralCenterViewController.h; sourceTree = "<group>"; };
+		C324CC7F2080A3D90030CEE7 /* HSQIntegralCenterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQIntegralCenterViewController.m; sourceTree = "<group>"; };
+		C324CC802080A3D90030CEE7 /* HSQIntegralCenterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQIntegralCenterViewController.xib; sourceTree = "<group>"; };
+		C324CC832080A5E50030CEE7 /* HSQToPromoteListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQToPromoteListCell.h; sourceTree = "<group>"; };
+		C324CC842080A5E50030CEE7 /* HSQToPromoteListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQToPromoteListCell.m; sourceTree = "<group>"; };
+		C324CC852080A5E50030CEE7 /* HSQToPromoteListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQToPromoteListCell.xib; sourceTree = "<group>"; };
+		C324E72A20881F3D00D133F0 /* HSQAccount.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQAccount.h; sourceTree = "<group>"; };
+		C324E72B20881F3D00D133F0 /* HSQAccount.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQAccount.m; sourceTree = "<group>"; };
+		C324E72D208820D000D133F0 /* HSQAccountTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQAccountTool.h; sourceTree = "<group>"; };
+		C324E72E208820D000D133F0 /* HSQAccountTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQAccountTool.m; sourceTree = "<group>"; };
+		C324E7302088932300D133F0 /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
+		C3281FEC209A9BF2007C3909 /* HSQSearchBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQSearchBarViewController.h; sourceTree = "<group>"; };
+		C3281FED209A9BF2007C3909 /* HSQSearchBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQSearchBarViewController.m; sourceTree = "<group>"; };
+		C3281FEE209A9BF2007C3909 /* HSQSearchBarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQSearchBarViewController.xib; sourceTree = "<group>"; };
+		C3281FF1209AAEB8007C3909 /* HSQSearchListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQSearchListCell.h; sourceTree = "<group>"; };
+		C3281FF2209AAEB8007C3909 /* HSQSearchListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQSearchListCell.m; sourceTree = "<group>"; };
+		C3281FF4209B19DC007C3909 /* HSQScreeningViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQScreeningViewController.h; sourceTree = "<group>"; };
+		C3281FF5209B19DC007C3909 /* HSQScreeningViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQScreeningViewController.m; sourceTree = "<group>"; };
+		C3281FF6209B19DC007C3909 /* HSQScreeningViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQScreeningViewController.xib; sourceTree = "<group>"; };
+		C3284E4A20A3F59B00C90290 /* HSQPinTuanGoodsDetailHomeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQPinTuanGoodsDetailHomeCell.h; sourceTree = "<group>"; };
+		C3284E4B20A3F59B00C90290 /* HSQPinTuanGoodsDetailHomeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQPinTuanGoodsDetailHomeCell.m; sourceTree = "<group>"; };
+		C3284E4C20A3F59B00C90290 /* HSQPinTuanGoodsDetailHomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQPinTuanGoodsDetailHomeCell.xib; sourceTree = "<group>"; };
+		C3284E4F20A4255E00C90290 /* HSQGuiGeAndCouperView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQGuiGeAndCouperView.h; sourceTree = "<group>"; };
+		C3284E5020A4255E00C90290 /* HSQGuiGeAndCouperView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQGuiGeAndCouperView.m; sourceTree = "<group>"; };
+		C3284E5220A427F800C90290 /* HSQCoupterListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQCoupterListCell.h; sourceTree = "<group>"; };
+		C3284E5320A427F800C90290 /* HSQCoupterListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQCoupterListCell.m; sourceTree = "<group>"; };
+		C3284E5420A427F800C90290 /* HSQCoupterListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQCoupterListCell.xib; sourceTree = "<group>"; };
+		C3284E5820A43C6700C90290 /* HSQGoodsDetailRateHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQGoodsDetailRateHeadView.h; sourceTree = "<group>"; };
+		C3284E5920A43C6700C90290 /* HSQGoodsDetailRateHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQGoodsDetailRateHeadView.m; sourceTree = "<group>"; };
+		C3284E5B20A445AD00C90290 /* HSQGoodsDetailFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQGoodsDetailFooterView.h; sourceTree = "<group>"; };
+		C3284E5C20A445AD00C90290 /* HSQGoodsDetailFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQGoodsDetailFooterView.m; sourceTree = "<group>"; };
+		C3284E5F20A44ABD00C90290 /* HSQStoreHeadIntroCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HSQStoreHeadIntroCell.h; path = "LiTianDecoration/Class/Mall(商城模块)/PinTuanView(拼团)/View/HSQStoreHeadIntroCell.h"; sourceTree = SOURCE_ROOT; };
+		C3284E6020A44ABD00C90290 /* HSQStoreHeadIntroCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = HSQStoreHeadIntroCell.m; path = "LiTianDecoration/Class/Mall(商城模块)/PinTuanView(拼团)/View/HSQStoreHeadIntroCell.m"; sourceTree = SOURCE_ROOT; };
+		C3284E6120A44ABD00C90290 /* HSQStoreHeadIntroCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HSQStoreHeadIntroCell.xib; path = "LiTianDecoration/Class/Mall(商城模块)/PinTuanView(拼团)/View/HSQStoreHeadIntroCell.xib"; sourceTree = SOURCE_ROOT; };
+		C3284E6420A4724000C90290 /* HSQRecommendGoodslListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQRecommendGoodslListCell.h; sourceTree = "<group>"; };
+		C3284E6520A4724000C90290 /* HSQRecommendGoodslListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQRecommendGoodslListCell.m; sourceTree = "<group>"; };
+		C32A866020A2A9A900260912 /* HSQPinTuanDetailGoodsListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQPinTuanDetailGoodsListModel.h; sourceTree = "<group>"; };
+		C32A866120A2A9A900260912 /* HSQPinTuanDetailGoodsListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQPinTuanDetailGoodsListModel.m; sourceTree = "<group>"; };
+		C32A866320A2DA0200260912 /* HSQPinTuanDataDealTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQPinTuanDataDealTool.h; sourceTree = "<group>"; };
+		C32A866420A2DA0200260912 /* HSQPinTuanDataDealTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQPinTuanDataDealTool.m; sourceTree = "<group>"; };
+		C32A866C20A2EB0C00260912 /* HSQGoodsDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQGoodsDetailViewController.h; sourceTree = "<group>"; };
+		C32A866D20A2EB0C00260912 /* HSQGoodsDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQGoodsDetailViewController.m; sourceTree = "<group>"; };
+		C32A866F20A2EE8300260912 /* HSQGoodsImageDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQGoodsImageDetailViewController.h; sourceTree = "<group>"; };
+		C32A867020A2EE8300260912 /* HSQGoodsImageDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQGoodsImageDetailViewController.m; sourceTree = "<group>"; };
+		C32A867220A2F8D400260912 /* HSQGoodsDetailImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQGoodsDetailImageCell.h; sourceTree = "<group>"; };
+		C32A867320A2F8D400260912 /* HSQGoodsDetailImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQGoodsDetailImageCell.m; sourceTree = "<group>"; };
+		C32A867420A2F8D400260912 /* HSQGoodsDetailImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQGoodsDetailImageCell.xib; sourceTree = "<group>"; };
+		C32A867B20A2FDCA00260912 /* HSQGoodsImageDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQGoodsImageDetailViewController.xib; sourceTree = "<group>"; };
+		C32A867D20A3210400260912 /* HSQComputerGoodsDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQComputerGoodsDetailViewController.h; sourceTree = "<group>"; };
+		C32A867E20A3210400260912 /* HSQComputerGoodsDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQComputerGoodsDetailViewController.m; sourceTree = "<group>"; };
+		C32A868220A326C800260912 /* HSQGoodsDetailHeadCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQGoodsDetailHeadCell.h; sourceTree = "<group>"; };
+		C32A868320A326C800260912 /* HSQGoodsDetailHeadCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQGoodsDetailHeadCell.m; sourceTree = "<group>"; };
+		C32C250E2092BE4100076F10 /* NSTimer+Addtions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Addtions.h"; sourceTree = "<group>"; };
+		C32C250F2092BE4100076F10 /* NSTimer+Addtions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Addtions.m"; sourceTree = "<group>"; };
+		C32C25112092C34800076F10 /* HSQChangePassWordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQChangePassWordViewController.h; sourceTree = "<group>"; };
+		C32C25122092C34800076F10 /* HSQChangePassWordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQChangePassWordViewController.m; sourceTree = "<group>"; };
+		C32C25132092C34800076F10 /* HSQChangePassWordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQChangePassWordViewController.xib; sourceTree = "<group>"; };
+		C32C25162092CFC500076F10 /* HSQMessageListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQMessageListViewController.h; sourceTree = "<group>"; };
+		C32C25172092CFC500076F10 /* HSQMessageListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQMessageListViewController.m; sourceTree = "<group>"; };
+		C32C252920930AF800076F10 /* HSQMyCollectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQMyCollectionHeaderView.h; sourceTree = "<group>"; };
+		C32C252A20930AF800076F10 /* HSQMyCollectionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQMyCollectionHeaderView.m; sourceTree = "<group>"; };
+		C32C252D2093154B00076F10 /* BrowseFootprintViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrowseFootprintViewController.h; sourceTree = "<group>"; };
+		C32C252E2093154B00076F10 /* BrowseFootprintViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrowseFootprintViewController.m; sourceTree = "<group>"; };
+		C32C25312093179000076F10 /* BrowseFootprintListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrowseFootprintListCell.h; sourceTree = "<group>"; };
+		C32C25322093179000076F10 /* BrowseFootprintListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrowseFootprintListCell.m; sourceTree = "<group>"; };
+		C32C2536209322B800076F10 /* BrowseFootprintListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrowseFootprintListModel.h; sourceTree = "<group>"; };
+		C32C2537209322B800076F10 /* BrowseFootprintListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrowseFootprintListModel.m; sourceTree = "<group>"; };
+		C32EDFFA209417A6004F85F0 /* HSQMobileRegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQMobileRegisterViewController.h; sourceTree = "<group>"; };
+		C32EDFFB209417A6004F85F0 /* HSQMobileRegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQMobileRegisterViewController.m; sourceTree = "<group>"; };
+		C32EDFFC209417A6004F85F0 /* HSQMobileRegisterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQMobileRegisterViewController.xib; sourceTree = "<group>"; };
+		C32EE003209445EB004F85F0 /* MobileVerificationLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MobileVerificationLoginViewController.h; sourceTree = "<group>"; };
+		C32EE004209445EB004F85F0 /* MobileVerificationLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MobileVerificationLoginViewController.m; sourceTree = "<group>"; };
+		C32EE005209445EB004F85F0 /* MobileVerificationLoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MobileVerificationLoginViewController.xib; sourceTree = "<group>"; };
+		C32EE00A20945706004F85F0 /* HSQMyPropertyHomeController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQMyPropertyHomeController.h; sourceTree = "<group>"; };
+		C32EE00B20945706004F85F0 /* HSQMyPropertyHomeController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQMyPropertyHomeController.m; sourceTree = "<group>"; };
+		C32EE01220945B60004F85F0 /* HSQMyPropertyHomeListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQMyPropertyHomeListCell.h; sourceTree = "<group>"; };
+		C32EE01320945B60004F85F0 /* HSQMyPropertyHomeListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQMyPropertyHomeListCell.m; sourceTree = "<group>"; };
+		C32EE01420945B60004F85F0 /* HSQMyPropertyHomeListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQMyPropertyHomeListCell.xib; sourceTree = "<group>"; };
+		C32EE01720945E79004F85F0 /* MyPropertyListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyPropertyListModel.h; sourceTree = "<group>"; };
+		C32EE01820945E79004F85F0 /* MyPropertyListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyPropertyListModel.m; sourceTree = "<group>"; };
+		C32EE01B20946E24004F85F0 /* HSQIntegralListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQIntegralListViewController.h; sourceTree = "<group>"; };
+		C32EE01C20946E24004F85F0 /* HSQIntegralListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQIntegralListViewController.m; sourceTree = "<group>"; };
+		C32EE01D20946E24004F85F0 /* HSQIntegralListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQIntegralListViewController.xib; sourceTree = "<group>"; };
+		C32EE02120947385004F85F0 /* HSQIntegralListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQIntegralListCell.h; sourceTree = "<group>"; };
+		C32EE02220947385004F85F0 /* HSQIntegralListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQIntegralListCell.m; sourceTree = "<group>"; };
+		C32EE02320947385004F85F0 /* HSQIntegralListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQIntegralListCell.xib; sourceTree = "<group>"; };
+		C32EE02620947774004F85F0 /* HSQIntegralListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQIntegralListModel.h; sourceTree = "<group>"; };
+		C32EE02720947774004F85F0 /* HSQIntegralListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQIntegralListModel.m; sourceTree = "<group>"; };
+		C3328058207DD99300AA6ACF /* HSQCustomViewWithButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQCustomViewWithButton.h; sourceTree = "<group>"; };
+		C3328059207DD99300AA6ACF /* HSQCustomViewWithButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQCustomViewWithButton.m; sourceTree = "<group>"; };
+		C332805B207DE8E400AA6ACF /* HSQGoodsCollectionListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQGoodsCollectionListCell.h; sourceTree = "<group>"; };
+		C332805C207DE8E400AA6ACF /* HSQGoodsCollectionListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQGoodsCollectionListCell.m; sourceTree = "<group>"; };
+		C332805E207DF29000AA6ACF /* HSQShaiBaoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQShaiBaoViewController.h; sourceTree = "<group>"; };
+		C332805F207DF29000AA6ACF /* HSQShaiBaoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQShaiBaoViewController.m; sourceTree = "<group>"; };
+		C3328062207DFA4D00AA6ACF /* HSQPubShaiBaoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQPubShaiBaoView.h; sourceTree = "<group>"; };
+		C3328063207DFA4D00AA6ACF /* HSQPubShaiBaoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQPubShaiBaoView.m; sourceTree = "<group>"; };
+		C3328066207E089D00AA6ACF /* HSQLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQLoginViewController.h; sourceTree = "<group>"; };
+		C3328067207E089D00AA6ACF /* HSQLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQLoginViewController.m; sourceTree = "<group>"; };
+		C3328068207E089D00AA6ACF /* HSQLoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQLoginViewController.xib; sourceTree = "<group>"; };
+		C332806B207E0BC800AA6ACF /* HSQRegisterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQRegisterViewController.h; sourceTree = "<group>"; };
+		C332806C207E0BC800AA6ACF /* HSQRegisterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQRegisterViewController.m; sourceTree = "<group>"; };
+		C332806D207E0BC800AA6ACF /* HSQRegisterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQRegisterViewController.xib; sourceTree = "<group>"; };
+		C334664A2086D37000B8AD0A /* HSQPersonCenterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQPersonCenterViewController.h; sourceTree = "<group>"; };
+		C334664B2086D37000B8AD0A /* HSQPersonCenterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQPersonCenterViewController.m; sourceTree = "<group>"; };
+		C334664C2086D37000B8AD0A /* HSQPersonCenterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQPersonCenterViewController.xib; sourceTree = "<group>"; };
+		C334664F2086E0B200B8AD0A /* HSQRealNameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQRealNameViewController.h; sourceTree = "<group>"; };
+		C33466502086E0B200B8AD0A /* HSQRealNameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQRealNameViewController.m; sourceTree = "<group>"; };
+		C33466512086E0B200B8AD0A /* HSQRealNameViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQRealNameViewController.xib; sourceTree = "<group>"; };
+		C33466542086E97800B8AD0A /* HSQUserGenderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQUserGenderView.h; sourceTree = "<group>"; };
+		C33466552086E97800B8AD0A /* HSQUserGenderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQUserGenderView.m; sourceTree = "<group>"; };
+		C334665920871E0900B8AD0A /* HSQSelectDatePickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQSelectDatePickerView.h; sourceTree = "<group>"; };
+		C334665A20871E0900B8AD0A /* HSQSelectDatePickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQSelectDatePickerView.m; sourceTree = "<group>"; };
+		C334666020872CD500B8AD0A /* HSQPublicAdressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQPublicAdressView.h; sourceTree = "<group>"; };
+		C334666120872CD500B8AD0A /* HSQPublicAdressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQPublicAdressView.m; sourceTree = "<group>"; };
+		C3346663208736D300B8AD0A /* HSQAddressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQAddressView.h; sourceTree = "<group>"; };
+		C3346664208736D300B8AD0A /* HSQAddressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQAddressView.m; sourceTree = "<group>"; };
+		C33466662087423E00B8AD0A /* HSQAdressListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQAdressListModel.h; sourceTree = "<group>"; };
+		C33466672087423E00B8AD0A /* HSQAdressListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQAdressListModel.m; sourceTree = "<group>"; };
+		C33466692087431B00B8AD0A /* AddressTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddressTableViewCell.xib; sourceTree = "<group>"; };
+		C334666A2087431B00B8AD0A /* AddressTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressTableViewCell.m; sourceTree = "<group>"; };
+		C334666B2087431B00B8AD0A /* AddressTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressTableViewCell.h; sourceTree = "<group>"; };
 		C338511E2079BA0B0030320C /* LiTianDecoration.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiTianDecoration.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C33851212079BA0B0030320C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		C33851222079BA0B0030320C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		C33851242079BA0B0030320C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		C33851252079BA0B0030320C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		C33851282079BA0B0030320C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C338512A2079BA140030320C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C338512D2079BA140030320C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C338512F2079BA140030320C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C33851302079BA140030320C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C338513D2079BB810030320C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		C338513E2079BB810030320C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		C33851422079BD770030320C /* HSQCustomTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQCustomTextView.h; sourceTree = "<group>"; };
+		C33851432079BD770030320C /* HSQCustomTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQCustomTextView.m; sourceTree = "<group>"; };
+		C33851452079C29D0030320C /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		C338514C207A121A0030320C /* HSQCustomButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQCustomButton.h; sourceTree = "<group>"; };
+		C338514D207A121A0030320C /* HSQCustomButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQCustomButton.m; sourceTree = "<group>"; };
+		C33A3C852096B5ED00944632 /* HSQReturnGoodsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQReturnGoodsViewController.h; sourceTree = "<group>"; };
+		C33A3C862096B5ED00944632 /* HSQReturnGoodsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQReturnGoodsViewController.m; sourceTree = "<group>"; };
+		C33A3C892096B82C00944632 /* HSQReturnGoodsListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQReturnGoodsListViewController.h; sourceTree = "<group>"; };
+		C33A3C8A2096B82C00944632 /* HSQReturnGoodsListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQReturnGoodsListViewController.m; sourceTree = "<group>"; };
+		C33A3C8F2096C01B00944632 /* HSQClassSecondGoodsListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQClassSecondGoodsListCell.h; sourceTree = "<group>"; };
+		C33A3C902096C01B00944632 /* HSQClassSecondGoodsListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQClassSecondGoodsListCell.m; sourceTree = "<group>"; };
+		C33A3C942096ECF600944632 /* HSQClassGoodsListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQClassGoodsListViewController.h; sourceTree = "<group>"; };
+		C33A3C952096ECF600944632 /* HSQClassGoodsListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQClassGoodsListViewController.m; sourceTree = "<group>"; };
+		C33A3C962096ECF600944632 /* HSQClassGoodsListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQClassGoodsListViewController.xib; sourceTree = "<group>"; };
+		C33A3C992096FB6B00944632 /* HSQDropdownMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQDropdownMenuView.h; sourceTree = "<group>"; };
+		C33A3C9A2096FB6B00944632 /* HSQDropdownMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQDropdownMenuView.m; sourceTree = "<group>"; };
+		C33A3C9C2097026800944632 /* HSQMenuListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQMenuListCell.h; sourceTree = "<group>"; };
+		C33A3C9D2097026800944632 /* HSQMenuListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQMenuListCell.m; sourceTree = "<group>"; };
+		C33A3C9E2097026800944632 /* HSQMenuListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQMenuListCell.xib; sourceTree = "<group>"; };
+		C33F4ACF209554550032B9A1 /* HSQMyAccountBalanceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQMyAccountBalanceViewController.h; sourceTree = "<group>"; };
+		C33F4AD0209554550032B9A1 /* HSQMyAccountBalanceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQMyAccountBalanceViewController.m; sourceTree = "<group>"; };
+		C33F4AD1209554550032B9A1 /* HSQMyAccountBalanceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQMyAccountBalanceViewController.xib; sourceTree = "<group>"; };
+		C33F4AD42095577B0032B9A1 /* MyBalanceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyBalanceViewController.h; sourceTree = "<group>"; };
+		C33F4AD52095577B0032B9A1 /* MyBalanceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyBalanceViewController.m; sourceTree = "<group>"; };
+		C33F4AD72095579D0032B9A1 /* TopUpDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopUpDetailViewController.h; sourceTree = "<group>"; };
+		C33F4AD82095579D0032B9A1 /* TopUpDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopUpDetailViewController.m; sourceTree = "<group>"; };
+		C33F4ADA209557BC0032B9A1 /* HSQWithdrawalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQWithdrawalViewController.h; sourceTree = "<group>"; };
+		C33F4ADB209557BC0032B9A1 /* HSQWithdrawalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQWithdrawalViewController.m; sourceTree = "<group>"; };
+		C33F4ADE20955F340032B9A1 /* HSQMemberPrizeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQMemberPrizeViewController.h; sourceTree = "<group>"; };
+		C33F4ADF20955F340032B9A1 /* HSQMemberPrizeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQMemberPrizeViewController.m; sourceTree = "<group>"; };
+		C33F4AE020955F340032B9A1 /* HSQMemberPrizeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQMemberPrizeViewController.xib; sourceTree = "<group>"; };
+		C33F4AE4209560360032B9A1 /* HSQCouponsHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQCouponsHomeViewController.h; sourceTree = "<group>"; };
+		C33F4AE5209560360032B9A1 /* HSQCouponsHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQCouponsHomeViewController.m; sourceTree = "<group>"; };
+		C33F4AE72095608F0032B9A1 /* HSQLeftCouponsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQLeftCouponsViewController.h; sourceTree = "<group>"; };
+		C33F4AE82095608F0032B9A1 /* HSQLeftCouponsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQLeftCouponsViewController.m; sourceTree = "<group>"; };
+		C33F4AEA209560A20032B9A1 /* HSQRightCouponsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQRightCouponsViewController.h; sourceTree = "<group>"; };
+		C33F4AEB209560A20032B9A1 /* HSQRightCouponsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQRightCouponsViewController.m; sourceTree = "<group>"; };
+		C33F4AEC209560A20032B9A1 /* HSQRightCouponsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQRightCouponsViewController.xib; sourceTree = "<group>"; };
+		C33F4AEF2095A3870032B9A1 /* HSQMyCollectionHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQMyCollectionHomeViewController.h; sourceTree = "<group>"; };
+		C33F4AF02095A3870032B9A1 /* HSQMyCollectionHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQMyCollectionHomeViewController.m; sourceTree = "<group>"; };
+		C33F4AF22095A39A0032B9A1 /* HSQGoodsCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQGoodsCollectionViewController.h; sourceTree = "<group>"; };
+		C33F4AF32095A39A0032B9A1 /* HSQGoodsCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQGoodsCollectionViewController.m; sourceTree = "<group>"; };
+		C33F4AF52095A3A90032B9A1 /* HSQStoreCollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQStoreCollectionViewController.h; sourceTree = "<group>"; };
+		C33F4AF62095A3A90032B9A1 /* HSQStoreCollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQStoreCollectionViewController.m; sourceTree = "<group>"; };
+		C33F4AF82095ACA30032B9A1 /* HSQTopNavtionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQTopNavtionView.h; sourceTree = "<group>"; };
+		C33F4AF92095ACA30032B9A1 /* HSQTopNavtionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQTopNavtionView.m; sourceTree = "<group>"; };
+		C33F4AFB2095C1F50032B9A1 /* HSQMyOrderHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQMyOrderHomeViewController.h; sourceTree = "<group>"; };
+		C33F4AFC2095C1F50032B9A1 /* HSQMyOrderHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQMyOrderHomeViewController.m; sourceTree = "<group>"; };
+		C33F4AFF2095C5120032B9A1 /* HSQMyOrderListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQMyOrderListViewController.h; sourceTree = "<group>"; };
+		C33F4B002095C5120032B9A1 /* HSQMyOrderListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQMyOrderListViewController.m; sourceTree = "<group>"; };
+		C3425BC8208472AA00869438 /* HSQProgressHUDManger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQProgressHUDManger.h; sourceTree = "<group>"; };
+		C3425BC9208472AA00869438 /* HSQProgressHUDManger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQProgressHUDManger.m; sourceTree = "<group>"; };
+		C34D514B2085A18A00C28016 /* HSQTrialReportListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQTrialReportListModel.h; sourceTree = "<group>"; };
+		C34D514C2085A18A00C28016 /* HSQTrialReportListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQTrialReportListModel.m; sourceTree = "<group>"; };
+		C34D514E2085A45000C28016 /* HSQPhotosView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQPhotosView.h; sourceTree = "<group>"; };
+		C34D514F2085A45000C28016 /* HSQPhotosView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQPhotosView.m; sourceTree = "<group>"; };
+		C34D51512085C13800C28016 /* HSQUsingTheReportCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQUsingTheReportCell.h; sourceTree = "<group>"; };
+		C34D51522085C13800C28016 /* HSQUsingTheReportCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQUsingTheReportCell.m; sourceTree = "<group>"; };
+		C34D51542085C47800C28016 /* HSQCollectionViewLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQCollectionViewLayout.h; sourceTree = "<group>"; };
+		C34D51552085C47800C28016 /* HSQCollectionViewLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQCollectionViewLayout.m; sourceTree = "<group>"; };
+		C34D51572085E34900C28016 /* HWStatusPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWStatusPhotoView.h; sourceTree = "<group>"; };
+		C34D51582085E34900C28016 /* HWStatusPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWStatusPhotoView.m; sourceTree = "<group>"; };
+		C34D515A2085E40600C28016 /* HWPhoto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HWPhoto.h; sourceTree = "<group>"; };
+		C34D515B2085E40600C28016 /* HWPhoto.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HWPhoto.m; sourceTree = "<group>"; };
+		C34D515D2085E5DF00C28016 /* HSQTrialReportFrameModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQTrialReportFrameModel.h; sourceTree = "<group>"; };
+		C34D515E2085E5DF00C28016 /* HSQTrialReportFrameModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQTrialReportFrameModel.m; sourceTree = "<group>"; };
+		C34D51602085F47E00C28016 /* HSQUsingReportDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQUsingReportDetailViewController.h; sourceTree = "<group>"; };
+		C34D51612085F47E00C28016 /* HSQUsingReportDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQUsingReportDetailViewController.m; sourceTree = "<group>"; };
+		C3546DC4209FDE040071294C /* MallHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MallHomeViewController.h; sourceTree = "<group>"; };
+		C3546DC5209FDE040071294C /* MallHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MallHomeViewController.m; sourceTree = "<group>"; };
+		C3546DCA209FE27E0071294C /* HSQMallHomeHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQMallHomeHeadView.h; sourceTree = "<group>"; };
+		C3546DCB209FE27E0071294C /* HSQMallHomeHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQMallHomeHeadView.m; sourceTree = "<group>"; };
+		C3546DCD209FF78B0071294C /* HSQMallHomeDataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQMallHomeDataModel.h; sourceTree = "<group>"; };
+		C3546DCE209FF78B0071294C /* HSQMallHomeDataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQMallHomeDataModel.m; sourceTree = "<group>"; };
+		C3546DD320A020B30071294C /* HSQModelViewReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQModelViewReusableView.h; sourceTree = "<group>"; };
+		C3546DD420A020B30071294C /* HSQModelViewReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQModelViewReusableView.m; sourceTree = "<group>"; };
+		C3546DD620A035980071294C /* HSQSecondsKillReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQSecondsKillReusableView.h; sourceTree = "<group>"; };
+		C3546DD720A035980071294C /* HSQSecondsKillReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQSecondsKillReusableView.m; sourceTree = "<group>"; };
+		C3546DDF20A041880071294C /* HSQHeadImageReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQHeadImageReusableView.h; sourceTree = "<group>"; };
+		C3546DE020A041880071294C /* HSQHeadImageReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQHeadImageReusableView.m; sourceTree = "<group>"; };
+		C3546DE220A06CAB0071294C /* HSQMiaoShaGoodsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQMiaoShaGoodsView.h; sourceTree = "<group>"; };
+		C3546DE320A06CAB0071294C /* HSQMiaoShaGoodsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQMiaoShaGoodsView.m; sourceTree = "<group>"; };
+		C3546DE520A070300071294C /* HSQMiaoShaGoodsListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQMiaoShaGoodsListCell.h; sourceTree = "<group>"; };
+		C3546DE620A070300071294C /* HSQMiaoShaGoodsListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQMiaoShaGoodsListCell.m; sourceTree = "<group>"; };
+		C3546DE720A070300071294C /* HSQMiaoShaGoodsListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQMiaoShaGoodsListCell.xib; sourceTree = "<group>"; };
+		C358123E207AF0C600BC26B4 /* HSQHomeTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQHomeTabBarController.h; sourceTree = "<group>"; };
+		C358123F207AF0C600BC26B4 /* HSQHomeTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQHomeTabBarController.m; sourceTree = "<group>"; };
+		C3581241207AF8BB00BC26B4 /* HSQNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQNavigationController.h; sourceTree = "<group>"; };
+		C3581242207AF8BB00BC26B4 /* HSQNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQNavigationController.m; sourceTree = "<group>"; };
+		C3581244207B005C00BC26B4 /* UIImage+HSQImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+HSQImage.h"; sourceTree = "<group>"; };
+		C3581245207B005C00BC26B4 /* UIImage+HSQImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+HSQImage.m"; sourceTree = "<group>"; };
+		C36F5700207C96BE0086C2FA /* HSQDiscoverHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQDiscoverHeadView.h; sourceTree = "<group>"; };
+		C36F5701207C96BE0086C2FA /* HSQDiscoverHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQDiscoverHeadView.m; sourceTree = "<group>"; };
+		C36F5707207CAAA50086C2FA /* HSQMineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQMineViewController.h; sourceTree = "<group>"; };
+		C36F5708207CAAA50086C2FA /* HSQMineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQMineViewController.m; sourceTree = "<group>"; };
+		C36F570A207CB0E80086C2FA /* HSQCustomNavBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQCustomNavBar.h; sourceTree = "<group>"; };
+		C36F570B207CB0E80086C2FA /* HSQCustomNavBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQCustomNavBar.m; sourceTree = "<group>"; };
+		C36F570D207CBC540086C2FA /* HSQHeaderCollectionReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQHeaderCollectionReusableView.h; sourceTree = "<group>"; };
+		C36F570E207CBC540086C2FA /* HSQHeaderCollectionReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQHeaderCollectionReusableView.m; sourceTree = "<group>"; };
+		C36F570F207CBC540086C2FA /* HSQHeaderCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQHeaderCollectionReusableView.xib; sourceTree = "<group>"; };
+		C375FBB820A68D65000BA8BA /* HSQNoDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HSQNoDataView.h; sourceTree = "<group>"; };
+		C375FBB920A68D65000BA8BA /* HSQNoDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HSQNoDataView.m; sourceTree = "<group>"; };
+		C375FBBB20A699B9000BA8BA /* HSQStarsView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQStarsView.h; sourceTree = "<group>"; };
+		C375FBBC20A699B9000BA8BA /* HSQStarsView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQStarsView.m; sourceTree = "<group>"; };
+		C375FBBE20A6BFD7000BA8BA /* HSQGoodsRateListCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQGoodsRateListCollectionViewCell.h; sourceTree = "<group>"; };
+		C375FBBF20A6BFD7000BA8BA /* HSQGoodsRateListCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQGoodsRateListCollectionViewCell.m; sourceTree = "<group>"; };
+		C375FBC120A6C281000BA8BA /* HSQGoodsRateImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQGoodsRateImageView.h; sourceTree = "<group>"; };
+		C375FBC220A6C281000BA8BA /* HSQGoodsRateImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQGoodsRateImageView.m; sourceTree = "<group>"; };
+		C375FBC420A6C789000BA8BA /* HSQGoodsRateListFrameModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQGoodsRateListFrameModel.h; sourceTree = "<group>"; };
+		C375FBC520A6C789000BA8BA /* HSQGoodsRateListFrameModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQGoodsRateListFrameModel.m; sourceTree = "<group>"; };
+		C375FBC720A6EA7A000BA8BA /* HSQGoodsDetailRateListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQGoodsDetailRateListCell.h; sourceTree = "<group>"; };
+		C375FBC820A6EA7A000BA8BA /* HSQGoodsDetailRateListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQGoodsDetailRateListCell.m; sourceTree = "<group>"; };
+		C37A9985207EF24A00A55AA0 /* HSQWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQWebViewController.h; sourceTree = "<group>"; };
+		C37A9986207EF24A00A55AA0 /* HSQWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQWebViewController.m; sourceTree = "<group>"; };
+		C37A998A207F075B00A55AA0 /* HSQForgotPasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQForgotPasswordViewController.h; sourceTree = "<group>"; };
+		C37A998B207F075B00A55AA0 /* HSQForgotPasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQForgotPasswordViewController.m; sourceTree = "<group>"; };
+		C37A998C207F075B00A55AA0 /* HSQForgotPasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQForgotPasswordViewController.xib; sourceTree = "<group>"; };
+		C37A9992207F34C800A55AA0 /* HSQClassViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQClassViewController.h; sourceTree = "<group>"; };
+		C37A9993207F34C800A55AA0 /* HSQClassViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQClassViewController.m; sourceTree = "<group>"; };
+		C37A9995207F373500A55AA0 /* HSQClassHomeListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQClassHomeListCell.h; sourceTree = "<group>"; };
+		C37A9996207F373500A55AA0 /* HSQClassHomeListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQClassHomeListCell.m; sourceTree = "<group>"; };
+		C37A9998207F443C00A55AA0 /* HSQClassHeadCollectionReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQClassHeadCollectionReusableView.h; sourceTree = "<group>"; };
+		C37A9999207F443C00A55AA0 /* HSQClassHeadCollectionReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQClassHeadCollectionReusableView.m; sourceTree = "<group>"; };
+		C37A999B207F47A800A55AA0 /* HSQClassGoodsListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQClassGoodsListCell.h; sourceTree = "<group>"; };
+		C37A999C207F47A800A55AA0 /* HSQClassGoodsListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQClassGoodsListCell.m; sourceTree = "<group>"; };
+		C37A99A0207F502D00A55AA0 /* HSQPinTuanViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQPinTuanViewController.h; sourceTree = "<group>"; };
+		C37A99A1207F502D00A55AA0 /* HSQPinTuanViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQPinTuanViewController.m; sourceTree = "<group>"; };
+		C37A99A2207F502D00A55AA0 /* HSQPinTuanViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQPinTuanViewController.xib; sourceTree = "<group>"; };
+		C37A99A5207F52BE00A55AA0 /* HSQPinTuanListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQPinTuanListCell.h; sourceTree = "<group>"; };
+		C37A99A6207F52BE00A55AA0 /* HSQPinTuanListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQPinTuanListCell.m; sourceTree = "<group>"; };
+		C38EF4A6207B4A2E0094B16B /* AFNetworkRequestTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFNetworkRequestTool.h; sourceTree = "<group>"; };
+		C38EF4A7207B4A2E0094B16B /* AFNetworkRequestTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFNetworkRequestTool.m; sourceTree = "<group>"; };
+		C38EF4B3207B4CE50094B16B /* HSQHomePageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQHomePageViewController.h; sourceTree = "<group>"; };
+		C38EF4B4207B4CE50094B16B /* HSQHomePageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQHomePageViewController.m; sourceTree = "<group>"; };
+		C38EF4BD207B4DDE0094B16B /* DiscoverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
+		C38EF4BE207B4DDE0094B16B /* DiscoverViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoverViewController.m; sourceTree = "<group>"; };
+		C38EF4C0207B51850094B16B /* DiscoverHomeListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoverHomeListCell.h; sourceTree = "<group>"; };
+		C38EF4C1207B51850094B16B /* DiscoverHomeListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoverHomeListCell.m; sourceTree = "<group>"; };
+		C38EF4C3207B59760094B16B /* DiscoverListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DiscoverListModel.h; sourceTree = "<group>"; };
+		C38EF4C4207B59760094B16B /* DiscoverListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoverListModel.m; sourceTree = "<group>"; };
+		C38EF4C6207B6A240094B16B /* NSString+HSQ.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+HSQ.h"; sourceTree = "<group>"; };
+		C38EF4C7207B6A240094B16B /* NSString+HSQ.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+HSQ.m"; sourceTree = "<group>"; };
+		C3BF6929209033A400726EEA /* HSQAdressListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQAdressListViewController.h; sourceTree = "<group>"; };
+		C3BF692A209033A400726EEA /* HSQAdressListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQAdressListViewController.m; sourceTree = "<group>"; };
+		C3BF692C2090363100726EEA /* HSQNewAdressViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQNewAdressViewController.h; sourceTree = "<group>"; };
+		C3BF692D2090363100726EEA /* HSQNewAdressViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQNewAdressViewController.m; sourceTree = "<group>"; };
+		C3BF692E2090363100726EEA /* HSQNewAdressViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQNewAdressViewController.xib; sourceTree = "<group>"; };
+		C3BF693120906AEF00726EEA /* HSQAdressListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQAdressListCell.h; sourceTree = "<group>"; };
+		C3BF693220906AEF00726EEA /* HSQAdressListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQAdressListCell.m; sourceTree = "<group>"; };
+		C3BF69372090717E00726EEA /* HSQAcceptAddressListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQAcceptAddressListModel.h; sourceTree = "<group>"; };
+		C3BF69382090717E00726EEA /* HSQAcceptAddressListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQAcceptAddressListModel.m; sourceTree = "<group>"; };
+		C3BF693A20907AC500726EEA /* HSQAdressListFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQAdressListFooterView.h; sourceTree = "<group>"; };
+		C3BF693B20907AC500726EEA /* HSQAdressListFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQAdressListFooterView.m; sourceTree = "<group>"; };
+		C3BF693D20908B4B00726EEA /* HSQLoginBandViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQLoginBandViewController.h; sourceTree = "<group>"; };
+		C3BF693E20908B4B00726EEA /* HSQLoginBandViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQLoginBandViewController.m; sourceTree = "<group>"; };
+		C3BF693F20908B4B00726EEA /* HSQLoginBandViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQLoginBandViewController.xib; sourceTree = "<group>"; };
+		C3DD2B4620A1ABDD004FC2F3 /* HSQMallShopCarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQMallShopCarViewController.h; sourceTree = "<group>"; };
+		C3DD2B4720A1ABDD004FC2F3 /* HSQMallShopCarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQMallShopCarViewController.m; sourceTree = "<group>"; };
+		C3DD2B5020A1C121004FC2F3 /* HSQPinTuanListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQPinTuanListModel.h; sourceTree = "<group>"; };
+		C3DD2B5120A1C121004FC2F3 /* HSQPinTuanListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQPinTuanListModel.m; sourceTree = "<group>"; };
+		C3E2982E20A12E56001E1EBE /* UIView+TXFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+TXFrame.h"; sourceTree = "<group>"; };
+		C3E2982F20A12E56001E1EBE /* TXScrollLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TXScrollLabelView.m; sourceTree = "<group>"; };
+		C3E2983020A12E56001E1EBE /* UIView+TXFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TXFrame.m"; sourceTree = "<group>"; };
+		C3E2983120A12E57001E1EBE /* TXScrollLabelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TXScrollLabelView.h; sourceTree = "<group>"; };
+		C3E2983420A13338001E1EBE /* HSQMallHomePageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQMallHomePageController.h; sourceTree = "<group>"; };
+		C3E2983520A13338001E1EBE /* HSQMallHomePageController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQMallHomePageController.m; sourceTree = "<group>"; };
+		C3E2983720A13521001E1EBE /* HSQMallHeiperTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQMallHeiperTool.h; sourceTree = "<group>"; };
+		C3E2983820A13521001E1EBE /* HSQMallHeiperTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQMallHeiperTool.m; sourceTree = "<group>"; };
+		C3E2984520A173F3001E1EBE /* HSQImageListCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQImageListCollectionViewCell.h; sourceTree = "<group>"; };
+		C3E2984620A173F3001E1EBE /* HSQImageListCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQImageListCollectionViewCell.m; sourceTree = "<group>"; };
+		C3E2984720A173F3001E1EBE /* HSQImageListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQImageListCollectionViewCell.xib; sourceTree = "<group>"; };
+		C3E2984B20A18D0C001E1EBE /* HSQButtonListViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQButtonListViewCell.h; sourceTree = "<group>"; };
+		C3E2984C20A18D0C001E1EBE /* HSQButtonListViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQButtonListViewCell.m; sourceTree = "<group>"; };
+		C3E2984D20A18D0C001E1EBE /* HSQButtonListViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQButtonListViewCell.xib; sourceTree = "<group>"; };
+		C3F8BB4B20A535180087B6A0 /* PublieTuiJianGoodsListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublieTuiJianGoodsListView.h; sourceTree = "<group>"; };
+		C3F8BB4C20A535180087B6A0 /* PublieTuiJianGoodsListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublieTuiJianGoodsListView.m; sourceTree = "<group>"; };
+		C3F8BB4F20A573810087B6A0 /* HSQContactTheMerchantController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQContactTheMerchantController.h; sourceTree = "<group>"; };
+		C3F8BB5020A573810087B6A0 /* HSQContactTheMerchantController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQContactTheMerchantController.m; sourceTree = "<group>"; };
+		C3F8BB5120A573810087B6A0 /* HSQContactTheMerchantController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQContactTheMerchantController.xib; sourceTree = "<group>"; };
+		C3F8BB5520A578300087B6A0 /* HSQStoreDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQStoreDetailViewController.h; sourceTree = "<group>"; };
+		C3F8BB5620A578300087B6A0 /* HSQStoreDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQStoreDetailViewController.m; sourceTree = "<group>"; };
+		C3F8BB5720A578300087B6A0 /* HSQStoreDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQStoreDetailViewController.xib; sourceTree = "<group>"; };
+		C3F8BB5A20A578C60087B6A0 /* HSQGoodsDetailCommentsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQGoodsDetailCommentsViewController.h; sourceTree = "<group>"; };
+		C3F8BB5B20A578C60087B6A0 /* HSQGoodsDetailCommentsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQGoodsDetailCommentsViewController.m; sourceTree = "<group>"; };
+		C3F8BB5C20A578C60087B6A0 /* HSQGoodsDetailCommentsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HSQGoodsDetailCommentsViewController.xib; sourceTree = "<group>"; };
+		C3F8BB5F20A58C750087B6A0 /* HSQGoodsRateListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQGoodsRateListModel.h; sourceTree = "<group>"; };
+		C3F8BB6020A58C750087B6A0 /* HSQGoodsRateListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQGoodsRateListModel.m; sourceTree = "<group>"; };
+		C3F8BB6320A590390087B6A0 /* HSQGoodsRateHeadCollectionReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQGoodsRateHeadCollectionReusableView.h; sourceTree = "<group>"; };
+		C3F8BB6420A590390087B6A0 /* HSQGoodsRateHeadCollectionReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQGoodsRateHeadCollectionReusableView.m; sourceTree = "<group>"; };
+		C3F8BB6820A590670087B6A0 /* HSQGoodsRateFootCollectionReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HSQGoodsRateFootCollectionReusableView.h; sourceTree = "<group>"; };
+		C3F8BB6920A590670087B6A0 /* HSQGoodsRateFootCollectionReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HSQGoodsRateFootCollectionReusableView.m; sourceTree = "<group>"; };
+		FB7A9902034549D1D3151FF5 /* Pods-LiTianDecoration.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiTianDecoration.release.xcconfig"; path = "Pods/Target Support Files/Pods-LiTianDecoration/Pods-LiTianDecoration.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +585,531 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9452C3F63637F9AA3BC00694 /* libPods-LiTianDecoration.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		69763DA39B6C0C79C5DB89F6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B85D559E6035A6FAD00F8BF1 /* Pods-LiTianDecoration.debug.xcconfig */,
+				FB7A9902034549D1D3151FF5 /* Pods-LiTianDecoration.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		7423BD6718F2B09E4482FEA9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				77A920C6BBD31099245ADB64 /* libPods-LiTianDecoration.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C303946E20A28B8500B2A0FA /* CouponsCenter(领券中心) */ = {
+			isa = PBXGroup;
+			children = (
+				C303946F20A28B9F00B2A0FA /* Controller */,
+				C303947120A28BAE00B2A0FA /* Model */,
+				C303947020A28BA800B2A0FA /* View */,
+			);
+			path = "CouponsCenter(领券中心)";
+			sourceTree = "<group>";
+		};
+		C303946F20A28B9F00B2A0FA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C303947220A28BF100B2A0FA /* HSQCouponsCenterViewController.h */,
+				C303947320A28BF100B2A0FA /* HSQCouponsCenterViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C303947020A28BA800B2A0FA /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C303947120A28BAE00B2A0FA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C303947520A28DB600B2A0FA /* promote(推广) */ = {
+			isa = PBXGroup;
+			children = (
+				C303947620A28DCB00B2A0FA /* Controller */,
+				C303947820A28DDC00B2A0FA /* Model */,
+				C303947720A28DD400B2A0FA /* View */,
+			);
+			path = "promote(推广)";
+			sourceTree = "<group>";
+		};
+		C303947620A28DCB00B2A0FA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C324CC782080A2F20030CEE7 /* HSQToPromoteViewController.h */,
+				C324CC792080A2F20030CEE7 /* HSQToPromoteViewController.m */,
+				C324CC7A2080A2F20030CEE7 /* HSQToPromoteViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C303947720A28DD400B2A0FA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C324CC832080A5E50030CEE7 /* HSQToPromoteListCell.h */,
+				C324CC842080A5E50030CEE7 /* HSQToPromoteListCell.m */,
+				C324CC852080A5E50030CEE7 /* HSQToPromoteListCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C303947820A28DDC00B2A0FA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C313EE93208997FD00D15B00 /* SetingController */ = {
+			isa = PBXGroup;
+			children = (
+				C318F8DF2091C0F70056F8A3 /* BandMobileController */,
+				C313EE942089982300D15B00 /* HSQSetingViewController.h */,
+				C313EE952089982300D15B00 /* HSQSetingViewController.m */,
+				C313EE962089982300D15B00 /* HSQSetingViewController.xib */,
+				C3BF693D20908B4B00726EEA /* HSQLoginBandViewController.h */,
+				C3BF693E20908B4B00726EEA /* HSQLoginBandViewController.m */,
+				C3BF693F20908B4B00726EEA /* HSQLoginBandViewController.xib */,
+			);
+			path = SetingController;
+			sourceTree = "<group>";
+		};
+		C318F8C1209164170056F8A3 /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				C32C25162092CFC500076F10 /* HSQMessageListViewController.h */,
+				C32C25172092CFC500076F10 /* HSQMessageListViewController.m */,
+				C318F8C22091642A0056F8A3 /* HSQMessageSetViewController.h */,
+				C318F8C32091642A0056F8A3 /* HSQMessageSetViewController.m */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		C318F8DF2091C0F70056F8A3 /* BandMobileController */ = {
+			isa = PBXGroup;
+			children = (
+				C318F8D52091AAC50056F8A3 /* HSQBandMobileViewController.h */,
+				C318F8D62091AAC50056F8A3 /* HSQBandMobileViewController.m */,
+				C318F8D72091AAC50056F8A3 /* HSQBandMobileViewController.xib */,
+				C318F8DA2091BF9F0056F8A3 /* HSQNextBandPhoneViewController.h */,
+				C318F8DB2091BF9F0056F8A3 /* HSQNextBandPhoneViewController.m */,
+				C318F8DC2091BF9F0056F8A3 /* HSQNextBandPhoneViewController.xib */,
+				C318F8E02091C1430056F8A3 /* HSQYanZhengMobileViewController.h */,
+				C318F8E12091C1430056F8A3 /* HSQYanZhengMobileViewController.m */,
+				C318F8E22091C1430056F8A3 /* HSQYanZhengMobileViewController.xib */,
+				C32C25112092C34800076F10 /* HSQChangePassWordViewController.h */,
+				C32C25122092C34800076F10 /* HSQChangePassWordViewController.m */,
+				C32C25132092C34800076F10 /* HSQChangePassWordViewController.xib */,
+			);
+			path = BandMobileController;
+			sourceTree = "<group>";
+		};
+		C324CC6A208084670030CEE7 /* ShiYong */ = {
+			isa = PBXGroup;
+			children = (
+				C34D51542085C47800C28016 /* HSQCollectionViewLayout.h */,
+				C34D51552085C47800C28016 /* HSQCollectionViewLayout.m */,
+				C324CC6B208084AD0030CEE7 /* HSQTheTrialViewController.h */,
+				C324CC6C208084AD0030CEE7 /* HSQTheTrialViewController.m */,
+			);
+			path = ShiYong;
+			sourceTree = "<group>";
+		};
+		C324CC70208092360030CEE7 /* ShiYongBaoGao(试用报告) */ = {
+			isa = PBXGroup;
+			children = (
+				C34D514E2085A45000C28016 /* HSQPhotosView.h */,
+				C34D514F2085A45000C28016 /* HSQPhotosView.m */,
+				C34D51572085E34900C28016 /* HWStatusPhotoView.h */,
+				C34D51582085E34900C28016 /* HWStatusPhotoView.m */,
+				C34D51602085F47E00C28016 /* HSQUsingReportDetailViewController.h */,
+				C34D51612085F47E00C28016 /* HSQUsingReportDetailViewController.m */,
+			);
+			path = "ShiYongBaoGao(试用报告)";
+			sourceTree = "<group>";
+		};
+		C324CC772080A2A70030CEE7 /* ToPromote(推广) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "ToPromote(推广)";
+			sourceTree = "<group>";
+		};
+		C324CC7D2080A39D0030CEE7 /* JiFenCenter */ = {
+			isa = PBXGroup;
+			children = (
+				C324CC7E2080A3D90030CEE7 /* HSQIntegralCenterViewController.h */,
+				C324CC7F2080A3D90030CEE7 /* HSQIntegralCenterViewController.m */,
+				C324CC802080A3D90030CEE7 /* HSQIntegralCenterViewController.xib */,
+			);
+			path = JiFenCenter;
+			sourceTree = "<group>";
+		};
+		C324E72920881EFB00D133F0 /* AccountManger */ = {
+			isa = PBXGroup;
+			children = (
+				C324E72A20881F3D00D133F0 /* HSQAccount.h */,
+				C324E72B20881F3D00D133F0 /* HSQAccount.m */,
+				C324E72D208820D000D133F0 /* HSQAccountTool.h */,
+				C324E72E208820D000D133F0 /* HSQAccountTool.m */,
+			);
+			path = AccountManger;
+			sourceTree = "<group>";
+		};
+		C3284E4620A3E46800C90290 /* PinTuanGoodsDetailCell */ = {
+			isa = PBXGroup;
+			children = (
+				C32A868220A326C800260912 /* HSQGoodsDetailHeadCell.h */,
+				C32A868320A326C800260912 /* HSQGoodsDetailHeadCell.m */,
+				C3284E4A20A3F59B00C90290 /* HSQPinTuanGoodsDetailHomeCell.h */,
+				C3284E4B20A3F59B00C90290 /* HSQPinTuanGoodsDetailHomeCell.m */,
+				C3284E4C20A3F59B00C90290 /* HSQPinTuanGoodsDetailHomeCell.xib */,
+				C3284E4F20A4255E00C90290 /* HSQGuiGeAndCouperView.h */,
+				C3284E5020A4255E00C90290 /* HSQGuiGeAndCouperView.m */,
+				C3284E5220A427F800C90290 /* HSQCoupterListCell.h */,
+				C3284E5320A427F800C90290 /* HSQCoupterListCell.m */,
+				C3284E5420A427F800C90290 /* HSQCoupterListCell.xib */,
+			);
+			path = PinTuanGoodsDetailCell;
+			sourceTree = "<group>";
+		};
+		C3284E5720A43C0200C90290 /* RateViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				C3284E5820A43C6700C90290 /* HSQGoodsDetailRateHeadView.h */,
+				C3284E5920A43C6700C90290 /* HSQGoodsDetailRateHeadView.m */,
+				C3284E5B20A445AD00C90290 /* HSQGoodsDetailFooterView.h */,
+				C3284E5C20A445AD00C90290 /* HSQGoodsDetailFooterView.m */,
+			);
+			path = RateViewCell;
+			sourceTree = "<group>";
+		};
+		C3284E5E20A44A3300C90290 /* StoreCell */ = {
+			isa = PBXGroup;
+			children = (
+				C3284E5F20A44ABD00C90290 /* HSQStoreHeadIntroCell.h */,
+				C3284E6020A44ABD00C90290 /* HSQStoreHeadIntroCell.m */,
+				C3284E6120A44ABD00C90290 /* HSQStoreHeadIntroCell.xib */,
+				C3284E6420A4724000C90290 /* HSQRecommendGoodslListCell.h */,
+				C3284E6520A4724000C90290 /* HSQRecommendGoodslListCell.m */,
+				C3F8BB4B20A535180087B6A0 /* PublieTuiJianGoodsListView.h */,
+				C3F8BB4C20A535180087B6A0 /* PublieTuiJianGoodsListView.m */,
+			);
+			path = StoreCell;
+			sourceTree = "<group>";
+		};
+		C32A867720A2F8E100260912 /* GoodsDetailHome(商品详情首页) */ = {
+			isa = PBXGroup;
+			children = (
+				C37A99A0207F502D00A55AA0 /* HSQPinTuanViewController.h */,
+				C37A99A1207F502D00A55AA0 /* HSQPinTuanViewController.m */,
+				C37A99A2207F502D00A55AA0 /* HSQPinTuanViewController.xib */,
+				C303948420A295D300B2A0FA /* HSQPinTuanDetailHomeViewController.h */,
+				C303948520A295D300B2A0FA /* HSQPinTuanDetailHomeViewController.m */,
+				C303948620A295D300B2A0FA /* HSQPinTuanDetailHomeViewController.xib */,
+			);
+			path = "GoodsDetailHome(商品详情首页)";
+			sourceTree = "<group>";
+		};
+		C32A867820A2F90500260912 /* GoodsDetail(商品) */ = {
+			isa = PBXGroup;
+			children = (
+				C32A866C20A2EB0C00260912 /* HSQGoodsDetailViewController.h */,
+				C32A866D20A2EB0C00260912 /* HSQGoodsDetailViewController.m */,
+			);
+			path = "GoodsDetail(商品)";
+			sourceTree = "<group>";
+		};
+		C32A867920A2F91600260912 /* GoodsImageDetail(详情) */ = {
+			isa = PBXGroup;
+			children = (
+				C32A866F20A2EE8300260912 /* HSQGoodsImageDetailViewController.h */,
+				C32A867020A2EE8300260912 /* HSQGoodsImageDetailViewController.m */,
+				C32A867B20A2FDCA00260912 /* HSQGoodsImageDetailViewController.xib */,
+				C32A867D20A3210400260912 /* HSQComputerGoodsDetailViewController.h */,
+				C32A867E20A3210400260912 /* HSQComputerGoodsDetailViewController.m */,
+			);
+			path = "GoodsImageDetail(详情)";
+			sourceTree = "<group>";
+		};
+		C32A867A20A2F94300260912 /* GoodsDetailRate(评论) */ = {
+			isa = PBXGroup;
+			children = (
+				C3F8BB5A20A578C60087B6A0 /* HSQGoodsDetailCommentsViewController.h */,
+				C3F8BB5B20A578C60087B6A0 /* HSQGoodsDetailCommentsViewController.m */,
+				C3F8BB5C20A578C60087B6A0 /* HSQGoodsDetailCommentsViewController.xib */,
+			);
+			path = "GoodsDetailRate(评论)";
+			sourceTree = "<group>";
+		};
+		C32C25192092D57100076F10 /* MyCollection */ = {
+			isa = PBXGroup;
+			children = (
+				C33F4AEF2095A3870032B9A1 /* HSQMyCollectionHomeViewController.h */,
+				C33F4AF02095A3870032B9A1 /* HSQMyCollectionHomeViewController.m */,
+				C33F4AF22095A39A0032B9A1 /* HSQGoodsCollectionViewController.h */,
+				C33F4AF32095A39A0032B9A1 /* HSQGoodsCollectionViewController.m */,
+				C33F4AF52095A3A90032B9A1 /* HSQStoreCollectionViewController.h */,
+				C33F4AF62095A3A90032B9A1 /* HSQStoreCollectionViewController.m */,
+			);
+			path = MyCollection;
+			sourceTree = "<group>";
+		};
+		C32C25222092F9BA00076F10 /* MyCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				C332805B207DE8E400AA6ACF /* HSQGoodsCollectionListCell.h */,
+				C332805C207DE8E400AA6ACF /* HSQGoodsCollectionListCell.m */,
+				C32C252920930AF800076F10 /* HSQMyCollectionHeaderView.h */,
+				C32C252A20930AF800076F10 /* HSQMyCollectionHeaderView.m */,
+			);
+			path = MyCollectionView;
+			sourceTree = "<group>";
+		};
+		C32C252C2093151400076F10 /* BrowseTheFootprint */ = {
+			isa = PBXGroup;
+			children = (
+				C32C252D2093154B00076F10 /* BrowseFootprintViewController.h */,
+				C32C252E2093154B00076F10 /* BrowseFootprintViewController.m */,
+			);
+			path = BrowseTheFootprint;
+			sourceTree = "<group>";
+		};
+		C32C25302093176D00076F10 /* BrowseTheFootprint */ = {
+			isa = PBXGroup;
+			children = (
+				C32C25312093179000076F10 /* BrowseFootprintListCell.h */,
+				C32C25322093179000076F10 /* BrowseFootprintListCell.m */,
+			);
+			path = BrowseTheFootprint;
+			sourceTree = "<group>";
+		};
+		C32EDFFF2094449B004F85F0 /* UserAndMobileLogin */ = {
+			isa = PBXGroup;
+			children = (
+				C3328066207E089D00AA6ACF /* HSQLoginViewController.h */,
+				C3328067207E089D00AA6ACF /* HSQLoginViewController.m */,
+				C3328068207E089D00AA6ACF /* HSQLoginViewController.xib */,
+				C32EE003209445EB004F85F0 /* MobileVerificationLoginViewController.h */,
+				C32EE004209445EB004F85F0 /* MobileVerificationLoginViewController.m */,
+				C32EE005209445EB004F85F0 /* MobileVerificationLoginViewController.xib */,
+			);
+			path = UserAndMobileLogin;
+			sourceTree = "<group>";
+		};
+		C32EE000209444DD004F85F0 /* UserAndMobileRegister */ = {
+			isa = PBXGroup;
+			children = (
+				C332806B207E0BC800AA6ACF /* HSQRegisterViewController.h */,
+				C332806C207E0BC800AA6ACF /* HSQRegisterViewController.m */,
+				C332806D207E0BC800AA6ACF /* HSQRegisterViewController.xib */,
+				C32EDFFA209417A6004F85F0 /* HSQMobileRegisterViewController.h */,
+				C32EDFFB209417A6004F85F0 /* HSQMobileRegisterViewController.m */,
+				C32EDFFC209417A6004F85F0 /* HSQMobileRegisterViewController.xib */,
+			);
+			path = UserAndMobileRegister;
+			sourceTree = "<group>";
+		};
+		C32EE0012094451F004F85F0 /* UserAgreement */ = {
+			isa = PBXGroup;
+			children = (
+				C37A9985207EF24A00A55AA0 /* HSQWebViewController.h */,
+				C37A9986207EF24A00A55AA0 /* HSQWebViewController.m */,
+			);
+			path = UserAgreement;
+			sourceTree = "<group>";
+		};
+		C32EE00220944541004F85F0 /* ForgotPassword */ = {
+			isa = PBXGroup;
+			children = (
+				C37A998A207F075B00A55AA0 /* HSQForgotPasswordViewController.h */,
+				C37A998B207F075B00A55AA0 /* HSQForgotPasswordViewController.m */,
+				C37A998C207F075B00A55AA0 /* HSQForgotPasswordViewController.xib */,
+			);
+			path = ForgotPassword;
+			sourceTree = "<group>";
+		};
+		C32EE008209456B3004F85F0 /* MyPropertyController */ = {
+			isa = PBXGroup;
+			children = (
+				C32EE009209456D0004F85F0 /* MyPropertyHomePage */,
+				C33F4AE3209560000032B9A1 /* couponsController */,
+				C33F4ACE2095500A0032B9A1 /* TheAccountBalance */,
+				C32EE01A20946DDE004F85F0 /* TheIntegralSubsidiary */,
+				C33F4ADD20955E9B0032B9A1 /* MemberOfThePrize */,
+			);
+			path = MyPropertyController;
+			sourceTree = "<group>";
+		};
+		C32EE009209456D0004F85F0 /* MyPropertyHomePage */ = {
+			isa = PBXGroup;
+			children = (
+				C32EE00A20945706004F85F0 /* HSQMyPropertyHomeController.h */,
+				C32EE00B20945706004F85F0 /* HSQMyPropertyHomeController.m */,
+			);
+			path = MyPropertyHomePage;
+			sourceTree = "<group>";
+		};
+		C32EE00D20945A63004F85F0 /* MyPropertyController */ = {
+			isa = PBXGroup;
+			children = (
+				C32EE02020947349004F85F0 /* TheIntegralSubsidiary */,
+				C32EE01120945B14004F85F0 /* MyPropertyHomeListCell */,
+			);
+			path = MyPropertyController;
+			sourceTree = "<group>";
+		};
+		C32EE00E20945A6E004F85F0 /* AdressListCell */ = {
+			isa = PBXGroup;
+			children = (
+				C3BF693120906AEF00726EEA /* HSQAdressListCell.h */,
+				C3BF693220906AEF00726EEA /* HSQAdressListCell.m */,
+				C3BF693A20907AC500726EEA /* HSQAdressListFooterView.h */,
+				C3BF693B20907AC500726EEA /* HSQAdressListFooterView.m */,
+			);
+			path = AdressListCell;
+			sourceTree = "<group>";
+		};
+		C32EE00F20945AA1004F85F0 /* MineHomePage */ = {
+			isa = PBXGroup;
+			children = (
+				C36F570D207CBC540086C2FA /* HSQHeaderCollectionReusableView.h */,
+				C36F570E207CBC540086C2FA /* HSQHeaderCollectionReusableView.m */,
+				C36F570F207CBC540086C2FA /* HSQHeaderCollectionReusableView.xib */,
+				C3328058207DD99300AA6ACF /* HSQCustomViewWithButton.h */,
+				C3328059207DD99300AA6ACF /* HSQCustomViewWithButton.m */,
+			);
+			path = MineHomePage;
+			sourceTree = "<group>";
+		};
+		C32EE01020945AD5004F85F0 /* MessageList */ = {
+			isa = PBXGroup;
+			children = (
+				C318F8C52091652A0056F8A3 /* HSQMessageSetListCell.h */,
+				C318F8C62091652A0056F8A3 /* HSQMessageSetListCell.m */,
+				C318F8C72091652A0056F8A3 /* HSQMessageSetListCell.xib */,
+				C318F8D2209175110056F8A3 /* HSQHeadMessageView.h */,
+				C318F8D3209175110056F8A3 /* HSQHeadMessageView.m */,
+			);
+			path = MessageList;
+			sourceTree = "<group>";
+		};
+		C32EE01120945B14004F85F0 /* MyPropertyHomeListCell */ = {
+			isa = PBXGroup;
+			children = (
+				C32EE01220945B60004F85F0 /* HSQMyPropertyHomeListCell.h */,
+				C32EE01320945B60004F85F0 /* HSQMyPropertyHomeListCell.m */,
+				C32EE01420945B60004F85F0 /* HSQMyPropertyHomeListCell.xib */,
+			);
+			path = MyPropertyHomeListCell;
+			sourceTree = "<group>";
+		};
+		C32EE01A20946DDE004F85F0 /* TheIntegralSubsidiary */ = {
+			isa = PBXGroup;
+			children = (
+				C32EE01B20946E24004F85F0 /* HSQIntegralListViewController.h */,
+				C32EE01C20946E24004F85F0 /* HSQIntegralListViewController.m */,
+				C32EE01D20946E24004F85F0 /* HSQIntegralListViewController.xib */,
+			);
+			path = TheIntegralSubsidiary;
+			sourceTree = "<group>";
+		};
+		C32EE02020947349004F85F0 /* TheIntegralSubsidiary */ = {
+			isa = PBXGroup;
+			children = (
+				C32EE02120947385004F85F0 /* HSQIntegralListCell.h */,
+				C32EE02220947385004F85F0 /* HSQIntegralListCell.m */,
+				C32EE02320947385004F85F0 /* HSQIntegralListCell.xib */,
+			);
+			path = TheIntegralSubsidiary;
+			sourceTree = "<group>";
+		};
+		C3328061207DF9A700AA6ACF /* PublieView */ = {
+			isa = PBXGroup;
+			children = (
+				C334665F20872CB500B8AD0A /* AdressListView */,
+				C3328062207DFA4D00AA6ACF /* HSQPubShaiBaoView.h */,
+				C3328063207DFA4D00AA6ACF /* HSQPubShaiBaoView.m */,
+				C324CC6720804EC90030CEE7 /* HSQPublicMenuView.h */,
+				C324CC6820804EC90030CEE7 /* HSQPublicMenuView.m */,
+				C33F4AF82095ACA30032B9A1 /* HSQTopNavtionView.h */,
+				C33F4AF92095ACA30032B9A1 /* HSQTopNavtionView.m */,
+				C375FBB820A68D65000BA8BA /* HSQNoDataView.h */,
+				C375FBB920A68D65000BA8BA /* HSQNoDataView.m */,
+			);
+			path = PublieView;
+			sourceTree = "<group>";
+		};
+		C3328065207E083F00AA6ACF /* LoginAndRegister */ = {
+			isa = PBXGroup;
+			children = (
+				C32EDFFF2094449B004F85F0 /* UserAndMobileLogin */,
+				C32EE000209444DD004F85F0 /* UserAndMobileRegister */,
+				C32EE00220944541004F85F0 /* ForgotPassword */,
+				C32EE0012094451F004F85F0 /* UserAgreement */,
+			);
+			path = LoginAndRegister;
+			sourceTree = "<group>";
+		};
+		C33466492086D2FB00B8AD0A /* AccountManger */ = {
+			isa = PBXGroup;
+			children = (
+				C334664A2086D37000B8AD0A /* HSQPersonCenterViewController.h */,
+				C334664B2086D37000B8AD0A /* HSQPersonCenterViewController.m */,
+				C334664C2086D37000B8AD0A /* HSQPersonCenterViewController.xib */,
+				C334664F2086E0B200B8AD0A /* HSQRealNameViewController.h */,
+				C33466502086E0B200B8AD0A /* HSQRealNameViewController.m */,
+				C33466512086E0B200B8AD0A /* HSQRealNameViewController.xib */,
+				C33466542086E97800B8AD0A /* HSQUserGenderView.h */,
+				C33466552086E97800B8AD0A /* HSQUserGenderView.m */,
+				C334665920871E0900B8AD0A /* HSQSelectDatePickerView.h */,
+				C334665A20871E0900B8AD0A /* HSQSelectDatePickerView.m */,
+			);
+			path = AccountManger;
+			sourceTree = "<group>";
+		};
+		C334665F20872CB500B8AD0A /* AdressListView */ = {
+			isa = PBXGroup;
+			children = (
+				C3346663208736D300B8AD0A /* HSQAddressView.h */,
+				C3346664208736D300B8AD0A /* HSQAddressView.m */,
+				C334666020872CD500B8AD0A /* HSQPublicAdressView.h */,
+				C334666120872CD500B8AD0A /* HSQPublicAdressView.m */,
+				C33466662087423E00B8AD0A /* HSQAdressListModel.h */,
+				C33466672087423E00B8AD0A /* HSQAdressListModel.m */,
+				C334666B2087431B00B8AD0A /* AddressTableViewCell.h */,
+				C334666A2087431B00B8AD0A /* AddressTableViewCell.m */,
+				C33466692087431B00B8AD0A /* AddressTableViewCell.xib */,
+			);
+			path = AdressListView;
+			sourceTree = "<group>";
+		};
 		C33851152079BA0B0030320C = {
 			isa = PBXGroup;
 			children = (
 				C33851202079BA0B0030320C /* LiTianDecoration */,
 				C338511F2079BA0B0030320C /* Products */,
+				69763DA39B6C0C79C5DB89F6 /* Pods */,
+				7423BD6718F2B09E4482FEA9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,17 +1124,658 @@
 		C33851202079BA0B0030320C /* LiTianDecoration */ = {
 			isa = PBXGroup;
 			children = (
-				C33851212079BA0B0030320C /* AppDelegate.h */,
-				C33851222079BA0B0030320C /* AppDelegate.m */,
-				C33851242079BA0B0030320C /* ViewController.h */,
-				C33851252079BA0B0030320C /* ViewController.m */,
+				C338513A2079BAFD0030320C /* AppDelegate */,
+				C33851402079BBA80030320C /* HomeTabbarController */,
+				C33851412079BBE60030320C /* GeneralView */,
+				C33851372079BABB0030320C /* Category */,
+				C33851392079BAEE0030320C /* Helper */,
+				C338513B2079BB080030320C /* Other */,
+				C3328061207DF9A700AA6ACF /* PublieView */,
+				C33851382079BACC0030320C /* Class */,
+				C338513C2079BB310030320C /* Vender */,
 				C33851272079BA0B0030320C /* Main.storyboard */,
 				C338512A2079BA140030320C /* Assets.xcassets */,
 				C338512C2079BA140030320C /* LaunchScreen.storyboard */,
 				C338512F2079BA140030320C /* Info.plist */,
 				C33851302079BA140030320C /* main.m */,
+				C33851452079C29D0030320C /* PrefixHeader.pch */,
 			);
 			path = LiTianDecoration;
+			sourceTree = "<group>";
+		};
+		C33851372079BABB0030320C /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				C324E7302088932300D133F0 /* Foundation+Log.m */,
+				C303946C20A2886700B2A0FA /* UIDevice+IPhoneModel.h */,
+				C303946B20A2886700B2A0FA /* UIDevice+IPhoneModel.m */,
+				C3581244207B005C00BC26B4 /* UIImage+HSQImage.h */,
+				C3581245207B005C00BC26B4 /* UIImage+HSQImage.m */,
+				C38EF4C6207B6A240094B16B /* NSString+HSQ.h */,
+				C38EF4C7207B6A240094B16B /* NSString+HSQ.m */,
+				C32C250E2092BE4100076F10 /* NSTimer+Addtions.h */,
+				C32C250F2092BE4100076F10 /* NSTimer+Addtions.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		C33851382079BACC0030320C /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				C3546DC1209FDD840071294C /* Mall(商城模块) */,
+				C3328065207E083F00AA6ACF /* LoginAndRegister */,
+				C38EF4AD207B4C5D0094B16B /* HomePage */,
+				C38EF4B7207B4D530094B16B /* Discover */,
+				C38EF4B9207B4D6F0094B16B /* Mine */,
+			);
+			path = Class;
+			sourceTree = "<group>";
+		};
+		C33851392079BAEE0030320C /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				C324E72920881EFB00D133F0 /* AccountManger */,
+				C38EF4A6207B4A2E0094B16B /* AFNetworkRequestTool.h */,
+				C38EF4A7207B4A2E0094B16B /* AFNetworkRequestTool.m */,
+				C3425BC8208472AA00869438 /* HSQProgressHUDManger.h */,
+				C3425BC9208472AA00869438 /* HSQProgressHUDManger.m */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		C338513A2079BAFD0030320C /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				C338513D2079BB810030320C /* AppDelegate.h */,
+				C338513E2079BB810030320C /* AppDelegate.m */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		C338513B2079BB080030320C /* Other */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		C338513C2079BB310030320C /* Vender */ = {
+			isa = PBXGroup;
+			children = (
+				C3E2982D20A12E4B001E1EBE /* TXScrollLabelView */,
+			);
+			path = Vender;
+			sourceTree = "<group>";
+		};
+		C33851402079BBA80030320C /* HomeTabbarController */ = {
+			isa = PBXGroup;
+			children = (
+				C3581241207AF8BB00BC26B4 /* HSQNavigationController.h */,
+				C3581242207AF8BB00BC26B4 /* HSQNavigationController.m */,
+				C358123E207AF0C600BC26B4 /* HSQHomeTabBarController.h */,
+				C358123F207AF0C600BC26B4 /* HSQHomeTabBarController.m */,
+			);
+			path = HomeTabbarController;
+			sourceTree = "<group>";
+		};
+		C33851412079BBE60030320C /* GeneralView */ = {
+			isa = PBXGroup;
+			children = (
+				C33851422079BD770030320C /* HSQCustomTextView.h */,
+				C33851432079BD770030320C /* HSQCustomTextView.m */,
+				C338514C207A121A0030320C /* HSQCustomButton.h */,
+				C338514D207A121A0030320C /* HSQCustomButton.m */,
+				C305F2F0207AEA68005301EE /* HSQCustomShareView.h */,
+				C305F2F1207AEA68005301EE /* HSQCustomShareView.m */,
+				C36F570A207CB0E80086C2FA /* HSQCustomNavBar.h */,
+				C36F570B207CB0E80086C2FA /* HSQCustomNavBar.m */,
+			);
+			path = GeneralView;
+			sourceTree = "<group>";
+		};
+		C33A3C882096B5F300944632 /* ReturnGoods */ = {
+			isa = PBXGroup;
+			children = (
+				C33A3C852096B5ED00944632 /* HSQReturnGoodsViewController.h */,
+				C33A3C862096B5ED00944632 /* HSQReturnGoodsViewController.m */,
+				C33A3C892096B82C00944632 /* HSQReturnGoodsListViewController.h */,
+				C33A3C8A2096B82C00944632 /* HSQReturnGoodsListViewController.m */,
+			);
+			path = ReturnGoods;
+			sourceTree = "<group>";
+		};
+		C33F4ACE2095500A0032B9A1 /* TheAccountBalance */ = {
+			isa = PBXGroup;
+			children = (
+				C33F4ACF209554550032B9A1 /* HSQMyAccountBalanceViewController.h */,
+				C33F4AD0209554550032B9A1 /* HSQMyAccountBalanceViewController.m */,
+				C33F4AD1209554550032B9A1 /* HSQMyAccountBalanceViewController.xib */,
+				C33F4AD42095577B0032B9A1 /* MyBalanceViewController.h */,
+				C33F4AD52095577B0032B9A1 /* MyBalanceViewController.m */,
+				C33F4AD72095579D0032B9A1 /* TopUpDetailViewController.h */,
+				C33F4AD82095579D0032B9A1 /* TopUpDetailViewController.m */,
+				C33F4ADA209557BC0032B9A1 /* HSQWithdrawalViewController.h */,
+				C33F4ADB209557BC0032B9A1 /* HSQWithdrawalViewController.m */,
+			);
+			path = TheAccountBalance;
+			sourceTree = "<group>";
+		};
+		C33F4ADD20955E9B0032B9A1 /* MemberOfThePrize */ = {
+			isa = PBXGroup;
+			children = (
+				C33F4ADE20955F340032B9A1 /* HSQMemberPrizeViewController.h */,
+				C33F4ADF20955F340032B9A1 /* HSQMemberPrizeViewController.m */,
+				C33F4AE020955F340032B9A1 /* HSQMemberPrizeViewController.xib */,
+			);
+			path = MemberOfThePrize;
+			sourceTree = "<group>";
+		};
+		C33F4AE3209560000032B9A1 /* couponsController */ = {
+			isa = PBXGroup;
+			children = (
+				C33F4AE4209560360032B9A1 /* HSQCouponsHomeViewController.h */,
+				C33F4AE5209560360032B9A1 /* HSQCouponsHomeViewController.m */,
+				C33F4AE72095608F0032B9A1 /* HSQLeftCouponsViewController.h */,
+				C33F4AE82095608F0032B9A1 /* HSQLeftCouponsViewController.m */,
+				C33F4AEA209560A20032B9A1 /* HSQRightCouponsViewController.h */,
+				C33F4AEB209560A20032B9A1 /* HSQRightCouponsViewController.m */,
+				C33F4AEC209560A20032B9A1 /* HSQRightCouponsViewController.xib */,
+			);
+			path = couponsController;
+			sourceTree = "<group>";
+		};
+		C33F4AFE2095C1FD0032B9A1 /* MyOrderController */ = {
+			isa = PBXGroup;
+			children = (
+				C33F4AFB2095C1F50032B9A1 /* HSQMyOrderHomeViewController.h */,
+				C33F4AFC2095C1F50032B9A1 /* HSQMyOrderHomeViewController.m */,
+				C33F4AFF2095C5120032B9A1 /* HSQMyOrderListViewController.h */,
+				C33F4B002095C5120032B9A1 /* HSQMyOrderListViewController.m */,
+			);
+			path = MyOrderController;
+			sourceTree = "<group>";
+		};
+		C3546DC1209FDD840071294C /* Mall(商城模块) */ = {
+			isa = PBXGroup;
+			children = (
+				C3546DC3209FDDD70071294C /* MallHomePage(商城首页) */,
+				C3DD2B4C20A1AD24004FC2F3 /* PinTuanView(拼团) */,
+				C303947520A28DB600B2A0FA /* promote(推广) */,
+				C303946E20A28B8500B2A0FA /* CouponsCenter(领券中心) */,
+				C3DD2B4520A1A9CF004FC2F3 /* MallClass(商城分类) */,
+				C38EF4B8207B4D650094B16B /* ShopCar(购物车) */,
+			);
+			path = "Mall(商城模块)";
+			sourceTree = "<group>";
+		};
+		C3546DC3209FDDD70071294C /* MallHomePage(商城首页) */ = {
+			isa = PBXGroup;
+			children = (
+				C3546DC7209FE2150071294C /* Controller */,
+				C3546DC9209FE2290071294C /* Model */,
+				C3546DC8209FE2230071294C /* View */,
+			);
+			path = "MallHomePage(商城首页)";
+			sourceTree = "<group>";
+		};
+		C3546DC7209FE2150071294C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C3546DC4209FDE040071294C /* MallHomeViewController.h */,
+				C3546DC5209FDE040071294C /* MallHomeViewController.m */,
+				C3E2983420A13338001E1EBE /* HSQMallHomePageController.h */,
+				C3E2983520A13338001E1EBE /* HSQMallHomePageController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C3546DC8209FE2230071294C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C3E2983A20A13D24001E1EBE /* Banner(轮播图) */,
+				C3E2984A20A186F4001E1EBE /* ImageView(只有图片) */,
+				C3546DEB20A076940071294C /* BtnView(按钮模块) */,
+				C3546DEA20A0766D0071294C /* MiaoSha(秒杀) */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C3546DC9209FE2290071294C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C3546DCD209FF78B0071294C /* HSQMallHomeDataModel.h */,
+				C3546DCE209FF78B0071294C /* HSQMallHomeDataModel.m */,
+				C3E2983720A13521001E1EBE /* HSQMallHeiperTool.h */,
+				C3E2983820A13521001E1EBE /* HSQMallHeiperTool.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C3546DEA20A0766D0071294C /* MiaoSha(秒杀) */ = {
+			isa = PBXGroup;
+			children = (
+				C3546DD620A035980071294C /* HSQSecondsKillReusableView.h */,
+				C3546DD720A035980071294C /* HSQSecondsKillReusableView.m */,
+				C3546DE220A06CAB0071294C /* HSQMiaoShaGoodsView.h */,
+				C3546DE320A06CAB0071294C /* HSQMiaoShaGoodsView.m */,
+				C3546DE520A070300071294C /* HSQMiaoShaGoodsListCell.h */,
+				C3546DE620A070300071294C /* HSQMiaoShaGoodsListCell.m */,
+				C3546DE720A070300071294C /* HSQMiaoShaGoodsListCell.xib */,
+			);
+			path = "MiaoSha(秒杀)";
+			sourceTree = "<group>";
+		};
+		C3546DEB20A076940071294C /* BtnView(按钮模块) */ = {
+			isa = PBXGroup;
+			children = (
+				C3546DD320A020B30071294C /* HSQModelViewReusableView.h */,
+				C3546DD420A020B30071294C /* HSQModelViewReusableView.m */,
+				C3E2984B20A18D0C001E1EBE /* HSQButtonListViewCell.h */,
+				C3E2984C20A18D0C001E1EBE /* HSQButtonListViewCell.m */,
+				C3E2984D20A18D0C001E1EBE /* HSQButtonListViewCell.xib */,
+			);
+			path = "BtnView(按钮模块)";
+			sourceTree = "<group>";
+		};
+		C36F5703207CAA5E0086C2FA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C36F5706207CAA770086C2FA /* MineHomePage */,
+				C33A3C882096B5F300944632 /* ReturnGoods */,
+				C33F4AFE2095C1FD0032B9A1 /* MyOrderController */,
+				C32EE008209456B3004F85F0 /* MyPropertyController */,
+				C318F8C1209164170056F8A3 /* Message */,
+				C33466492086D2FB00B8AD0A /* AccountManger */,
+				C32C25192092D57100076F10 /* MyCollection */,
+				C32C252C2093151400076F10 /* BrowseTheFootprint */,
+				C3BF69282090336600726EEA /* ShippingAddress */,
+				C313EE93208997FD00D15B00 /* SetingController */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C36F5704207CAA680086C2FA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C3BF69372090717E00726EEA /* HSQAcceptAddressListModel.h */,
+				C3BF69382090717E00726EEA /* HSQAcceptAddressListModel.m */,
+				C318F8CA209170850056F8A3 /* HSQMessageReceiveModel.h */,
+				C318F8CB209170850056F8A3 /* HSQMessageReceiveModel.m */,
+				C32C2536209322B800076F10 /* BrowseFootprintListModel.h */,
+				C32C2537209322B800076F10 /* BrowseFootprintListModel.m */,
+				C32EE01720945E79004F85F0 /* MyPropertyListModel.h */,
+				C32EE01820945E79004F85F0 /* MyPropertyListModel.m */,
+				C32EE02620947774004F85F0 /* HSQIntegralListModel.h */,
+				C32EE02720947774004F85F0 /* HSQIntegralListModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C36F5705207CAA6E0086C2FA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C32EE00D20945A63004F85F0 /* MyPropertyController */,
+				C32EE01020945AD5004F85F0 /* MessageList */,
+				C32EE00F20945AA1004F85F0 /* MineHomePage */,
+				C32EE00E20945A6E004F85F0 /* AdressListCell */,
+				C32C25302093176D00076F10 /* BrowseTheFootprint */,
+				C32C25222092F9BA00076F10 /* MyCollectionView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C36F5706207CAA770086C2FA /* MineHomePage */ = {
+			isa = PBXGroup;
+			children = (
+				C36F5707207CAAA50086C2FA /* HSQMineViewController.h */,
+				C36F5708207CAAA50086C2FA /* HSQMineViewController.m */,
+			);
+			path = MineHomePage;
+			sourceTree = "<group>";
+		};
+		C37A998F207F344800A55AA0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C37A9992207F34C800A55AA0 /* HSQClassViewController.h */,
+				C37A9993207F34C800A55AA0 /* HSQClassViewController.m */,
+				C3281FEC209A9BF2007C3909 /* HSQSearchBarViewController.h */,
+				C3281FED209A9BF2007C3909 /* HSQSearchBarViewController.m */,
+				C3281FEE209A9BF2007C3909 /* HSQSearchBarViewController.xib */,
+				C33A3C942096ECF600944632 /* HSQClassGoodsListViewController.h */,
+				C33A3C952096ECF600944632 /* HSQClassGoodsListViewController.m */,
+				C33A3C962096ECF600944632 /* HSQClassGoodsListViewController.xib */,
+				C3281FF4209B19DC007C3909 /* HSQScreeningViewController.h */,
+				C3281FF5209B19DC007C3909 /* HSQScreeningViewController.m */,
+				C3281FF6209B19DC007C3909 /* HSQScreeningViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C37A9990207F345000A55AA0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C37A9995207F373500A55AA0 /* HSQClassHomeListCell.h */,
+				C37A9996207F373500A55AA0 /* HSQClassHomeListCell.m */,
+				C37A9998207F443C00A55AA0 /* HSQClassHeadCollectionReusableView.h */,
+				C37A9999207F443C00A55AA0 /* HSQClassHeadCollectionReusableView.m */,
+				C37A999B207F47A800A55AA0 /* HSQClassGoodsListCell.h */,
+				C37A999C207F47A800A55AA0 /* HSQClassGoodsListCell.m */,
+				C33A3C8F2096C01B00944632 /* HSQClassSecondGoodsListCell.h */,
+				C33A3C902096C01B00944632 /* HSQClassSecondGoodsListCell.m */,
+				C33A3C992096FB6B00944632 /* HSQDropdownMenuView.h */,
+				C33A3C9A2096FB6B00944632 /* HSQDropdownMenuView.m */,
+				C33A3C9C2097026800944632 /* HSQMenuListCell.h */,
+				C33A3C9D2097026800944632 /* HSQMenuListCell.m */,
+				C33A3C9E2097026800944632 /* HSQMenuListCell.xib */,
+				C3281FF1209AAEB8007C3909 /* HSQSearchListCell.h */,
+				C3281FF2209AAEB8007C3909 /* HSQSearchListCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C37A9991207F345600A55AA0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C313EE992089E06500D15B00 /* RightGoodsClassModel.h */,
+				C313EE9A2089E06500D15B00 /* RightGoodsClassModel.m */,
+				C313EE9C2089E68300D15B00 /* HSQLeftCategoryModel.h */,
+				C313EE9D2089E68300D15B00 /* HSQLeftCategoryModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C37A999E207F4FFC00A55AA0 /* ShaiBao */ = {
+			isa = PBXGroup;
+			children = (
+				C38EF4BD207B4DDE0094B16B /* DiscoverViewController.h */,
+				C38EF4BE207B4DDE0094B16B /* DiscoverViewController.m */,
+				C332805E207DF29000AA6ACF /* HSQShaiBaoViewController.h */,
+				C332805F207DF29000AA6ACF /* HSQShaiBaoViewController.m */,
+			);
+			path = ShaiBao;
+			sourceTree = "<group>";
+		};
+		C38EF4AD207B4C5D0094B16B /* HomePage */ = {
+			isa = PBXGroup;
+			children = (
+				C38EF4AE207B4C660094B16B /* Controller */,
+				C38EF4B0207B4C820094B16B /* Model */,
+				C38EF4AF207B4C7C0094B16B /* View */,
+			);
+			path = HomePage;
+			sourceTree = "<group>";
+		};
+		C38EF4AE207B4C660094B16B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C38EF4B2207B4CC10094B16B /* HomePageController */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C38EF4AF207B4C7C0094B16B /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C38EF4B0207B4C820094B16B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C38EF4B2207B4CC10094B16B /* HomePageController */ = {
+			isa = PBXGroup;
+			children = (
+				C38EF4B3207B4CE50094B16B /* HSQHomePageViewController.h */,
+				C38EF4B4207B4CE50094B16B /* HSQHomePageViewController.m */,
+			);
+			path = HomePageController;
+			sourceTree = "<group>";
+		};
+		C38EF4B7207B4D530094B16B /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				C38EF4BA207B4D940094B16B /* Controller */,
+				C38EF4BC207B4DA10094B16B /* View */,
+				C38EF4BB207B4D9C0094B16B /* Model */,
+			);
+			path = Discover;
+			sourceTree = "<group>";
+		};
+		C38EF4B8207B4D650094B16B /* ShopCar(购物车) */ = {
+			isa = PBXGroup;
+			children = (
+				C3DD2B4920A1ABE3004FC2F3 /* Controller */,
+				C3DD2B4B20A1ABF8004FC2F3 /* Model */,
+				C3DD2B4A20A1ABEF004FC2F3 /* View */,
+			);
+			path = "ShopCar(购物车)";
+			sourceTree = "<group>";
+		};
+		C38EF4B9207B4D6F0094B16B /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				C36F5703207CAA5E0086C2FA /* Controller */,
+				C36F5705207CAA6E0086C2FA /* View */,
+				C36F5704207CAA680086C2FA /* Model */,
+			);
+			path = Mine;
+			sourceTree = "<group>";
+		};
+		C38EF4BA207B4D940094B16B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C37A999E207F4FFC00A55AA0 /* ShaiBao */,
+				C324CC772080A2A70030CEE7 /* ToPromote(推广) */,
+				C324CC6A208084670030CEE7 /* ShiYong */,
+				C324CC7D2080A39D0030CEE7 /* JiFenCenter */,
+				C324CC70208092360030CEE7 /* ShiYongBaoGao(试用报告) */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C38EF4BB207B4D9C0094B16B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C34D514B2085A18A00C28016 /* HSQTrialReportListModel.h */,
+				C34D514C2085A18A00C28016 /* HSQTrialReportListModel.m */,
+				C38EF4C3207B59760094B16B /* DiscoverListModel.h */,
+				C38EF4C4207B59760094B16B /* DiscoverListModel.m */,
+				C34D515A2085E40600C28016 /* HWPhoto.h */,
+				C34D515B2085E40600C28016 /* HWPhoto.m */,
+				C34D515D2085E5DF00C28016 /* HSQTrialReportFrameModel.h */,
+				C34D515E2085E5DF00C28016 /* HSQTrialReportFrameModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C38EF4BC207B4DA10094B16B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C36F5700207C96BE0086C2FA /* HSQDiscoverHeadView.h */,
+				C36F5701207C96BE0086C2FA /* HSQDiscoverHeadView.m */,
+				C38EF4C0207B51850094B16B /* DiscoverHomeListCell.h */,
+				C38EF4C1207B51850094B16B /* DiscoverHomeListCell.m */,
+				C34D51512085C13800C28016 /* HSQUsingTheReportCell.h */,
+				C34D51522085C13800C28016 /* HSQUsingTheReportCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C3BF69282090336600726EEA /* ShippingAddress */ = {
+			isa = PBXGroup;
+			children = (
+				C3BF6929209033A400726EEA /* HSQAdressListViewController.h */,
+				C3BF692A209033A400726EEA /* HSQAdressListViewController.m */,
+				C3BF692C2090363100726EEA /* HSQNewAdressViewController.h */,
+				C3BF692D2090363100726EEA /* HSQNewAdressViewController.m */,
+				C3BF692E2090363100726EEA /* HSQNewAdressViewController.xib */,
+			);
+			path = ShippingAddress;
+			sourceTree = "<group>";
+		};
+		C3DD2B4520A1A9CF004FC2F3 /* MallClass(商城分类) */ = {
+			isa = PBXGroup;
+			children = (
+				C37A998F207F344800A55AA0 /* Controller */,
+				C37A9991207F345600A55AA0 /* Model */,
+				C37A9990207F345000A55AA0 /* View */,
+			);
+			path = "MallClass(商城分类)";
+			sourceTree = "<group>";
+		};
+		C3DD2B4920A1ABE3004FC2F3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C3DD2B4620A1ABDD004FC2F3 /* HSQMallShopCarViewController.h */,
+				C3DD2B4720A1ABDD004FC2F3 /* HSQMallShopCarViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C3DD2B4A20A1ABEF004FC2F3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C3DD2B4B20A1ABF8004FC2F3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C3DD2B4C20A1AD24004FC2F3 /* PinTuanView(拼团) */ = {
+			isa = PBXGroup;
+			children = (
+				C3DD2B4D20A1AD4A004FC2F3 /* Controller */,
+				C3DD2B4E20A1AD53004FC2F3 /* View */,
+				C3DD2B4F20A1AD59004FC2F3 /* Model */,
+			);
+			path = "PinTuanView(拼团)";
+			sourceTree = "<group>";
+		};
+		C3DD2B4D20A1AD4A004FC2F3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C32A867720A2F8E100260912 /* GoodsDetailHome(商品详情首页) */,
+				C32A867820A2F90500260912 /* GoodsDetail(商品) */,
+				C32A867920A2F91600260912 /* GoodsImageDetail(详情) */,
+				C32A867A20A2F94300260912 /* GoodsDetailRate(评论) */,
+				C3F8BB5420A576BE0087B6A0 /* StoreDetail(店铺详情) */,
+				C3F8BB4E20A573400087B6A0 /* ContactTheMerchant(联系商家) */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		C3DD2B4E20A1AD53004FC2F3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C3F8BB6220A58FFF0087B6A0 /* GoodsDetailRate(评论) */,
+				C3284E5E20A44A3300C90290 /* StoreCell */,
+				C3284E5720A43C0200C90290 /* RateViewCell */,
+				C3284E4620A3E46800C90290 /* PinTuanGoodsDetailCell */,
+				C37A99A5207F52BE00A55AA0 /* HSQPinTuanListCell.h */,
+				C37A99A6207F52BE00A55AA0 /* HSQPinTuanListCell.m */,
+				C32A867220A2F8D400260912 /* HSQGoodsDetailImageCell.h */,
+				C32A867320A2F8D400260912 /* HSQGoodsDetailImageCell.m */,
+				C32A867420A2F8D400260912 /* HSQGoodsDetailImageCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C3DD2B4F20A1AD59004FC2F3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C3DD2B5020A1C121004FC2F3 /* HSQPinTuanListModel.h */,
+				C3DD2B5120A1C121004FC2F3 /* HSQPinTuanListModel.m */,
+				C32A866320A2DA0200260912 /* HSQPinTuanDataDealTool.h */,
+				C32A866420A2DA0200260912 /* HSQPinTuanDataDealTool.m */,
+				C32A866020A2A9A900260912 /* HSQPinTuanDetailGoodsListModel.h */,
+				C32A866120A2A9A900260912 /* HSQPinTuanDetailGoodsListModel.m */,
+				C3F8BB5F20A58C750087B6A0 /* HSQGoodsRateListModel.h */,
+				C3F8BB6020A58C750087B6A0 /* HSQGoodsRateListModel.m */,
+				C375FBC420A6C789000BA8BA /* HSQGoodsRateListFrameModel.h */,
+				C375FBC520A6C789000BA8BA /* HSQGoodsRateListFrameModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C3E2982D20A12E4B001E1EBE /* TXScrollLabelView */ = {
+			isa = PBXGroup;
+			children = (
+				C3E2983120A12E57001E1EBE /* TXScrollLabelView.h */,
+				C3E2982F20A12E56001E1EBE /* TXScrollLabelView.m */,
+				C3E2982E20A12E56001E1EBE /* UIView+TXFrame.h */,
+				C3E2983020A12E56001E1EBE /* UIView+TXFrame.m */,
+			);
+			path = TXScrollLabelView;
+			sourceTree = "<group>";
+		};
+		C3E2983A20A13D24001E1EBE /* Banner(轮播图) */ = {
+			isa = PBXGroup;
+			children = (
+				C3546DCA209FE27E0071294C /* HSQMallHomeHeadView.h */,
+				C3546DCB209FE27E0071294C /* HSQMallHomeHeadView.m */,
+			);
+			path = "Banner(轮播图)";
+			sourceTree = "<group>";
+		};
+		C3E2984A20A186F4001E1EBE /* ImageView(只有图片) */ = {
+			isa = PBXGroup;
+			children = (
+				C3E2984520A173F3001E1EBE /* HSQImageListCollectionViewCell.h */,
+				C3E2984620A173F3001E1EBE /* HSQImageListCollectionViewCell.m */,
+				C3E2984720A173F3001E1EBE /* HSQImageListCollectionViewCell.xib */,
+				C3546DDF20A041880071294C /* HSQHeadImageReusableView.h */,
+				C3546DE020A041880071294C /* HSQHeadImageReusableView.m */,
+			);
+			path = "ImageView(只有图片)";
+			sourceTree = "<group>";
+		};
+		C3F8BB4E20A573400087B6A0 /* ContactTheMerchant(联系商家) */ = {
+			isa = PBXGroup;
+			children = (
+				C3F8BB4F20A573810087B6A0 /* HSQContactTheMerchantController.h */,
+				C3F8BB5020A573810087B6A0 /* HSQContactTheMerchantController.m */,
+				C3F8BB5120A573810087B6A0 /* HSQContactTheMerchantController.xib */,
+			);
+			path = "ContactTheMerchant(联系商家)";
+			sourceTree = "<group>";
+		};
+		C3F8BB5420A576BE0087B6A0 /* StoreDetail(店铺详情) */ = {
+			isa = PBXGroup;
+			children = (
+				C3F8BB5520A578300087B6A0 /* HSQStoreDetailViewController.h */,
+				C3F8BB5620A578300087B6A0 /* HSQStoreDetailViewController.m */,
+				C3F8BB5720A578300087B6A0 /* HSQStoreDetailViewController.xib */,
+			);
+			path = "StoreDetail(店铺详情)";
+			sourceTree = "<group>";
+		};
+		C3F8BB6220A58FFF0087B6A0 /* GoodsDetailRate(评论) */ = {
+			isa = PBXGroup;
+			children = (
+				C3F8BB6320A590390087B6A0 /* HSQGoodsRateHeadCollectionReusableView.h */,
+				C3F8BB6420A590390087B6A0 /* HSQGoodsRateHeadCollectionReusableView.m */,
+				C3F8BB6820A590670087B6A0 /* HSQGoodsRateFootCollectionReusableView.h */,
+				C3F8BB6920A590670087B6A0 /* HSQGoodsRateFootCollectionReusableView.m */,
+				C375FBBB20A699B9000BA8BA /* HSQStarsView.h */,
+				C375FBBC20A699B9000BA8BA /* HSQStarsView.m */,
+				C375FBBE20A6BFD7000BA8BA /* HSQGoodsRateListCollectionViewCell.h */,
+				C375FBBF20A6BFD7000BA8BA /* HSQGoodsRateListCollectionViewCell.m */,
+				C375FBC120A6C281000BA8BA /* HSQGoodsRateImageView.h */,
+				C375FBC220A6C281000BA8BA /* HSQGoodsRateImageView.m */,
+				C375FBC720A6EA7A000BA8BA /* HSQGoodsDetailRateListCell.h */,
+				C375FBC820A6EA7A000BA8BA /* HSQGoodsDetailRateListCell.m */,
+			);
+			path = "GoodsDetailRate(评论)";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -78,9 +1785,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C33851342079BA140030320C /* Build configuration list for PBXNativeTarget "LiTianDecoration" */;
 			buildPhases = (
+				F7F31A4FFD052CA9697A4EE0 /* [CP] Check Pods Manifest.lock */,
 				C338511A2079BA0B0030320C /* Sources */,
 				C338511B2079BA0B0030320C /* Frameworks */,
 				C338511C2079BA0B0030320C /* Resources */,
+				161A212364FBB0A9C9ABE9A9 /* [CP] Embed Pods Frameworks */,
+				2FF8AB390D371FA907EEF081 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -128,22 +1838,273 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3281FF8209B19DC007C3909 /* HSQScreeningViewController.xib in Resources */,
+				C3E2984920A173F3001E1EBE /* HSQImageListCollectionViewCell.xib in Resources */,
+				C32EE02520947385004F85F0 /* HSQIntegralListCell.xib in Resources */,
+				C3F8BB5320A573810087B6A0 /* HSQContactTheMerchantController.xib in Resources */,
+				C32A867C20A2FDCA00260912 /* HSQGoodsImageDetailViewController.xib in Resources */,
+				C33A3CA02097026800944632 /* HSQMenuListCell.xib in Resources */,
+				C318F8DE2091BF9F0056F8A3 /* HSQNextBandPhoneViewController.xib in Resources */,
+				C303948820A295D300B2A0FA /* HSQPinTuanDetailHomeViewController.xib in Resources */,
+				C332806A207E089D00AA6ACF /* HSQLoginViewController.xib in Resources */,
+				C3284E4E20A3F59B00C90290 /* HSQPinTuanGoodsDetailHomeCell.xib in Resources */,
+				C3F8BB5920A578300087B6A0 /* HSQStoreDetailViewController.xib in Resources */,
+				C313EE982089982300D15B00 /* HSQSetingViewController.xib in Resources */,
+				C37A998E207F075B00A55AA0 /* HSQForgotPasswordViewController.xib in Resources */,
+				C3284E5620A427F800C90290 /* HSQCoupterListCell.xib in Resources */,
+				C32C25152092C34800076F10 /* HSQChangePassWordViewController.xib in Resources */,
+				C3F8BB5E20A578C60087B6A0 /* HSQGoodsDetailCommentsViewController.xib in Resources */,
+				C324CC822080A3D90030CEE7 /* HSQIntegralCenterViewController.xib in Resources */,
 				C338512E2079BA140030320C /* LaunchScreen.storyboard in Resources */,
+				C33F4AEE209560A20032B9A1 /* HSQRightCouponsViewController.xib in Resources */,
+				C332806F207E0BC800AA6ACF /* HSQRegisterViewController.xib in Resources */,
+				C33F4AE220955F340032B9A1 /* HSQMemberPrizeViewController.xib in Resources */,
+				C3BF69302090363100726EEA /* HSQNewAdressViewController.xib in Resources */,
+				C318F8C92091652A0056F8A3 /* HSQMessageSetListCell.xib in Resources */,
+				C324CC7C2080A2F20030CEE7 /* HSQToPromoteViewController.xib in Resources */,
+				C3284E6320A44ABD00C90290 /* HSQStoreHeadIntroCell.xib in Resources */,
 				C338512B2079BA140030320C /* Assets.xcassets in Resources */,
+				C3E2984F20A18D0C001E1EBE /* HSQButtonListViewCell.xib in Resources */,
+				C3BF694120908B4B00726EEA /* HSQLoginBandViewController.xib in Resources */,
+				C3281FF0209A9BF2007C3909 /* HSQSearchBarViewController.xib in Resources */,
+				C32A867620A2F8D400260912 /* HSQGoodsDetailImageCell.xib in Resources */,
+				C334664E2086D37000B8AD0A /* HSQPersonCenterViewController.xib in Resources */,
+				C3546DE920A070300071294C /* HSQMiaoShaGoodsListCell.xib in Resources */,
 				C33851292079BA0B0030320C /* Main.storyboard in Resources */,
+				C33466532086E0B200B8AD0A /* HSQRealNameViewController.xib in Resources */,
+				C33A3C982096ECF600944632 /* HSQClassGoodsListViewController.xib in Resources */,
+				C36F5711207CBC540086C2FA /* HSQHeaderCollectionReusableView.xib in Resources */,
+				C33F4AD3209554550032B9A1 /* HSQMyAccountBalanceViewController.xib in Resources */,
+				C324CC872080A5E50030CEE7 /* HSQToPromoteListCell.xib in Resources */,
+				C334666C2087431C00B8AD0A /* AddressTableViewCell.xib in Resources */,
+				C318F8D92091AAC50056F8A3 /* HSQBandMobileViewController.xib in Resources */,
+				C318F8E42091C1430056F8A3 /* HSQYanZhengMobileViewController.xib in Resources */,
+				C32EE01F20946E24004F85F0 /* HSQIntegralListViewController.xib in Resources */,
+				C32EE007209445EB004F85F0 /* MobileVerificationLoginViewController.xib in Resources */,
+				C37A99A4207F502D00A55AA0 /* HSQPinTuanViewController.xib in Resources */,
+				C32EDFFE209417A6004F85F0 /* HSQMobileRegisterViewController.xib in Resources */,
+				C32EE01620945B60004F85F0 /* HSQMyPropertyHomeListCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		161A212364FBB0A9C9ABE9A9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LiTianDecoration/Pods-LiTianDecoration-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2FF8AB390D371FA907EEF081 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-LiTianDecoration/Pods-LiTianDecoration-resources.sh",
+				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LiTianDecoration/Pods-LiTianDecoration-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F7F31A4FFD052CA9697A4EE0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LiTianDecoration-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C338511A2079BA0B0030320C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C33851262079BA0B0030320C /* ViewController.m in Sources */,
+				C318F8C82091652A0056F8A3 /* HSQMessageSetListCell.m in Sources */,
+				C3546DC6209FDE040071294C /* MallHomeViewController.m in Sources */,
+				C38EF4C8207B6A240094B16B /* NSString+HSQ.m in Sources */,
+				C3581246207B005C00BC26B4 /* UIImage+HSQImage.m in Sources */,
+				C32C25102092BE4200076F10 /* NSTimer+Addtions.m in Sources */,
+				C3F8BB6620A590390087B6A0 /* HSQGoodsRateHeadCollectionReusableView.m in Sources */,
+				C318F8C42091642A0056F8A3 /* HSQMessageSetViewController.m in Sources */,
+				C38EF4C2207B51850094B16B /* DiscoverHomeListCell.m in Sources */,
+				C34D51532085C13800C28016 /* HSQUsingTheReportCell.m in Sources */,
+				C34D51502085A45000C28016 /* HSQPhotosView.m in Sources */,
+				C303948720A295D300B2A0FA /* HSQPinTuanDetailHomeViewController.m in Sources */,
+				C36F5710207CBC540086C2FA /* HSQHeaderCollectionReusableView.m in Sources */,
+				C375FBC320A6C281000BA8BA /* HSQGoodsRateImageView.m in Sources */,
+				C33F4AED209560A20032B9A1 /* HSQRightCouponsViewController.m in Sources */,
+				C34D51622085F47E00C28016 /* HSQUsingReportDetailViewController.m in Sources */,
+				C33F4AFD2095C1F50032B9A1 /* HSQMyOrderHomeViewController.m in Sources */,
+				C37A998D207F075B00A55AA0 /* HSQForgotPasswordViewController.m in Sources */,
+				C3BF693320906AEF00726EEA /* HSQAdressListCell.m in Sources */,
+				C313EE9E2089E68300D15B00 /* HSQLeftCategoryModel.m in Sources */,
+				C32EE006209445EB004F85F0 /* MobileVerificationLoginViewController.m in Sources */,
+				C375FBBD20A699B9000BA8BA /* HSQStarsView.m in Sources */,
+				C32C252F2093154B00076F10 /* BrowseFootprintViewController.m in Sources */,
+				C3328069207E089D00AA6ACF /* HSQLoginViewController.m in Sources */,
+				C38EF4A8207B4A2E0094B16B /* AFNetworkRequestTool.m in Sources */,
+				C32C2538209322B800076F10 /* BrowseFootprintListModel.m in Sources */,
+				C3546DCF209FF78B0071294C /* HSQMallHomeDataModel.m in Sources */,
+				C37A99A3207F502D00A55AA0 /* HSQPinTuanViewController.m in Sources */,
+				C3328060207DF29000AA6ACF /* HSQShaiBaoViewController.m in Sources */,
+				C36F570C207CB0E80086C2FA /* HSQCustomNavBar.m in Sources */,
+				C32EE00C20945706004F85F0 /* HSQMyPropertyHomeController.m in Sources */,
+				C3BF692B209033A400726EEA /* HSQAdressListViewController.m in Sources */,
+				C33A3C9B2096FB6B00944632 /* HSQDropdownMenuView.m in Sources */,
+				C3546DE420A06CAB0071294C /* HSQMiaoShaGoodsView.m in Sources */,
+				C3328064207DFA4D00AA6ACF /* HSQPubShaiBaoView.m in Sources */,
+				C33A3C972096ECF600944632 /* HSQClassGoodsListViewController.m in Sources */,
+				C3284E5A20A43C6700C90290 /* HSQGoodsDetailRateHeadView.m in Sources */,
+				C33851442079BD770030320C /* HSQCustomTextView.m in Sources */,
+				C3DD2B5220A1C121004FC2F3 /* HSQPinTuanListModel.m in Sources */,
+				C3F8BB5220A573810087B6A0 /* HSQContactTheMerchantController.m in Sources */,
+				C3284E5D20A445AD00C90290 /* HSQGoodsDetailFooterView.m in Sources */,
+				C3F8BB6B20A590670087B6A0 /* HSQGoodsRateFootCollectionReusableView.m in Sources */,
+				C33F4AD2209554550032B9A1 /* HSQMyAccountBalanceViewController.m in Sources */,
+				C33A3C872096B5ED00944632 /* HSQReturnGoodsViewController.m in Sources */,
+				C375FBC620A6C789000BA8BA /* HSQGoodsRateListFrameModel.m in Sources */,
+				C3F8BB5820A578300087B6A0 /* HSQStoreDetailViewController.m in Sources */,
+				C34D514D2085A18A00C28016 /* HSQTrialReportListModel.m in Sources */,
+				C334666D2087431C00B8AD0A /* AddressTableViewCell.m in Sources */,
+				C33466562086E97800B8AD0A /* HSQUserGenderView.m in Sources */,
+				C334666220872CD500B8AD0A /* HSQPublicAdressView.m in Sources */,
+				C34D51592085E34900C28016 /* HWStatusPhotoView.m in Sources */,
+				C34D515F2085E5DF00C28016 /* HSQTrialReportFrameModel.m in Sources */,
+				C37A999D207F47A800A55AA0 /* HSQClassGoodsListCell.m in Sources */,
+				C313EE9B2089E06500D15B00 /* RightGoodsClassModel.m in Sources */,
+				C3581240207AF0C600BC26B4 /* HSQHomeTabBarController.m in Sources */,
+				C32EE01520945B60004F85F0 /* HSQMyPropertyHomeListCell.m in Sources */,
+				C3DD2B4820A1ABDD004FC2F3 /* HSQMallShopCarViewController.m in Sources */,
+				C324CC7B2080A2F20030CEE7 /* HSQToPromoteViewController.m in Sources */,
+				C37A9994207F34C800A55AA0 /* HSQClassViewController.m in Sources */,
+				C3E2983320A12E57001E1EBE /* UIView+TXFrame.m in Sources */,
+				C3F8BB6120A58C750087B6A0 /* HSQGoodsRateListModel.m in Sources */,
+				C3281FF3209AAEB8007C3909 /* HSQSearchListCell.m in Sources */,
+				C303947420A28BF100B2A0FA /* HSQCouponsCenterViewController.m in Sources */,
+				C32A867120A2EE8300260912 /* HSQGoodsImageDetailViewController.m in Sources */,
+				C3284E4D20A3F59B00C90290 /* HSQPinTuanGoodsDetailHomeCell.m in Sources */,
+				C324CC812080A3D90030CEE7 /* HSQIntegralCenterViewController.m in Sources */,
+				C3284E6620A4724000C90290 /* HSQRecommendGoodslListCell.m in Sources */,
+				C36F5709207CAAA50086C2FA /* HSQMineViewController.m in Sources */,
+				C332805A207DD99300AA6ACF /* HSQCustomViewWithButton.m in Sources */,
+				C34D515C2085E40600C28016 /* HWPhoto.m in Sources */,
+				C32A867520A2F8D400260912 /* HSQGoodsDetailImageCell.m in Sources */,
+				C33466522086E0B200B8AD0A /* HSQRealNameViewController.m in Sources */,
+				C3546DCC209FE27E0071294C /* HSQMallHomeHeadView.m in Sources */,
+				C3E2984820A173F3001E1EBE /* HSQImageListCollectionViewCell.m in Sources */,
+				C324CC6920804EC90030CEE7 /* HSQPublicMenuView.m in Sources */,
+				C318F8DD2091BF9F0056F8A3 /* HSQNextBandPhoneViewController.m in Sources */,
+				C33A3C912096C01B00944632 /* HSQClassSecondGoodsListCell.m in Sources */,
+				C33F4AFA2095ACA30032B9A1 /* HSQTopNavtionView.m in Sources */,
+				C3284E5120A4255E00C90290 /* HSQGuiGeAndCouperView.m in Sources */,
+				C33A3C8B2096B82C00944632 /* HSQReturnGoodsListViewController.m in Sources */,
+				C32A866520A2DA0200260912 /* HSQPinTuanDataDealTool.m in Sources */,
+				C3281FEF209A9BF2007C3909 /* HSQSearchBarViewController.m in Sources */,
+				C375FBC920A6EA7A000BA8BA /* HSQGoodsDetailRateListCell.m in Sources */,
+				C3346665208736D300B8AD0A /* HSQAddressView.m in Sources */,
+				C3F8BB4D20A535180087B6A0 /* PublieTuiJianGoodsListView.m in Sources */,
+				C3E2983620A13338001E1EBE /* HSQMallHomePageController.m in Sources */,
+				C32C25342093179000076F10 /* BrowseFootprintListCell.m in Sources */,
+				C305F2F2207AEA68005301EE /* HSQCustomShareView.m in Sources */,
+				C37A99A7207F52BE00A55AA0 /* HSQPinTuanListCell.m in Sources */,
+				C33F4AF12095A3870032B9A1 /* HSQMyCollectionHomeViewController.m in Sources */,
+				C32EE02420947385004F85F0 /* HSQIntegralListCell.m in Sources */,
+				C3581243207AF8BB00BC26B4 /* HSQNavigationController.m in Sources */,
 				C33851312079BA140030320C /* main.m in Sources */,
-				C33851232079BA0B0030320C /* AppDelegate.m in Sources */,
+				C32C25142092C34800076F10 /* HSQChangePassWordViewController.m in Sources */,
+				C318F8CC209170850056F8A3 /* HSQMessageReceiveModel.m in Sources */,
+				C37A9997207F373500A55AA0 /* HSQClassHomeListCell.m in Sources */,
+				C33F4AD62095577B0032B9A1 /* MyBalanceViewController.m in Sources */,
+				C334664D2086D37000B8AD0A /* HSQPersonCenterViewController.m in Sources */,
+				C318F8D82091AAC50056F8A3 /* HSQBandMobileViewController.m in Sources */,
+				C32A868420A326C800260912 /* HSQGoodsDetailHeadCell.m in Sources */,
+				C3284E6220A44ABD00C90290 /* HSQStoreHeadIntroCell.m in Sources */,
+				C33466682087423E00B8AD0A /* HSQAdressListModel.m in Sources */,
+				C33F4AF72095A3A90032B9A1 /* HSQStoreCollectionViewController.m in Sources */,
+				C3284E5520A427F800C90290 /* HSQCoupterListCell.m in Sources */,
+				C324E72F208820D000D133F0 /* HSQAccountTool.m in Sources */,
+				C32C252B20930AF800076F10 /* HSQMyCollectionHeaderView.m in Sources */,
+				C33F4ADC209557BC0032B9A1 /* HSQWithdrawalViewController.m in Sources */,
+				C313EE972089982300D15B00 /* HSQSetingViewController.m in Sources */,
+				C334665B20871E0900B8AD0A /* HSQSelectDatePickerView.m in Sources */,
+				C3E2984E20A18D0C001E1EBE /* HSQButtonListViewCell.m in Sources */,
+				C3281FF7209B19DC007C3909 /* HSQScreeningViewController.m in Sources */,
+				C33F4AE6209560360032B9A1 /* HSQCouponsHomeViewController.m in Sources */,
+				C3BF692F2090363100726EEA /* HSQNewAdressViewController.m in Sources */,
+				C33A3C9F2097026800944632 /* HSQMenuListCell.m in Sources */,
+				C324E72C20881F3D00D133F0 /* HSQAccount.m in Sources */,
+				C32EE01E20946E24004F85F0 /* HSQIntegralListViewController.m in Sources */,
+				C3546DD820A035980071294C /* HSQSecondsKillReusableView.m in Sources */,
+				C33F4B012095C5120032B9A1 /* HSQMyOrderListViewController.m in Sources */,
+				C38EF4C5207B59760094B16B /* DiscoverListModel.m in Sources */,
+				C33F4AE120955F340032B9A1 /* HSQMemberPrizeViewController.m in Sources */,
+				C32EE02820947774004F85F0 /* HSQIntegralListModel.m in Sources */,
+				C36F5702207C96BE0086C2FA /* HSQDiscoverHeadView.m in Sources */,
+				C38EF4BF207B4DDE0094B16B /* DiscoverViewController.m in Sources */,
+				C3425BCA208472AA00869438 /* HSQProgressHUDManger.m in Sources */,
+				C34D51562085C47800C28016 /* HSQCollectionViewLayout.m in Sources */,
+				C3F8BB5D20A578C60087B6A0 /* HSQGoodsDetailCommentsViewController.m in Sources */,
+				C33F4AD92095579D0032B9A1 /* TopUpDetailViewController.m in Sources */,
+				C338513F2079BB810030320C /* AppDelegate.m in Sources */,
+				C338514E207A121A0030320C /* HSQCustomButton.m in Sources */,
+				C324CC6D208084AD0030CEE7 /* HSQTheTrialViewController.m in Sources */,
+				C38EF4B5207B4CE50094B16B /* HSQHomePageViewController.m in Sources */,
+				C332806E207E0BC800AA6ACF /* HSQRegisterViewController.m in Sources */,
+				C3BF694020908B4B00726EEA /* HSQLoginBandViewController.m in Sources */,
+				C3546DE120A041880071294C /* HSQHeadImageReusableView.m in Sources */,
+				C32A868020A3210400260912 /* HSQComputerGoodsDetailViewController.m in Sources */,
+				C37A999A207F443C00A55AA0 /* HSQClassHeadCollectionReusableView.m in Sources */,
+				C318F8E32091C1430056F8A3 /* HSQYanZhengMobileViewController.m in Sources */,
+				C324CC862080A5E50030CEE7 /* HSQToPromoteListCell.m in Sources */,
+				C32EDFFD209417A6004F85F0 /* HSQMobileRegisterViewController.m in Sources */,
+				C32EE01920945E79004F85F0 /* MyPropertyListModel.m in Sources */,
+				C32C25182092CFC500076F10 /* HSQMessageListViewController.m in Sources */,
+				C3BF693C20907AC500726EEA /* HSQAdressListFooterView.m in Sources */,
+				C33F4AE92095608F0032B9A1 /* HSQLeftCouponsViewController.m in Sources */,
+				C324E7312088932400D133F0 /* Foundation+Log.m in Sources */,
+				C375FBC020A6BFD7000BA8BA /* HSQGoodsRateListCollectionViewCell.m in Sources */,
+				C3BF69392090717E00726EEA /* HSQAcceptAddressListModel.m in Sources */,
+				C32A866E20A2EB0C00260912 /* HSQGoodsDetailViewController.m in Sources */,
+				C3546DE820A070300071294C /* HSQMiaoShaGoodsListCell.m in Sources */,
+				C3E2983220A12E57001E1EBE /* TXScrollLabelView.m in Sources */,
+				C3546DD520A020B30071294C /* HSQModelViewReusableView.m in Sources */,
+				C375FBBA20A68D65000BA8BA /* HSQNoDataView.m in Sources */,
+				C318F8D4209175110056F8A3 /* HSQHeadMessageView.m in Sources */,
+				C37A9987207EF24A00A55AA0 /* HSQWebViewController.m in Sources */,
+				C332805D207DE8E400AA6ACF /* HSQGoodsCollectionListCell.m in Sources */,
+				C32A866220A2A9A900260912 /* HSQPinTuanDetailGoodsListModel.m in Sources */,
+				C33F4AF42095A39A0032B9A1 /* HSQGoodsCollectionViewController.m in Sources */,
+				C303946D20A2886800B2A0FA /* UIDevice+IPhoneModel.m in Sources */,
+				C3E2983920A13521001E1EBE /* HSQMallHeiperTool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,16 +2242,20 @@
 		};
 		C33851352079BA140030320C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B85D559E6035A6FAD00F8BF1 /* Pods-LiTianDecoration.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7XXTHWTB53;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/LiTianDecoration/PrefixHeader.pch";
 				INFOPLIST_FILE = LiTianDecoration/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = yangguanglitian.LiTianDecoration;
+				PRODUCT_BUNDLE_IDENTIFIER = LiTianDecoration;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -298,16 +2263,20 @@
 		};
 		C33851362079BA140030320C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FB7A9902034549D1D3151FF5 /* Pods-LiTianDecoration.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7XXTHWTB53;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/LiTianDecoration/PrefixHeader.pch";
 				INFOPLIST_FILE = LiTianDecoration/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = yangguanglitian.LiTianDecoration;
+				PRODUCT_BUNDLE_IDENTIFIER = LiTianDecoration;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
