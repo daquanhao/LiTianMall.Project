@@ -93,14 +93,14 @@
     // 1.获得按钮的文本的frame
     CGRect titleFrame = self.titleLabel.frame;
     
-    // 2.设置按钮的文本的x坐标为0-－－左对齐
-    titleFrame.origin.x = 0;
-    
     //获得按钮的图片的frame
     CGRect imageFrame = self.imageView.frame;
     
+    // 2.设置按钮的文本的x坐标为0-－－左对齐
+    titleFrame.origin.x =(self.mj_w - titleFrame.size.width - imageFrame.size.width)/2;
+    
     //设置按钮的图片的x坐标紧跟文本的后面
-    imageFrame.origin.x = CGRectGetWidth(titleFrame);
+    imageFrame.origin.x = CGRectGetMaxX(titleFrame);
     
     //重写赋值frame
     self.titleLabel.frame = titleFrame;

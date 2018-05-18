@@ -7,6 +7,7 @@
 //
 
 #import "HSQGoodsDetailHeadCell.h"
+#import "HSQCountdownView.h"
 
 @interface HSQGoodsDetailHeadCell ()<SDCycleScrollViewDelegate>
 
@@ -14,7 +15,7 @@
 
 @property (nonatomic, strong) UILabel *countLabel;
 
-@property (nonatomic, strong) UIView *CountdownView;  // 倒计时的视图
+@property (nonatomic, strong) HSQCountdownView *CountdownView;  // 倒计时的视图
 
 @property (nonatomic, strong) UILabel *GoodsName_Label;  // 商品的名字
 
@@ -65,8 +66,7 @@
     self.countLabel = countLabel;
     
      // 倒计时的视图
-    UIView *CountdownView = [[UIView alloc] init];
-    CountdownView.backgroundColor = [UIColor purpleColor];
+    HSQCountdownView *CountdownView = [[HSQCountdownView alloc] initCountdownViewWithXIB];
     [self.contentView addSubview:CountdownView];
     self.CountdownView = CountdownView;
     
@@ -100,7 +100,7 @@
     [self.countLabel setSd_cornerRadiusFromWidthRatio:@(0.5)];
     
     // 倒计时的视图
-    self.CountdownView.sd_layout.leftSpaceToView(self.contentView, 0).topSpaceToView(self.CycleScrollView, 0).rightSpaceToView(self.contentView, 0).heightIs(50);
+    self.CountdownView.sd_layout.leftSpaceToView(self.contentView, 0).topSpaceToView(self.CycleScrollView, 0).rightSpaceToView(self.contentView, 0).heightIs(60);
     
     // 商品的名字
     self.GoodsName_Label.sd_layout.leftSpaceToView(self.contentView, 10).topSpaceToView(self.CountdownView, 10).rightSpaceToView(self.contentView, 10).autoHeightRatio(0);
@@ -144,6 +144,9 @@
     
     // 商品的描述
     self.GoodsDescribe_Label.text = [NSString stringWithFormat:@"%@",dataDiction[@"groupGoodsDetailVo"][@"jingle"]];
+    
+    // 倒计时界面
+    self.CountdownView.dataDiction = dataDiction;
 }
 
 - (void)awakeFromNib {

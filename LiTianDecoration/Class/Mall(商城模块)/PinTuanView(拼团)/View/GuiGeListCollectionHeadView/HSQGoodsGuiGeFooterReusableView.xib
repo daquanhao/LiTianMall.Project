@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="HSQGoodsGuiGeFooterReusableView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="数量" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CFC-D6-cYk">
+                    <rect key="frame" x="10" y="15" width="30" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="7rM-ma-K4p"/>
+                        <constraint firstAttribute="height" constant="20" id="P01-3D-23y"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XtH-dH-V4P">
+                    <rect key="frame" x="270" y="0.0" width="40" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="LnR-00-4L1"/>
+                    </constraints>
+                    <state key="normal" image="893B5C4F-ACBD-45A3-9607-948EC2B60365"/>
+                    <connections>
+                        <action selector="TianJiaGoodsCountBtnClickAction:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="24N-Q8-AH5"/>
+                    </connections>
+                </button>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="93" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="17n-VP-mgN">
+                    <rect key="frame" x="220" y="0.0" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="1Gg-A9-F4w"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tbq-M0-B5W">
+                    <rect key="frame" x="180" y="0.0" width="40" height="50"/>
+                    <state key="normal" image="33CCDACD-1102-4FA4-90EC-88E512B5A274"/>
+                    <connections>
+                        <action selector="JianShaoGoodsCountBtnClickAction:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="QYY-ZV-tTH"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="17n-VP-mgN" firstAttribute="top" secondItem="9Gg-ye-v9C" secondAttribute="top" id="6FG-66-c2m"/>
+                <constraint firstItem="XtH-dH-V4P" firstAttribute="leading" secondItem="17n-VP-mgN" secondAttribute="trailing" id="Avj-hb-DDW"/>
+                <constraint firstItem="17n-VP-mgN" firstAttribute="leading" secondItem="Tbq-M0-B5W" secondAttribute="trailing" id="J6T-Vz-WYv"/>
+                <constraint firstItem="9Gg-ye-v9C" firstAttribute="trailing" secondItem="XtH-dH-V4P" secondAttribute="trailing" constant="10" id="eZL-ZD-JUG"/>
+                <constraint firstItem="9Gg-ye-v9C" firstAttribute="bottom" secondItem="XtH-dH-V4P" secondAttribute="bottom" id="gd8-Rb-gRQ"/>
+                <constraint firstItem="XtH-dH-V4P" firstAttribute="top" secondItem="Tbq-M0-B5W" secondAttribute="top" id="iHq-cB-kdn"/>
+                <constraint firstItem="XtH-dH-V4P" firstAttribute="width" secondItem="Tbq-M0-B5W" secondAttribute="width" id="mPc-ob-7sd"/>
+                <constraint firstItem="CFC-D6-cYk" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerY" id="mYx-db-m3c"/>
+                <constraint firstItem="9Gg-ye-v9C" firstAttribute="bottom" secondItem="17n-VP-mgN" secondAttribute="bottom" id="ncY-vu-ofn"/>
+                <constraint firstItem="XtH-dH-V4P" firstAttribute="bottom" secondItem="Tbq-M0-B5W" secondAttribute="bottom" id="oyN-z2-JVp"/>
+                <constraint firstItem="XtH-dH-V4P" firstAttribute="top" secondItem="9Gg-ye-v9C" secondAttribute="top" id="yRb-1R-oNf"/>
+                <constraint firstItem="CFC-D6-cYk" firstAttribute="leading" secondItem="9Gg-ye-v9C" secondAttribute="leading" constant="10" id="yVt-dK-sv1"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="9Gg-ye-v9C"/>
+            <connections>
+                <outlet property="Add_Button" destination="XtH-dH-V4P" id="Qra-xa-b78"/>
+                <outlet property="Count_TextField" destination="17n-VP-mgN" id="lpQ-vY-JuL"/>
+                <outlet property="Jian_Button" destination="Tbq-M0-B5W" id="LEf-lK-4IR"/>
+            </connections>
+            <point key="canvasLocation" x="-787" y="-89"/>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <image name="33CCDACD-1102-4FA4-90EC-88E512B5A274" width="22" height="22"/>
+        <image name="893B5C4F-ACBD-45A3-9607-948EC2B60365" width="22" height="22"/>
+    </resources>
+</document>

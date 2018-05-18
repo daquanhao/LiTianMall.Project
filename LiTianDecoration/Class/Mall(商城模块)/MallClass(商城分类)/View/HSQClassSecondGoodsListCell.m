@@ -16,8 +16,7 @@
 
 @property (nonatomic, strong) UILabel *PriceLabel;
 
-@property (nonatomic, strong) UIButton *DiscountBtn;
-
+@property (nonatomic, strong) UILabel *XiaoLiang_Label; // 商品的销量
 
 @end
 
@@ -62,6 +61,13 @@
         [self.contentView addSubview:DiscountBtn];
         self.DiscountBtn = DiscountBtn;
         
+        // 商品的销量
+        UILabel *XiaoLiang_Label = [[UILabel alloc] init];
+        XiaoLiang_Label.textColor = RGB(150, 150, 150);
+        XiaoLiang_Label.font = [UIFont systemFontOfSize:12.0];
+        [self.contentView addSubview:XiaoLiang_Label];
+        self.XiaoLiang_Label = XiaoLiang_Label;
+        
         
     }
     
@@ -75,7 +81,7 @@
     if (isGrid)
     {
         // 商品的图片
-        self.GoodsImageView.frame = CGRectMake(10, 10, self.bounds.size.width - 20, self.bounds.size.width - 10);
+        self.GoodsImageView.frame = CGRectMake(10, 10, self.bounds.size.width - 20, self.bounds.size.width - 20);
         
         // 商品的名字
         self.GoodsNameLabel.frame = CGRectMake(10, CGRectGetMaxY(self.GoodsImageView.frame)+10, self.bounds.size.width - 20, 20);
@@ -84,7 +90,10 @@
         self.DiscountBtn.frame = CGRectMake(self.bounds.size.width - 70, CGRectGetMaxY(self.GoodsNameLabel.frame)+10, 60, 20);
         
         // 商品的价格
-        self.PriceLabel.frame = CGRectMake(10, CGRectGetMaxY(self.GoodsNameLabel.frame)+10, self.bounds.size.width - 80, 20);
+        self.PriceLabel.frame = CGRectMake(10, CGRectGetMaxY(self.GoodsNameLabel.frame)+5, self.bounds.size.width - 80, 20);
+        
+        // 商品的销量
+        self.XiaoLiang_Label.frame = CGRectMake(10, CGRectGetMaxY(self.PriceLabel.frame)+5, self.bounds.size.width - 80, 15);
         
     }
     else
@@ -96,11 +105,37 @@
         self.GoodsNameLabel.frame = CGRectMake(CGRectGetMaxX(self.GoodsImageView.frame)+10, self.GoodsImageView.mj_y, self.bounds.size.width - self.GoodsImageView.mj_w - 30, 50);
         
         // 商品的价格
-        self.PriceLabel.frame = CGRectMake(CGRectGetMaxX(self.GoodsImageView.frame)+10, CGRectGetMaxY(self.GoodsNameLabel.frame)+10, 100, 20);
+        self.PriceLabel.frame = CGRectMake(CGRectGetMaxX(self.GoodsImageView.frame)+10, CGRectGetMaxY(self.GoodsNameLabel.frame)+5, 100, 20);
         
         // 商品的标签
         self.DiscountBtn.frame = CGRectMake(CGRectGetMaxX(self.PriceLabel.frame), CGRectGetMaxY(self.GoodsNameLabel.frame)+10, 60, 20);
+        
+        // 商品的销量
+        self.XiaoLiang_Label.frame = CGRectMake(CGRectGetMaxX(self.GoodsImageView.frame)+10, CGRectGetMaxY(self.PriceLabel.frame)+10, 100, 15);
     }
 }
+
+/**
+ * @brief 商品的数据
+ */
+- (void)setDataDiction:(NSDictionary *)dataDiction{
+    
+    _dataDiction = dataDiction;
+    
+    // 1.商品的图片
+    [self.GoodsImageView sd_setImageWithURL:[NSURL URLWithString:dataDiction[@"imageSrc"]] placeholderImage:KGoodsPlacherImage];
+    
+    // 2.商品的名字
+    self.GoodsNameLabel.text = [NSString stringWithFormat:@"%@",dataDiction[@"goodsName"]];
+    
+    // 3.商品的价格
+    self.PriceLabel.text = [NSString stringWithFormat:@"¥%@",dataDiction[@"appPrice0"]];
+    
+    // 4.商品的销量
+    self.XiaoLiang_Label.text = [NSString stringWithFormat:@"销量：%@",dataDiction[@"goodsSaleNum"]];
+}
+
+
+
 
 @end

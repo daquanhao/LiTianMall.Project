@@ -20,8 +20,9 @@
 #import "HSQGoodsDetailCommentsViewController.h" // 商品评论
 #import "HSQContactTheMerchantController.h"
 #import "HSQMallShopCarViewController.h"  // 购物车
+#import "HSQGoodsModelView.h" // 选择商品的型号及价格
 
-@interface HSQPinTuanDetailHomeViewController ()<HSQTopNavtionViewDelegate,UIScrollViewDelegate>
+@interface HSQPinTuanDetailHomeViewController ()<HSQTopNavtionViewDelegate,UIScrollViewDelegate,HSQGoodsModelViewDelegate>
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *ViewBottomMargin;
 
@@ -288,12 +289,32 @@
  * @brief 单独购买
  */
 - (IBAction)ClickEventsForIndividualPurchaseButtons:(UIButton *)sender {
+    
+    HSQGoodsModelView *GuiGeAndCouperView = [HSQGoodsModelView initGoodsModelView];
+    
+    GuiGeAndCouperView.TypeString = @"100";
+    
+    GuiGeAndCouperView.dataDiction = self.DataDiction;
+    
+    GuiGeAndCouperView.delegate = self;
+    
+    [GuiGeAndCouperView ShowGoodsModelAndPriceView];
 }
 
 /**
  * @brief 开团按钮的点击事件
  */
 - (IBAction)ClickEventForTheGroupButton:(UIButton *)sender {
+    
+    HSQGoodsModelView *GuiGeAndCouperView = [HSQGoodsModelView initGoodsModelView];
+    
+    GuiGeAndCouperView.TypeString = @"200";
+    
+    GuiGeAndCouperView.dataDiction = self.DataDiction;
+    
+      GuiGeAndCouperView.delegate = self;
+    
+    [GuiGeAndCouperView ShowGoodsModelAndPriceView];
 }
 
 
@@ -425,8 +446,18 @@
     [self TopNavtionViewButtonClickAction:self.navigationItem.titleView.subviews[index]];
 }
 
-
-
+/**
+ * @brief 商品的规格及数量选好的回调
+ */
+- (void)hsqGoodsModelViewBottomBtnClickAction:(UIButton *)sender GoodsCount:(NSString *)Count Type:(NSString *)typeString{
+    
+    HSQLog(@"==选好的商品个数==%@==%@",Count,typeString);
+    
+    if (typeString.integerValue == 100) // 将商品加入到购物车
+    {
+        
+    }
+}
 
 
 

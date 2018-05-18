@@ -74,7 +74,7 @@
         
         self.BgView.sd_layout.leftEqualToView(self.contentView).rightEqualToView(self.contentView).topSpaceToView(self.contentView, 5).bottomSpaceToView(self.name_label, 5);
         
-        self.good_imageView.sd_layout.topSpaceToView(self.BgView, 0).bottomSpaceToView(self.BgView, 0).widthEqualToHeight().centerXEqualToView(self.BgView);
+        self.good_imageView.sd_layout.topSpaceToView(self.BgView, 5).bottomSpaceToView(self.BgView, 5).widthEqualToHeight().centerXEqualToView(self.BgView);
         
     }
     
@@ -96,7 +96,19 @@
     self.price_label.text = [NSString stringWithFormat:@"¥%@",Diction[@"goodsPrice"]];
 }
 
-
+- (void)setStoreGoodsDiction:(NSDictionary *)StoreGoodsDiction{
+    
+    _StoreGoodsDiction = StoreGoodsDiction;
+    
+    // 商品的图片
+    [self.good_imageView sd_setImageWithURL:[NSURL URLWithString:StoreGoodsDiction[@"imageSrc"]] placeholderImage:KGoodsPlacherImage];
+    
+    // 商品的名字
+    self.name_label.text = [NSString stringWithFormat:@"%@",StoreGoodsDiction[@"goodsName"]];
+    
+    // 商品的价格
+    self.price_label.text = [NSString stringWithFormat:@"¥%@",StoreGoodsDiction[@"appPrice0"]];
+}
 
 
 

@@ -119,8 +119,9 @@
         
         btn.titleLabel.font = [UIFont systemFontOfSize:12.0];
         
-        [btn sd_setBackgroundImageWithURL:[NSURL URLWithString:diction[@"imageUrl"]] forState:(UIControlStateNormal)];
-                
+//        [btn sd_setBackgroundImageWithURL:[NSURL URLWithString:diction[@"imageUrl"]] forState:(UIControlStateNormal)];
+        [btn setTitle:diction[@"type"] forState:(UIControlStateNormal)];
+        
         [btn addTarget:self action:@selector(CustomButtonClickAction:) forControlEvents:(UIControlEventTouchUpInside)];
         
         [self.scrollerView addSubview:btn];

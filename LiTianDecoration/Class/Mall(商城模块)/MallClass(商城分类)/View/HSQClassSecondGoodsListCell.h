@@ -15,4 +15,14 @@
  */
 @property (nonatomic, assign) BOOL isGrid;
 
+/**
+ * @brief 商品的数据
+ */
+@property (nonatomic, strong) NSDictionary *dataDiction;
+
+/**
+ * @brief 右边按钮的标题
+ */
+@property (nonatomic, strong) UIButton *DiscountBtn;
+
 @end

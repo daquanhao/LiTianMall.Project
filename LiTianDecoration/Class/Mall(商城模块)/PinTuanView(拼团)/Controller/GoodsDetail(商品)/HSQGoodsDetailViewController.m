@@ -11,16 +11,17 @@
 #import "HSQPinTuanGoodsDetailHomeCell.h"
 #import "HSQPublicAdressView.h"
 #import "HSQGuiGeAndCouperView.h"
-#import "HSQGoodsDetailRateHeadView.h"
+#import "HSQRateCountCell.h"
 #import "HSQGoodsDetailFooterView.h"
 #import "HSQStoreHeadIntroCell.h"
-#import "HSQRecommendGoodslListCell.h"
 #import "HSQContactTheMerchantController.h"
 #import "HSQStoreDetailViewController.h"
 #import "HSQGoodsRateListModel.h"
 #import "HSQGoodsDetailRateListCell.h"
+#import "HSQAccountTool.h"
+#import "HSQLoginViewController.h"
 
-@interface HSQGoodsDetailViewController ()<UITableViewDelegate,UITableViewDataSource,HSQPinTuanGoodsDetailHomeCellDelegate,HSQGuiGeAndCouperViewDelegate,HSQRecommendGoodslListCellDelegate,HSQStoreHeadIntroCellDelegate>
+@interface HSQGoodsDetailViewController ()<UITableViewDelegate,UITableViewDataSource,HSQPinTuanGoodsDetailHomeCellDelegate,HSQGuiGeAndCouperViewDelegate,HSQStoreHeadIntroCellDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -54,7 +55,7 @@
     [self SetUpTableView];
     
     // 2.请求为你推荐的数据
-    [self RequestTheDataYouRecommend];
+//    [self RequestTheDataYouRecommend];
 }
 
 /**
@@ -103,13 +104,9 @@
     
     [tableView registerClass:[HSQGoodsDetailRateListCell class] forCellReuseIdentifier:@"HSQGoodsDetailRateListCell"];
     
-    [tableView registerClass:[HSQRecommendGoodslListCell class] forCellReuseIdentifier:@"HSQRecommendGoodslListCell"];
-    
     [tableView registerNib:[UINib nibWithNibName:@"HSQStoreHeadIntroCell" bundle:nil] forCellReuseIdentifier:@"HSQStoreHeadIntroCell"];
     
     [tableView registerNib:[UINib nibWithNibName:@"HSQPinTuanGoodsDetailHomeCell" bundle:nil] forCellReuseIdentifier:@"HSQPinTuanGoodsDetailHomeCell"];
-    
-    [tableView registerClass:[HSQGoodsDetailRateHeadView class] forHeaderFooterViewReuseIdentifier:@"HSQGoodsDetailRateHeadView"];
     
     [tableView registerClass:[HSQGoodsDetailFooterView class] forHeaderFooterViewReuseIdentifier:@"HSQGoodsDetailFooterView"];
     
@@ -140,7 +137,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 5;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -172,7 +169,7 @@
     }
     else if (indexPath.section == 1) // 商品的优惠券，规格等
     {
-        return 305;
+         return 365;
     }
     else if (indexPath.section == 2) // 评论的cell的高度
     {
@@ -180,66 +177,48 @@
         
         return model.CellHeight;
     }
-    else if (indexPath.section == 3) // 店铺的介绍
+    else  // 店铺的介绍
     {
         return 200;
-    }
-    else
-    {
-        NSArray *array = self.TuiJianDiction[@"goodsCombo"][@"goodsVo"][@"goodsList"];
-        if (array.count > 3)
-        {
-             return KScreenWidth + 70; // 为你推荐
-        }
-        else if (array.count > 0)
-        {
-             return KScreenWidth/2 + 70; // 为你推荐
-        }
-        else
-        {
-            return 0;
-        }
     }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    if (section == 2)
-    {
-         return 50;
-    }
-    else
-    {
-         return 0;
-    }
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    
-    HSQGoodsDetailRateHeadView *headView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"HSQGoodsDetailRateHeadView"];
-    
-    headView.DataDiction = self.GoodsDetailDict;
-    
-    return headView;
+    return 0.01;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    
+
     if (section == 2)
     {
         return 70;
     }
     else
     {
-        return 0;
+         return 0.01;
     }
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
+    return nil;
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    
-    HSQGoodsDetailFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"HSQGoodsDetailFooterView"];
-    
-    return footerView;
+
+    if (section == 2)
+    {
+        HSQGoodsDetailFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"HSQGoodsDetailFooterView"];
+        
+        footerView.PlacherString = @"有疑问? 可咨询店铺客服";
+        
+        return footerView;
+    }
+    else
+    {
+        return nil;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -279,26 +258,13 @@
         
         return cell;
     }
-    else if (indexPath.section == 3)  // 店铺的介绍
+    else  // 店铺的介绍
     {
         HSQStoreHeadIntroCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HSQStoreHeadIntroCell" forIndexPath:indexPath];
         
         if (self.GoodsDetailDict.allKeys.count != 0)
         {
             cell.DataDiction = self.GoodsDetailDict;
-        }
-        
-        cell.delegate = self;
-        
-        return cell;
-    }
-    else  // 为你推荐
-    {
-        HSQRecommendGoodslListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HSQRecommendGoodslListCell" forIndexPath:indexPath];
-        
-        if (self.TuiJianDiction.allKeys.count != 0)
-        {
-            cell.DataSource = self.TuiJianDiction[@"goodsCombo"][@"goodsVo"][@"goodsList"];
         }
         
         cell.delegate = self;
@@ -345,7 +311,9 @@
     [GuiGeAndCouperView ShowGuiGeAndCouperView];
 }
 
-#pragma mark - 选择规格或者优惠券
+/**
+ * @brief 选择规格或者优惠券
+ */
 -  (void)ChooseGuiGeAndCoupter:(NSIndexPath *)indexPath{
     
     HSQLog(@"===你点击了优惠券");
@@ -386,14 +354,6 @@
 }
 
 /**
- * @brief 推荐商品的点击
- */
-- (void)RecommendGoodslListButtonClickAction:(UIButton *)sender goodID:(NSString *)commonId{
-    
-    HSQLog(@"=为你推荐==%@",commonId);
-}
-
-/**
  * @brief 联系商家
  */
 - (void)ContactTheMerchantButtonClickAction:(UIButton *)sender{
@@ -409,12 +369,49 @@
  */
 - (void)EnterTheStoreButtonClickAction:(UIButton *)sender{
     
-    HSQStoreDetailViewController *StoreDetailVC = [[HSQStoreDetailViewController alloc] init];
+    HSQAccount *account = [HSQAccountTool account];
     
-    [self.navigationController pushViewController:StoreDetailVC animated:YES];
+    if (account.token.length == 0)
+    {
+        HSQLoginViewController *LoginVC = [[HSQLoginViewController alloc] init];
+        
+        [self.navigationController pushViewController:LoginVC animated:YES];
+
+    }
+    else
+    {
+        HSQStoreDetailViewController *StoreDetailVC = [[HSQStoreDetailViewController alloc] init];
+        
+        StoreDetailVC.storeId = [NSString stringWithFormat:@"%@",self.GoodsDetailDict[@"groupGoodsDetailVo"][@"storeId"]];
+        
+        [self.navigationController pushViewController:StoreDetailVC animated:YES];
+    }
 }
 
 
 
+//NSArray *array = self.TuiJianDiction[@"goodsCombo"][@"goodsVo"][@"goodsList"];
+//if (array.count > 3)
+//{
+//    return KScreenWidth + 70; // 为你推荐
+//}
+//else if (array.count > 0)
+//{
+//    return KScreenWidth/2 + 70; // 为你推荐
+//}
+//else
+//{
+//    return 0;
+//}
 
+//HSQRecommendGoodslListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HSQRecommendGoodslListCell" forIndexPath:indexPath];
+//
+//if (self.TuiJianDiction.allKeys.count != 0)
+//{
+//    cell.DataSource = self.TuiJianDiction[@"goodsCombo"][@"goodsVo"][@"goodsList"];
+//}
+//
+//cell.delegate = self;
+//
+//return cell;
 @end

@@ -1,14 +1,14 @@
 //
-//  HSQGoodsDetailRateHeadView.m
+//  HSQRateCountCell.m
 //  LiTianDecoration
 //
-//  Created by administrator on 2018/5/10.
+//  Created by administrator on 2018/5/15.
 //  Copyright © 2018年 administrator. All rights reserved.
 //
 
-#import "HSQGoodsDetailRateHeadView.h"
+#import "HSQRateCountCell.h"
 
-@interface HSQGoodsDetailRateHeadView ()
+@interface HSQRateCountCell ()
 
 @property (nonatomic, strong) UIImageView *RightImageView; // 右边的按钮
 
@@ -18,26 +18,25 @@
 
 @property (nonatomic, strong) UILabel *NoRatePlacherLabel;  //没有评论的提示文字
 
+
 @end
 
-@implementation HSQGoodsDetailRateHeadView
+@implementation HSQRateCountCell
 
-- (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier{
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     
-    if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
         self.contentView.backgroundColor = [UIColor whiteColor];
         
         // 创建视图控件
         [self SetUpView];
         
-         // 添加控件约束
+        // 添加控件约束
         [self SetUpViewLayOut];
     }
-    
     return self;
 }
-
 /**
  * @brief 创建视图控件
  */
@@ -55,7 +54,7 @@
     [self.contentView addSubview:GoodsRateLabel];
     self.GoodsRateLabel = GoodsRateLabel;
     
-     // 评论数量
+    // 评论数量
     UILabel *RateCountLabel = [[UILabel alloc] init];
     RateCountLabel.textColor = [UIColor blackColor];
     RateCountLabel.font = [UIFont systemFontOfSize:14.0];
@@ -96,9 +95,10 @@
 - (void)setDataDiction:(NSDictionary *)DataDiction{
     
     _DataDiction = DataDiction;
-    
+        
     // 评论的数量
     NSString *ratecount = [NSString stringWithFormat:@"%@",DataDiction[@"evaluateGoodsTotal"]];
+    
     if (ratecount.integerValue == 0) // 没有评论数
     {
         [self.RateCountLabel setHidden:YES];
@@ -127,11 +127,20 @@
         NSMutableAttributedString *attribeString = [NSString attributedStringWithString:GoodsRate Color:RGB(51, 51, 51) range:NSMakeRange(0, 3)];
         self.GoodsRateLabel.attributedText = attribeString;
     }
+
 }
 
 
 
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    // Initialization code
+}
 
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
 
+    // Configure the view for the selected state
+}
 
 @end

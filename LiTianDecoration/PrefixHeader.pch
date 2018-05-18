@@ -76,6 +76,7 @@
 #import <SDCycleScrollView.h>
 #import "UIDevice+IPhoneModel.h"
 #import "HSQNoDataView.h"
+#import "HSQParameterTool.h"
 
 /****************************** 全局通用的接口 *****************************/
  
@@ -224,6 +225,24 @@
 
 // 为你推荐的商品
 #define KWeiNiTuiJianGoodsUrl @"/goods/combo"
+
+// 店铺的首页
+#define KStoreHomePageUrl @"/store/index"
+
+// 店铺介绍
+#define KStoreIntroducedUrl @"/store/introduce"
+
+// 店铺内商品搜索
+#define KSearchGoodsInStoreUrl @"/store/search/goods"
+
+// 店铺活动的接口
+#define KStoreActivityUrl @"/store/voucher"
+
+// 收藏店铺
+#define KCollectionStoreUrl @"/member/store/favorite/add"
+
+// 取消收藏店铺
+#define KCancelCollectionStoreUrl @"/member/store/favorite/delete"
 
 /******************** 发现相关的接口  *****************/
 

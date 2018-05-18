@@ -241,7 +241,7 @@
     
     [self.collectionView.mj_header endRefreshing];
     
-    if ( self.totalPage.integerValue == self.CurrentPage)
+    if ( self.totalPage.integerValue == self.CurrentPage || self.totalPage.integerValue == 0)
     {
         [self.collectionView.mj_footer endRefreshingWithNoMoreData];
     }

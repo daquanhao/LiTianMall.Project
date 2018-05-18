@@ -10,4 +10,7 @@
 
 @interface HSQGoodsDetailFooterView : UITableViewHeaderFooterView
 
+/** 提示文字*/
+@property (nonatomic, copy) NSString *PlacherString;
+
 @end

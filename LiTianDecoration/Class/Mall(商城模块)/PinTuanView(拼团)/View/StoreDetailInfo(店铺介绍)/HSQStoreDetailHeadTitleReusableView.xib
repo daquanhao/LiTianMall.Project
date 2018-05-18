@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="HSQStoreDetailHeadTitleReusableView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D18-gM-pE4">
+                    <rect key="frame" x="0.0" y="10" width="320" height="40"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="店铺推荐" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iL5-hm-viF">
+                            <rect key="frame" x="10" y="0.0" width="300" height="40"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="iL5-hm-viF" secondAttribute="bottom" id="1vA-Fr-SI2"/>
+                        <constraint firstAttribute="trailing" secondItem="iL5-hm-viF" secondAttribute="trailing" constant="10" id="JI0-xC-mMa"/>
+                        <constraint firstItem="iL5-hm-viF" firstAttribute="leading" secondItem="D18-gM-pE4" secondAttribute="leading" constant="10" id="hX2-ha-Ady"/>
+                        <constraint firstItem="iL5-hm-viF" firstAttribute="top" secondItem="D18-gM-pE4" secondAttribute="top" id="ipC-57-UVn"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.94117647058823528" green="0.94901960784313721" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="D18-gM-pE4" secondAttribute="trailing" id="0sg-7G-mw8"/>
+                <constraint firstItem="D18-gM-pE4" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" constant="10" id="2Yk-GM-BzD"/>
+                <constraint firstItem="D18-gM-pE4" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="8iL-TP-9sq"/>
+                <constraint firstAttribute="bottom" secondItem="D18-gM-pE4" secondAttribute="bottom" id="DPi-1O-qPz"/>
+            </constraints>
+            <connections>
+                <outlet property="BgView" destination="D18-gM-pE4" id="s3Y-Yd-h3p"/>
+                <outlet property="Title_Label" destination="iL5-hm-viF" id="rVn-HN-DpK"/>
+            </connections>
+            <point key="canvasLocation" x="-1692" y="-40"/>
+        </collectionReusableView>
+    </objects>
+</document>

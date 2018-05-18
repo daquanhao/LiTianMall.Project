@@ -55,7 +55,6 @@
     UILabel *PlacherLabel = [[UILabel alloc] init];
     PlacherLabel.textColor = [UIColor blackColor];
     PlacherLabel.font = [UIFont systemFontOfSize:14.0];
-    PlacherLabel.text = @"有疑问? 可咨询店铺客服";
     [self.contentView addSubview:PlacherLabel];
     self.PlacherLabel = PlacherLabel;
 }
@@ -75,7 +74,24 @@
     self.PlacherLabel.sd_layout.rightSpaceToView(self.RightImageView, 10).centerYEqualToView(self.contentView).leftSpaceToView(self.contentView, 10).heightIs(20);
 }
 
-
+- (void)setPlacherString:(NSString *)PlacherString{
+    
+    _PlacherString = PlacherString;
+    
+    if (PlacherString.length == 0)
+    {
+        self.BgView.hidden = YES;
+        self.RightImageView.hidden = YES;
+        self.PlacherLabel.hidden = YES;
+    }
+    else
+    {
+        self.BgView.hidden = NO;
+        self.RightImageView.hidden = NO;
+        self.PlacherLabel.hidden = NO;
+        self.PlacherLabel.text = PlacherString;
+    }
+}
 
 
 

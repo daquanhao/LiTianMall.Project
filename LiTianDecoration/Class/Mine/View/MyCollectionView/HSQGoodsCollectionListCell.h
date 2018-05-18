@@ -14,4 +14,6 @@
 
 @property (nonatomic, strong) NSDictionary *Diction; // 商品数据
 
+@property (nonatomic, strong) NSDictionary *StoreGoodsDiction; // 店铺里面的商品数据
+
 @end

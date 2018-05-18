@@ -51,17 +51,17 @@
     // 商品的分数
     NSString *GoodsFenShu =  [self RuturnRateStateWithFenShu:@"desEvalArrow" diction:DataDiction];
     NSString *GoodsScroe = [NSString stringWithFormat:@"商品 %@ | %@",DataDiction[@"evaluateStoreVo"][@"storeDesEval"],GoodsFenShu];
-    self.GoodScore_Label.attributedText = [NSString attributedStringWithString:GoodsScroe Color:RGB(150, 150, 150) range:NSMakeRange(0, 2)];
+    self.GoodScore_Label.attributedText = [NSString attributedStringWithString:GoodsScroe Color:[self ReturnDifferentColorsDependingOnTheScore:GoodsFenShu] range:NSMakeRange(2, GoodsScroe.length - 2)];
     
     // 服务的分数
     NSString *ServerFenShu =  [self RuturnRateStateWithFenShu:@"serviceEvalArrow" diction:DataDiction];
     NSString *ServerScore = [NSString stringWithFormat:@"服务 %@ | %@",DataDiction[@"evaluateStoreVo"][@"storeServiceEval"],ServerFenShu];
-    self.ServerScore_Label.attributedText = [NSString attributedStringWithString:ServerScore Color:RGB(150, 150, 150) range:NSMakeRange(0, 2)];
+    self.ServerScore_Label.attributedText = [NSString attributedStringWithString:ServerScore Color:[self ReturnDifferentColorsDependingOnTheScore:ServerFenShu] range:NSMakeRange(2, ServerScore.length - 2)];
     
     // 发货的分数
     NSString *FaHuoFenShu =  [self RuturnRateStateWithFenShu:@"deliveryEvalArrow" diction:DataDiction];
     NSString *FaHuo = [NSString stringWithFormat:@"发货 %@ | %@",DataDiction[@"evaluateStoreVo"][@"storeServiceEval"],FaHuoFenShu];
-    self.FaHuoScore_Label.attributedText = [NSString attributedStringWithString:FaHuo Color:RGB(150, 150, 150) range:NSMakeRange(0, 2)];
+    self.FaHuoScore_Label.attributedText = [NSString attributedStringWithString:FaHuo Color:[self ReturnDifferentColorsDependingOnTheScore:FaHuoFenShu] range:NSMakeRange(2, FaHuo.length - 2)];
     
     // 收藏人数
     self.CollectionPersonCount.text = [NSString stringWithFormat:@"%@\n收藏人数",DataDiction[@"storeInfo"][@"storeCollect"]];
@@ -82,17 +82,32 @@
     
     NSString *GoodsFenShu =  [NSString stringWithFormat:@"%@",dict[@"evaluateStoreVo"][String]];
     
-    if ([GoodsFenShu isEqualToString:@""])
+    if ([GoodsFenShu isEqualToString:@"low"])
     {
         return @"低";
     }
-    else if ([GoodsFenShu isEqualToString:@""])
+    else if ([GoodsFenShu isEqualToString:@"equal"])
     {
         return @"平";
     }
     else
     {
         return @"高";
+    }
+}
+
+/**
+ * @brief 根据评分的高低，返回不同的颜色
+ */
+- (UIColor *)ReturnDifferentColorsDependingOnTheScore:(NSString *)type{
+    
+    if ([type isEqualToString:@"低"])
+    {
+        return [UIColor greenColor];
+    }
+    else
+    {
+        return RGB(238, 58, 68);
     }
 }
 

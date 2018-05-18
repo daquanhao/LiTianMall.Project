@@ -1,14 +1,14 @@
 //
-//  HSQGoodsDetailRateHeadView.h
+//  HSQRateCountCell.h
 //  LiTianDecoration
 //
-//  Created by administrator on 2018/5/10.
+//  Created by administrator on 2018/5/15.
 //  Copyright © 2018年 administrator. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface HSQGoodsDetailRateHeadView : UITableViewHeaderFooterView
+@interface HSQRateCountCell : UITableViewCell
 
 @property (nonatomic, strong) NSDictionary *DataDiction;
 
