@@ -18,12 +18,10 @@
  *
  *  @param account 账号模型
  */
-+ (void)saveAccount:(HSQAccount *)account
-{
++ (void)saveAccount:(HSQAccount *)account{
+    
     // 自定义对象的存储必须用NSKeyedArchiver，不再有什么writeToFile方法
     [NSKeyedArchiver archiveRootObject:account toFile:HWAccountPath];
-    
-    
 }
 
 /**
@@ -42,7 +40,6 @@
     account.memberId = nil;
     
     account.memberName = nil;
-    
 }
 
 
@@ -51,8 +48,8 @@
  *
  *  @return 账号模型（如果账号过期，返回nil）
  */
-+ (HSQAccount *)account
-{
++ (HSQAccount *)account{
+    
     // 加载模型
     HSQAccount *account = [NSKeyedUnarchiver unarchiveObjectWithFile:HWAccountPath];
     

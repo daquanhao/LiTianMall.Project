@@ -39,11 +39,11 @@
     
     UISearchBar *Search_Bar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, bgView.mj_w, bgView.mj_h)];
     
-    Search_Bar.backgroundColor = [UIColor clearColor];
+    Search_Bar.backgroundColor = [UIColor colorWithPatternImage:[UIImage ReturnAPictureOfStretching:@"8BD5AE65-80F2-4186-9EAC-C5F1D2D48555"]];
     
     Search_Bar.showsCancelButton = NO;
     
-    Search_Bar.searchBarStyle = UISearchBarStyleMinimal;
+    Search_Bar.searchBarStyle = UISearchBarStyleProminent;
     
     Search_Bar.placeholder = @"请输入搜索的关键字";
     
@@ -64,7 +64,7 @@
                 textField.backgroundColor = [UIColor clearColor];
                 textField.textColor = RGB(74, 74, 74);
                 textField.font = [UIFont systemFontOfSize:14.0];
-                [textField setBackground:[UIImage imageNamed:@"SearchBackGroupImageView"]];
+//                [textField setBackground:[UIImage imageNamed:@"8BD5AE65-80F2-4186-9EAC-C5F1D2D48555"]];
                 
                 //修改默认的放大镜图片
                 UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 13, 13)];

@@ -244,12 +244,18 @@
 // 取消收藏店铺
 #define KCancelCollectionStoreUrl @"/member/store/favorite/delete"
 
+// 将商品加入到购物车里面
+#define KaddGoodsToShopCarUrl @"/cart/add"
+
+// 登录后将数据同步到服务商
+#define KUpLoadShopCarDataToServerUrl @"/cart/add/from/app"
+
 /******************** 发现相关的接口  *****************/
 
 // 获取晒宝编辑精选
 #define KGetSunTreasureListDataUrl @"/showorders/list"
 
-// 获取试用列表de数据
+// 获取试用列表的数据
 #define KGetTrialListDataUrl @"/trys/report/list"
 
 

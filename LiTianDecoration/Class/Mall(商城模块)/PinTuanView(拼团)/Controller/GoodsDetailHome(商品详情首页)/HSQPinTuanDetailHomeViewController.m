@@ -21,6 +21,8 @@
 #import "HSQContactTheMerchantController.h"
 #import "HSQMallShopCarViewController.h"  // 购物车
 #import "HSQGoodsModelView.h" // 选择商品的型号及价格
+#import "HSQShopCarGoodsListModel.h"
+#import "HSQShopCarManger.h"  // 购物车管理工具
 
 @interface HSQPinTuanDetailHomeViewController ()<HSQTopNavtionViewDelegate,UIScrollViewDelegate,HSQGoodsModelViewDelegate>
 
@@ -41,6 +43,11 @@
 @property (nonatomic, strong) UIScrollView *contentView;
 
 @property (nonatomic, strong) HSQTopNavtionView *NavtionView;
+
+@property (nonatomic, copy) NSString *cartCount; // 购物车数量
+
+@property (weak, nonatomic) IBOutlet UILabel *ShopCarCount_Label;
+
 
 @end
 
@@ -72,6 +79,9 @@
     
     // 3.检测商品是否收藏
     [self RequestDataToDetermineIfTheItemIsCollected];
+    
+    // 4.查看本地购物车中商品的个数
+    [self LookUpShopCarCount];
 }
 
 /**
@@ -416,7 +426,7 @@
     [self scrollViewDidEndScrollingAnimation:contentView];
 }
 
-#pragma mark - <UIScrollViewDelegate>
+#pragma mark **************************** UIScrollViewDelegate  ****************************
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
     
     // 当前的索引
@@ -449,15 +459,165 @@
 /**
  * @brief 商品的规格及数量选好的回调
  */
-- (void)hsqGoodsModelViewBottomBtnClickAction:(UIButton *)sender GoodsCount:(NSString *)Count Type:(NSString *)typeString{
+- (void)hsqGoodsModelViewBottomBtnClickAction:(UIButton *)sender GoodsCount:(NSString *)Count Type:(NSString *)typeString goods_id:(NSString *)goodsId{
     
-    HSQLog(@"==选好的商品个数==%@==%@",Count,typeString);
+    HSQLog(@"==选好的商品个数==%@==%@==%@",Count,typeString,goodsId);
     
     if (typeString.integerValue == 100) // 将商品加入到购物车
     {
-        
+        [self AddItemsToTheShoppingCart:Count Goods_id:goodsId];
     }
 }
+
+/**
+ * @brief 将商品添加到购物车
+ * @params BuyNumber 购买的数量
+ */
+- (void)AddItemsToTheShoppingCart:(NSString *)BuyNumber Goods_id:(NSString *)goodsId{
+    
+    // 购物车管理工具
+    HSQShopCarManger *ShopCarManger = [HSQShopCarManger sharedShopCarManger];
+    
+    // 添加购物车数据
+    NSDictionary *buyData_diction = @{@"buyNum":BuyNumber,@"goodsId":goodsId};
+    NSMutableArray *goods_array = [NSMutableArray array];
+    [goods_array addObject:buyData_diction];
+    NSString *buydata = [ShopCarManger toJSONDataString:goods_array];
+    
+    // 要加入购物车的数据
+    NSDictionary *cartData_diction = @{goodsId:@(BuyNumber.integerValue)};
+    NSString *cartData = [ShopCarManger toJSONDataString:cartData_diction];
+    
+    // 购物车数据模型
+    HSQShopCarGoodsListModel *ShopCarModel = [[HSQShopCarGoodsListModel alloc] init];
+    ShopCarModel.goodsId = goodsId;
+    ShopCarModel.buyData = buydata;
+    ShopCarModel.cartData = cartData;
+    ShopCarModel.commonId = self.commonId;
+    
+    // 1.判断用户购物车中是否有该商品
+    BOOL isExit =  [ShopCarManger LoookUpGoodsIsExitWithGoods_id:goodsId];
+
+    if (isExit == YES) // 该商品存在，更新本地的数据
+    {
+        [ShopCarManger updatePGoodsModel:ShopCarModel];
+    }
+    else // 不存在，将该商品添加到本地购物车中
+    {
+        [ShopCarManger addGoodsModel:ShopCarModel];
+    }
+    
+    // 1.判断用户是否登录
+    HSQAccount *accountTool = [HSQAccountTool account];
+    
+    if (accountTool.token.length == 0) // 用户没有登录，将商品保存到本地，等到用户登录后添加到线上的服务器中
+    {
+        [self WhenNotLoggedInAddTheItemToTheCartAndUploadItToTheServer:buydata cartData:cartData token:@""];
+    }
+    else // 用户在登录状态
+    {
+        [self WhenNotLoggedInAddTheItemToTheCartAndUploadItToTheServer:buydata cartData:cartData token:accountTool.token];
+    }
+
+}
+
+/**
+ * @brief 没有登录的时候，将商品添加到购物车，并上传至服务器
+ */
+- (void)WhenNotLoggedInAddTheItemToTheCartAndUploadItToTheServer:(NSString *)buyData cartData:(NSString *)cartData token:(NSString *)token{
+    
+    [[HSQProgressHUDManger Manger] ShowLoadingDataFromeServer:@"" ToView:self.view IsClearColor:YES];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"buyData"] = buyData;
+    params[@"cartData"] = cartData;
+    params[@"clientType"] = KClientType;
+    params[@"bundlingId"] = @"";
+    params[@"token"] = token;
+    
+    HSQLog(@"==购物车参数==%@",params);
+    
+    AFNetworkRequestTool *RequestTool = [AFNetworkRequestTool shareRequestTool];
+    
+    [RequestTool.manger POST:UrlAdress(KaddGoodsToShopCarUrl) parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        [[HSQProgressHUDManger Manger] DismissProgressHUD];
+        
+        HSQLog(@"=添加购物车数据==%@",responseObject);
+        if ([responseObject[@"code"] integerValue] == 200)
+        {
+            [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:@"添加购物车成功" SupView:self.view];
+            
+            self.cartCount = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"cartCount"]];
+            
+            // 购物车的数量
+            [self LookUpShopCarCount];
+        }
+        else
+        {
+            NSString *errorString = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"error"]];
+            
+            [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:errorString SuperView:self.view];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"购物车添加失败" SuperView:self.view];
+    }];
+}
+
+/**
+ * @brief 用户登录以后，将本地的购物车数据同步到服务器
+ */
+#warning TODO 用户登录以后，将本地的购物车数据同步到服务器
+- (void)AftetheUserLogsInSynchronizeTheLocalShoppingCartDataToTheServer{
+    
+    
+    
+    
+}
+
+
+/**
+ * @brief 查看购物车的数量
+ */
+- (void)LookUpShopCarCount{
+    
+    // 4.查看本地购物车中商品的个数
+    NSMutableArray *ShopCarCount = [[HSQShopCarManger sharedShopCarManger] getAllGoodsModel];
+    
+    HSQLog(@"==本地数据==%@",ShopCarCount);
+    
+    if (ShopCarCount.count == 0)
+    {
+        self.ShopCarCount_Label.hidden = YES;
+    }
+    else
+    {
+        self.ShopCarCount_Label.hidden = NO;
+        
+        // 对数组进行去重操作
+        for (NSInteger i = 0; i < ShopCarCount.count; i++) {
+            
+            for (NSInteger j = i+1;j < ShopCarCount.count; j++) {
+                
+                HSQShopCarGoodsListModel *tempModel = ShopCarCount[i];
+                
+                HSQShopCarGoodsListModel *model = ShopCarCount[j];
+                
+                if ([tempModel.commonId isEqualToString:model.commonId]) {
+                    
+                    [ShopCarCount removeObject:model];
+                }
+            }
+        }
+        
+        self.ShopCarCount_Label.text = [NSString stringWithFormat:@"%ld",ShopCarCount.count];
+    }
+}
+
 
 
 

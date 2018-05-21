@@ -40,6 +40,8 @@
 
 @property (nonatomic, copy) NSString *SelectKuCunString; // 商品的选好的库存
 
+@property (nonatomic, copy) NSString *Goods_id; // 商品的id
+
 @end
 
 @implementation HSQGoodsModelView
@@ -185,6 +187,9 @@
     self.GoodsPrice.text = [NSString stringWithFormat:@"¥%@(库存: %@%@)",FirstGoodsDiction[Keys],FirstGoodsDiction[@"goodsStorage"],dataDiction[@"groupGoodsDetailVo"][@"unitName"]];
     self.GoodsPrice.frame = CGRectMake(self.YiXuanGoods.mj_x, self.YiXuanGoods.mj_y - 25, self.YiXuanGoods.mj_w , 20);
     self.GoodsKuCunString = [NSString stringWithFormat:@"%@",FirstGoodsDiction[@"goodsStorage"]];
+    
+    // 商品的id
+    self.Goods_id = [NSString stringWithFormat:@"%@",FirstGoodsDiction[@"goodsId"]];
 
     // 拼团的人数及价格
     NSString *count = [NSString stringWithFormat:@"%@",dataDiction[@"groupGoodsDetailVo"][@"groups"][@"groupRequireNum"]];
@@ -359,6 +364,9 @@
             
             // 商品的图片
             [self.GoodsImageView sd_setImageWithURL:[NSURL URLWithString:GoodsDiction[@"imageSrc"]] placeholderImage:KGoodsPlacherImage];
+            
+            // 商品的id
+            self.Goods_id = [NSString stringWithFormat:@"%@",GoodsDiction[@"goodsId"]];
         }
     }
 }
@@ -405,24 +413,14 @@
  * @brief 底部按钮的点击事件
  */
 - (void)BottomClickBtnClickAction:(UIButton *)sender{
-    
-    if (self.delegate && [self.delegate respondsToSelector:@selector(hsqGoodsModelViewBottomBtnClickAction:GoodsCount:Type:)]) {
+
+    if (self.delegate && [self.delegate respondsToSelector:@selector(hsqGoodsModelViewBottomBtnClickAction:GoodsCount:Type:goods_id:)]) {
         
-        [self.delegate hsqGoodsModelViewBottomBtnClickAction:sender GoodsCount:self.SelectKuCunString Type:self.TypeString];
+        [self.delegate hsqGoodsModelViewBottomBtnClickAction:sender GoodsCount:self.SelectKuCunString Type:self.TypeString goods_id:self.Goods_id];
     }
     
     [self dismissAdressView];
 }
-
-
-
-
-
-
-
-
-
-
 
 /**
  * @brief 点击背景按钮的点击事件

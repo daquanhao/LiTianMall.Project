@@ -23,6 +23,8 @@
 #import "HSQStoreSearchGoodsViewController.h"
 #import "HSQAccountTool.h"
 #import "HSQLoginViewController.h"
+#import "HSQContactTheMerchantController.h"
+#import "HSQFreeCouponRedemptionView.h"
 
 @interface HSQStoreDetailViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,HSQStoreDetailHomeHeadReusableViewDelegate,HSQAllGoodsModelTitleCollectionReusableViewDelegate>
 
@@ -441,7 +443,9 @@
  */
 - (IBAction)FreeCouponButtonClickAction:(UIButton *)sender {
     
+    HSQFreeCouponRedemptionView *FreeCouponView = [HSQFreeCouponRedemptionView initFreeCouponRedemptionView];
     
+    [FreeCouponView ShowFreeCouponRedemptionView];
 }
 
 /**
@@ -449,7 +453,9 @@
  */
 - (IBAction)ContactTheCustomerServiceButtonClick:(UIButton *)sender {
     
+    HSQContactTheMerchantController *ContactTheMerchantVC = [[HSQContactTheMerchantController alloc] init];
     
+    [self.navigationController pushViewController:ContactTheMerchantVC animated:YES];
 }
 
 #pragma mark - UICollectionViewDelegate,UICollectionViewDataSource

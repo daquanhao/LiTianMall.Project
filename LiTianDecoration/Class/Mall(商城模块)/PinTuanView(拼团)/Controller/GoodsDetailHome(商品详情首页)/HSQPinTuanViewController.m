@@ -94,7 +94,6 @@
     [self.tableView.mj_header beginRefreshing];
 }
 
-
 /**
  * @brief 1.请求顶部标题栏的数据
  */
@@ -353,8 +352,6 @@
     [self.navigationController pushViewController:PinTuanDetailVC animated:YES];
 
 }
-
-
 
 - (void)dealloc{
     
