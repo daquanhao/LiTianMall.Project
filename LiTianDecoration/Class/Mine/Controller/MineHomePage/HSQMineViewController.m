@@ -481,6 +481,7 @@
         {
             HSQMyOrderHomeViewController *MyOrderHomeVC = [[HSQMyOrderHomeViewController alloc] init];
             MyOrderHomeVC.indexNumber = @"0";
+            MyOrderHomeVC.JumpType_string = @"200";
             [self.navigationController pushViewController:MyOrderHomeVC animated:YES];
         }
         else if ([sender.titleLabel.text isEqualToString:@"待付款"])

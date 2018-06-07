@@ -10,8 +10,7 @@
 
 @protocol HSQGoodsModelViewDelegate <NSObject>
 
-
--(void)hsqGoodsModelViewBottomBtnClickAction:(UIButton *)sender GoodsCount:(NSString *)Count Type:(NSString *)typeString goods_id:(NSString *)goodsId;
+-(void)hsqGoodsModelViewBottomBtnClickAction:(UIButton *)sender GoodsCount:(NSString *)Count Type:(NSString *)typeString goods_id:(NSString *)goodsId GoodsKunCun:(NSString *)goodsStorage;
 
 @end
 

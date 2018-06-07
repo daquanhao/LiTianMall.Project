@@ -405,7 +405,7 @@
                 <constraint firstItem="5xE-6w-hfy" firstAttribute="top" secondItem="7do-f2-Cdh" secondAttribute="bottom" constant="10" id="rRH-Y5-ol1"/>
                 <constraint firstItem="inH-YB-09l" firstAttribute="centerX" secondItem="wcT-Tp-M7h" secondAttribute="centerX" id="rqb-wY-Gwg"/>
             </constraints>
-            <point key="canvasLocation" x="-2045" y="-785"/>
+            <point key="canvasLocation" x="-2242" y="-889"/>
         </view>
     </objects>
     <resources>

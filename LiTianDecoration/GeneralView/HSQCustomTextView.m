@@ -73,7 +73,7 @@
 /**
  * @brief 当提示文字的颜色发生改变的时候，重绘提示文字的颜色
  */
-- (void)setPlaceholderColor:(NSString *)placeholderColor{
+- (void)setPlaceholderColor:(UIColor *)placeholderColor{
     
     _placeholderColor = placeholderColor;
     
@@ -114,7 +114,8 @@
     
     attribes[NSForegroundColorAttributeName] = self.placeholderColor ? self.placeholderColor : [UIColor grayColor];
     
-    [self.placeholderColor drawInRect:CGRectMake(KPlaceholderX, KPlaceholderY, rect.size.width - 2 * KPlaceholderX, rect.size.height - 2 * KPlaceholderY) withAttributes:attribes];
+    [self.placeholder drawInRect:CGRectMake(KPlaceholderX, KPlaceholderY, rect.size.width - 2 * KPlaceholderX, rect.size.height - 2 * KPlaceholderY) withAttributes:attribes];
+    
 }
 
 

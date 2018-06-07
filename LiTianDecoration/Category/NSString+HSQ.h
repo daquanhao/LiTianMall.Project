@@ -22,6 +22,12 @@
 -(BOOL)isValidateEmail:(NSString*)email;
 
 /**
+ * @brief 将字典或者数组转化为JSON串
+ * @param theData 要转化的数据
+ */
++(NSString *)toJSONDataString:(id)theData;
+
+/**
  * @brief 判断输入的是否是纯数字
  */
 - (BOOL)isPureInt:(NSString *)string;

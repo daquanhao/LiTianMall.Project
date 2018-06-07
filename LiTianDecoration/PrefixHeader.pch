@@ -55,9 +55,17 @@
 // 商品的替代图片
 #define KGoodsPlacherImage [UIImage imageNamed:@"icon4"]
 
+// 购物车规格列表的高度
+#define KGoodsShopCarGuiGeHeight 60
 
+// 购物车商品图片的高度
+#define KGoodsImageShopCaHeight 60
 
+// 订单列表图片的高度
+#define KGoodsListViewH 80
 
+// 评价订单头部的提示标语
+#define KEvaluationOrderHeadPlacher @"    特别提示：评价晒图选择直接拍照或从手机相册上传图片时，请注意图片尺寸控制在1M以内，超出请压缩裁剪后再选择上传！评价内容不要超过250个字符。   "
 
 #import <SDAutoLayout.h>
 #import "NSString+HSQ.h"
@@ -77,6 +85,8 @@
 #import "UIDevice+IPhoneModel.h"
 #import "HSQNoDataView.h"
 #import "HSQParameterTool.h"
+#import "HSQCustomTextView.h"
+#import "IQKeyboardManager.h"
 
 /****************************** 全局通用的接口 *****************************/
  
@@ -107,7 +117,8 @@
 /************************************************* 接口文档 ***************************************/
 
 // 完整的接口 
-#define UrlAdress(url) [NSString stringWithFormat:@"%@%@",@"http://10.1.8.238/api",url] 
+#define UrlAdress(url) [NSString stringWithFormat:@"%@%@",@"http://10.1.8.238/api",url] // 经军校的服务器
+//#define UrlAdress(url) [NSString stringWithFormat:@"%@%@",@"http://10.1.8.30/api",url]   // 王璐璐的服务器
 
 // 普通登录接口
 #define KNormalLoginUrl @"/login"
@@ -250,6 +261,30 @@
 // 登录后将数据同步到服务商
 #define KUpLoadShopCarDataToServerUrl @"/cart/add/from/app"
 
+// 购物车的列表
+#define KShopCarGoodsListUrl @"/cart/list"
+
+// 编辑购物车的数量
+#define KEditShopCarCountUrl @"/cart/edit"
+
+// 计算购物车商品的种类
+#define KJiSuanShopCarTypeUrl @"/cart/count"
+
+// 购买的第一步：显示商品的信息
+#define KBuyGoodsFirstBuUrl @"/member/buy/step1"
+
+// 购买第二步：计算运费
+#define KBuyGoodsSecondBuUrl @"/member/buy/calc/freight"
+
+// 购买第二步：保存生成订单
+#define KBuySetup2Url @"/member/buy/step2"
+
+// 预存款支付的接口
+#define KYuCunKuanPayMoneryUrl @"/member/buy/pay/app/alipay"
+
+// 购买支付成功提示页
+#define KBuyGoodsSuccessfulDataUrl @"/member/buy/pay/success"
+
 /******************** 发现相关的接口  *****************/
 
 // 获取晒宝编辑精选
@@ -259,28 +294,94 @@
 #define KGetTrialListDataUrl @"/trys/report/list"
 
 
+/******************** 订单相关的接口  *****************/
 
+// 订单列表
+#define KOrderListUrl @"/member/orders/list"
 
+// 删除订单
+#define KDeteleOrderUrl @"/member/orders/delete"
 
+// 获取可用的支付列表
+#define KGetUserPayTypeListUrl @"/member/buy/show/payment"
 
+// 订单确认收货
+#define KOrderQRShouHuoUrl @"/member/orders/receive"
 
+// 取消订单
+#define KCancelNoPayMoneryOrderUrl @"/member/orders/cancel"
 
+// 评价商品--获取商品的信息
+#define KRateGoodsDetailInfoUrl @"/member/evaluate/addPage"
 
+// 评价商品--将评论提交到服务器上
+#define KAddRateContentToServerUrl @"/member/evaluate/add"
 
+// 获取追加评论的信息
+#define KGetOrderZhuiJiaRateUrl @"/member/evaluate/addAgainPage"
 
+// 将追加的评论的上传至服务器
+#define KZhuiJiaPingLunDataUrl @"/member/evaluate/addAgain"
 
+// 订单再次购买
+#define KOrderRepurchaseInterfaceUrl @"/member/orders/buy/again"
 
+// 订单详情的数据
+#define KOrderDetailDataUrl @"/member/orders/info"
 
+// 投诉发起页面
+#define KComplainInitiationPageUrl @"/member/complain/add"
 
+// 投诉数据保存
+#define KTouSuDataSaveUrl @"/member/complain/add/save"
 
+// 全部退款申请页面
+#define KAllGoodsTuiKuangUrl @"/member/refund/all"
 
+// 全部退款申请保存
+#define KAllGoodsTuiKuangSubmitUrl @"/member/refund/all/save"
 
+// 单个商品退款的接口
+#define KGoodsTuiMoneryUrl @"/member/refund/goods"
 
+// 单个界面商品退款界面的保存
+#define KGoodsTuiMonerySaveUrl @"/member/refund/goods/save"
 
+// 单个商品退货界面申请
+#define KTuiHuoSehnQingUrl @"/member/return/add"
 
+// 单个商品退货保存
+#define KTuiHuoShenQingSave @"/member/return/save"
 
+// 投诉列表
+#define KTouSuLieBiaoUrl @"/member/complain/list"
 
+// 查看投诉详情
+#define KTouSuDetailUrl @"/member/complain/info"
 
+// 撤销投诉
+#define KCheXiaoTouSuUrl @"/member/complain/close"
+
+// 投诉详情
+#define KTouSuDetailUrl @"/member/complain/info"
+
+// 退款记录列表
+#define KTuiMoneryListUrl @"/member/refund/list"
+
+// 退款详情
+#define KTuiKuanDetailUrl @"/member/refund/info"
+
+// 退货记录列表
+#define KTuiHuoListUrl @"/member/return/list"
+
+// 退货详情
+#define KTuiHuoDetailDataUrl @"/member/return/info"
+
+// 发票列表
+#define KFaPiaoListUrl @"/member/invoice/list"
+
+// 添加发票
+#define KAddFapiaoUrl @"/member/invoice/add"
 
 
 

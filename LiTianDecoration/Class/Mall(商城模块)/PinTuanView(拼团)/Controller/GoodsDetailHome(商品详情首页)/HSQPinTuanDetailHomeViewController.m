@@ -82,6 +82,7 @@
     
     // 4.查看本地购物车中商品的个数
     [self LookUpShopCarCount];
+    
 }
 
 /**
@@ -89,7 +90,20 @@
  */
 - (void)UserLoginSuccessNotif:(NSNotification *)notif{
     
+    // 检测商品是否被收藏
     [self RequestDataToDetermineIfTheItemIsCollected];
+    
+    // 将本地购物车的数据同步到服务器
+    // 购物车管理工具
+    HSQShopCarManger *ShopCarManger = [HSQShopCarManger sharedShopCarManger];
+    
+    // 1.取出本地所有的购物车数据
+    NSMutableArray *ShopCarCount = [ShopCarManger getAllGoodsModel];
+    
+    if (ShopCarCount.count != 0)
+    {
+        [self AftetheUserLogsInSynchronizeTheLocalShoppingCartDataToTheServer];
+    }
 }
 
 /**
@@ -292,6 +306,8 @@
     
     HSQMallShopCarViewController *ShopCarVC = [[HSQMallShopCarViewController alloc] init];
     
+    ShopCarVC.source = @"200";
+    
     [self.navigationController pushViewController:ShopCarVC animated:YES];
 }
 
@@ -317,13 +333,13 @@
 - (IBAction)ClickEventForTheGroupButton:(UIButton *)sender {
     
     HSQGoodsModelView *GuiGeAndCouperView = [HSQGoodsModelView initGoodsModelView];
-    
+
     GuiGeAndCouperView.TypeString = @"200";
-    
+
     GuiGeAndCouperView.dataDiction = self.DataDiction;
-    
+
       GuiGeAndCouperView.delegate = self;
-    
+
     [GuiGeAndCouperView ShowGoodsModelAndPriceView];
 }
 
@@ -426,7 +442,9 @@
     [self scrollViewDidEndScrollingAnimation:contentView];
 }
 
-#pragma mark **************************** UIScrollViewDelegate  ****************************
+/**
+ * @brief UIScrollViewDelegate
+ */
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView{
     
     // 当前的索引
@@ -459,13 +477,17 @@
 /**
  * @brief 商品的规格及数量选好的回调
  */
-- (void)hsqGoodsModelViewBottomBtnClickAction:(UIButton *)sender GoodsCount:(NSString *)Count Type:(NSString *)typeString goods_id:(NSString *)goodsId{
+- (void)hsqGoodsModelViewBottomBtnClickAction:(UIButton *)sender GoodsCount:(NSString *)Count Type:(NSString *)typeString goods_id:(NSString *)goodsId GoodsKunCun:(NSString *)goodsStorage{
     
     HSQLog(@"==选好的商品个数==%@==%@==%@",Count,typeString,goodsId);
     
     if (typeString.integerValue == 100) // 将商品加入到购物车
     {
         [self AddItemsToTheShoppingCart:Count Goods_id:goodsId];
+    }
+    else // 开团按钮的点击
+    {
+        
     }
 }
 
@@ -494,6 +516,7 @@
     ShopCarModel.buyData = buydata;
     ShopCarModel.cartData = cartData;
     ShopCarModel.commonId = self.commonId;
+    ShopCarModel.buyNum = BuyNumber;
     
     // 1.判断用户购物车中是否有该商品
     BOOL isExit =  [ShopCarManger LoookUpGoodsIsExitWithGoods_id:goodsId];
@@ -516,7 +539,7 @@
     }
     else // 用户在登录状态
     {
-        [self WhenNotLoggedInAddTheItemToTheCartAndUploadItToTheServer:buydata cartData:cartData token:accountTool.token];
+        [self WhenNotLoggedInAddTheItemToTheCartAndUploadItToTheServer:buydata cartData:@"" token:accountTool.token];
     }
 
 }
@@ -530,10 +553,13 @@
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"buyData"] = buyData;
-    params[@"cartData"] = cartData;
     params[@"clientType"] = KClientType;
     params[@"bundlingId"] = @"";
     params[@"token"] = token;
+    if (token.length == 0)
+    {
+        params[@"cartData"] = cartData;
+    }
     
     HSQLog(@"==购物车参数==%@",params);
     
@@ -571,11 +597,31 @@
 /**
  * @brief 用户登录以后，将本地的购物车数据同步到服务器
  */
-#warning TODO 用户登录以后，将本地的购物车数据同步到服务器
 - (void)AftetheUserLogsInSynchronizeTheLocalShoppingCartDataToTheServer{
     
+    HSQAccount *account = [HSQAccountTool account];
     
+    NSString *cartData = [self JsonStringWithDataDiction];
     
+    NSDictionary *diction = @{@"token":account.token,@"cartData":cartData};
+    
+    AFNetworkRequestTool *requestTool = [AFNetworkRequestTool shareRequestTool];
+    
+    [requestTool.manger POST:UrlAdress(KUpLoadShopCarDataToServerUrl) parameters:diction progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        HSQLog(@"==购物车数据同步==%@",responseObject);
+        if ([responseObject[@"code"] integerValue] != 200)
+        {
+            [self AftetheUserLogsInSynchronizeTheLocalShoppingCartDataToTheServer];
+        }
+
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"购物车数据同步失败" SuperView:self.view];
+        
+    }];
     
 }
 
@@ -618,8 +664,36 @@
     }
 }
 
+/**
+ * @brief 根据数据，将数组中的数据转化为字典，并将字典转化为json字符串
+ */
+- (NSString *)JsonStringWithDataDiction{
+    
+    // 购物车管理工具
+    HSQShopCarManger *ShopCarManger = [HSQShopCarManger sharedShopCarManger];
+    
+    // 1.取出本地所有的购物车数据
+    NSMutableArray *ShopCarCount = [ShopCarManger getAllGoodsModel];
+    
+    // 2.初始化一个字典
+    NSMutableDictionary *dataDiction = [NSMutableDictionary dictionary];
+    
+    if (ShopCarCount.count != 0) // 说明本地购物车有数据
+    {
+        for (HSQShopCarGoodsListModel *model in ShopCarCount)
+        {
+            dataDiction[model.goodsId] = model.buyNum;
+        }
+    }
+    
+    NSString *jsonString = [ShopCarManger toJSONDataString:dataDiction];
+    
+        HSQLog(@"==服务器数据==%@",jsonString);
+    
+    return jsonString;
+    
 
-
+}
 
 
 

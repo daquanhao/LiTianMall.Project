@@ -62,6 +62,28 @@
 }
 
 /**
+ * @brief 将字典或者数组转化为JSON串
+ * @param theData 要转化的数据
+ */
++(NSString *)toJSONDataString:(id)theData{
+    
+    NSError *error = nil;
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:theData options:NSJSONReadingMutableLeaves | NSJSONReadingAllowFragments error:nil];
+    
+    NSString *JsonString = [[NSString alloc] initWithData:jsonData encoding:(NSUTF8StringEncoding)];
+    
+    if ([JsonString length]&&error== nil)
+    {
+        return JsonString;
+    }
+    else
+    {
+        return nil;
+    }
+}
+
+/**
  * @brief 验证邮箱
  */
 -(BOOL)validateEmail:(NSString*)email{
@@ -254,9 +276,9 @@
     
     NSMutableAttributedString *attribe = [[NSMutableAttributedString alloc] initWithString:text];
     
-    [attribe setAttributes:@{NSFontAttributeName : font} range:fontRang];
+    [attribe addAttribute:NSFontAttributeName value:font range:fontRang];
     
-    [attribe setAttributes: @{NSForegroundColorAttributeName : color} range:colorRang];
+    [attribe addAttribute:NSForegroundColorAttributeName value:color range:colorRang];
     
     return attribe;
 }

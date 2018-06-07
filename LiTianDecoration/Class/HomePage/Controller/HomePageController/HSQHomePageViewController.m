@@ -42,6 +42,8 @@
     
     HSQMallHomePageController *mallHomeVC = [[HSQMallHomePageController alloc] init];
     
+    mallHomeVC.Index_Number = @"100";
+    
     [self.navigationController pushViewController:mallHomeVC animated:YES];
 }
 

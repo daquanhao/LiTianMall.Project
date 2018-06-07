@@ -7,7 +7,9 @@
 //
 
 #import "HSQReturnGoodsViewController.h"
-#import "HSQReturnGoodsListViewController.h"
+#import "HSQReturnGoodsListViewController.h"  // 退货
+#import "HSQTouSuListViewController.h" // 投诉列表
+#import "HSQReturnMoneryListViewController.h" // 退款
 
 @interface HSQReturnGoodsViewController ()<UIScrollViewDelegate>
 
@@ -43,6 +45,24 @@
     // 3.设置底布滚动控制器
     [self setupContentView];
     
+    // 添加导航栏的item
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:KImageName(@"LeftBackIcon") style:(UIBarButtonItemStylePlain) target:self action:@selector(itemBackClick:)];
+    
+}
+
+/**
+ * @brief 返回按钮的点击
+ */
+- (void)itemBackClick:(UIBarButtonItem *)sender{
+    
+    if (self.index_Number.integerValue == 100 || self.index_Number.integerValue == 200 || self.index_Number.integerValue == 300)
+    {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+    else
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 /**
@@ -51,22 +71,17 @@
 - (void)setupChildVces{
     
     // 1.退款列表
-    HSQReturnGoodsListViewController *WaitOrderVC = [[HSQReturnGoodsListViewController alloc] init];
-    WaitOrderVC.title = @"退款列表";
-    [self addChildViewController:WaitOrderVC];
+    HSQReturnMoneryListViewController *ReturnMoneryListVC = [[HSQReturnMoneryListViewController alloc] init];
+    ReturnMoneryListVC.title = @"退款列表";
+    [self addChildViewController:ReturnMoneryListVC];
     
     // 2.退货列表
     HSQReturnGoodsListViewController *OningOrderVC = [[HSQReturnGoodsListViewController alloc] init];
     OningOrderVC.title = @"退货列表";
     [self addChildViewController:OningOrderVC];
     
-    // 3.虚拟退款
-    HSQReturnGoodsListViewController *WaitSendOrderVC = [[HSQReturnGoodsListViewController alloc] init];
-    WaitSendOrderVC.title = @"虚拟退款";
-    [self addChildViewController:WaitSendOrderVC];
-    
     // 4.投诉列表
-    HSQReturnGoodsListViewController *ClosedGoodsVC = [[HSQReturnGoodsListViewController alloc] init];
+    HSQTouSuListViewController *ClosedGoodsVC = [[HSQTouSuListViewController alloc] init];
     ClosedGoodsVC.title = @"投诉列表";
     [self addChildViewController:ClosedGoodsVC];
 }
@@ -230,7 +245,26 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+/**
+ * @brief 100是从退款界面  200  退货界面  300 投诉界面
+ */
+- (void)setIndex_Number:(NSString *)index_Number{
+    
+    _index_Number = index_Number;
+    
+    if (index_Number.integerValue == 100)
+    {
+        [self titleClick:self.titlesView.subviews[0]];
+    }
+    else if (index_Number.integerValue == 200)
+    {
+        [self titleClick:self.titlesView.subviews[1]];
+    }
+    else if (index_Number.integerValue == 300)
+    {
+        [self titleClick:self.titlesView.subviews[2]];
+    }
+}
 
 
 

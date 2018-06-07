@@ -10,4 +10,9 @@
 
 @interface HSQReturnGoodsViewController : UIViewController
 
+/**
+ * @brief 区分是从哪里进入的 100是从退款界面  200  退货界面  300 投诉界面
+ */
+@property (nonatomic, copy) NSString *index_Number;
+
 @end

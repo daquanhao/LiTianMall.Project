@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HSQSubmitOrdersViewController">
+            <connections>
+                <outlet property="SubmitOrderBtn" destination="HBw-ag-kq3" id="gBg-J0-UyU"/>
+                <outlet property="TotalMonery_Label" destination="Mjr-p0-ucs" id="Rgu-Pg-6R5"/>
+                <outlet property="ViewBottomLayOut" destination="Y13-Ob-Tk9" id="4h1-aV-78c"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bBf-be-1rb">
+                    <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HBw-ag-kq3">
+                            <rect key="frame" x="275" y="0.0" width="100" height="50"/>
+                            <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="100" id="ka6-5F-fhS"/>
+                            </constraints>
+                            <state key="normal" title="提交订单">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="SubmitOrderBtnClickAction:" destination="-1" eventType="touchUpInside" id="b6v-ry-9nq"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mjr-p0-ucs">
+                            <rect key="frame" x="10" y="0.0" width="255" height="50"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="Mjr-p0-ucs" firstAttribute="leading" secondItem="bBf-be-1rb" secondAttribute="leading" constant="10" id="4yx-bQ-YJJ"/>
+                        <constraint firstAttribute="height" constant="50" id="G3Z-Ol-1Ru"/>
+                        <constraint firstItem="HBw-ag-kq3" firstAttribute="leading" secondItem="Mjr-p0-ucs" secondAttribute="trailing" constant="10" id="JDn-ZU-nFZ"/>
+                        <constraint firstItem="HBw-ag-kq3" firstAttribute="top" secondItem="bBf-be-1rb" secondAttribute="top" id="LGY-8v-xFd"/>
+                        <constraint firstAttribute="bottom" secondItem="HBw-ag-kq3" secondAttribute="bottom" id="cdr-Ky-7dg"/>
+                        <constraint firstItem="Mjr-p0-ucs" firstAttribute="top" secondItem="bBf-be-1rb" secondAttribute="top" id="frn-md-i5G"/>
+                        <constraint firstAttribute="bottom" secondItem="Mjr-p0-ucs" secondAttribute="bottom" id="gPT-F3-wFr"/>
+                        <constraint firstAttribute="trailing" secondItem="HBw-ag-kq3" secondAttribute="trailing" id="pCd-Mf-bFs"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.53258323669999996" green="0.15963962879999999" blue="0.27296977100000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <constraints>
+                <constraint firstItem="bBf-be-1rb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="B0a-aE-D42"/>
+                <constraint firstAttribute="bottom" secondItem="bBf-be-1rb" secondAttribute="bottom" id="Y13-Ob-Tk9"/>
+                <constraint firstAttribute="trailing" secondItem="bBf-be-1rb" secondAttribute="trailing" id="n3N-G9-QLu"/>
+            </constraints>
+            <point key="canvasLocation" x="-727" y="-109"/>
+        </view>
+    </objects>
+</document>

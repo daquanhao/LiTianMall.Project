@@ -36,7 +36,7 @@
                         <action selector="TianJiaGoodsCountBtnClickAction:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="24N-Q8-AH5"/>
                     </connections>
                 </button>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="93" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="17n-VP-mgN">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="17n-VP-mgN">
                     <rect key="frame" x="220" y="0.0" width="50" height="50"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50" id="1Gg-A9-F4w"/>
@@ -74,7 +74,7 @@
                 <outlet property="Count_TextField" destination="17n-VP-mgN" id="lpQ-vY-JuL"/>
                 <outlet property="Jian_Button" destination="Tbq-M0-B5W" id="LEf-lK-4IR"/>
             </connections>
-            <point key="canvasLocation" x="-787" y="-89"/>
+            <point key="canvasLocation" x="-452" y="-111"/>
         </collectionReusableView>
     </objects>
     <resources>

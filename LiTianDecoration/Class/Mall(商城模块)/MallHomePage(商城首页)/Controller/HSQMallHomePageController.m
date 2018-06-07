@@ -56,7 +56,24 @@
     // 请求首页的数据
     [self AddRefreshControlOnTheHomePage];
     
+    // 导航栏
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:KImageName(@"LeftBackIcon") style:(UIBarButtonItemStylePlain) target:self action:@selector(LeftItemClickAction:)];
     
+}
+
+/**
+ * @brief 导航栏
+ */
+- (void)LeftItemClickAction:(UIBarButtonItem *)sender{
+    
+    if (self.Index_Number.integerValue == 100)
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else
+    {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 /**
@@ -284,18 +301,11 @@
     }
     else if ([typeString isEqualToString:@"cart"]) //跳转到购物车
     {
-        HSQAccount *account = [HSQAccountTool account];
+        HSQMallShopCarViewController *ShopCarVC = [[HSQMallShopCarViewController alloc] init];
         
-        if (account.token.length == 0)  // 没有登录
-        {
-            HSQLoginViewController *LoginVC = [[HSQLoginViewController alloc] init];
-            [self.navigationController pushViewController:LoginVC animated:YES];
-        }
-        else
-        {
-            HSQMallShopCarViewController *ShopCarVC = [[HSQMallShopCarViewController alloc] init];
-            [self.navigationController pushViewController:ShopCarVC animated:YES];
-        }
+        ShopCarVC.source = @"200";
+        
+        [self.navigationController pushViewController:ShopCarVC animated:YES];
     }
     else if ([typeString isEqualToString:@"group"]) //跳转到拼团页面
     {

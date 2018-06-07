@@ -14,8 +14,6 @@
 
 @interface HSQGoodsRateImageView ()
 
-
-
 @end
 
 @implementation HSQGoodsRateImageView

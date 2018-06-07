@@ -413,13 +413,20 @@
  * @brief 底部按钮的点击事件
  */
 - (void)BottomClickBtnClickAction:(UIButton *)sender{
-
-    if (self.delegate && [self.delegate respondsToSelector:@selector(hsqGoodsModelViewBottomBtnClickAction:GoodsCount:Type:goods_id:)]) {
-        
-        [self.delegate hsqGoodsModelViewBottomBtnClickAction:sender GoodsCount:self.SelectKuCunString Type:self.TypeString goods_id:self.Goods_id];
-    }
     
-    [self dismissAdressView];
+    if (self.SelectKuCunString.integerValue > self.GoodsKuCunString.integerValue)
+    {
+        [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:@"商品库存不足" SupView:self];
+    }
+    else
+    {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(hsqGoodsModelViewBottomBtnClickAction:GoodsCount:Type:goods_id:GoodsKunCun:)]) {
+            
+            [self.delegate hsqGoodsModelViewBottomBtnClickAction:sender GoodsCount:self.SelectKuCunString Type:self.TypeString goods_id:self.Goods_id GoodsKunCun:self.GoodsKuCunString];
+        }
+        
+        [self dismissAdressView];
+    }
 }
 
 /**

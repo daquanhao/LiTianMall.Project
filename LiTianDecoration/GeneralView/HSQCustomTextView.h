@@ -18,6 +18,6 @@
 /**
  * @brief 提示文字的颜色
  */
-@property (nonatomic, copy) NSString *placeholderColor;
+@property (nonatomic, strong) UIColor *placeholderColor;
 
 @end

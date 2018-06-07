@@ -24,6 +24,12 @@
 - (NSString *)toJSONDataString:(id)theData;
 
 /**
+ * @brief 将字典转化为JSON串
+ * @param theDataDiction 要转化的数据
+ */
+- (NSString *)toJSONDataStringWithDiction:(NSDictionary *)theDataDiction;
+
+/**
  *  @brief 查询某个商品是否存在
  *  @param Goods_id 商品的ID
  */
@@ -39,6 +45,11 @@
  * @brief 添加商品的模型
  */
 - (void)addGoodsModel:(HSQShopCarGoodsListModel *)GoodModel;
+
+/**
+ * @brief 根据商品的id取出商品的模型
+ */
+- (HSQShopCarGoodsListModel *)TakeOutTheModelOfTheProductAccordingToTheIdOfTheProduct:(NSString *)GoodsId;
 
 /**
  * @brief 删除商品的模型

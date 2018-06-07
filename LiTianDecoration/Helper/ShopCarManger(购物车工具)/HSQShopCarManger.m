@@ -6,8 +6,6 @@
 //  Copyright © 2018年 administrator. All rights reserved.
 //
 
-// 购物车的存储路径
-#define HWAccountPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"ShopCar.archive"]
 
 #import "HSQShopCarManger.h"
 #import "HSQShopCarGoodsListModel.h"
@@ -51,7 +49,29 @@
     
     NSError *error = nil;
     
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:theData options:(kNilOptions) error:nil];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:theData options:NSJSONReadingMutableLeaves | NSJSONReadingAllowFragments error:nil];
+    
+    NSString *JsonString = [[NSString alloc] initWithData:jsonData encoding:(NSUTF8StringEncoding)];
+    
+    if ([JsonString length]&&error== nil)
+    {
+        return JsonString;
+    }
+    else
+    {
+        return nil;
+    }
+}
+
+/**
+ * @brief 将字典转化为JSON串
+ * @param theDataDiction 要转化的数据NSJSONReadingMutableContainers
+ */
+- (NSString *)toJSONDataStringWithDiction:(NSDictionary *)theDataDiction{
+    
+    NSError *error = nil;
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:theDataDiction options:NSJSONWritingPrettyPrinted error:nil];
     
     NSString *JsonString = [[NSString alloc] initWithData:jsonData encoding:(NSUTF8StringEncoding)];
     
@@ -74,13 +94,15 @@
     // 文件路径
     NSString *filePath = [documentsPath stringByAppendingPathComponent:@"model.sqlite"];
     
+    HSQLog(@"=文件路径==%@",filePath);
+    
     // 实例化FMDataBase对象
     _db = [FMDatabase databaseWithPath:filePath];
     
     [_db open];
     
     // 初始化数据表
-    NSString *personSql = @"CREATE TABLE 'person' ('id' INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,'goodsId' VARCHAR(255),'commonId' VARCHAR(255),'buyData' VARCHAR(255),'cartData'VARCHAR(255)) ";
+    NSString *personSql = @"CREATE TABLE 'person' ('id' INTEGER PRIMARY KEY AUTOINCREMENT  NOT NULL ,'goodsId' VARCHAR(255),'commonId' VARCHAR(255),'buyData' VARCHAR(255),'cartData'VARCHAR(255),'buyNum' VARCHAR(255)) ";
     
     //监测数据库中我要需要的表是否已经存在
     NSString *existsSql = [NSString stringWithFormat:@"select count(name) as countNum from sqlite_master where type = 'table' and name = '%@'", @"person" ];
@@ -125,6 +147,38 @@
     return Isexit;
 }
 
+
+/**
+ * @brief 根据商品的id取出商品的模型
+ */
+- (HSQShopCarGoodsListModel *)TakeOutTheModelOfTheProductAccordingToTheIdOfTheProduct:(NSString *)GoodsId{
+    
+    [_db open];
+    
+    HSQShopCarGoodsListModel *goodsModel = [[HSQShopCarGoodsListModel alloc] init];
+    
+    //根据条件查询
+    FMResultSet *resultSet = [_db executeQuery:@"select * from person where goodsId = ?", GoodsId];
+    
+    //遍历结果集合
+    while ([resultSet  next])
+    {
+        goodsModel.goodsId = [resultSet stringForColumn:@"goodsId"];
+        
+        goodsModel.buyData = [resultSet stringForColumn:@"buyData"];
+        
+        goodsModel.cartData = [resultSet stringForColumn:@"cartData"];
+        
+        goodsModel.commonId = [resultSet stringForColumn:@"commonId"];
+        
+        goodsModel.buyNum = [resultSet stringForColumn:@"buyNum"];
+    }
+    
+    [_db close];
+    
+    return goodsModel;
+}
+
 /**
  * @brief 根据商品的SKU查询商品的个数
  */
@@ -149,6 +203,8 @@
         
         goodsModel.commonId = [res stringForColumn:@"commonId"];
         
+        goodsModel.buyNum = [res stringForColumn:@"buyNum"];
+        
         [dataArray addObject:goodsModel];
         
     }
@@ -165,7 +221,7 @@
     
     [_db open];
     
-    BOOL IsSucess = [_db executeUpdate:@"INSERT INTO person(commonId,goodsId,buyData,cartData)VALUES(?,?,?,?)",GoodModel.commonId,GoodModel.goodsId,GoodModel.buyData,GoodModel.cartData];
+    BOOL IsSucess = [_db executeUpdate:@"INSERT INTO person(commonId,goodsId,buyData,cartData,buyNum)VALUES(?,?,?,?,?)",GoodModel.commonId,GoodModel.goodsId,GoodModel.buyData,GoodModel.cartData,GoodModel.buyNum];
     
     if (IsSucess)
     {
@@ -214,6 +270,8 @@
     [_db executeUpdate:@"UPDATE 'person' SET buyData = ?  WHERE goodsId = ? ",GoodModel.buyData,GoodModel.goodsId];
     
     [_db executeUpdate:@"UPDATE 'person' SET cartData = ?  WHERE goodsId = ? ",GoodModel.cartData,GoodModel.goodsId];
+    
+    [_db executeUpdate:@"UPDATE 'person' SET buyNum = ?  WHERE goodsId = ? ",GoodModel.buyNum,GoodModel.goodsId];
 
     [_db close];
 }
@@ -240,6 +298,8 @@
         goodsModel.cartData = [res stringForColumn:@"cartData"];
         
         goodsModel.commonId = [res stringForColumn:@"commonId"];
+        
+        goodsModel.buyNum = [res stringForColumn:@"buyNum"];
 
         [dataArray addObject:goodsModel];
         

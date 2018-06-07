@@ -13,11 +13,14 @@
 #import "HSQAcceptAddressListModel.h"
 #import "HSQAdressListFooterView.h"
 
+
 @interface HSQAdressListViewController ()<UITableViewDelegate,UITableViewDataSource,HSQAdressListFooterViewDelegate,HSQAdressListCellDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 
 @property (nonatomic, strong) NSMutableArray *dataSource;
+
+@property (nonatomic, strong) HSQNoDataView *NoDataView;
 
 @end
 
@@ -31,6 +34,16 @@
     }
     
     return _dataSource;
+}
+
+-(HSQNoDataView *)NoDataView{
+    
+    if (_NoDataView == nil) {
+        
+        self.NoDataView = [[HSQNoDataView alloc] initWithTitle:@"亲，暂无地址额" imageName:@"123" height:50 TopMargin:0];
+    }
+    
+    return _NoDataView;
 }
 
 - (void)viewDidLoad {
@@ -124,6 +137,11 @@
             [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:errorString SuperView:self.view];
         }
         
+        if (self.dataSource.count == 0)
+        {
+            [self.view addSubview:self.NoDataView];
+        }
+        
         [self.tableView reloadData];
         
         [self.tableView.mj_header endRefreshing];
@@ -131,6 +149,8 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
          [self.tableView.mj_header endRefreshing];
+        
+        [self.view addSubview:self.NoDataView];
         
         [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"地址列表的数据加载失败" SuperView:self.view];
     }];
@@ -166,6 +186,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    self.NoDataView.hidden = (self.dataSource.count != 0);
     
     return self.dataSource.count;
 }
@@ -216,6 +238,18 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (self.Source.integerValue == 100) // 提交订单界面
+    {
+        HSQAcceptAddressListModel *model = self.dataSource[indexPath.row];
+        
+        if (self.SelectAdressModel) {
+            
+            self.SelectAdressModel(model);
+        }
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark - HSQAdressListCellDelegate

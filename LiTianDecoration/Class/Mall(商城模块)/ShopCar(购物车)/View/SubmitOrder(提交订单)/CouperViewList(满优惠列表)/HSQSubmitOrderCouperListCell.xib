@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="KGk-i7-Jjw" customClass="HSQSubmitOrderCouperListCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="878CADA4-7366-480C-856E-9DBA873C758C" translatesAutoresizingMaskIntoConstraints="NO" id="cBm-XZ-gq4">
+                        <rect key="frame" x="10" y="11" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="94P-Mo-65b"/>
+                            <constraint firstAttribute="height" constant="20" id="CsU-HN-wkX"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tC8-zf-yPg">
+                        <rect key="frame" x="40" y="0.0" width="132.5" height="43.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AMG-EL-3Vb">
+                        <rect key="frame" x="177.5" y="0.0" width="132.5" height="43.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXz-Hn-EXD">
+                        <rect key="frame" x="40" y="0.0" width="270" height="43.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="AMG-EL-3Vb" firstAttribute="bottom" secondItem="tC8-zf-yPg" secondAttribute="bottom" id="1vA-sk-j65"/>
+                    <constraint firstItem="tC8-zf-yPg" firstAttribute="leading" secondItem="cBm-XZ-gq4" secondAttribute="trailing" constant="10" id="29E-sX-YoD"/>
+                    <constraint firstAttribute="trailing" secondItem="AMG-EL-3Vb" secondAttribute="trailing" constant="10" id="EpA-5a-Xhh"/>
+                    <constraint firstItem="vXz-Hn-EXD" firstAttribute="leading" secondItem="cBm-XZ-gq4" secondAttribute="trailing" constant="10" id="N41-GI-F1V"/>
+                    <constraint firstItem="tC8-zf-yPg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="OrQ-zm-KxJ"/>
+                    <constraint firstAttribute="bottom" secondItem="tC8-zf-yPg" secondAttribute="bottom" id="PBj-3e-UnX"/>
+                    <constraint firstItem="cBm-XZ-gq4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="R79-dN-aOx"/>
+                    <constraint firstAttribute="bottom" secondItem="vXz-Hn-EXD" secondAttribute="bottom" id="aRj-W6-2iS"/>
+                    <constraint firstAttribute="trailing" secondItem="vXz-Hn-EXD" secondAttribute="trailing" constant="10" id="aeE-yg-mvK"/>
+                    <constraint firstItem="AMG-EL-3Vb" firstAttribute="leading" secondItem="tC8-zf-yPg" secondAttribute="trailing" constant="5" id="mNb-tm-yHU"/>
+                    <constraint firstItem="vXz-Hn-EXD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="nnB-hc-Flz"/>
+                    <constraint firstItem="AMG-EL-3Vb" firstAttribute="top" secondItem="tC8-zf-yPg" secondAttribute="top" id="wda-JV-Zdm"/>
+                    <constraint firstItem="AMG-EL-3Vb" firstAttribute="width" secondItem="tC8-zf-yPg" secondAttribute="width" id="z6K-Ah-7gv"/>
+                    <constraint firstItem="cBm-XZ-gq4" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="zc5-Sa-VeJ"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="ActivityName_Label" destination="AMG-EL-3Vb" id="hOh-rf-6j7"/>
+                <outlet property="Left_ImageView" destination="cBm-XZ-gq4" id="xou-dX-iJX"/>
+                <outlet property="Reason_Label" destination="vXz-Hn-EXD" id="W7H-0d-0fH"/>
+                <outlet property="ShengMonery_Label" destination="tC8-zf-yPg" id="1vX-YO-DYf"/>
+            </connections>
+            <point key="canvasLocation" x="-557" y="-50"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="878CADA4-7366-480C-856E-9DBA873C758C" width="20" height="20"/>
+    </resources>
+</document>

@@ -15,4 +15,9 @@
     return [NSString stringWithFormat:@"%@%@",self.areaInfo,self.address];
 }
 
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key{
+    
+    
+}
+
 @end

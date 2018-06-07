@@ -52,7 +52,6 @@
     
     NSDictionary *diction = @{@"token":[HSQAccountTool account].token};
     
-    
     AFNetworkRequestTool *RequestTool = [AFNetworkRequestTool shareRequestTool];
     
     [RequestTool.manger POST:UrlAdress(KPersonDetailUrl) parameters:diction progress:^(NSProgress * _Nonnull uploadProgress) {
