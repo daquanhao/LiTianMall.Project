@@ -1736,7 +1736,7 @@
 			path = GeneralView;
 			sourceTree = "<group>";
 		};
-		C33A3C882096B5F300944632 /* ReturnGoods */ = {
+		C33A3C882096B5F300944632 /* ReturnGoods(退款或者退货) */ = {
 			isa = PBXGroup;
 			children = (
 				C33A3C852096B5ED00944632 /* HSQReturnGoodsViewController.h */,
@@ -1750,7 +1750,7 @@
 				C33C31F120C5449100470BF2 /* HSQTuiGoodAndMoneryDetailViewController.h */,
 				C33C31F220C5449100470BF2 /* HSQTuiGoodAndMoneryDetailViewController.m */,
 			);
-			path = ReturnGoods;
+			path = "ReturnGoods(退款或者退货)";
 			sourceTree = "<group>";
 		};
 		C33C31EB20C538C600470BF2 /* TuiHuoListCell(退货列表) */ = {
@@ -1814,10 +1814,9 @@
 			path = couponsController;
 			sourceTree = "<group>";
 		};
-		C33F4AFE2095C1FD0032B9A1 /* MyOrderController */ = {
+		C33F4AFE2095C1FD0032B9A1 /* MyOrderController(订单列表) */ = {
 			isa = PBXGroup;
 			children = (
-				C35D51B620C1506500A02E73 /* TouSu(投诉) */,
 				C3570A2620B8E7C20044A911 /* OrderHomeController(订单首页) */,
 				C3570A2720B8E7E80044A911 /* AllOrderListController(全部订单) */,
 				C3570A2820B8E8090044A911 /* WaitPayMoneryOrderController(待支付) */,
@@ -1825,8 +1824,12 @@
 				C331F6BF20BB8A0000E5A690 /* OrderWaitQuHuo(待取货) */,
 				C3570A3220B8E8FB0044A911 /* WaitRateOrder(待评价) */,
 				C35D51A420C0D55700A02E73 /* OrderDetailController(订单详情) */,
+				C35D51B620C1506500A02E73 /* TouSu(投诉) */,
+				C33A3C882096B5F300944632 /* ReturnGoods(退款或者退货) */,
+				C3C3E8D420B963C700951DAA /* PayMoneryView(支付界面) */,
+				C344441420C7CD8D00D1DACC /* PayMonerySuccess(支付成功界面) */,
 			);
-			path = MyOrderController;
+			path = "MyOrderController(订单列表)";
 			sourceTree = "<group>";
 		};
 		C341B4AA20B54CFF00348B29 /* SubmitOrders(T提交订单) */ = {
@@ -2087,11 +2090,8 @@
 		C36F5703207CAA5E0086C2FA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				C344441420C7CD8D00D1DACC /* PayMonerySuccess(支付成功界面) */,
-				C3C3E8D420B963C700951DAA /* PayMoneryView(支付界面) */,
 				C36F5706207CAA770086C2FA /* MineHomePage */,
-				C33A3C882096B5F300944632 /* ReturnGoods */,
-				C33F4AFE2095C1FD0032B9A1 /* MyOrderController */,
+				C33F4AFE2095C1FD0032B9A1 /* MyOrderController(订单列表) */,
 				C32EE008209456B3004F85F0 /* MyPropertyController */,
 				C318F8C1209164170056F8A3 /* Message */,
 				C33466492086D2FB00B8AD0A /* AccountManger */,

@@ -1,12 +1,12 @@
 //
-//  HSQQWaitPayMoneryOrderViewController.m
+//  HSQAllOrderListViewController.m
 //  LiTianDecoration
 //
 //  Created by administrator on 2018/5/26.
 //  Copyright © 2018年 administrator. All rights reserved.
 //
 
-#import "HSQQWaitPayMoneryOrderViewController.h"
+#import "HSQAllOrderListViewController.h"
 #import "HSQOrderListFirstCengModel.h"
 #import "HSQAccountTool.h"
 #import "HSQOrderGoodsListCell.h"
@@ -15,11 +15,14 @@
 #import "HSQShopCarGoodsTypeListModel.h"
 #import "HSQOrderGoodsListBgView.h"
 #import "HSQStoreDetailViewController.h"
-#import "HSQPayMoneryView.h"
+#import "HSQEvaluationOrderViewController.h"
+#import "HSQZhuiJiaRateViewController.h"
+#import "HSQMallShopCarViewController.h"
 #import "HSQOrderDetailViewController.h"
+#import "HSQPayMoneryView.h"   // 支付界面
 #import "HSQPayMonerySuccessViewController.h"  // 支付成功界面
 
-@interface HSQQWaitPayMoneryOrderViewController ()<UITableViewDelegate,UITableViewDataSource,HSQOrderListFooterViewDelegate,HSQOrderGoodsListCellDelegate,HSQPayMoneryViewDelegate>
+@interface HSQAllOrderListViewController ()<UITableViewDelegate,UITableViewDataSource,HSQOrderListFooterViewDelegate,HSQOrderGoodsListCellDelegate,HSQPayMoneryViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -37,7 +40,7 @@
 
 @end
 
-@implementation HSQQWaitPayMoneryOrderViewController
+@implementation HSQAllOrderListViewController
 
 -(NSMutableArray *)dataSource{
     
@@ -62,7 +65,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-        
+    
     self.view.backgroundColor = KViewBackGroupColor;
     
     // 1.创建tableView
@@ -71,8 +74,17 @@
     // 2.添加刷新控件
     [self AddRefreshControls];
     
+    // 监听支付成功界面的消息
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(AllOrderLookUpOrderNotif:) name:@"LookUpOrderNotif" object:nil];
     
+}
+
+/**
+ * @brief 监听支付成功界面的消息
+ */
+- (void)AllOrderLookUpOrderNotif:(NSNotification *)notif{
     
+    [self.tableView.mj_header beginRefreshing];
 }
 
 /**
@@ -81,13 +93,13 @@
 - (void)CreatTableView{
     
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight - KSafeTopeHeight - KSafeBottomHeight - 50) style:(UITableViewStyleGrouped)];
-
+    
     tableView.backgroundColor = [UIColor clearColor];
-
+    
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-
+    
     tableView.delegate = self;
-
+    
     tableView.dataSource = self;
     
     [tableView registerNib:[UINib nibWithNibName:@"HSQOrderGoodsListCell" bundle:nil] forCellReuseIdentifier:@"HSQOrderGoodsListCell"];
@@ -95,9 +107,9 @@
     [tableView registerClass:[HSQOrderListFooterView class] forHeaderFooterViewReuseIdentifier:@"HSQOrderListFooterView"];
     
     [tableView registerClass:[HSQOrderListHeaderView class] forHeaderFooterViewReuseIdentifier:@"HSQOrderListHeaderView"];
-
+    
     [self.view addSubview:tableView];
-
+    
     self.tableView = tableView;
 }
 
@@ -134,7 +146,6 @@
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"token"] = account.token;
-    params[@"ordersState"] = @"new";
     params[@"page"] = @(self.currentPage);
     if (self.keyword.length != 0)
     {
@@ -193,7 +204,6 @@
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"token"] = account.token;
-    params[@"ordersState"] = @"new";
     params[@"page"] = @(++self.currentPage);
     if (self.keyword.length != 0)
     {
@@ -284,7 +294,6 @@
                 }
             }
         }
-        
     }
 }
 
@@ -307,7 +316,7 @@
     }
     
     self.noDataView.hidden = (self.dataSource.count != 0);
-        
+    
     return self.dataSource.count;
 }
 
@@ -337,12 +346,30 @@
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForFooterInSection:(NSInteger)section{
     
-    return 50;
+    HSQOrderListFirstCengModel *FirstModel = self.dataSource[section];
+    
+    if (FirstModel.ordersOnlineDiffAmount.integerValue > 0) // 待支付
+     {
+         return 50;
+     }
+    else
+    {
+        return 5;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
-    return 50;
+    HSQOrderListFirstCengModel *FirstModel = self.dataSource[section];
+    
+    if (FirstModel.ordersOnlineDiffAmount.integerValue > 0) // 待支付
+    {
+        return 50;
+    }
+    else
+    {
+        return 5;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
@@ -366,8 +393,21 @@
     
     CGSize photosSize = [HSQOrderGoodsListBgView SizeWithDataModelArray:SecondModel.ordersGoodsVoList_array];
     
-    return 125 + photosSize.height;
-    
+    if (SecondModel.ordersState.integerValue == 10 || SecondModel.ordersState.integerValue == 0 || SecondModel.ordersState.integerValue == 40)  // 待支付，已取消，已完成
+    {
+         return 125 + photosSize.height;
+    }
+    else
+    {
+        if (SecondModel.showRefundWaiting.integerValue == 1)
+        {
+            return 125 + photosSize.height;
+        }
+        else
+        {
+            return 85 + photosSize.height;
+        }
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -394,13 +434,14 @@
     HSQOrderDetailViewController *OrderDetailVC = [[HSQOrderDetailViewController alloc] init];
     
     OrderDetailVC.ordersId = secondModel.ordersId;
-    
+        
     OrderDetailVC.OrderDetailTealSuccessModel = ^(id success) {
-       
+
         [self.tableView.mj_header beginRefreshing];
     };
-    
+
     [self.navigationController pushViewController:OrderDetailVC animated:YES];
+    
 }
 
 /**
@@ -413,9 +454,9 @@
     HSQOrderListFirstCengModel *FirstModel = self.dataSource[footerView.Section];
     
     [[HSQProgressHUDManger Manger] ShowLoadingDataFromeServer:@"" ToView:self.view IsClearColor:YES];
-
+    
     HSQAccount *account = [HSQAccountTool account];
-
+    
     NSDictionary *params = @{@"token":account.token,@"clientType":@"app",@"payId":FirstModel.payId};
     
     AFNetworkRequestTool *requestTool = [AFNetworkRequestTool shareRequestTool];
@@ -447,7 +488,9 @@
         // 提示数据请求失败
         [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:@"网络出现问题" SupView:self.view];
     }];
+    
 }
+
 
 /**
  * @brief 弹出支付界面
@@ -503,6 +546,81 @@
     }];
 }
 
+
+/**
+ * @brief 删除订单
+ */
+- (void)DeleteOrderButtonClickAction:(UIButton *)sender{
+    
+    HSQOrderGoodsListCell *cell = (HSQOrderGoodsListCell *)sender.superview.superview.superview;
+    
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    
+    HSQOrderListFirstCengModel *FirstModel = self.dataSource[indexPath.section];
+    
+    HSQOrderListSecondCengModel *secondModel = FirstModel.ordersVoList[indexPath.row];
+    
+    if (secondModel.ordersState.integerValue == 40 || secondModel.ordersState.integerValue == 0)
+    {
+        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:@"确认删除该订单？" preferredStyle:(UIAlertControllerStyleAlert)];
+        
+        UIAlertAction *Cancel_action = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:nil];
+        
+        UIAlertAction *delete_action = [UIAlertAction actionWithTitle:@"删除" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+            
+            [self DeleteOrderFromeServerWithModel:secondModel];
+        }];
+        
+        [alertVC addAction:delete_action];
+        
+        [alertVC addAction:Cancel_action];
+        
+        [self presentViewController:alertVC animated:YES completion:nil];
+        
+    }
+}
+
+/**
+ * @brief 删除订单
+ */
+- (void)DeleteOrderFromeServerWithModel:(HSQOrderListSecondCengModel *)secondModel{
+    
+    [[HSQProgressHUDManger Manger] ShowLoadingDataFromeServer:@"" ToView:self.view IsClearColor:YES];
+    
+    HSQAccount *account = [HSQAccountTool account];
+    
+    NSDictionary *params = @{@"token":account.token,@"ordersId":secondModel.ordersId};
+    
+    AFNetworkRequestTool *requestTool = [AFNetworkRequestTool shareRequestTool];
+    
+    [requestTool.manger POST:UrlAdress(KDeteleOrderUrl) parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        [[HSQProgressHUDManger Manger] DismissProgressHUD];
+        
+        HSQLog(@"===删除订单===%@",responseObject);
+        
+        if ([responseObject[@"code"] integerValue] == 200)
+        {
+            [self.dataSource removeObject:secondModel];
+        }
+        else
+        {
+            NSString *errorString = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"error"]];
+            
+            [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:errorString SuperView:self.view];
+        }
+        
+        [self.tableView reloadData];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        // 提示数据请求失败
+        [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:@"网络出现问题" SupView:self.view];
+    }];
+}
+
 /**
  * @brief 进入店铺
  */
@@ -524,7 +642,47 @@
 }
 
 /**
- * @brief 取消订单的点击事件
+ * @brief 评价订单或者追加评论
+ */
+- (void)EvaluationOfTheOrderButtonClickAction:(UIButton *)sender{
+    
+    HSQOrderGoodsListCell *cell = (HSQOrderGoodsListCell *)sender.superview.superview.superview;
+    
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    
+    HSQOrderListFirstCengModel *FirstModel = self.dataSource[indexPath.section];
+    
+    HSQOrderListSecondCengModel *secondModel = FirstModel.ordersVoList[indexPath.row];
+    
+    if (secondModel.ordersState.integerValue == 40) // 交易完成，等待评价
+    {
+        if (secondModel.showEvaluationAppend.integerValue == 0)  // 第一次评论
+        {
+            HSQEvaluationOrderViewController *EvaluationOrderVC = [[HSQEvaluationOrderViewController alloc] init];
+            
+            EvaluationOrderVC.orderId = secondModel.ordersId;
+            
+            EvaluationOrderVC.SelectFirstRateSuccessModel = ^(id success) {
+                
+                [self.tableView.mj_header beginRefreshing];
+                
+            };
+            
+            [self.navigationController pushViewController:EvaluationOrderVC animated:YES];
+        }
+        else  // 追加评论
+        {
+            HSQZhuiJiaRateViewController *ZhuiJiaRateOrderVC = [[HSQZhuiJiaRateViewController alloc] init];
+            
+            ZhuiJiaRateOrderVC.orderId = secondModel.ordersId;
+            
+            [self.navigationController pushViewController:ZhuiJiaRateOrderVC animated:YES];
+        }
+    }
+}
+
+/**
+ * @brief 再次购买，
  */
 - (void)OrderCancelBtnClickAction:(UIButton *)sender{
     
@@ -532,97 +690,58 @@
     
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     
-    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:@"确认取消订单？" preferredStyle:(UIAlertControllerStyleAlert)];
-    
-    UIAlertAction *Cancel_action = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:nil];
-    
-    UIAlertAction *delete_action = [UIAlertAction actionWithTitle:@"确认" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-        
-        [self CancelOrderNotifserverWithIndex:indexPath];
-    }];
-    
-    [alertVC addAction:delete_action];
-    
-    [alertVC addAction:Cancel_action];
-    
-    [self presentViewController:alertVC animated:YES completion:nil];
-
-}
-
-/**
- * @brief 通知服务器，取消订单
- */
-- (void)CancelOrderNotifserverWithIndex:(NSIndexPath *)indexPath{
-    
     HSQOrderListFirstCengModel *FirstOrderModel = self.dataSource[indexPath.section];
     
     HSQOrderListSecondCengModel *secondOrderModel = FirstOrderModel.ordersVoList[indexPath.row];
     
-    // 是否可以取消订单(1-是,0-否
-    if (secondOrderModel.showMemberCancel.integerValue == 1)
+    HSQLog(@"====再次购买==%@",secondOrderModel.ordersState);
+    
+    if (secondOrderModel.ordersState.integerValue == 40) // 购买完成，等待平台的状态
     {
-        HSQAccount *account = [HSQAccountTool account];
-        
-        [[HSQProgressHUDManger Manger] ShowLoadingDataFromeServer:@"" ToView:self.view IsClearColor:YES];
-        
-        NSDictionary *params = @{@"token":account.token,@"ordersId":secondOrderModel.ordersId};
-        
-        AFNetworkRequestTool *requestTool = [AFNetworkRequestTool shareRequestTool];
-        
-        [requestTool.manger POST:UrlAdress(KCancelNoPayMoneryOrderUrl) parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
-            
-        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            
-            HSQLog(@"==取消订单==%@",responseObject);
-            [[HSQProgressHUDManger Manger] DismissProgressHUD];
-            
-            if ([responseObject[@"code"] integerValue] == 200)
-            {
-                // 删除对应的数据
-                [FirstOrderModel.ordersVoList removeObject:secondOrderModel];
-                
-                if (FirstOrderModel.ordersVoList.count == 0)
-                {
-                    [self.dataSource removeObject:FirstOrderModel];
-                }
-            }
-            else
-            {
-                NSString *errorString = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"error"]];
-                
-                [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:errorString SuperView:self.view];
-            }
-            
-            [self.tableView reloadData];
-            
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            
-            [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:@"取消订单失败，请稍后重试" SupView:self.view];
-            
-        }];
-    }
-    else
-    {
-        [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:@"该订单不能被取消" SupView:self.view];
+        [self NotifyTheServerToPurchaseAgainWithBtn:secondOrderModel];
     }
 }
-
-
-
-
 
 /**
- * @brief 使用余额支付
+ * @brief 通知服务器再次购买
  */
-- (void)UseBalancePayMonery{
+- (void)NotifyTheServerToPurchaseAgainWithBtn:(HSQOrderListSecondCengModel *)model{
     
+    [[HSQProgressHUDManger Manger] ShowLoadingDataFromeServer:@"" ToView:self.view IsClearColor:YES];
     
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"token"] = [HSQAccountTool account].token;
+    params[@"ordersId"] = model.ordersId;
+    params[@"clientType"] = KClientType;
+    
+    AFNetworkRequestTool *requestTool = [AFNetworkRequestTool shareRequestTool];
+    
+    [requestTool.manger POST:UrlAdress(KOrderRepurchaseInterfaceUrl) parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+    
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    
+        if ([responseObject[@"code"] integerValue] == 200)
+        {
+            HSQMallShopCarViewController *shopCarVC = [[HSQMallShopCarViewController alloc] init];
+    
+            shopCarVC.source = @"100";
+    
+            [self.navigationController pushViewController:shopCarVC animated:YES];
+        }
+        else
+        {
+            NSString *errorString = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"error"]];
+    
+            [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:errorString SuperView:self.view];
+        }
+    
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    
+        [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:@"网络出问题啦！" SupView:self.view];
+    
+    }];
+
 }
-
-
-
-
-
 
 
 

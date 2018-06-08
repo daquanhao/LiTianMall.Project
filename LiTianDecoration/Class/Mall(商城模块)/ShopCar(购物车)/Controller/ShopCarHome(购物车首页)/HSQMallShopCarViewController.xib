@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,6 +13,7 @@
             <connections>
                 <outlet property="BottomView" destination="Yod-So-EHJ" id="v6q-Uz-x2L"/>
                 <outlet property="BottomViewLayOut" destination="v3d-z9-uGA" id="3Ih-lM-aU1"/>
+                <outlet property="Delete_Button" destination="BsI-cF-ayI" id="h1E-4x-Iz6"/>
                 <outlet property="Jiesuan_Btn" destination="Zll-vP-qYC" id="QkY-Lb-Iru"/>
                 <outlet property="QuanXuan_Btn" destination="jyY-aI-Yys" id="6Gt-Xj-ehv"/>
                 <outlet property="TotalMonery_Label" destination="39u-AR-yXc" id="V4l-n3-Xn9"/>
@@ -64,9 +64,20 @@
                             <color key="textColor" red="0.87058823529999996" green="0.2274509804" blue="0.27058823529999998" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BsI-cF-ayI">
+                            <rect key="frame" x="280" y="11" width="75" height="29"/>
+                            <state key="normal" title="删除" backgroundImage="24BB2CFF-14F5-4974-BE1A-0D9A10EA0857">
+                                <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="ShopCarDeleteButtonClickAction:" destination="-1" eventType="touchUpInside" id="mFy-51-nsA"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="BsI-cF-ayI" firstAttribute="centerY" secondItem="Yod-So-EHJ" secondAttribute="centerY" id="0yb-es-OdH"/>
+                        <constraint firstAttribute="trailing" secondItem="BsI-cF-ayI" secondAttribute="trailing" constant="20" id="9aP-lf-QvA"/>
                         <constraint firstItem="jyY-aI-Yys" firstAttribute="top" secondItem="Yod-So-EHJ" secondAttribute="top" id="Ayt-Hn-hzH"/>
                         <constraint firstItem="Zll-vP-qYC" firstAttribute="leading" secondItem="39u-AR-yXc" secondAttribute="trailing" constant="10" id="BER-Dc-YYs"/>
                         <constraint firstAttribute="bottom" secondItem="Zll-vP-qYC" secondAttribute="bottom" id="BfJ-Mu-6rA"/>
@@ -83,15 +94,15 @@
             </subviews>
             <color key="backgroundColor" red="0.53258323669999996" green="0.15963962879999999" blue="0.27296977100000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
-                <constraint firstItem="Yod-So-EHJ" firstAttribute="leading" secondItem="Iu2-hn-SoQ" secondAttribute="leading" id="09U-I5-ysM"/>
-                <constraint firstItem="Iu2-hn-SoQ" firstAttribute="trailing" secondItem="Yod-So-EHJ" secondAttribute="trailing" id="CYb-xE-LcJ"/>
-                <constraint firstItem="Iu2-hn-SoQ" firstAttribute="bottom" secondItem="Yod-So-EHJ" secondAttribute="bottom" id="v3d-z9-uGA"/>
+                <constraint firstItem="Yod-So-EHJ" firstAttribute="leading" secondItem="7h8-33-RKg" secondAttribute="leading" id="09U-I5-ysM"/>
+                <constraint firstAttribute="trailing" secondItem="Yod-So-EHJ" secondAttribute="trailing" id="CYb-xE-LcJ"/>
+                <constraint firstAttribute="bottom" secondItem="Yod-So-EHJ" secondAttribute="bottom" id="v3d-z9-uGA"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="Iu2-hn-SoQ"/>
-            <point key="canvasLocation" x="-94" y="-295"/>
+            <point key="canvasLocation" x="-1003" y="-455"/>
         </view>
     </objects>
     <resources>
+        <image name="24BB2CFF-14F5-4974-BE1A-0D9A10EA0857" width="75" height="29"/>
         <image name="320A9B4D-0268-49C1-845B-7E3AABAB72BC" width="20" height="20"/>
         <image name="878CADA4-7366-480C-856E-9DBA873C758C" width="20" height="20"/>
     </resources>

@@ -20,4 +20,9 @@
  */
 @property (nonatomic, copy) NSString *Code;
 
+/**
+ * @brief 来源
+ */
+@property (nonatomic, copy) NSString *Source;
+
 @end

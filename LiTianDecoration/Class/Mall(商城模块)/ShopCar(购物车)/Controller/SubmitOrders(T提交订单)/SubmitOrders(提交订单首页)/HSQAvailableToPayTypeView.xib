@@ -6,23 +6,24 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HSQAvailableToPayTypeView">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="593"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DmL-j5-BGk">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="593"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MJF-96-g82">
-                            <rect key="frame" x="0.0" y="293" width="375" height="300"/>
+                            <rect key="frame" x="0.0" y="333.5" width="375" height="333.5"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aK4-pf-4Js">
-                                    <rect key="frame" x="20" y="246" width="335" height="44"/>
+                                    <rect key="frame" x="20" y="279.5" width="335" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="gMp-T4-Xog"/>
                                     </constraints>
@@ -35,7 +36,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="或" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IKb-dX-mBN">
-                                    <rect key="frame" x="10" y="221" width="355" height="20"/>
+                                    <rect key="frame" x="10" y="254.5" width="355" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="20" id="gcQ-Of-yCZ"/>
                                     </constraints>
@@ -44,7 +45,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u3v-lJ-eOU">
-                                    <rect key="frame" x="20" y="172" width="335" height="44"/>
+                                    <rect key="frame" x="20" y="205.5" width="335" height="44"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <state key="normal" title="确认支付" backgroundImage="LoginButton_Image">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -54,7 +55,10 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="在线支付方式" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WnG-KR-UF1">
-                                    <rect key="frame" x="10" y="145" width="355" height="17"/>
+                                    <rect key="frame" x="10" y="178.5" width="355" height="17"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="17" id="MBC-Pb-tad"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -67,7 +71,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" red="0.53258323669999996" green="0.15963962879999999" blue="0.27296977100000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="aK4-pf-4Js" firstAttribute="leading" secondItem="MJF-96-g82" secondAttribute="leading" constant="20" id="4rH-Ym-xn0"/>
                                 <constraint firstItem="aK4-pf-4Js" firstAttribute="top" secondItem="IKb-dX-mBN" secondAttribute="bottom" constant="5" id="64z-pT-ox1"/>
@@ -84,7 +88,6 @@
                                 <constraint firstItem="IKb-dX-mBN" firstAttribute="leading" secondItem="MJF-96-g82" secondAttribute="leading" constant="10" id="adS-9G-Pzf"/>
                                 <constraint firstItem="aK4-pf-4Js" firstAttribute="trailing" secondItem="u3v-lJ-eOU" secondAttribute="trailing" id="cYJ-Gd-Pb3"/>
                                 <constraint firstItem="u3v-lJ-eOU" firstAttribute="top" secondItem="WnG-KR-UF1" secondAttribute="bottom" constant="10" id="fCI-Kv-AI8"/>
-                                <constraint firstAttribute="height" constant="300" id="lYf-FF-ZPY"/>
                                 <constraint firstAttribute="bottom" secondItem="aK4-pf-4Js" secondAttribute="bottom" constant="10" id="lj5-wl-GuI"/>
                             </constraints>
                         </view>
@@ -92,6 +95,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="MJF-96-g82" secondAttribute="trailing" id="Raw-sJ-cdo"/>
+                        <constraint firstItem="MJF-96-g82" firstAttribute="height" secondItem="DmL-j5-BGk" secondAttribute="height" multiplier="0.5" id="VU9-EL-CHy"/>
                         <constraint firstItem="MJF-96-g82" firstAttribute="leading" secondItem="DmL-j5-BGk" secondAttribute="leading" id="iU7-sf-yOf"/>
                         <constraint firstAttribute="bottom" secondItem="MJF-96-g82" secondAttribute="bottom" id="wA7-4A-ERT"/>
                     </constraints>
@@ -104,12 +108,12 @@
                 <constraint firstItem="DmL-j5-BGk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="KRD-Z0-J4X"/>
                 <constraint firstAttribute="trailing" secondItem="DmL-j5-BGk" secondAttribute="trailing" id="j4L-vx-QU7"/>
             </constraints>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="BgView" destination="MJF-96-g82" id="FfU-bb-7v7"/>
                 <outlet property="PayLater_Button" destination="aK4-pf-4Js" id="yfi-9V-ja9"/>
                 <outlet property="TotalMonery_Label" destination="9C1-b1-eeW" id="YvK-m9-dns"/>
             </connections>
-            <point key="canvasLocation" x="-1033.5" y="106.5"/>
+            <point key="canvasLocation" x="-1886" y="90"/>
         </view>
     </objects>
     <resources>

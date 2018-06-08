@@ -14,7 +14,7 @@
 
 @optional
 
-/** 左边小圆圈的点击事件*/
+/** 左边小圆圈的点击事件 */
 - (void)LeftXiaoYuanQuanButtonClickAction:(UIButton *)sender;
 
 /** 加好按钮的点击事件*/
@@ -39,7 +39,6 @@
  * @brief 数据模型
  */
 @property (nonatomic, strong) HSQShopCarVCSecondGoodsDataModel *SecondModel;
-
 
 
 @end

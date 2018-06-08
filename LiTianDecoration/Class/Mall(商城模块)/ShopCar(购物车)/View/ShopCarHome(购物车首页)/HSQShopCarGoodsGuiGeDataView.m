@@ -25,6 +25,8 @@
 
 @property (nonatomic, strong) UILabel *GoodsPrice_Label; // 商品的价格
 
+@property (nonatomic, strong) UILabel *EditStateCount_Label; // 商品的编辑状态下的数量
+
 @end
 
 @implementation HSQShopCarGoodsGuiGeDataView
@@ -87,6 +89,15 @@
         [bgView addSubview:GoodsPrice_Label];
         self.GoodsPrice_Label = GoodsPrice_Label;
         
+        // 商品的在编辑状态的数量
+        UILabel *EditStateCount_Label = [[UILabel alloc] init];
+        EditStateCount_Label.textColor = RGB(71, 71, 71);
+        EditStateCount_Label.numberOfLines = 0;
+        EditStateCount_Label.font = [UIFont systemFontOfSize:14.0];
+        EditStateCount_Label.textAlignment = NSTextAlignmentCenter;
+        [bgView addSubview:EditStateCount_Label];
+        self.EditStateCount_Label = EditStateCount_Label;
+        
         // 添加控件的约束
         [self SetValueViewLayout];
     }
@@ -120,6 +131,9 @@
 
     // 商品的价格
     self.GoodsPrice_Label.sd_layout.leftEqualToView(self.GoodsSulLabel).bottomSpaceToView(self.BgView, 0).rightEqualToView(self.GoodsSulLabel).heightIs(20);
+    
+    // 商品的在编辑状态的数量
+    self.EditStateCount_Label.sd_layout.leftEqualToView(self.Jian_Button).topEqualToView(self.Jian_Button).rightEqualToView(self.Add_Button).heightIs(20);
 
 }
 
@@ -147,6 +161,23 @@
     else
     {
         [self.LeftRato_Button setSelected:YES];
+    }
+    
+    // 商品的在编辑状态的数量
+    self.EditStateCount_Label.text =  [NSString stringWithFormat:@"%@%@",model.buyNum,model.unitName];;
+    
+    // 判断购物车是否处于编辑状态
+    if (model.EditState.integerValue == 1)
+    {
+        self.EditStateCount_Label.hidden = YES;
+        
+        self.Jian_Button.hidden = self.GoodsCount_TextField.hidden = self.Add_Button.hidden = NO;
+    }
+    else
+    {
+        self.EditStateCount_Label.hidden = NO;
+        
+        self.Jian_Button.hidden = self.GoodsCount_TextField.hidden = self.Add_Button.hidden = YES;
     }
 }
 

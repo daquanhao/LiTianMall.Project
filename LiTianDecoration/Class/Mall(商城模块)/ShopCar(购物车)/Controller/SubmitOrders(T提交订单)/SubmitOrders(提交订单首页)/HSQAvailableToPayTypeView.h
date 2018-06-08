@@ -14,7 +14,7 @@
 - (void)TheClickEventOfThePayButtonLater:(UIButton *)sender;
 
 /** 确认支付按钮的点击事件*/
-- (void)ConfirmTheClickEventOfThePaymentButton:(UIButton *)sender;
+- (void)ConfirmTheClickEventOfThePaymentButton:(UIButton *)sender PassWord:(NSString *)PayPassWord;
 
 @end
 
@@ -26,8 +26,8 @@
 @property (nonatomic, weak) id<HSQAvailableToPayTypeViewDelegate>delegate;
 
 /**
- * @brief 商品的总金额
+ * @brief 支付方式的数据
  */
-@property (nonatomic, copy) NSString *total_monery;
+@property (nonatomic, strong) NSDictionary *datas;
 
 @end

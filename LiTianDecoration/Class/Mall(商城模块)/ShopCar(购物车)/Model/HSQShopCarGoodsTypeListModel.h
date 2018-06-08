@@ -88,5 +88,8 @@
 /** 进入退款或者退货详情的id*/
 @property (nonatomic, copy) NSString *refundId;
 
+/** 购物车是否处于编辑状态 1 不是 2 是*/
+@property (nonatomic, copy) NSString *EditState;
+
 
 @end

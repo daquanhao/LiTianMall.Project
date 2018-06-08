@@ -40,4 +40,5 @@
  */
 @property (nonatomic, weak) id<HSQShopCarGoodsGuiGeListViewDelegate>delegate;
 
+
 @end

@@ -77,7 +77,7 @@
         
         tabbar.selectedIndex = 4;
         
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }
     else
     {

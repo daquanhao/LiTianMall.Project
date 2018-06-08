@@ -22,7 +22,7 @@
 
 - (instancetype)initWithTitle:(NSString *)title imageName:(NSString *)Name height:(CGFloat)Loginheight TopMargin:(CGFloat)TopY{
     
-    if (self = [super initWithFrame:CGRectMake(0, TopY, KScreenWidth, KScreenHeight)]) {
+    if (self = [super initWithFrame:CGRectMake(0, TopY, KScreenWidth, KScreenHeight - KSafeBottomHeight - KSafeTopeHeight)]) {
         
         self.backgroundColor = [UIColor whiteColor];
         

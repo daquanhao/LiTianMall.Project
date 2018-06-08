@@ -270,6 +270,9 @@
 // 计算购物车商品的种类
 #define KJiSuanShopCarTypeUrl @"/cart/count"
 
+// 删除购物车的商品
+#define KDeteleShopCarGoodsUrl @"/cart/del/batch/sku"
+
 // 购买的第一步：显示商品的信息
 #define KBuyGoodsFirstBuUrl @"/member/buy/step1"
 

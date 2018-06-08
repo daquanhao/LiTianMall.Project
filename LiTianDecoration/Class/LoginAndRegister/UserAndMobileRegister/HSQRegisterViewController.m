@@ -64,6 +64,7 @@
     
     // 1.监听键盘的弹出或者消失
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WillChange:) name:UIKeyboardWillShowNotification object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WillDismissChange:) name:UIKeyboardWillHideNotification object:nil];
 
     

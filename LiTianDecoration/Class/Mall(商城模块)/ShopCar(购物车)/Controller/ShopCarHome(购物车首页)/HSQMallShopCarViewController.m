@@ -56,6 +56,9 @@
 
 @property (nonatomic, strong) NSMutableArray *Cell_Array; // cell是不是全部被选中
 
+@property (weak, nonatomic) IBOutlet UIButton *Delete_Button; // 删除按钮
+
+
 @end
 
 @implementation HSQMallShopCarViewController
@@ -116,7 +119,7 @@
     
     self.view.backgroundColor = KViewBackGroupColor;
     
-//    self.BottomViewLayOut.constant = KSafeBottomHeight;
+    self.BottomViewLayOut.constant = KSafeBottomHeight;
     
     self.navigationItem.title = @"购物车";
     
@@ -136,6 +139,7 @@
     
     // 添加右边的编辑按钮
     self.ClickActionState = @"1";
+    self.Delete_Button.hidden = YES;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:(UIBarButtonItemStylePlain) target:self action:@selector(RightEditItemClickAction:)];
     
     // 1.监听用户的登录
@@ -184,6 +188,8 @@
  * @brief 请求购物车的数据
  */
 - (void)RequestShopCarListDataFromeServer{
+    
+    [self.dataSource removeAllObjects];
     
     [[HSQProgressHUDManger Manger] ShowLoadingDataFromeServer:@"" ToView:self.view IsClearColor:YES];
     
@@ -243,6 +249,7 @@
                     for (NSDictionary *ThirdDiction in ModelDiction[@"cartItemVoList"]) {
                         HSQShopCarGoodsTypeListModel *ThirdModel = [[HSQShopCarGoodsTypeListModel alloc] init];
                         ThirdModel.IsSelect = @"0";
+                        ThirdModel.EditState = @"1";
                         [ThirdModel setValuesForKeysWithDictionary:ThirdDiction];
                         [ListModel.SecondCartItemVoList addObject:ThirdModel];
                         
@@ -314,11 +321,26 @@
     {
         self.ClickActionState = @"2";
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:(UIBarButtonItemStylePlain) target:self action:@selector(RightEditItemClickAction:)];
+        self.Jiesuan_Btn.hidden = self.TotalMonery_Label.hidden = YES;
+        self.Delete_Button.hidden = NO;
     }
     else
     {
         self.ClickActionState = @"1";
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:(UIBarButtonItemStylePlain) target:self action:@selector(RightEditItemClickAction:)];
+        self.Jiesuan_Btn.hidden = self.TotalMonery_Label.hidden = NO;
+        self.Delete_Button.hidden = YES;
+    }
+    
+    for (HSQShopCarVCGoodsDataModel *firstModel in self.dataSource) {
+        
+        for (HSQShopCarVCSecondGoodsDataModel *secondModel in firstModel.cartSpuVoList) {
+            
+            for (HSQShopCarGoodsTypeListModel *thirdModel in secondModel.SecondCartItemVoList) {
+                
+                thirdModel.EditState = self.ClickActionState;
+            }
+        }
     }
     
     [self.collectionView reloadData];
@@ -331,7 +353,6 @@
 - (void)UserLoginSuccessNotif:(NSNotification *)notif{
     
     // 将本地购物车的数据同步到服务器
-    // 购物车管理工具
     HSQShopCarManger *ShopCarManger = [HSQShopCarManger sharedShopCarManger];
     
     // 1.取出本地所有的购物车数据
@@ -1365,6 +1386,77 @@
 }
 
 
+/**
+ * @brief 购物车删除按钮的点击
+ */
+- (IBAction)ShopCarDeleteButtonClickAction:(UIButton *)sender {
+    
+    if (self.SelectGoodsTypeCount_Array.count == 0)
+    {
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"请选择你要删除的商品" SuperView:self.view];
+    }
+    else
+    {
+        [[HSQProgressHUDManger Manger] ShowLoadingDataFromeServer:@"" ToView:self.view IsClearColor:YES];
+        
+        NSMutableArray *goods_array = [NSMutableArray array];
+        
+        for (HSQShopCarGoodsTypeListModel *ThirdModel in self.SelectGoodsTypeCount_Array) {
+            
+            [goods_array addObject:ThirdModel.cartId];
+            
+        }
+        
+        NSString *cartId = [goods_array componentsJoinedByString:@","];
+        
+        NSMutableDictionary *params = [NSMutableDictionary dictionary];
+        
+        HSQAccount *account = [HSQAccountTool account];
+        
+        if (account.token.length == 0)
+        {
+            // 购买的商品(sku)的goodsId 和 购买数量组成的json串
+            NSString *cartData = [self ShengChengSubmitOrderBuyData];
+            params[@"cartData"] = cartData;
+            params[@"token"] = @"";
+            params[@"cartId"] = cartId;
+        }
+        else
+        {
+            params[@"token"] = account.token;
+            params[@"cartId"] = cartId;
+        }
+        
+        HSQLog(@"===删除数据==%@",params);
+        
+        AFNetworkRequestTool *requestTool = [AFNetworkRequestTool shareRequestTool];
+    
+        [requestTool.manger POST:UrlAdress(KDeteleShopCarGoodsUrl) parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+    
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    
+            [[HSQProgressHUDManger Manger] DismissProgressHUD];
+    
+            HSQLog(@"=删除购物车数据==%@",responseObject);
+            if ([responseObject[@"code"] integerValue] == 200)
+            {
+                [self RequestShopCarListDataFromeServer];
+            }
+            else
+            {
+                NSString *errorString = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"error"]];
+                
+                [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:errorString SuperView:self.view];
+            }
+    
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+    
+            [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:@"网络出问题啦！" SupView:self.view];
+        }];
+    }
+    
+
+}
 
 
 

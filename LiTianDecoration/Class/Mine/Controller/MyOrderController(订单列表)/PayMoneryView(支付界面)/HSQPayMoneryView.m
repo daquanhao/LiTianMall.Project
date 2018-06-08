@@ -56,6 +56,14 @@
         
         // 1.创建控件
         [self SetUpViews];
+        
+        // 1.监听键盘的弹出或者消失
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WillChange:) name:UIKeyboardWillShowNotification object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WillDismissChange:) name:UIKeyboardWillHideNotification object:nil];
+        
+        [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
+        
     }
     
     return self;
@@ -71,13 +79,13 @@
     Bottombtn.backgroundColor = [UIColor clearColor];
     [Bottombtn addTarget:self action:@selector(btnClickAction:) forControlEvents:(UIControlEventTouchUpInside)];
     [self addSubview:Bottombtn];
-    
+
     // 1.屏幕一半的背景图
     UIView *BgView = [[UIView alloc] initWithFrame:CGRectMake(0, KScreenHeight, KScreenWidth,(KViewHeight)/2)];
     BgView.backgroundColor = [UIColor whiteColor];
     [self addSubview:BgView];
     self.BgView = BgView;
-    
+
     // 2.头部的提示标题
     UILabel *placher_Label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, KPlacherLabelHeight)];
     placher_Label.textColor = [UIColor grayColor];
@@ -86,28 +94,27 @@
     placher_Label.textAlignment = NSTextAlignmentCenter;
     [BgView addSubview:placher_Label];
     self.placher_Label = placher_Label;
-    
+
     // 3.右边的退出按钮
     UIButton *right_button = [UIButton buttonWithType:(UIButtonTypeCustom)];
     right_button.frame = CGRectMake(KScreenWidth - KPlacherLabelHeight, 0, KPlacherLabelHeight, KPlacherLabelHeight);
     [right_button setImage:KImageName(@"TuiChuButton") forState:(UIControlStateNormal)];
     [right_button addTarget:self action:@selector(dismissAdressView) forControlEvents:(UIControlEventTouchUpInside)];
     [BgView addSubview:right_button];
-    
+
     // 6.添加tableView
     UITableView * tabbleView = [[UITableView alloc]initWithFrame:CGRectMake(0, KPlacherLabelHeight, KScreenWidth, BgView.mj_h - KPlacherLabelHeight - 65)];
     tabbleView.backgroundColor = KViewBackGroupColor;
     tabbleView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tabbleView.delegate = self;
     tabbleView.dataSource = self;
-    tabbleView.contentInset = UIEdgeInsetsMake(0, 0, 10, 0);
     [tabbleView registerNib:[UINib nibWithNibName:@"HSQPayMoneryTypeListCell" bundle:nil] forCellReuseIdentifier:@"HSQPayMoneryTypeListCell"];
     [BgView addSubview:tabbleView];
     self.tableView = tabbleView;
-    
+
     // 确认支付
     UIButton *QRPayMonery_Btn = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    QRPayMonery_Btn.frame = CGRectMake(20, BgView.mj_h - 55, KScreenWidth - 40, 45);
+    QRPayMonery_Btn.frame = CGRectMake(20, CGRectGetMaxY(tabbleView.frame)+10, KScreenWidth - 40, 45);
     [QRPayMonery_Btn setBackgroundImage:KImageName(@"LoginButton_Image") forState:(UIControlStateNormal)];
     [QRPayMonery_Btn setTitle:@"确认支付" forState:(UIControlStateNormal)];
     [QRPayMonery_Btn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
@@ -187,10 +194,6 @@
  */
 - (void)SelectThePaymentMethodButtonClickEvent:(UISwitch *)sender{
     
-//    HSQPayMoneryTypeListCell *cell = (HSQPayMoneryTypeListCell *)sender.superview.superview;
-    
-//    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    
     if (sender.isOn == YES)
     {
         self.IsOn = @"1";
@@ -258,11 +261,11 @@
     [UIView animateWithDuration:0.25 animations:^{
         
         self.BgView.frame = ({
-            
+
             CGRect frame = self.BgView.frame;
-            
-            frame.origin.y = (KScreenHeight) / 2;
-            
+
+            frame.origin.y = (KViewHeight) /2;
+
             frame;
         });
     }];
@@ -274,21 +277,75 @@
 - (void)dismissAdressView{
     
     [UIView animateWithDuration:0.25 animations:^{
+
+        self.BgView.frame = ({
+
+            CGRect frame = self.BgView.frame;
+
+            frame.origin.y = KScreenHeight;
+
+            frame;
+        });
+    }completion:^(BOOL finished) {
+
+        [self.BgView removeFromSuperview];
+
+        [self removeFromSuperview];
+    }];
+}
+
+- (void)WillChange:(NSNotification *)notif{
+    
+    NSDictionary *keyboardInfo = notif.userInfo;
+    
+    CGRect keyboardFrame = [keyboardInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    
+    CGFloat animationDuration = [keyboardInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    
+    [UIView animateWithDuration:animationDuration animations:^{
         
         self.BgView.frame = ({
             
             CGRect frame = self.BgView.frame;
             
-            frame.origin.y = KScreenHeight;
+            frame.origin.y = KScreenHeight - KSafeBottomHeight - keyboardFrame.size.height - 140;
             
             frame;
         });
-    }completion:^(BOOL finished) {
         
-        [self.BgView removeFromSuperview];
-        
-        [self removeFromSuperview];
     }];
+    
+    
+}
+
+- (void)WillDismissChange:(NSNotification *)notif{
+    
+    NSDictionary *keyboardInfo = notif.userInfo;
+    
+    CGFloat animationDuration = [keyboardInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    
+    [UIView animateWithDuration:animationDuration animations:^{
+        
+        self.BgView.frame = ({
+            
+            CGRect frame = self.BgView.frame;
+            
+            frame.origin.y = (KViewHeight)/2;
+            
+            frame;
+        });
+        
+    }];
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    [scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
+}
+
+-(void)dealloc{
+    
+    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;
 }
 
 

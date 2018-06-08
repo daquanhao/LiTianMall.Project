@@ -95,9 +95,7 @@
     {
         [self.LeftRato_Button setSelected:YES];
     }
-
 }
-
 
 /**
  * @brief 左边小圆圈的点击事件

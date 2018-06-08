@@ -9,6 +9,7 @@
 #import "HSQPayMonerySuccessViewController.h"
 #import "HSQAccountTool.h"
 #import "HSQMallHomePageController.h"
+#import "HSQMyOrderHomeViewController.h"
 
 @interface HSQPayMonerySuccessViewController ()
 
@@ -131,11 +132,22 @@
  */
 - (IBAction)ViewTheOrderButtonClickEvent:(UIButton *)sender {
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"LookUpOrderNotif" object:self];
-    
-    [self.navigationController popViewControllerAnimated:YES];
-    
-    
+    if (self.Source.integerValue == 100) // 从提交订单界面过来的
+    {
+        HSQMyOrderHomeViewController *MyOrderHomeVC = [[HSQMyOrderHomeViewController alloc] init];
+        
+        MyOrderHomeVC.indexNumber = @"0";
+        
+        MyOrderHomeVC.JumpType_string = @"100";
+        
+        [self.navigationController pushViewController:MyOrderHomeVC animated:YES];
+    }
+    else
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"LookUpOrderNotif" object:self];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 

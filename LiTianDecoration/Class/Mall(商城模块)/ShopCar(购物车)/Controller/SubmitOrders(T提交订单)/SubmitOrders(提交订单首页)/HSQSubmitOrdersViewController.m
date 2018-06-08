@@ -23,6 +23,7 @@
 #import "HSQSelecttheInvoiceViewController.h"  // 发票明细
 #import "HSQAvailableToPayTypeView.h"  // 可用的支付方式
 #import "HSQMyOrderHomeViewController.h"  // 全部的订单
+#import "HSQPayMonerySuccessViewController.h" // 支付成功的界面
 
 @interface HSQSubmitOrdersViewController ()<UITableViewDelegate,UITableViewDataSource,HSQSubmitOrderHeadAdressViewDelegate,HSQSubmitOrderFooterViewDelegate,UITextViewDelegate,HSQAvailableToPayTypeViewDelegate>
 
@@ -59,6 +60,8 @@
 @property (nonatomic, copy) NSString *GoodsTotalMonery;  // 商品的总金额
 
 @property (nonatomic, strong) HSQAvailableToPayTypeView *AvailableToPayTypeView; // 可用的支付方式
+
+@property (nonatomic, copy) NSString *payId;  // 支付id
 
 @end
 
@@ -782,112 +785,100 @@
  */
 - (IBAction)SubmitOrderBtnClickAction:(UIButton *)sender {
     
-    HSQAvailableToPayTypeView *AvailableToPayTypeView = [[[NSBundle mainBundle] loadNibNamed:@"HSQAvailableToPayTypeView" owner:self options:nil] firstObject];
+    if (self.dataDiction[@"address"] == [NSNull null]) // 说明没有配送地址
+    {
+        [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:@"请选择您的收货地址" SupView:self.view];
+    }
+    else
+    {
+        // 店铺数组
+        NSMutableDictionary *Submit_Params = [NSMutableDictionary dictionary];
 
-    AvailableToPayTypeView.frame = CGRectMake(0, 0, KScreenWidth, KScreenHeight - KSafeBottomHeight);
+        // 店铺数组
+        NSMutableArray *storeList = [NSMutableArray array];
 
-    AvailableToPayTypeView.total_monery = self.GoodsTotalMonery;
+        for (HSQShopCarVCGoodsDataModel *FirstModel in self.dataSource) {
 
-    AvailableToPayTypeView.delegate = self;
+            // 店铺的参数
+            NSMutableDictionary *Store_params = [NSMutableDictionary dictionary];
 
-    [[UIApplication sharedApplication].keyWindow addSubview:AvailableToPayTypeView];
+            // 商品数组
+            NSMutableArray *goodsList = [NSMutableArray array];
 
-    self.AvailableToPayTypeView = AvailableToPayTypeView;
-    
-    HSQLog(@"=======");
-    
-//    if (self.dataDiction[@"address"] == [NSNull null]) // 说明没有配送地址
-//    {
-//        [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:@"请选择您的收货地址" SupView:self.view];
-//    }
-//    else
-//    {
-//        if (self.isCart.integerValue == 1) // 购物车跳转的
-//        {
-//            // 店铺数组
-//            NSMutableDictionary *Submit_Params = [NSMutableDictionary dictionary];
-//
-//            // 店铺数组
-//            NSMutableArray *storeList = [NSMutableArray array];
-//
-//            for (HSQShopCarVCGoodsDataModel *FirstModel in self.dataSource) {
-//
-//                 // 店铺的参数
-//                NSMutableDictionary *Store_params = [NSMutableDictionary dictionary];
-//
-//                // 商品数组
-//                NSMutableArray *goodsList = [NSMutableArray array];
-//
-//                for (HSQShopCarVCSecondGoodsDataModel *secondModel in FirstModel.buyGoodsSpuVoList) {
-//
-//                    for (HSQShopCarGoodsTypeListModel *ThirdModel in secondModel.buyGoodsItemVoListSource) {
-//
-//                        // 商品的参数
-//                        NSMutableDictionary *Goods_params = [NSMutableDictionary dictionary];
-//                        Goods_params[@"buyNum"] = ThirdModel.buyNum;
-//                        Goods_params[@"cartId"] = ThirdModel.cartId;
-//                        [goodsList addObject:Goods_params];
-//                    }
-//                }
-//
-//                Store_params[@"goodsList"] = goodsList;
-//                Store_params[@"storeId"] = FirstModel.storeId;
-//                Store_params[@"receiverMessage"] = FirstModel.receiverMessage;  // 买家留言
-//                Store_params[@"conformId"] = (FirstModel.conformId.length == 0 ? @"":FirstModel.conformId);  // 优惠活动id
-//                Store_params[@"voucherId"] = @"";  // 优惠券Id,可为空
-//
-//                [storeList addObject:Store_params];
-//
-//            }
-//
-//            Submit_Params[@"storeList"] = storeList;
-//            Submit_Params[@"addressId"] = self.addressId;
-//
-//            // 是否有货到付款
-//            NSString *allowOffline = [NSString stringWithFormat:@"%@",self.dataDiction[@"allowOffline"]];
-//
-//            if (allowOffline.integerValue == 0)
-//            {
-//                Submit_Params[@"paymentTypeCode"] = @"online"; // 支付方式--在线支付
-//            }
-//            else
-//            {
-//                Submit_Params[@"paymentTypeCode"] = @"offline"; // 支付方式--货到付款
-//            }
-//            Submit_Params[@"isCart"] = [NSString stringWithFormat:@"%@",self.dataDiction[@"isCart"]]; //  是否来源于购物车（1–是 0–否）,必填
-//             Submit_Params[@"isGroup"] = [NSString stringWithFormat:@"%@",self.dataDiction[@"isGroup"]]; //  是否是团购商品
-//
-//            // 判断是不是有发票
-//            NSString *type = [NSString stringWithFormat:@"%@",self.FaPiaoDiction[@"type"]];
-//
-//            if (type.integerValue == 1)
-//            {
-//                Submit_Params[@"invoiceTitle"] = @""; //  发票抬头
-//                Submit_Params[@"invoiceContent"] = @""; //  发票内容
-//                Submit_Params[@"invoiceCode"] = @""; //  纳税人识别号
-//            }
-//            else
-//            {
-//                Submit_Params[@"invoiceTitle"] = [NSString stringWithFormat:@"%@",self.FaPiaoDiction[@"title"]];//  发票抬头
-//                Submit_Params[@"invoiceContent"] = [NSString stringWithFormat:@"%@",self.FaPiaoDiction[@"content"]]; //  发票内容
-//                Submit_Params[@"invoiceCode"] = [NSString stringWithFormat:@"%@",self.FaPiaoDiction[@"code"]]; //  纳税人识别号
-//            }
-//
-//            Submit_Params[@"redPackageId"] = @""; //  红包Id,选填，不使用时留空
-//             Submit_Params[@"isExistTrys"] = [NSString stringWithFormat:@"%@",self.dataDiction[@"isExistTrys"]];; //  是否含有拥有试用资格的商品。由buy/step1接口返回不作更改原样提交
-//            Submit_Params[@"isExistBundling"] = @"0"; // 购买的商品是否含有优惠套装（1–是 0–否）
-//
-//            NSString *buyData = [NSString toJSONDataString:Submit_Params];
-//
-//            // 保存生成订单
-//            [self SaveTheGeneratedOrderWithString:buyData];
-//
-//        }
-//        else // 立即购买跳转的
-//        {
-//
-//        }
-//    }
+            for (HSQShopCarVCSecondGoodsDataModel *secondModel in FirstModel.buyGoodsSpuVoList) {
+
+                for (HSQShopCarGoodsTypeListModel *ThirdModel in secondModel.buyGoodsItemVoListSource) {
+
+                    // 商品的参数
+                    NSMutableDictionary *Goods_params = [NSMutableDictionary dictionary];
+
+                    Goods_params[@"buyNum"] = ThirdModel.buyNum;
+
+                    if (self.isCart.integerValue == 1) // 来源于购物车
+                    {
+                        Goods_params[@"cartId"] = ThirdModel.cartId;
+                    }
+                    else // 来源于立即购买
+                    {
+                        Goods_params[@"goodsId"] = ThirdModel.goodsId;
+                    }
+
+                    [goodsList addObject:Goods_params];
+                }
+            }
+
+            Store_params[@"goodsList"] = goodsList;
+            Store_params[@"storeId"] = FirstModel.storeId;
+            Store_params[@"receiverMessage"] = FirstModel.receiverMessage;  // 买家留言
+            Store_params[@"conformId"] = (FirstModel.conformId.length == 0 ? @"":FirstModel.conformId);  // 优惠活动id
+            Store_params[@"voucherId"] = @"";  // 优惠券Id,可为空
+
+            [storeList addObject:Store_params];
+
+        }
+
+        Submit_Params[@"storeList"] = storeList;
+        Submit_Params[@"addressId"] = self.addressId;
+
+        // 是否有货到付款
+        NSString *allowOffline = [NSString stringWithFormat:@"%@",self.dataDiction[@"allowOffline"]];
+
+        if (allowOffline.integerValue == 0)
+        {
+            Submit_Params[@"paymentTypeCode"] = @"online"; // 支付方式--在线支付
+        }
+        else
+        {
+            Submit_Params[@"paymentTypeCode"] = @"offline"; // 支付方式--货到付款
+        }
+        Submit_Params[@"isCart"] = [NSString stringWithFormat:@"%@",self.dataDiction[@"isCart"]]; //  是否来源于购物车（1–是 0–否）,必填
+        Submit_Params[@"isGroup"] = [NSString stringWithFormat:@"%@",self.dataDiction[@"isGroup"]]; //  是否是团购商品
+
+        // 判断是不是有发票
+        NSString *type = [NSString stringWithFormat:@"%@",self.FaPiaoDiction[@"type"]];
+
+        if (type.integerValue == 1)
+        {
+            Submit_Params[@"invoiceTitle"] = @""; //  发票抬头
+            Submit_Params[@"invoiceContent"] = @""; //  发票内容
+            Submit_Params[@"invoiceCode"] = @""; //  纳税人识别号
+        }
+        else
+        {
+            Submit_Params[@"invoiceTitle"] = [NSString stringWithFormat:@"%@",self.FaPiaoDiction[@"title"]];//  发票抬头
+            Submit_Params[@"invoiceContent"] = [NSString stringWithFormat:@"%@",self.FaPiaoDiction[@"content"]]; //  发票内容
+            Submit_Params[@"invoiceCode"] = [NSString stringWithFormat:@"%@",self.FaPiaoDiction[@"code"]]; //  纳税人识别号
+        }
+
+        Submit_Params[@"redPackageId"] = @""; //  红包Id,选填，不使用时留空
+        Submit_Params[@"isExistTrys"] = [NSString stringWithFormat:@"%@",self.dataDiction[@"isExistTrys"]];; //  是否含有拥有试用资格的商品。由buy/step1接口返回不作更改原样提交
+        Submit_Params[@"isExistBundling"] = @"0"; // 购买的商品是否含有优惠套装（1–是 0–否）
+
+        NSString *buyData = [NSString toJSONDataString:Submit_Params];
+
+        // 保存生成订单
+        [self SaveTheGeneratedOrderWithString:buyData];
+    }
 }
 
 /**
@@ -952,7 +943,20 @@
         
         if ([responseObject[@"code"] integerValue] == 200)
         {
-
+            HSQAvailableToPayTypeView *AvailableToPayTypeView = [[[NSBundle mainBundle] loadNibNamed:@"HSQAvailableToPayTypeView" owner:self options:nil] firstObject];
+            
+            AvailableToPayTypeView.frame = CGRectMake(0, 0, KScreenWidth, KScreenHeight - KSafeBottomHeight);
+            
+            AvailableToPayTypeView.datas = responseObject[@"datas"];
+            
+            AvailableToPayTypeView.delegate = self;
+            
+            [[UIApplication sharedApplication].keyWindow addSubview:AvailableToPayTypeView];
+            
+            self.AvailableToPayTypeView = AvailableToPayTypeView;
+            
+            // 支付单Id
+            self.payId = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"payId"]];
         }
         else
         {
@@ -982,11 +986,11 @@
         [self.AvailableToPayTypeView removeFromSuperview];
         
         HSQMyOrderHomeViewController *MyOrderHomeVC = [[HSQMyOrderHomeViewController alloc] init];
-        
+
         MyOrderHomeVC.indexNumber = @"0";
-        
+
         MyOrderHomeVC.JumpType_string = @"100";
-        
+
         [self.navigationController pushViewController:MyOrderHomeVC animated:YES];
         
     }];
@@ -995,13 +999,53 @@
 /**
  * @brief 确认支付按钮的点击事件
  */
-- (void)ConfirmTheClickEventOfThePaymentButton:(UIButton *)sender{
+- (void)ConfirmTheClickEventOfThePaymentButton:(UIButton *)sender PassWord:(NSString *)PayPassWord{
     
+    [UIView animateWithDuration:0.25 animations:^{
+        
+        self.AvailableToPayTypeView.hidden = YES;
+        
+    }completion:^(BOOL finished) {
+        
+        [self.AvailableToPayTypeView removeFromSuperview];
+    }];
+    
+    [[HSQProgressHUDManger Manger] ShowLoadingDataFromeServer:@"" ToView:self.view IsClearColor:YES];
+    
+    NSDictionary *params = @{@"token":[HSQAccountTool account].token,@"payId":self.payId,@"predepositPay":@"1",@"payPwd":PayPassWord};
+    
+    AFNetworkRequestTool *requestTool = [AFNetworkRequestTool shareRequestTool];
+    
+    [requestTool.manger POST:UrlAdress(KYuCunKuanPayMoneryUrl) parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        [[HSQProgressHUDManger Manger] DismissProgressHUD];
+        
+        HSQLog(@"==支付===%@==%@",responseObject,params);
+        
+        HSQPayMonerySuccessViewController *PayMoneryVC = [[HSQPayMonerySuccessViewController alloc] init];
+        
+        if ([responseObject[@"code"] integerValue] == 200)
+        {
+            PayMoneryVC.payId = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"payId"]];
+        }
+        else
+        {
+            PayMoneryVC.Code = [NSString stringWithFormat:@"%@",responseObject[@"code"]];
+        }
+        
+        PayMoneryVC.Source = @"100";
+        
+        [self.navigationController pushViewController:PayMoneryVC animated:YES];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"网络出问题啦！" SuperView:self.view];
+        
+    }];
     
 }
-
-
-
 
 
 
