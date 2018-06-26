@@ -22,6 +22,8 @@
 // 底部的所有内容
 @property (nonatomic, weak) UIScrollView *contentView;
 
+@property (nonatomic, assign) NSInteger IsEditState;  // 是否处于编辑状态
+
 @end
 
 @implementation HSQMyCollectionHomeViewController
@@ -40,6 +42,13 @@
     
     // 3.设置底布滚动控制器
     [self setupContentView];
+    
+    // 编辑按钮
+    self.IsEditState = 1;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:(UIBarButtonItemStylePlain) target:self action:@selector(EditButtonClickAction:)];
+    
+    // 监听商品界面删除成功的消息
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(DeteleGoodsSuccessFul:) name:@"DeteleGoodsSuccessFul" object:nil];
     
 }
 
@@ -78,12 +87,33 @@
  */
 - (void)TopNavtionViewButtonClickAction:(UIButton *)sender{
     
+    // 修改按钮状态
+    self.NavtionView.selectedButton.enabled = YES;
+    
+    sender.enabled = NO;
+    
+    self.NavtionView.selectedButton = sender;
+    
+    // 动画
+    [UIView animateWithDuration:0.25 animations:^{
+        
+        self.NavtionView.indicatorView.width = sender.titleLabel.mj_w;
+        
+        self.NavtionView.indicatorView.centerX = sender.centerX;
+    }];
+    
     // 滚动
     CGPoint offset = self.contentView.contentOffset;
     
     offset.x = sender.tag * self.contentView.width;
     
     [self.contentView setContentOffset:offset animated:YES];
+    
+    self.IsEditState = 1;
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:(UIBarButtonItemStylePlain) target:self action:@selector(EditButtonClickAction:)];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SendIsEditStateNotif" object:self userInfo:@{@"IsEditState":@(self.IsEditState)}];
 }
 
 
@@ -158,10 +188,36 @@
    
 }
 
+/**
+ * @brief 编辑按钮的点击
+ */
+- (void)EditButtonClickAction:(UIBarButtonItem *)sender{
+    
+    if (self.IsEditState == 1) // 编辑
+    {
+        self.IsEditState = 2;
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:(UIBarButtonItemStylePlain) target:self action:@selector(EditButtonClickAction:)];
+    }
+    else
+    {
+        self.IsEditState = 1;
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:(UIBarButtonItemStylePlain) target:self action:@selector(EditButtonClickAction:)];
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SendIsEditStateNotif" object:self userInfo:@{@"IsEditState":@(self.IsEditState)}];
+}
 
-
-
-
+/**
+ * @brief 监听商品界面删除的消息
+ */
+- (void)DeteleGoodsSuccessFul:(NSNotification *)notif{
+    
+    self.IsEditState = 1;
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:(UIBarButtonItemStylePlain) target:self action:@selector(EditButtonClickAction:)];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SendIsEditStateNotif" object:self userInfo:@{@"IsEditState":@(self.IsEditState)}];
+}
 
 
 

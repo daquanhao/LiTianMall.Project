@@ -53,6 +53,14 @@
     [self.contentView addSubview:bgView];
     self.BgView = bgView;
     
+    // 活动的标题
+    UILabel *ActivityType_Label = [[UILabel alloc] init];
+    ActivityType_Label.font = [UIFont systemFontOfSize:14.0];
+    ActivityType_Label.backgroundColor = [UIColor redColor];
+    ActivityType_Label.textColor = [UIColor whiteColor];
+    [bgView addSubview:ActivityType_Label];
+    self.ActivityType_Label = ActivityType_Label;
+    
     // 活动的时间
     UILabel *activityTime_Label = [[UILabel alloc] init];
     activityTime_Label.text = @"活动时间：2017-12-12 10:53:36 至 2018-12-12 10:53:36";
@@ -70,23 +78,23 @@
     [bgView addSubview:activityContent_Label];
     self.activityContent_Label = activityContent_Label;
     
-    // 降字的提示标语
-    UILabel *JiangPlacher_Label = [[UILabel alloc] init];
-    JiangPlacher_Label.text = @" 降 ";
-    JiangPlacher_Label.textColor = [UIColor whiteColor];
-    JiangPlacher_Label.backgroundColor = RGB(238, 58, 68);
-    JiangPlacher_Label.font = [UIFont systemFontOfSize:12.0];
-    [bgView addSubview:JiangPlacher_Label];
-    self.JiangPlacher_Label = JiangPlacher_Label;
-    
-    // 底部的提示标语
-    UILabel *BottomPlacher_Label = [[UILabel alloc] init];
-    BottomPlacher_Label.text = @" 单笔订单消费满¥2000，立减¥200.免邮费，送面额100元优惠券，送赠品 ";
-    BottomPlacher_Label.font = [UIFont systemFontOfSize:12.0];
-    BottomPlacher_Label.textColor = RGB(150, 150, 150);
-    BottomPlacher_Label.numberOfLines = 0;
-    [bgView addSubview:BottomPlacher_Label];
-    self.BottomPlacher_Label = BottomPlacher_Label;
+//    // 降字的提示标语
+//    UILabel *JiangPlacher_Label = [[UILabel alloc] init];
+//    JiangPlacher_Label.text = @" 降 ";
+//    JiangPlacher_Label.textColor = [UIColor whiteColor];
+//    JiangPlacher_Label.backgroundColor = RGB(238, 58, 68);
+//    JiangPlacher_Label.font = [UIFont systemFontOfSize:12.0];
+//    [bgView addSubview:JiangPlacher_Label];
+//    self.JiangPlacher_Label = JiangPlacher_Label;
+//
+//    // 底部的提示标语
+//    UILabel *BottomPlacher_Label = [[UILabel alloc] init];
+//    BottomPlacher_Label.text = @" 单笔订单消费满¥2000，立减¥200.免邮费，送面额100元优惠券，送赠品 ";
+//    BottomPlacher_Label.font = [UIFont systemFontOfSize:12.0];
+//    BottomPlacher_Label.textColor = RGB(150, 150, 150);
+//    BottomPlacher_Label.numberOfLines = 0;
+//    [bgView addSubview:BottomPlacher_Label];
+//    self.BottomPlacher_Label = BottomPlacher_Label;
 }
 
 /**
@@ -94,36 +102,65 @@
  */
 - (void)setUpViewLayOut{
     
-    self.BgView.sd_layout.leftSpaceToView(self.contentView, 0).topSpaceToView(self.contentView, 0).rightSpaceToView(self.contentView, 0).bottomSpaceToView(self.contentView, 0);
+    self.BgView.sd_layout.leftSpaceToView(self.contentView, 0).topSpaceToView(self.contentView, 5).rightSpaceToView(self.contentView, 0).bottomSpaceToView(self.contentView, 0);
+    
+    // 活动的类型
+    self.ActivityType_Label.sd_layout.leftSpaceToView(self.BgView, 10).topSpaceToView(self.BgView, 10).heightIs(20).autoWidthRatio(0);
+    [self.ActivityType_Label setSingleLineAutoResizeWithMaxWidth:KScreenWidth - 20];
     
     // 活动的时间
-    self.activityTime_Label.sd_layout.leftSpaceToView(self.BgView, 10).rightSpaceToView(self.BgView, 0).topSpaceToView(self.BgView, 10).heightIs(20);
+    self.activityTime_Label.sd_layout.leftSpaceToView(self.BgView, 10).rightSpaceToView(self.BgView, 0).topSpaceToView(self.ActivityType_Label, 10).heightIs(20);
     
     // 活动的内容
     self.activityContent_Label.sd_layout.leftEqualToView(self.activityTime_Label).rightEqualToView(self.activityTime_Label).topSpaceToView(self.activityTime_Label, 10).autoHeightRatio(0);
     
-    // 降字的提示标语
-    self.JiangPlacher_Label.sd_layout.leftEqualToView(self.activityTime_Label).topSpaceToView(self.activityContent_Label, 10).autoWidthRatio(0).autoHeightRatio(0);
-    [self.JiangPlacher_Label setSingleLineAutoResizeWithMaxWidth:60];
+//    // 降字的提示标语
+//    self.JiangPlacher_Label.sd_layout.leftEqualToView(self.activityTime_Label).topSpaceToView(self.activityContent_Label, 10).autoWidthRatio(0).autoHeightRatio(0);
+//    [self.JiangPlacher_Label setSingleLineAutoResizeWithMaxWidth:60];
+//    
+//    // 底部的提示标语
+//    self.BottomPlacher_Label.sd_layout.leftSpaceToView(self.JiangPlacher_Label, 0).topEqualToView(self.JiangPlacher_Label).rightSpaceToView(self.BgView, 10).autoHeightRatio(0);
     
-    // 底部的提示标语
-    self.BottomPlacher_Label.sd_layout.leftSpaceToView(self.JiangPlacher_Label, 0).topEqualToView(self.JiangPlacher_Label).rightSpaceToView(self.BgView, 10).autoHeightRatio(0);
+}
+
+
+/**
+ * @brief 店铺限时折扣活动的数据
+ */
+- (void)setDiscountList_diction:(NSDictionary *)discountList_diction{
+    
+    _discountList_diction = discountList_diction;
+    
+    // 标题
+    self.ActivityType_Label.text = [NSString stringWithFormat:@"  %@  ",discountList_diction[@"discountTitleFinal"]];
+    
+    // 时间
+    self.activityTime_Label.text = [NSString stringWithFormat:@"活动时间：%@至%@",discountList_diction[@"startTime"],discountList_diction[@"endTime"]];
+    
+    // 活动的内容
+    self.activityContent_Label.text = [NSString stringWithFormat:@"活动商品享受%@折，优惠价",discountList_diction[@"discountRate"]];
+    
     
 }
 
 /**
- * @brief 店铺活动的数据
+ * @brief  店铺优惠券活动的数据
  */
-- (void)setDataDiction:(NSDictionary *)dataDiction{
+- (void)setConformList_diction:(NSDictionary *)conformList_diction{
     
-    _dataDiction = dataDiction;
+    _conformList_diction = conformList_diction;
     
+    // 标题
+    self.ActivityType_Label.text = [NSString stringWithFormat:@"  %@  ",conformList_diction[@"conformTileFinal"]];
     
+    // 时间
+    self.activityTime_Label.text = [NSString stringWithFormat:@"活动时间：%@至%@",conformList_diction[@"startTime"],conformList_diction[@"endTime"]];
+    
+    // 活动的内容
+    self.activityContent_Label.text = [NSString stringWithFormat:@"%@",conformList_diction[@"contentRule"]];
+    
+    self.activityContent_Label.backgroundColor = RGB(200, 118, 170);
 }
-
-
-
-
 
 
 

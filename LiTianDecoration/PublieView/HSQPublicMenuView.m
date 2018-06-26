@@ -49,11 +49,11 @@
         // 2.创建底部的滚动视图
         [self SetUpScrollerView];
         
-        
     }
     
     return self;
 }
+
 
 /**
  * @brief 右边的箭头按钮
@@ -121,7 +121,11 @@
  */
 - (void)AddTitleButtonWithDataSource:(NSMutableArray *)title_array{
     
-    self.scrollerView.contentSize = CGSizeMake(title_array.count * self.scrollerView.size.width / KShowCount , self.frame.size.height);
+//    self.scrollerView.contentSize = CGSizeMake(title_array.count * self.scrollerView.size.width / KShowCount , self.frame.size.height);
+    
+    CGFloat contentW = 0;
+    
+    CGFloat ButtonX = 0;
     
     for (NSInteger i = 0; i < title_array.count; i++) {
         
@@ -129,14 +133,7 @@
         
         UIButton *title_btn = [UIButton buttonWithType:(UIButtonTypeSystem)];
         
-        if (i == 0)
-        {
-            [title_btn setTitle:title_array[i] forState:(UIControlStateNormal)];
-        }
-        else
-        {
-            [title_btn setTitle:model.categoryName forState:(UIControlStateNormal)];
-        }
+       [title_btn setTitle:model.categoryName forState:(UIControlStateNormal)];
         
         [title_btn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
         
@@ -146,7 +143,24 @@
         
         title_btn.tag = i;
         
-        title_btn.frame = CGRectMake(i * self.scrollerView.size.width / KShowCount, 0, self.scrollerView.size.width / KShowCount, self.scrollerView.size.height - self.indicatorView.size.height);
+//        title_btn.frame = CGRectMake(i * self.scrollerView.size.width / KShowCount, 0, self.scrollerView.size.width / KShowCount, self.scrollerView.size.height - self.indicatorView.size.height);
+        
+        CGSize Title_Size = [NSString SizeOfTheText:model.categoryName font:[UIFont systemFontOfSize:KTextFont_(13)] MaxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
+        
+        if (i == 0)
+        {
+            ButtonX = 10;
+        }
+        else
+        {
+            HSQLeftCategoryModel *model = title_array[i - 1];
+            
+            CGSize Title_Size = [NSString SizeOfTheText:model.categoryName font:[UIFont systemFontOfSize:KTextFont_(13)] MaxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
+            
+            ButtonX = ButtonX + Title_Size.width + 10;
+        }
+        
+        title_btn.frame = CGRectMake(ButtonX, 0, Title_Size.width, self.scrollerView.size.height - self.indicatorView.size.height);
         
         [title_btn addTarget:self action:@selector(title_btnClickAction:) forControlEvents:(UIControlEventTouchUpInside)];
         
@@ -165,7 +179,17 @@
             
             self.indicatorView.centerX = title_btn.centerX;
         }
+        
+        HSQLeftCategoryModel *Max_model = title_array.lastObject;
+        
+        CGSize Max_Title_Size = [NSString SizeOfTheText:Max_model.categoryName font:[UIFont systemFontOfSize:KTextFont_(13)] MaxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
+        
+        contentW = ButtonX + Max_Title_Size.width + 10;
     }
+    
+    
+    
+     self.scrollerView.contentSize = CGSizeMake(contentW, self.frame.size.height);
     
     [self.scrollerView addSubview:self.indicatorView];
 }
@@ -199,20 +223,13 @@
         
         UIButton *title_btn = [UIButton buttonWithType:(UIButtonTypeSystem)];
         
-        if (i == 0)
-        {
-            [title_btn setTitle:title_array[i] forState:(UIControlStateNormal)];
-        }
-        else
-        {
-            [title_btn setTitle:model.categoryName forState:(UIControlStateNormal)];
-        }
+        [title_btn setTitle:model.categoryName forState:(UIControlStateNormal)];
         
         [title_btn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
         
         [title_btn setTitleColor:[UIColor redColor] forState:(UIControlStateDisabled)];
         
-        title_btn.titleLabel.font = [UIFont systemFontOfSize:KTextFont_(12)];
+        title_btn.titleLabel.font = [UIFont systemFontOfSize:KTextFont_(12.0)];
         
         title_btn.backgroundColor = [UIColor whiteColor];
         
@@ -270,12 +287,16 @@
     
     // 修改按钮状态
     self.Select_Btn.enabled = YES;
+    
     sender.enabled = NO;
+    
     self.Select_Btn = sender;
     
     // 动画
     [UIView animateWithDuration:0.25 animations:^{
+        
         self.indicatorView.width = sender.titleLabel.mj_w;
+        
         self.indicatorView.centerX = sender.centerX;
     }];
     

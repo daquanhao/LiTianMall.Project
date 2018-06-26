@@ -22,16 +22,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gyI-J9-eFb">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥100.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NhK-YI-As5">
-                            <rect key="frame" x="10" y="32" width="355" height="32"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NhK-YI-As5">
+                            <rect key="frame" x="10" y="25" width="355" height="25"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="预存款账户" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HMg-32-54E">
-                            <rect key="frame" x="10" y="0.0" width="355" height="32"/>
+                            <rect key="frame" x="10" y="0.0" width="355" height="25"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -46,7 +46,7 @@
                         <constraint firstAttribute="bottom" secondItem="NhK-YI-As5" secondAttribute="bottom" id="Tc3-2o-7VW"/>
                         <constraint firstItem="HMg-32-54E" firstAttribute="height" secondItem="NhK-YI-As5" secondAttribute="height" id="Xc0-J6-Q1o"/>
                         <constraint firstItem="HMg-32-54E" firstAttribute="leading" secondItem="NhK-YI-As5" secondAttribute="leading" id="YWT-ua-CDB"/>
-                        <constraint firstAttribute="height" constant="64" id="gnw-EQ-oij"/>
+                        <constraint firstAttribute="height" constant="50" id="gnw-EQ-oij"/>
                         <constraint firstItem="HMg-32-54E" firstAttribute="top" secondItem="gyI-J9-eFb" secondAttribute="top" id="v4A-dQ-CKT"/>
                     </constraints>
                 </view>

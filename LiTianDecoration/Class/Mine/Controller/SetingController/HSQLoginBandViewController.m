@@ -37,6 +37,8 @@
     [setString  addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [self.Placher_Label.text length])];
     
     [self.Placher_Label  setAttributedText:setString];
+    
+
 }
 
 - (void)didReceiveMemoryWarning {

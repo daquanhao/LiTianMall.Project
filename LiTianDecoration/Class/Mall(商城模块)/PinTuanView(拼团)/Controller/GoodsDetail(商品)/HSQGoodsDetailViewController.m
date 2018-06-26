@@ -19,7 +19,7 @@
 #import "HSQGoodsRateListModel.h"
 #import "HSQGoodsDetailRateListCell.h"
 #import "HSQAccountTool.h"
-#import "HSQLoginViewController.h"
+#import "HSQLoginHomeViewController.h"
 
 @interface HSQGoodsDetailViewController ()<UITableViewDelegate,UITableViewDataSource,HSQPinTuanGoodsDetailHomeCellDelegate,HSQGuiGeAndCouperViewDelegate,HSQStoreHeadIntroCellDelegate>
 
@@ -373,7 +373,7 @@
     
     if (account.token.length == 0)
     {
-        HSQLoginViewController *LoginVC = [[HSQLoginViewController alloc] init];
+        HSQLoginHomeViewController *LoginVC = [[HSQLoginHomeViewController alloc] init];
         
         [self.navigationController pushViewController:LoginVC animated:YES];
 

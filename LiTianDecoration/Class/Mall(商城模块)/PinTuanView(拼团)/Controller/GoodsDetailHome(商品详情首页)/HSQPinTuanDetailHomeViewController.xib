@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -7,7 +7,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -198,12 +197,11 @@
             </subviews>
             <color key="backgroundColor" red="0.58081901069999997" green="0.088427625600000004" blue="0.31863921880000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="n75-fd-68t" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="QLe-LQ-qbB"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="n75-fd-68t" secondAttribute="bottom" id="bET-2Z-e7c"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="n75-fd-68t" secondAttribute="trailing" id="yPq-rx-GLO"/>
+                <constraint firstItem="n75-fd-68t" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="QLe-LQ-qbB"/>
+                <constraint firstAttribute="bottom" secondItem="n75-fd-68t" secondAttribute="bottom" id="bET-2Z-e7c"/>
+                <constraint firstAttribute="trailing" secondItem="n75-fd-68t" secondAttribute="trailing" id="yPq-rx-GLO"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
-            <point key="canvasLocation" x="-885" y="24"/>
+            <point key="canvasLocation" x="-422" y="20"/>
         </view>
     </objects>
     <resources>

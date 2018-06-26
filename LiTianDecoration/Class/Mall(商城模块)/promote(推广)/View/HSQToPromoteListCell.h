@@ -8,15 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
+@class HSQGoodsDataListModel;
+
 @protocol HSQToPromoteListCellDelegate <NSObject>
 
-/** 列表上立即选取按钮的点击**/
+/**
+ * @brief 列表上立即选取按钮的点击
+ */
 - (void)AtOnceSelectButtonWithCellList:(UIButton *)sender;
 
-/** 背景视图上立即选取按钮的点击**/
+/**
+ * @brief 背景视图上立即选取按钮的点击
+ */
 - (void)AtOnceSelectButtonWithBgViewClickAction:(UIButton *)sender;
 
-/** 背景视图上立即分享按钮的点击**/
+/**
+ * @brief 背景视图上立即分享按钮的点击
+ */
 - (void)AtOnceShareButtonWithBgViewClickAction:(UIButton *)sender;
 
 @end
@@ -28,5 +36,7 @@
 @property (nonatomic, assign) BOOL IsHiddenBgView;
 
 @property (nonatomic, strong) UILabel *YongJin_Label;  // 商品的佣金
+
+@property (nonatomic, strong) HSQGoodsDataListModel *model;
 
 @end

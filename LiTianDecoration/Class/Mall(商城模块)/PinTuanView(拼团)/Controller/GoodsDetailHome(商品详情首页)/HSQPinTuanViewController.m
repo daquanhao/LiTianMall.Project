@@ -115,7 +115,13 @@
         {
             self.Class_Array = [HSQLeftCategoryModel mj_objectArrayWithKeyValuesArray:responseObject[@"datas"][@"categoryList"]];
             
-            [self.Class_Array insertObject:@"全部" atIndex:0];
+            HSQLeftCategoryModel *model = [[HSQLeftCategoryModel alloc] init];
+            
+            model.categoryId = @"";
+            
+            model.categoryName = @"全部";
+            
+             [self.Class_Array insertObject:model atIndex:0];
           
             [self addHeadClassView:self.Class_Array];
         }
@@ -128,7 +134,7 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"分类数据加载失败" SuperView:self.view];
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
         
     }];
     
@@ -186,7 +192,7 @@
         
         [self.tableView.mj_header endRefreshing];
         
-        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"分类数据加载失败" SuperView:self.view];
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
         
     }];
 }
@@ -249,7 +255,7 @@
         // 结束刷新
         [self.tableView.mj_footer endRefreshing];
         
-        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"分类数据加载失败" SuperView:self.view];
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
         
     }];
 }
@@ -275,15 +281,9 @@
 
 - (void)topButtonClickAction:(UIButton *)sender{
     
-    if (sender.tag == 0)
-    {
-        self.categoryId = @"";
-    }
-    else
-    {
-        HSQLeftCategoryModel *model = self.Class_Array[sender.tag];
-        self.categoryId = model.categoryId;
-    }
+    HSQLeftCategoryModel *model = self.Class_Array[sender.tag];
+    
+    self.categoryId = model.categoryId;
     
     [self.tableView.mj_header beginRefreshing];
 }

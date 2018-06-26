@@ -12,10 +12,14 @@
 
 @optional
 
-/** 顶部按钮的点击事件 **/
+/**
+ * @brief 顶部按钮的点击事件
+ */
 - (void)topButtonClickAction:(UIButton *)sender;
 
-/** 下拉菜单里按钮的点击事件 **/
+/**
+ * @brief 下拉菜单里按钮的点击事件
+ */
 - (void)MenuButtonClickAction:(UIButton *)sender;
 
 @end

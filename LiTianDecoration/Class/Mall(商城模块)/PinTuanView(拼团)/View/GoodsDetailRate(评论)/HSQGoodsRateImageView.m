@@ -6,7 +6,7 @@
 //  Copyright © 2018年 administrator. All rights reserved.
 //
 
-#define HWStatusPhotoWH 70
+#define HWStatusPhotoWH 50
 #define HWStatusPhotoMargin 10
 #define HWStatusPhotoMaxCol(count) ((count==4)?2:3)
 

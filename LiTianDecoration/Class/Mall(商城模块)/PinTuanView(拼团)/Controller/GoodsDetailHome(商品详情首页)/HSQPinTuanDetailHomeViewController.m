@@ -11,7 +11,7 @@
 
 #import "HSQPinTuanDetailHomeViewController.h"
 #import "HSQPinTuanDetailGoodsListModel.h"
-#import "HSQLoginViewController.h"
+#import "HSQLoginHomeViewController.h"
 #import "HSQAccountTool.h"
 #import "HSQPinTuanDataDealTool.h"
 #import "HSQTopNavtionView.h"
@@ -186,7 +186,7 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"数据加载失败" SuperView:self.view];
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
         
     }];
 }
@@ -198,8 +198,11 @@
     
     // 1.拼团的价格和所需的人数
     self.GoodsArray = [HSQPinTuanDetailGoodsListModel mj_objectArrayWithKeyValuesArray:diction[@"groupGoodsDetailVo"][@"goodsList"]];
+    
     HSQPinTuanDetailGoodsListModel *model = [self.GoodsArray firstObject];
+    
     NSString *count = [NSString stringWithFormat:@"%@",diction[@"groupGoodsDetailVo"][@"groups"][@"groupRequireNum"]];
+    
     self.KaiTuanCount_Label.text = [NSString stringWithFormat:@"¥%@\n%@人团",model.groupPrice,count];
     
     // 2.单独购买
@@ -232,7 +235,7 @@
     
     if (account.token.length == 0)  // 没有登录
     {
-        HSQLoginViewController *LoginVC = [[HSQLoginViewController alloc] init];
+        HSQLoginHomeViewController *LoginVC = [[HSQLoginHomeViewController alloc] init];
         
         [self.navigationController pushViewController:LoginVC animated:YES];
     }
@@ -294,7 +297,7 @@
         
         self.IsCollection = CollectionState;
         
-        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"数据加载失败" SuperView:self.view];
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
     }];
     
 }
@@ -477,7 +480,7 @@
 /**
  * @brief 商品的规格及数量选好的回调
  */
-- (void)hsqGoodsModelViewBottomBtnClickAction:(UIButton *)sender GoodsCount:(NSString *)Count Type:(NSString *)typeString goods_id:(NSString *)goodsId GoodsKunCun:(NSString *)goodsStorage{
+- (void)hsqGoodsModelViewBottomBtnClickAction:(UIButton *)sender GoodsCount:(NSString *)Count Type:(NSString *)typeString goods_id:(NSString *)goodsId GoodsKunCun:(NSString *)goodsStorage goodsSpecString:(NSString *)goodsSpecString{
     
     HSQLog(@"==选好的商品个数==%@==%@==%@",Count,typeString,goodsId);
     

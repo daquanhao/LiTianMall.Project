@@ -308,7 +308,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KpO-Yg-H61">
                             <rect key="frame" x="290" y="511" width="75" height="29"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <state key="normal" title="取消订单" backgroundImage="7D99DFED-F3B6-4DB1-9F77-E24CA867DD17">
+                            <state key="normal" backgroundImage="7D99DFED-F3B6-4DB1-9F77-E24CA867DD17">
                                 <color key="titleColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
@@ -433,7 +433,7 @@
                 <outlet property="YuCunKuanPay_Label" destination="ezB-zF-Qfq" id="Sod-ql-1XF"/>
                 <outlet property="YuCunKuan_BgView" destination="4Mj-WG-FLk" id="VF7-MN-oXV"/>
             </connections>
-            <point key="canvasLocation" x="-2194" y="-696"/>
+            <point key="canvasLocation" x="-2594" y="-769"/>
         </view>
     </objects>
     <resources>

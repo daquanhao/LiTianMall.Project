@@ -10,13 +10,20 @@
 
 @interface HSQMobileRegisterViewController : UIViewController
 
-/** 用户的手机号*/
+/**
+ * @brief 用户的手机号
+ */
 @property (nonatomic, copy) NSString *PhoneString;
 
-/** 短信的间隔时间*/
+/**
+ * @brief 短信的间隔时间
+ */
 @property (nonatomic, copy) NSString *SMS_IntervalTime;
 
-/** 短信的有效时间*/
+/**
+ * @brief 短信的有效时间
+ */
 @property (nonatomic, copy) NSString *SMS_ValidTime;
+
 
 @end

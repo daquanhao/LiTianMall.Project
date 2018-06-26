@@ -61,13 +61,7 @@
     self.view.backgroundColor = KViewBackGroupColor;
     
     self.navigationItem.title = @"会员注册";
-    
-    // 1.监听键盘的弹出或者消失
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WillChange:) name:UIKeyboardWillShowNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(WillDismissChange:) name:UIKeyboardWillHideNotification object:nil];
 
-    
 }
 
 #pragma mark - 顶部--普通注册事件
@@ -232,18 +226,57 @@
     }
     else
     {
-#warning TODO 在此验证输入的图片验证码是否正确，然后发送短信验证码
-        HSQMobileRegisterViewController *MobileRegisterVC = [[HSQMobileRegisterViewController alloc] init];
-        
-        MobileRegisterVC.PhoneString = self.Mobile_TextField.text;
-        
-        MobileRegisterVC.SMS_ValidTime = @"10";
-        
-        MobileRegisterVC.SMS_IntervalTime = @"60";
-        
-        [self.navigationController pushViewController:MobileRegisterVC animated:YES];
+        [self VerifyTheImageVerificationCode];
     }
 }
+
+/**
+ * @brief 验证图片验证码，并发送短信验证码
+ */
+- (void)VerifyTheImageVerificationCode{
+    
+    [[HSQProgressHUDManger Manger] ShowLoadingDataFromeServer:@"" ToView:self.view IsClearColor:YES];
+    
+    NSDictionary *diction = @{@"mobile":self.Mobile_TextField.text,@"captchaVal":self.MobileCode_TextField.text,@"sendType":@"1",@"captchaKey":self.captchaKey};
+    
+    HSQLog(@"===手机号注册=%@",diction);
+    
+    AFNetworkRequestTool *RequestTool = [AFNetworkRequestTool shareRequestTool];
+    
+    [RequestTool.manger GET:UrlAdress(KValidationBtnCodeImageUrl) parameters:diction progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        [[HSQProgressHUDManger Manger] DismissProgressHUD];
+        
+        HSQLog(@"===%@",responseObject);
+        if ([responseObject[@"code"] integerValue] == 200)
+        {
+            HSQMobileRegisterViewController *MobileRegisterVC = [[HSQMobileRegisterViewController alloc] init];
+            
+            MobileRegisterVC.PhoneString = self.Mobile_TextField.text;
+            
+            MobileRegisterVC.SMS_ValidTime = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"authCodeValidTime"]];
+            
+            MobileRegisterVC.SMS_IntervalTime = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"authCodeResendTime"]];
+            
+            [self.navigationController pushViewController:MobileRegisterVC animated:YES];
+        }
+        else
+        {
+            NSString *message = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"error"]];
+            
+            [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:message SuperView:self.view];
+            
+            [self RegisterCodeButtonImageFromeServer:self.MobileCode_Button];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -321,33 +354,6 @@
     return YES;
 }
 
-- (void)WillChange:(NSNotification *)notif{
-    
-    NSDictionary *keyboardInfo = notif.userInfo;
-    
-    CGRect keyboardFrame = [keyboardInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
-    
-    CGFloat animationDuration = [keyboardInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    
-    self.KeyBoard_Y = keyboardFrame.origin.y;
-    
-    [self ShowKeyBoardAnimate:animationDuration];
-    
-}
-
-- (void)WillDismissChange:(NSNotification *)notif{
-    
-    NSDictionary *keyboardInfo = notif.userInfo;
-    
-    CGFloat animationDuration = [keyboardInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    
-    [UIView animateWithDuration:animationDuration animations:^{
-        
-        self.view.transform = CGAffineTransformIdentity;
-        
-    }];
-}
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     
     if (textField == self.UserName_TextField)
@@ -379,28 +385,10 @@
         [self.MobileCode_TextField resignFirstResponder];
     }
     
-    if (self.Code_TextField.isFirstResponder == YES)
-    {
-        [self ShowKeyBoardAnimate:0.25f];
-    }
     
     return YES;
 }
 
-- (void)ShowKeyBoardAnimate:(CGFloat)animationDuration{
-    
-    if (self.KeyBoard_Y < self.TextFielfSuper_Height) {
-
-        [UIView animateWithDuration:animationDuration animations:^{
-
-            self.view.transform = CGAffineTransformMakeTranslation(0, self.KeyBoard_Y - self.TextFielfSuper_Height);
-            
-        }completion:^(BOOL finished) {
-            
-            self.KeyBoard_Margin = self.view.transform.ty + 55;
-        }];
-    }
-}
 
 - (void)dealloc{
     

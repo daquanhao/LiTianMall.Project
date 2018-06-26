@@ -17,11 +17,13 @@
 #import "HSQImageListCollectionViewCell.h"
 #import "HSQClassViewController.h"
 #import "HSQMallShopCarViewController.h"
-#import "HSQLoginViewController.h"
+#import "HSQLoginHomeViewController.h"
 #import "HSQAccountTool.h"
 #import "HSQPinTuanViewController.h"
 #import "HSQCouponsCenterViewController.h"
 #import "HSQToPromoteViewController.h"
+#import "HSQIntegralCenterViewController.h" // 积分中心
+#import "HSQSearchBarViewController.h"
 
 @interface HSQMallHomePageController ()<UICollectionViewDelegate,UICollectionViewDataSource,HSQMallHomeHeadViewDelegate,HSQModelViewReusableViewDelegate>
 
@@ -32,7 +34,6 @@
 @end
 
 @implementation HSQMallHomePageController
-
 
 - (NSMutableArray *)dataSource{
     
@@ -58,6 +59,9 @@
     
     // 导航栏
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:KImageName(@"LeftBackIcon") style:(UIBarButtonItemStylePlain) target:self action:@selector(LeftItemClickAction:)];
+    
+    // 添加搜索视图
+    [self AddSearchView];
     
 }
 
@@ -145,7 +149,7 @@
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-//        HSQLog(@"==商城首页=%@",responseObject);
+        HSQLog(@"==商城首页=%@",responseObject);
         
         [[HSQProgressHUDManger Manger] DismissProgressHUD];
         
@@ -160,10 +164,41 @@
         
         [self.collectionView.mj_header endRefreshing];
         
-        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"数据刷新失败" SuperView:self.view];
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
     }];
 }
 
+/**
+ * @brief 添加搜索视图
+ */
+- (void)AddSearchView{
+    
+    UIButton *SearchBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    
+    [SearchBtn setBackgroundImage:[UIImage ImageWithColor:RGB(234, 234, 234)] forState:(UIControlStateNormal)];
+    
+    [SearchBtn setImage:KImageName(@"6DE36884-837C-44C3-B808-CE7F7D8C4FFA") forState:(UIControlStateNormal)];
+    
+    SearchBtn.frame = CGRectMake(0, 0, KScreenWidth * 0.8, 35);
+    
+    SearchBtn.layer.cornerRadius = 5;
+    
+    SearchBtn.clipsToBounds = YES;
+    
+    [SearchBtn addTarget:self action:@selector(SearchBtnClickAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    
+    self.navigationItem.titleView = SearchBtn;
+}
+
+/**
+ * @brief 进入搜索界面
+ */
+- (void)SearchBtnClickAction:(UIButton *)sender{
+    
+    HSQSearchBarViewController *SearchBarVC = [[HSQSearchBarViewController alloc] init];
+    
+    [self.navigationController pushViewController:SearchBarVC animated:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -302,9 +337,7 @@
     else if ([typeString isEqualToString:@"cart"]) //跳转到购物车
     {
         HSQMallShopCarViewController *ShopCarVC = [[HSQMallShopCarViewController alloc] init];
-        
         ShopCarVC.source = @"200";
-        
         [self.navigationController pushViewController:ShopCarVC animated:YES];
     }
     else if ([typeString isEqualToString:@"group"]) //跳转到拼团页面
@@ -323,6 +356,12 @@
         HSQToPromoteViewController *ToPromoteVC = [[HSQToPromoteViewController alloc] init];
         ToPromoteVC.NavtionTitle = @"推广分佣";
         [self.navigationController pushViewController:ToPromoteVC animated:YES];
+    }
+    else if ([typeString isEqualToString:@"pointsCenter"]) //跳转到积分中心
+    {
+        HSQIntegralCenterViewController *IntegralCenterVC = [[HSQIntegralCenterViewController alloc] init];
+        IntegralCenterVC.NavtionTitle = @"积分中心";
+        [self.navigationController pushViewController:IntegralCenterVC animated:YES];
     }
         
 }

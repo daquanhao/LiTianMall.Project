@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="HSQPointsExchangeFooterReusableView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u8U-qe-0Yy">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="积分兑换商品" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tSs-aY-jqV">
+                            <rect key="frame" x="10" y="0.0" width="300" height="40"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="tSs-aY-jqV" firstAttribute="top" secondItem="u8U-qe-0Yy" secondAttribute="top" id="0UU-QK-a1j"/>
+                        <constraint firstAttribute="height" constant="40" id="0Wk-ih-RMc"/>
+                        <constraint firstItem="tSs-aY-jqV" firstAttribute="leading" secondItem="u8U-qe-0Yy" secondAttribute="leading" constant="10" id="28j-9e-cfl"/>
+                        <constraint firstAttribute="trailing" secondItem="tSs-aY-jqV" secondAttribute="trailing" constant="10" id="5Ej-6N-Xin"/>
+                        <constraint firstAttribute="bottom" secondItem="tSs-aY-jqV" secondAttribute="bottom" id="th2-iL-4P5"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="u8U-qe-0Yy" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="OKk-Me-Ip2"/>
+                <constraint firstItem="u8U-qe-0Yy" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="d1f-Rv-FTi"/>
+                <constraint firstAttribute="trailing" secondItem="u8U-qe-0Yy" secondAttribute="trailing" id="il5-5L-6gU"/>
+            </constraints>
+            <connections>
+                <outlet property="Placher_Label" destination="tSs-aY-jqV" id="fkZ-YF-UWU"/>
+            </connections>
+            <point key="canvasLocation" x="-1434" y="-114"/>
+        </collectionReusableView>
+    </objects>
+</document>

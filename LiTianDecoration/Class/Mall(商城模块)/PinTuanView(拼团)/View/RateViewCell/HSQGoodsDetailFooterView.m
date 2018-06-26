@@ -81,14 +81,19 @@
     if (PlacherString.length == 0)
     {
         self.BgView.hidden = YES;
+        
         self.RightImageView.hidden = YES;
+        
         self.PlacherLabel.hidden = YES;
     }
     else
     {
         self.BgView.hidden = NO;
+        
         self.RightImageView.hidden = NO;
+        
         self.PlacherLabel.hidden = NO;
+        
         self.PlacherLabel.text = PlacherString;
     }
 }

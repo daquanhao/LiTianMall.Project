@@ -122,7 +122,7 @@
     [WhiteView addSubview:title_Label];
     
     //右边的图片
-    UIImageView *right_imageView = [[UIImageView alloc] initWithImage: KImageName(@"123")];
+    UIImageView *right_imageView = [[UIImageView alloc] initWithImage: KImageName(@"btn_check")];
     right_imageView.frame = CGRectMake(WhiteView.mj_w - 40, (WhiteView.mj_h - 20)/2, 20, 20);
 //    right_imageView.hidden = (number == 0) ? NO : YES;
     right_imageView.hidden = YES;

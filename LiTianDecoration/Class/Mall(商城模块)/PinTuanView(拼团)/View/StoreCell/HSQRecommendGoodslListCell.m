@@ -6,7 +6,7 @@
 //  Copyright © 2018年 administrator. All rights reserved.
 //
 
-#define KNumber 9 // 一页显示多少个商品
+#define KNumber 6 // 一页显示多少个商品
 #define KRows 3  // 一行显示几列
 
 #import "HSQRecommendGoodslListCell.h"
@@ -112,41 +112,12 @@
             NSDictionary *diction = DataSource[i];
             
             CGSize GoodsSize = CGSizeMake(KScreenWidth / KRows, KScreenWidth/2);
+
+            NSInteger Page = i / KNumber;  // 表示第几页
             
-            CGFloat GoodsX = 0;
+            CGFloat GoodsX = (i % KRows) * GoodsSize.width + Page * KScreenWidth;
             
-            CGFloat GoodsY = 0;
-            
-            if (i < 10)
-            {
-                GoodsX = i % KRows * GoodsSize.width;
-                GoodsY =  i / KRows * GoodsSize.height;
-            }
-            else if ( i < 20)
-            {
-                GoodsX = (i - 10) % KRows * GoodsSize.width + ( i / 10 * KScreenWidth);
-                GoodsY =  (i - 10) / KRows * GoodsSize.height;
-            }
-            else if ( i < 30)
-            {
-                GoodsX = (i - 20) % KRows * GoodsSize.width + ( (i / 20 + 1) * KScreenWidth);
-                GoodsY =  (i - 20) / KRows * GoodsSize.height;
-            }
-            else if ( i < 40)
-            {
-                GoodsX = (i - 30) % KRows * GoodsSize.width + ( (i / 30 + 1) * KScreenWidth);
-                GoodsY =  (i - 30) / KRows * GoodsSize.height;
-            }
-            else if ( i < 50)
-            {
-                GoodsX = (i - 40) % KRows * GoodsSize.width + ( (i / 40 + 1) * KScreenWidth);
-                GoodsY =  (i - 40) / KRows * GoodsSize.height;
-            }
-            else if ( i < 60)
-            {
-                GoodsX = (i - 50) % KRows * GoodsSize.width + ( (i / 50 + 1) * KScreenWidth);
-                GoodsY =  (i - 50) / KRows * GoodsSize.height;
-            }
+            CGFloat GoodsY =  ((i - Page * KNumber) / KRows)  * GoodsSize.height;
             
             PublieTuiJianGoodsListView *GoodsListView = [[PublieTuiJianGoodsListView alloc] initWithFrame:CGRectMake(GoodsX, GoodsY, GoodsSize.width, GoodsSize.height)];
             
@@ -171,7 +142,16 @@
     }
 }
 
-
+/**
+ * @brief UIScrollViewDelegate
+ */
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    NSInteger number = scrollView.contentOffset.x / KScreenWidth;
+    
+    self.pageControl.currentPage = number;
+    
+}
 
 
 

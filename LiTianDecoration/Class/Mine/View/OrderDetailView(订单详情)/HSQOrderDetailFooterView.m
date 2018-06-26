@@ -91,28 +91,43 @@
     // 订单创建时间
     self.OrderCreatTime_Label.text = [NSString stringWithFormat:@"创建时间：%@",OrderDataDiction[@"ordersVo"][@"createTime"]];
 
-    // 判断订单的类型
-    [self JudeOrderStateWithDiction:OrderDataDiction];
-    
     // 判断预存款是否存在
     NSString *Order_Type = [NSString stringWithFormat:@"%@",OrderDataDiction[@"ordersVo"][@"ordersState"]];
     
     if (Order_Type.integerValue == 10)  // 待支付
     {
         self.YuCunKuan_BgView.hidden = YES;
+        
         self.PlacherView.hidden = NO;
+        
         self.OrderMoneryTopMargin.constant = -41;
+        
         self.Placher_Label.text = [NSString stringWithFormat:@"%@",OrderDataDiction[@"ordersTips"]];
+    }
+    else if (Order_Type.integerValue == 0)  // 已取消
+    {
+        self.YuCunKuan_BgView.hidden = YES;
+        
+        self.PlacherView.hidden = YES;
+        
+        self.OrderMoneryTopMargin.constant = -41;
+        
+        self.Placher_Label.text = @"";
     }
     else
     {
         self.YuCunKuan_BgView.hidden = NO;
+        
         self.PlacherView.hidden = YES;
+        
         self.OrderMoneryTopMargin.constant = 1;
         
         // 预存款
         self.YuCunKuanPay_Label.text = [NSString stringWithFormat:@"¥%@",OrderDataDiction[@"ordersVo"][@"predepositAmount"]];
     }
+    
+    // 判断订单的类型
+    [self JudeOrderStateWithDiction:OrderDataDiction];
 }
 
 /**
@@ -187,9 +202,13 @@
         self.BottomPlacher_Label.hidden = YES;
         
         self.CancelOrder_Button.hidden = YES;
+        
+        HSQLog(@"==订单详情===%@",Order_Type);
     }
     else if (Order_Type.integerValue == 10) // 待支付
     {
+        self.CancelOrder_Button.hidden = NO;
+        
         self.OrderPayTime_BgView.hidden = self.SendGoodsTime_BgView.hidden = self.FinshTime_BgView.hidden = YES;
         
         // 底部的按钮
@@ -200,6 +219,8 @@
     else if (Order_Type.integerValue == 20) // 待发货
     {
         self.OrderPayTime_BgView.hidden = NO;
+        
+        self.CancelOrder_Button.hidden = NO;
         
         self.SendGoodsTime_BgView.hidden = self.FinshTime_BgView.hidden = YES;
         
@@ -215,6 +236,8 @@
         
         self.FinshTime_BgView.hidden = YES;
         
+        self.CancelOrder_Button.hidden = NO;
+        
         // 订单付款时间
         self.OrderPayMoneryTime_Label.text = [NSString stringWithFormat:@"付款时间：%@",OrderDataDiction[@"ordersVo"][@"paymentTime"]];
         
@@ -229,6 +252,8 @@
     }
     else if (Order_Type.integerValue == 40) // 交易完成，等待评价
     {
+         self.CancelOrder_Button.hidden = NO;
+        
         self.OrderPayTime_BgView.hidden = self.SendGoodsTime_BgView.hidden = self.FinshTime_BgView.hidden = NO;
         
         // 订单付款时间
@@ -256,6 +281,24 @@
         
     }
     
+    // 判断订单是否在退货中
+    NSString *showRefundWaiting = [NSString stringWithFormat:@"%@",OrderDataDiction[@"ordersVo"][@"showRefundWaiting"]];
+    
+    if (showRefundWaiting.integerValue == 0) // 不是
+    {
+        self.CancelOrder_Button.hidden = YES;
+        
+        self.BottomPlacher_Label.hidden = YES;
+    }
+    else
+    {
+        self.CancelOrder_Button.hidden = YES;
+        
+        self.BottomPlacher_Label.hidden = NO;
+        
+        self.BottomPlacher_Label.text = @"退款/退货中...";
+    }
+    
     // 判断是否是拼团商品
     NSString *ordersStateName = [NSString stringWithFormat:@"%@",OrderDataDiction[@"ordersVo"][@"ordersStateName"]];
     
@@ -270,23 +313,9 @@
         
         [self.CancelOrder_Button setTitle:@"查看团详情" forState:(UIControlStateNormal)];
     }
-    
-    // 判断订单是否在退货中
-    NSString *showRefundWaiting = [NSString stringWithFormat:@"%@",OrderDataDiction[@"ordersVo"][@"showRefundWaiting"]];
-    
-    if (showRefundWaiting.integerValue == 0) // 不是
-    {
-        self.CancelOrder_Button.hidden = NO;
-        
-        self.BottomPlacher_Label.hidden = YES;
-    }
     else
     {
         self.CancelOrder_Button.hidden = YES;
-        
-        self.BottomPlacher_Label.hidden = NO;
-        
-        self.BottomPlacher_Label.text = @"退款/退货中...";
     }
 }
 

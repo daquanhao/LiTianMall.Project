@@ -195,7 +195,7 @@
     {
         return 400;
     }
-    else if (orderState.integerValue == 0)
+    else if (orderState.integerValue == 0) // 已取消
     {
         return 380;
     }

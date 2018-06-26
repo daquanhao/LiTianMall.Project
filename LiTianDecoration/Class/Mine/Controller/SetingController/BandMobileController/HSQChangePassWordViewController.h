@@ -10,7 +10,14 @@
 
 @interface HSQChangePassWordViewController : UIViewController
 
-/** 导航栏的标题*/
+/**
+ * @brief 导航栏的标题
+ */
 @property (nonatomic, copy) NSString *Navtion_Title;
+
+/**
+ * @brief 来源
+ */
+@property (nonatomic, assign) NSInteger source;
 
 @end

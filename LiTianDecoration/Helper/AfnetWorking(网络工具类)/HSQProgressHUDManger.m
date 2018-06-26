@@ -57,8 +57,9 @@
     
     //3,设置提示信息 信息颜色，字体
     HUD.label.textColor = [UIColor whiteColor];
-    HUD.label.font = [UIFont systemFontOfSize:15];
+    HUD.label.font = [UIFont systemFontOfSize:14];
     HUD.label.text = string;
+    HUD.label.numberOfLines = 0;
     
     //4，设置提示框的相对于父视图中心点的便宜，正值 向右下偏移，负值左上
     [HUD setOffset:CGPointMake(0, -64)];

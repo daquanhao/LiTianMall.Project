@@ -42,6 +42,8 @@
 
 @property (nonatomic, copy) NSString *Goods_id; // 商品的id
 
+@property (nonatomic, copy) NSString *goodsSpecString; // 商品规格
+
 @end
 
 @implementation HSQGoodsModelView
@@ -177,6 +179,7 @@
     NSDictionary *FirstGoodsDiction = GoodsListArray[0];
     
     // 已选的规格
+    self.goodsSpecString = [NSString stringWithFormat:@"%@",FirstGoodsDiction[@"goodsSpecString"]];
     NSString *GuiGeString = [NSString stringWithFormat:@"已选: %@",FirstGoodsDiction[@"goodsSpecString"]];
     CGSize GuiGeSize = [NSString SizeOfTheText:GuiGeString font:[UIFont systemFontOfSize:12.0] MaxSize:CGSizeMake(KScreenWidth - CGRectGetMaxX(self.GoodsImageView.frame)-20, MAXFLOAT)];
     self.YiXuanGoods.text = GuiGeString;
@@ -191,12 +194,25 @@
     // 商品的id
     self.Goods_id = [NSString stringWithFormat:@"%@",FirstGoodsDiction[@"goodsId"]];
 
-    // 拼团的人数及价格
-    NSString *count = [NSString stringWithFormat:@"%@",dataDiction[@"groupGoodsDetailVo"][@"groups"][@"groupRequireNum"]];
-    NSString *PlacherString = (self.TypeString.integerValue == 100 ? @"单独购买":@"拼团");
-    NSString *BottomText = (self.TypeString.integerValue == 100 ? [NSString stringWithFormat:@"¥%@\n%@",FirstGoodsDiction[Keys],PlacherString] :[NSString stringWithFormat:@"¥%@\n%@%@",FirstGoodsDiction[Keys],count,PlacherString]);
-    [self.BottomClickBtn setTitle:BottomText forState:(UIControlStateNormal)];
+    // 拼团的人数及价格（判断商品是否有拼团信息）
+  NSString *groups = [NSString stringWithFormat:@"%@",dataDiction[@"groupGoodsDetailVo"][@"groups"]];
     
+    if (![groups isEqualToString:@"<null>"])
+    {
+        NSString *count = [NSString stringWithFormat:@"%@",dataDiction[@"groupGoodsDetailVo"][@"groups"][@"groupRequireNum"]];
+        
+        NSString *PlacherString = (self.TypeString.integerValue == 100 ? @"单独购买":@"拼团");
+        
+        NSString *BottomText = (self.TypeString.integerValue == 100 ? [NSString stringWithFormat:@"¥%@\n%@",FirstGoodsDiction[Keys],PlacherString] :[NSString stringWithFormat:@"¥%@\n%@%@",FirstGoodsDiction[Keys],count,PlacherString]);
+        
+        [self.BottomClickBtn setTitle:BottomText forState:(UIControlStateNormal)];
+    }
+    
+    if (self.Source == 200) // 收藏列表详情跳转过里的
+    {
+        [self.BottomClickBtn setTitle:@"加入购物车" forState:(UIControlStateNormal)];
+    }
+
     // 中间的规格列表
     for (NSDictionary *dict in dataDiction[@"groupGoodsDetailVo"][@"specJson"])
     {
@@ -226,6 +242,96 @@
    
     
 }
+
+/**
+ * @brief 积分商品详情的规格数据
+ */
+-(void)setPointDatasDiction:(NSDictionary *)PointDatasDiction{
+    
+    _PointDatasDiction = PointDatasDiction;
+    
+    NSDictionary *GoodsDiction = [PointDatasDiction[@"pointsGoodsDetailVo"][@"specJson"] firstObject];
+    
+    // 商品的图片
+    [self.GoodsImageView sd_setImageWithURL:[NSURL URLWithString:GoodsDiction[@"specValueList"][0][@"imageSrc"]] placeholderImage:KGoodsPlacherImage];
+    
+    // 购买的价格及库存
+    NSArray *GoodsListArray = PointDatasDiction[@"pointsGoodsDetailVo"][@"goodsList"];
+    NSDictionary *FirstGoodsDiction = GoodsListArray[0];
+    
+    // 已选的规格
+     self.goodsSpecString = [NSString stringWithFormat:@"%@",FirstGoodsDiction[@"goodsSpecString"]];
+    NSString *GuiGeString = [NSString stringWithFormat:@"已选: %@",FirstGoodsDiction[@"goodsSpecString"]];
+    CGSize GuiGeSize = [NSString SizeOfTheText:GuiGeString font:[UIFont systemFontOfSize:12.0] MaxSize:CGSizeMake(KScreenWidth - CGRectGetMaxX(self.GoodsImageView.frame)-20, MAXFLOAT)];
+    self.YiXuanGoods.text = GuiGeString;
+    self.YiXuanGoods.frame = CGRectMake(CGRectGetMaxX(self.GoodsImageView.frame)+10, CGRectGetMaxY(self.GoodsImageView.frame) - GuiGeSize.height, KScreenWidth -CGRectGetMaxX(self.GoodsImageView.frame) -20 , GuiGeSize.height);
+    
+    // 价格及库存
+    NSString *Keys = (self.TypeString.integerValue == 100 ? @"appPrice0":@"groupPrice");
+    
+    self.GoodsPrice.text = [NSString stringWithFormat:@"¥%@(库存: %@%@)",FirstGoodsDiction[Keys],FirstGoodsDiction[@"goodsStorage"],PointDatasDiction[@"pointsGoodsDetailVo"][@"unitName"]];
+    
+    self.GoodsPrice.frame = CGRectMake(self.YiXuanGoods.mj_x, self.YiXuanGoods.mj_y - 25, self.YiXuanGoods.mj_w , 20);
+    
+    self.GoodsKuCunString = [NSString stringWithFormat:@"%@",FirstGoodsDiction[@"goodsStorage"]];
+    
+    // 商品的id
+    self.Goods_id = [NSString stringWithFormat:@"%@",FirstGoodsDiction[@"goodsId"]];
+    
+    // 拼团的人数及价格（判断商品是否有拼团信息）
+    NSString *groups = [NSString stringWithFormat:@"%@",PointDatasDiction[@"pointsGoodsDetailVo"][@"groups"]];
+    
+    if (![groups isEqualToString:@"<null>"])
+    {
+        NSString *count = [NSString stringWithFormat:@"%@",PointDatasDiction[@"pointsGoodsDetailVo"][@"groups"][@"groupRequireNum"]];
+        
+        if (self.TypeString.integerValue == 300)
+        {
+             [self.BottomClickBtn setTitle:@"我要换购" forState:(UIControlStateNormal)];
+        }
+        else
+        {
+            NSString *PlacherString = (self.TypeString.integerValue == 100 ? @"单独购买":@"拼团");
+            
+            NSString *BottomText = (self.TypeString.integerValue == 100 ? [NSString stringWithFormat:@"¥%@\n%@",FirstGoodsDiction[Keys],PlacherString] :[NSString stringWithFormat:@"¥%@\n%@%@",FirstGoodsDiction[Keys],count,PlacherString]);
+            
+            [self.BottomClickBtn setTitle:BottomText forState:(UIControlStateNormal)];
+        }
+    }
+    
+    if (self.Source == 200) // 收藏列表详情跳转过里的
+    {
+        [self.BottomClickBtn setTitle:@"加入购物车" forState:(UIControlStateNormal)];
+    }
+    
+    // 中间的规格列表
+    for (NSDictionary *dict in PointDatasDiction[@"pointsGoodsDetailVo"][@"specJson"])
+    {
+        // 外层数据
+        HSQGoodsGuiGeTypeModel *ReceiveModel = [[HSQGoodsGuiGeTypeModel alloc] initWithDictionary:dict error:nil];
+        
+        ReceiveModel.specValueList = [NSMutableArray array];
+        
+        [self.dataSource addObject:ReceiveModel];
+        
+        // 内层数据
+        for (NSInteger i = 0; i < [dict[@"specValueList"] count] ; i++) {
+            
+            NSDictionary *ModelDiction = dict[@"specValueList"][i];
+            
+            HSQGoodsGuiGeListModel *ListModel = [[HSQGoodsGuiGeListModel alloc] init];
+            
+            [ListModel setValuesForKeysWithDictionary:ModelDiction];
+            
+            ListModel.IsSelect = (i == 0 ? @"1" : @"0");
+            
+            [ReceiveModel.specValueList addObject:ListModel];
+        }
+    }
+    
+    [self.collectionView reloadData];
+}
+
 
 #pragma mark - UICollectionViewDelegate,UICollectionViewDataSource
 
@@ -338,10 +444,20 @@
         }
     }
     
-    
     NSString *name = [NSString stringWithFormat:@"%@",[GuiGeArray componentsJoinedByString:@"；"]];
     
-    NSArray *goodsList = self.dataDiction[@"groupGoodsDetailVo"][@"goodsList"];
+//    NSArray *goodsList = self.dataDiction[@"groupGoodsDetailVo"][@"goodsList"];
+    
+    NSArray *goodsList = [NSArray array];
+    
+    if (self.TypeString.integerValue == 300)
+    {
+        goodsList = self.PointDatasDiction[@"pointsGoodsDetailVo"][@"goodsList"];
+    }
+    else
+    {
+       goodsList = self.dataDiction[@"groupGoodsDetailVo"][@"goodsList"];
+    }
     
     for (NSInteger i = 0; i < goodsList.count ; i++) {
         
@@ -352,14 +468,29 @@
         if ([goodsSpecString containsString:name]){
             
             NSString *GuiGeString = [NSString stringWithFormat:@"已选: %@",goodsSpecString];
+            
+             self.goodsSpecString = [NSString stringWithFormat:@"%@",goodsSpecString];
+            
             CGSize GuiGeSize = [NSString SizeOfTheText:GuiGeString font:[UIFont systemFontOfSize:12.0] MaxSize:CGSizeMake(KScreenWidth - CGRectGetMaxX(self.GoodsImageView.frame)-20, MAXFLOAT)];
+            
             self.YiXuanGoods.text = GuiGeString;
+            
             self.YiXuanGoods.frame = CGRectMake(CGRectGetMaxX(self.GoodsImageView.frame)+10, CGRectGetMaxY(self.GoodsImageView.frame) - GuiGeSize.height, KScreenWidth -CGRectGetMaxX(self.GoodsImageView.frame) -20 , GuiGeSize.height);
             
             // 价格及库存
             NSString *Keys = (self.TypeString.integerValue == 100 ? @"appPrice0":@"groupPrice");
-            self.GoodsPrice.text = [NSString stringWithFormat:@"¥%@(库存: %@%@)",GoodsDiction[Keys],GoodsDiction[@"goodsStorage"],self.dataDiction[@"groupGoodsDetailVo"][@"unitName"]];
+            
+            if (self.TypeString.integerValue == 300)
+            {
+                self.GoodsPrice.text = [NSString stringWithFormat:@"¥%@(库存: %@%@)",GoodsDiction[Keys],GoodsDiction[@"goodsStorage"],self.PointDatasDiction[@"pointsGoodsDetailVo"][@"unitName"]];
+            }
+            else
+            {
+                self.GoodsPrice.text = [NSString stringWithFormat:@"¥%@(库存: %@%@)",GoodsDiction[Keys],GoodsDiction[@"goodsStorage"],self.dataDiction[@"groupGoodsDetailVo"][@"unitName"]];
+            }
+            
             self.GoodsPrice.frame = CGRectMake(self.YiXuanGoods.mj_x, self.YiXuanGoods.mj_y - 25, self.YiXuanGoods.mj_w , 20);
+            
             self.GoodsKuCunString = [NSString stringWithFormat:@"%@",GoodsDiction[@"goodsStorage"]];
             
             // 商品的图片
@@ -420,9 +551,9 @@
     }
     else
     {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(hsqGoodsModelViewBottomBtnClickAction:GoodsCount:Type:goods_id:GoodsKunCun:)]) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(hsqGoodsModelViewBottomBtnClickAction:GoodsCount:Type:goods_id:GoodsKunCun:goodsSpecString:)]) {
             
-            [self.delegate hsqGoodsModelViewBottomBtnClickAction:sender GoodsCount:self.SelectKuCunString Type:self.TypeString goods_id:self.Goods_id GoodsKunCun:self.GoodsKuCunString];
+            [self.delegate hsqGoodsModelViewBottomBtnClickAction:sender GoodsCount:self.SelectKuCunString Type:self.TypeString goods_id:self.Goods_id GoodsKunCun:self.GoodsKuCunString goodsSpecString:self.goodsSpecString];
         }
         
         [self dismissAdressView];

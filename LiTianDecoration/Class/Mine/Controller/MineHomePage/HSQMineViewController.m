@@ -17,7 +17,6 @@
 #import "HSQHeaderCollectionReusableView.h"
 #import "HSQCustomNavBar.h"
 #import "HSQGoodsCollectionListCell.h"
-#import "HSQLoginViewController.h"
 #import "HSQPersonCenterViewController.h"
 #import "HSQSetingViewController.h"
 #import "HSQAdressListViewController.h"
@@ -32,6 +31,11 @@
 #import "HSQIntegralListViewController.h"
 #import "HSQMyOrderHomeViewController.h"
 #import "HSQReturnGoodsViewController.h"
+#import "HSQMIneCollectionViewListCell.h"
+#import "HSQLikeFooterCollectionReusableView.h"
+#import "HSQLoginHomeViewController.h"
+#import "HSQPointExchangeGoodsOrderViewController.h"
+#import "HSQToPromoteViewController.h"
 
 @interface HSQMineViewController ()<UINavigationControllerDelegate,UICollectionViewDelegate,UICollectionViewDataSource,HSQHeaderCollectionReusableViewDelegate,HSQCustomNavBarDelegate>
 
@@ -40,6 +44,10 @@
 @property (nonatomic, strong) HSQCustomNavBar *CustomNavBar;
 
 @property (nonatomic, strong) NSMutableDictionary *UserInfoDiction;
+
+@property (nonatomic, strong) NSMutableArray *title_array;  // 标题数组
+
+@property (nonatomic, strong) NSMutableArray *LikeGoods_array;  // 猜你喜欢的数组
 
 @end
 
@@ -68,6 +76,26 @@
     }
     
     return _UserInfoDiction;
+}
+
+-(NSMutableArray *)title_array{
+    
+    if (_title_array == nil) {
+        
+        self.title_array = [NSMutableArray arrayWithObjects:@"待付款",@"待收/取货",@"待评价",@"退换/售后",@"我的订单",@"预存款",@"优惠券",@"红包",@"积分",@"我的财产",@"我的收藏",@"预约到店",@"浏览足迹",@"商品咨询",@"积分兑换",@"试用",@"晒宝",@"推广分佣",@"收货地址",@"个人信息",@"登录绑定",@"消息接收",@"设置", nil];
+    }
+    
+    return _title_array;
+}
+
+- (NSMutableArray *)LikeGoods_array{
+    
+    if (_LikeGoods_array == nil) {
+        
+        self.LikeGoods_array = [NSMutableArray array];
+    }
+    
+    return _LikeGoods_array;
 }
 
 - (void)viewDidLoad {
@@ -136,7 +164,7 @@
     
     if (account.token.length == 0)  // 没有登录
     {
-        HSQLoginViewController *LoginVC = [[HSQLoginViewController alloc] init];
+        HSQLoginHomeViewController *LoginVC = [[HSQLoginHomeViewController alloc] init];
         
          [self.navigationController pushViewController:LoginVC animated:YES];
     }
@@ -155,12 +183,6 @@
 
     UICollectionViewFlowLayout *Layout = [[UICollectionViewFlowLayout alloc] init];
     
-    Layout.itemSize = CGSizeMake((KScreenWidth-5)/2, (KScreenWidth-5)/2);
-    
-    Layout.minimumLineSpacing = 5;  // 最小的行间距
-    
-    Layout.minimumInteritemSpacing = 5; // 最小的列间距
-    
     CGFloat collectionHeight = KScreenHeight - KSafeBottomHeight - KcollectionView_Y - 49;
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, KcollectionView_Y, KScreenWidth, collectionHeight) collectionViewLayout:Layout];
@@ -171,11 +193,15 @@
 
     collectionView.delegate = self;
         
-    UINib *nib = [UINib nibWithNibName:@"HSQHeaderCollectionReusableView" bundle:nil];
+    UINib *HeadNib = [UINib nibWithNibName:@"HSQHeaderCollectionReusableView" bundle:nil];
+    [collectionView registerNib:HeadNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HSQHeaderCollectionReusableView"];
     
-    [collectionView registerNib:nib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HSQHeaderCollectionReusableView"];
+    UINib *FooterNib = [UINib nibWithNibName:@"HSQLikeFooterCollectionReusableView" bundle:nil];
+    [collectionView registerNib:FooterNib forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"HSQLikeFooterCollectionReusableView"];
     
     [collectionView registerClass:[HSQGoodsCollectionListCell class] forCellWithReuseIdentifier:@"HSQGoodsCollectionListCell"];
+    
+    [collectionView registerNib:[UINib nibWithNibName:@"HSQMIneCollectionViewListCell" bundle:nil] forCellWithReuseIdentifier:@"HSQMIneCollectionViewListCell"];
     
     [self.view addSubview:collectionView];
     
@@ -239,9 +265,7 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        HSQLog(@"==%@",error.description);
-        
-        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"用户中心数据加载失败" SuperView:self.view];
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"网络出问题啦！" SuperView:self.view];
     }];
 }
 
@@ -250,7 +274,36 @@
  */
 - (void)AskForYourFavoriteData{
     
+    AFNetworkRequestTool *requestTool = [AFNetworkRequestTool shareRequestTool];
     
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"token"] = ([HSQAccountTool account].token.length == 0 ? @"":[HSQAccountTool account].token);
+    
+    [requestTool.manger POST:UrlAdress(KYouLikeUrl) parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        [[HSQProgressHUDManger Manger] DismissProgressHUD];
+        
+        HSQLog(@"===猜你喜欢数据===%@",responseObject);
+        
+        if ([responseObject[@"code"] integerValue] == 200)
+        {
+            [self.LikeGoods_array addObjectsFromArray:responseObject[@"datas"][@"goodsCommonList"]];
+        }
+        else
+        {
+            NSString *errorString = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"error"]];
+            
+            [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:errorString SuperView:self.view];
+        }
+        
+        [self.collectionView reloadData];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:@"网络出现问题" SupView:self.view];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -262,42 +315,354 @@
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     
-    return 1;
+    return 2;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     
-    return 13;
+    if (section == 0)
+    {
+        return self.title_array.count;
+    }
+    else
+    {
+        return self.LikeGoods_array.count;
+    }
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
 
-    return CGSizeMake(KScreenWidth, KPersonHeight + 3 * 5 + 3 + 5 * KBtnViewH);
+//    return CGSizeMake(KScreenWidth, KPersonHeight + 3 * 5 + 3 + 5 * KBtnViewH);
+    
+    if (section == 0)
+    {
+       return CGSizeMake(KScreenWidth, KPersonHeight);
+    }
+    else
+    {
+        return CGSizeMake(0, 0);
+    }
+}
+
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section{
+    
+    if (section == 0)
+    {
+         return CGSizeMake(KScreenWidth, 50);
+    }
+    else
+    {
+         return CGSizeMake(0, 0);
+    }
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
 
-    HSQHeaderCollectionReusableView *headView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HSQHeaderCollectionReusableView" forIndexPath:indexPath];
-
-    headView.delegate = self;
+    UICollectionReusableView *reusableView = nil;
     
-    headView.UserInfoDiction = self.UserInfoDiction;
+    if (kind == UICollectionElementKindSectionHeader)
+    {
+        HSQHeaderCollectionReusableView *headView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HSQHeaderCollectionReusableView" forIndexPath:indexPath];
+        
+        headView.delegate = self;
+        
+        headView.UserInfoDiction = self.UserInfoDiction;
+        
+        reusableView = headView;
+    }
+    
+    if (kind == UICollectionElementKindSectionFooter)
+    {
+        HSQLikeFooterCollectionReusableView *FooterView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"HSQLikeFooterCollectionReusableView" forIndexPath:indexPath];
 
-    return headView;
+         reusableView = FooterView;
+    }
+    
+    return reusableView;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.section == 0)
+    {
+        if (indexPath.row == 10 || indexPath.row == 11 ||indexPath.row == 12 || indexPath.row == 13  || indexPath.row == 14 || indexPath.row == 15 ||indexPath.row == 16 ||indexPath.row == 17)
+        {
+            return CGSizeMake(KScreenWidth/4, 60);
+        }
+        else
+        {
+            return CGSizeMake(KScreenWidth/5, 60);
+        }
+    }
+    else
+    {
+        return CGSizeMake((KScreenWidth-5)/2, (KScreenWidth-5)/2);
+    }
+}
+
+// 两个cell之间的最小间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    if (section == 0)
+    {
+        return 0;
+    }
+    else
+    {
+        return 5;
+    }
+}
+
+// 行间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 5;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    HSQGoodsCollectionListCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HSQGoodsCollectionListCell" forIndexPath:indexPath];
-
-    [cell.OrginPrice_label setHidden:YES];
-    
-    return cell;
+    if (indexPath.section == 0)
+    {
+        HSQMIneCollectionViewListCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HSQMIneCollectionViewListCell" forIndexPath:indexPath];
+        
+        cell.Title_Label.text = [NSString stringWithFormat:@"%@",self.title_array[indexPath.row]];
+        
+        if (indexPath.row == 5 || indexPath.row == 6 ||indexPath.row == 7 ||indexPath.row == 8)
+        {
+            cell.Icon_ImageView.hidden = YES;
+            
+            cell.Count_Label.hidden = NO;
+        }
+        else
+        {
+            cell.Icon_ImageView.hidden = NO;
+            
+            cell.Count_Label.hidden = YES;
+        }
+        
+        if (self.UserInfoDiction.allKeys.count != 0)
+        {
+            if (indexPath.row == 5) // 预存款
+            {
+                NSString *predepositAvailable = [NSString stringWithFormat:@"%@",self.UserInfoDiction[@"memberInfo"][@"predepositAvailable"]];
+                
+                cell.Count_Label.text = [NSString stringWithFormat:@"%.2f",predepositAvailable.floatValue];
+            }
+            else if (indexPath.row == 6) // 优惠券
+            {
+                cell.Count_Label.text = [NSString stringWithFormat:@"%@",self.UserInfoDiction[@"memberInfo"][@"voucherNum"]];
+            }
+            else if (indexPath.row == 7) // 红包
+            {
+                cell.Count_Label.text = [NSString stringWithFormat:@"%@",self.UserInfoDiction[@"memberInfo"][@"redpackageNum"]];
+            }
+            else if (indexPath.row == 8) // 积分
+            {
+                cell.Count_Label.text = [NSString stringWithFormat:@"%@",self.UserInfoDiction[@"memberInfo"][@"memberPoints"]];
+            }
+        }
+        
+        return cell;
+    }
+    else
+    {
+        HSQGoodsCollectionListCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HSQGoodsCollectionListCell" forIndexPath:indexPath];
+        
+        [cell.OrginPrice_label setHidden:YES];
+        
+        cell.StoreGoodsDiction = self.LikeGoods_array[indexPath.row];
+        
+        return cell;
+    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-  
+   HSQAccount *account = [HSQAccountTool account];
+    
+    if (account.token.length == 0)  // 没有登录
+    {
+        HSQLoginHomeViewController *LoginVC = [[HSQLoginHomeViewController alloc] init];
+        
+        [self.navigationController pushViewController:LoginVC animated:YES];
+    }
+    else
+    {
+        if (indexPath.section == 0)
+        {
+            [self FirstSectionClickWithIndexPath:indexPath];
+        }
+        else // 猜你喜欢的点击
+        {
+            
+        }
+    }
+    
+}
+
+/**
+ * @brief 第一个分区cell的点击
+ */
+- (void)FirstSectionClickWithIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.row == 0) // 待支付
+    {
+        HSQMyOrderHomeViewController *MyOrderHomeVC = [[HSQMyOrderHomeViewController alloc] init];
+        MyOrderHomeVC.indexNumber = @"1";
+        [self.navigationController pushViewController:MyOrderHomeVC animated:YES];
+    }
+    else if (indexPath.row == 1) // 待收/取货
+    {
+        HSQMyOrderHomeViewController *MyOrderHomeVC = [[HSQMyOrderHomeViewController alloc] init];
+        MyOrderHomeVC.indexNumber = @"3";
+        [self.navigationController pushViewController:MyOrderHomeVC animated:YES];
+    }
+    else if (indexPath.row == 2) // 待评价
+    {
+        HSQMyOrderHomeViewController *MyOrderHomeVC = [[HSQMyOrderHomeViewController alloc] init];
+        MyOrderHomeVC.indexNumber = @"4";
+        [self.navigationController pushViewController:MyOrderHomeVC animated:YES];
+    }
+    else if (indexPath.row == 3) // 退换/售后
+    {
+        HSQReturnGoodsViewController *ReturnGoodsVC = [[HSQReturnGoodsViewController alloc] init];
+        [self.navigationController pushViewController:ReturnGoodsVC animated:YES];
+    }
+    else if (indexPath.row == 4) // 我的订单
+    {
+        HSQMyOrderHomeViewController *MyOrderHomeVC = [[HSQMyOrderHomeViewController alloc] init];
+        MyOrderHomeVC.indexNumber = @"0";
+        MyOrderHomeVC.JumpType_string = @"200";
+        [self.navigationController pushViewController:MyOrderHomeVC animated:YES];
+    }
+    else if (indexPath.row == 5) // 预存款
+    {
+        HSQMyAccountBalanceViewController *MyAccountBalanceVC = [[HSQMyAccountBalanceViewController alloc] init];
+                
+        [self.navigationController pushViewController:MyAccountBalanceVC animated:YES];
+    }
+    else if (indexPath.row == 6) // 优惠券
+    {
+        HSQCouponsHomeViewController *CouponsHomeVC = [[HSQCouponsHomeViewController alloc] init];
+        
+        CouponsHomeVC.Navtion_Title = @"优惠券";
+        
+        CouponsHomeVC.LeftTop_Title = @"我的优惠券";
+        
+        CouponsHomeVC.RightTop_Title = @"领取优惠券";
+        
+        CouponsHomeVC.ID_Number = @"100";
+        
+        [self.navigationController pushViewController:CouponsHomeVC animated:YES];
+    }
+    else if (indexPath.row == 7) // 红包
+    {
+        HSQCouponsHomeViewController *CouponsHomeVC = [[HSQCouponsHomeViewController alloc] init];
+        
+        CouponsHomeVC.Navtion_Title = @"红包";
+        
+        CouponsHomeVC.LeftTop_Title = @"我的红包";
+        
+        CouponsHomeVC.RightTop_Title = @"领取红包";
+        
+        CouponsHomeVC.ID_Number = @"200";
+        
+        [self.navigationController pushViewController:CouponsHomeVC animated:YES];
+    }
+    else if (indexPath.row == 8) //积分
+    {
+        HSQIntegralListViewController *IntegralListVC = [[HSQIntegralListViewController alloc] init];
+        
+        IntegralListVC.IntegralCount = [NSString stringWithFormat:@"%@",self.UserInfoDiction[@"memberInfo"][@"memberPoints"]];
+        
+        IntegralListVC.Navtion_Title = @"积分明细";
+        
+        IntegralListVC.Top_Title = @"我的积分";
+        
+        IntegralListVC.DataUrl = UrlAdress(KIntegralListCell);
+        
+        [self.navigationController pushViewController:IntegralListVC animated:YES];
+    }
+    else if (indexPath.row == 9) //我的财产
+    {
+        HSQMyPropertyHomeController *MyPropertyVC = [[HSQMyPropertyHomeController alloc] init];
+        [self.navigationController pushViewController:MyPropertyVC animated:YES];
+    }
+    else if (indexPath.row == 10) // 我的收藏
+    {
+        HSQMyCollectionHomeViewController *MyCollectionVC = [[HSQMyCollectionHomeViewController alloc] init];
+        [self.navigationController pushViewController:MyCollectionVC animated:YES];
+    }
+    else if (indexPath.row == 11) // 预约到店
+    {
+        
+    }
+    else if (indexPath.row == 12) // 浏览足迹
+    {
+        BrowseFootprintViewController *BrowseFootprintVC = [[BrowseFootprintViewController alloc] init];
+        [self.navigationController pushViewController:BrowseFootprintVC animated:YES];
+    }
+    else if (indexPath.row == 13) // 商品咨询
+    {
+        
+    }
+    else if (indexPath.row == 14) // 积分兑换
+    {
+        HSQPointExchangeGoodsOrderViewController *PointExchangeGoodsOrderVC = [[HSQPointExchangeGoodsOrderViewController alloc] init];
+        
+        [self.navigationController pushViewController:PointExchangeGoodsOrderVC animated:YES];
+    }
+    else if (indexPath.row == 15) // 试用
+    {
+
+    }
+    else if (indexPath.row == 16) // 晒宝
+    {
+
+    }
+    else if (indexPath.row == 17) // 推广分佣
+    {
+        HSQToPromoteViewController *ToPromoteVC = [[HSQToPromoteViewController alloc] init];
+        
+        ToPromoteVC.NavtionTitle = @"推广分佣";
+        
+        [self.navigationController pushViewController:ToPromoteVC animated:YES];
+    }
+    else if (indexPath.row == 18) // 收货地址
+    {
+        HSQAdressListViewController *AdressListVC = [[HSQAdressListViewController alloc] init];
+        
+        [self.navigationController pushViewController:AdressListVC animated:YES];
+    }
+    else if (indexPath.row == 19) // 个人信息
+    {
+        HSQPersonCenterViewController *personVC = [[HSQPersonCenterViewController alloc] init];
+        
+        personVC.Success = ^(NSString *Url) {
+            
+            [self requestUserCenterDataFromeserver];
+        };
+        
+        [self.navigationController pushViewController:personVC animated:YES];
+    }
+    else if (indexPath.row == 20) // 登录绑定
+    {
+        HSQLoginBandViewController *LoginBandVC = [[HSQLoginBandViewController alloc] init];
+        
+        [self.navigationController pushViewController:LoginBandVC animated:YES];
+    }
+    else if (indexPath.row == 21) // 消息接收
+    {
+        HSQMessageSetViewController *MessageSetVC = [[HSQMessageSetViewController alloc] init];
+        
+        [self.navigationController pushViewController:MessageSetVC animated:YES];
+    }
+    else if (indexPath.row == 22) // 设置
+    {
+        HSQSetingViewController *setingVC = [[HSQSetingViewController alloc] init];
+        
+        [self.navigationController pushViewController:setingVC animated:YES];
+    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -340,7 +705,7 @@
     
     if (account.token.length == 0)  // 没有登录
     {
-        HSQLoginViewController *LoginVC = [[HSQLoginViewController alloc] init];
+        HSQLoginHomeViewController *LoginVC = [[HSQLoginHomeViewController alloc] init];
         
          [self.navigationController pushViewController:LoginVC animated:YES];
     }
@@ -359,161 +724,10 @@
 
 - (void)ToPrepareLoginAction:(UIButton *)sender{
     
-    HSQLoginViewController *LoginVC = [[HSQLoginViewController alloc] init];
+    HSQLoginHomeViewController *LoginVC = [[HSQLoginHomeViewController alloc] init];
     
      [self.navigationController pushViewController:LoginVC animated:YES];
 }
-
-- (void)UnderLogineCustomeButtonClickAction:(UIButton *)sender{
-    
-    HSQAccount *account = [HSQAccountTool account];
-    
-    if (account.token.length == 0)  // 没有登录
-    {
-        HSQLoginViewController *LoginVC = [[HSQLoginViewController alloc] init];
-        
-        [self.navigationController pushViewController:LoginVC animated:YES];
-    }
-    else
-    {
-        if ([sender.titleLabel.text isEqualToString:@"设置"])
-        {
-            HSQSetingViewController *setingVC = [[HSQSetingViewController alloc] init];
-            
-            [self.navigationController pushViewController:setingVC animated:YES];
-        }
-        else if ([sender.titleLabel.text isEqualToString:@"收货地址"])
-        {
-            HSQAdressListViewController *AdressListVC = [[HSQAdressListViewController alloc] init];
-            
-            [self.navigationController pushViewController:AdressListVC animated:YES];
-        }
-        else if ([sender.titleLabel.text isEqualToString:@"个人信息"])
-        {
-            HSQPersonCenterViewController *personVC = [[HSQPersonCenterViewController alloc] init];
-            
-            personVC.Success = ^(NSString *Url) {
-                
-                [self requestUserCenterDataFromeserver];
-            };
-            
-            [self.navigationController pushViewController:personVC animated:YES];
-        }
-        else if ([sender.titleLabel.text isEqualToString:@"登录绑定"])
-        {
-            HSQLoginBandViewController *LoginBandVC = [[HSQLoginBandViewController alloc] init];
-            
-            [self.navigationController pushViewController:LoginBandVC animated:YES];
-        }
-        else if ([sender.titleLabel.text isEqualToString:@"消息接收"])
-        {
-            HSQMessageSetViewController *MessageSetVC = [[HSQMessageSetViewController alloc] init];
-            
-            [self.navigationController pushViewController:MessageSetVC animated:YES];
-        }
-        else if ([sender.titleLabel.text isEqualToString:@"我的收藏"])
-        {
-            HSQMyCollectionHomeViewController *MyCollectionVC = [[HSQMyCollectionHomeViewController alloc] init];
-            
-            [self.navigationController pushViewController:MyCollectionVC animated:YES];
-        }
-        else if ([sender.titleLabel.text isEqualToString:@"浏览足迹"])
-        {
-            BrowseFootprintViewController *BrowseFootprintVC = [[BrowseFootprintViewController alloc] init];
-            
-            [self.navigationController pushViewController:BrowseFootprintVC animated:YES];
-        }
-        else if ([sender.titleLabel.text isEqualToString:@"我的财产"])
-        {
-            HSQMyPropertyHomeController *MyPropertyVC = [[HSQMyPropertyHomeController alloc] init];
-            
-            [self.navigationController pushViewController:MyPropertyVC animated:YES];
-        }
-        else if ([sender.titleLabel.text isEqualToString:@"预存款"])
-        {
-            HSQMyAccountBalanceViewController *MyAccountBalanceVC = [[HSQMyAccountBalanceViewController alloc] init];
-        
-            [self.navigationController pushViewController:MyAccountBalanceVC animated:YES];
-        }
-        else if ([sender.titleLabel.text isEqualToString:@"优惠券"])
-        {
-            HSQCouponsHomeViewController *CouponsHomeVC = [[HSQCouponsHomeViewController alloc] init];
-        
-            CouponsHomeVC.Navtion_Title = @"优惠券";
-        
-            CouponsHomeVC.LeftTop_Title = @"我的优惠券";
-        
-            CouponsHomeVC.RightTop_Title = @"领取优惠券";
-        
-            CouponsHomeVC.ID_Number = @"100";
-        
-            [self.navigationController pushViewController:CouponsHomeVC animated:YES];
-        }
-        else if ([sender.titleLabel.text isEqualToString:@"红包"])
-        {
-            HSQCouponsHomeViewController *CouponsHomeVC = [[HSQCouponsHomeViewController alloc] init];
-        
-            CouponsHomeVC.Navtion_Title = @"红包";
-        
-            CouponsHomeVC.LeftTop_Title = @"我的红包";
-        
-            CouponsHomeVC.RightTop_Title = @"领取红包";
-        
-            CouponsHomeVC.ID_Number = @"200";
-        
-            [self.navigationController pushViewController:CouponsHomeVC animated:YES];
-        }
-        else if ([sender.titleLabel.text isEqualToString:@"积分"])
-        {
-            HSQIntegralListViewController *IntegralListVC = [[HSQIntegralListViewController alloc] init];
-        
-            IntegralListVC.IntegralCount = [NSString stringWithFormat:@"%@",self.UserInfoDiction[@"memberInfo"][@"memberPoints"]];
-        
-            IntegralListVC.Navtion_Title = @"积分明细";
-        
-            IntegralListVC.Top_Title = @"我的积分";
-        
-            IntegralListVC.DataUrl = UrlAdress(KIntegralListCell);
-        
-            [self.navigationController pushViewController:IntegralListVC animated:YES];
-        }
-        else if ([sender.titleLabel.text isEqualToString:@"我的订单"])
-        {
-            HSQMyOrderHomeViewController *MyOrderHomeVC = [[HSQMyOrderHomeViewController alloc] init];
-            MyOrderHomeVC.indexNumber = @"0";
-            MyOrderHomeVC.JumpType_string = @"200";
-            [self.navigationController pushViewController:MyOrderHomeVC animated:YES];
-        }
-        else if ([sender.titleLabel.text isEqualToString:@"待付款"])
-        {
-            HSQMyOrderHomeViewController *MyOrderHomeVC = [[HSQMyOrderHomeViewController alloc] init];
-            MyOrderHomeVC.indexNumber = @"1";
-            [self.navigationController pushViewController:MyOrderHomeVC animated:YES];
-        }
-        else if ([sender.titleLabel.text isEqualToString:@"待收/取货"])
-        {
-            HSQMyOrderHomeViewController *MyOrderHomeVC = [[HSQMyOrderHomeViewController alloc] init];
-            MyOrderHomeVC.indexNumber = @"3";
-            [self.navigationController pushViewController:MyOrderHomeVC animated:YES];
-        }
-        else if ([sender.titleLabel.text isEqualToString:@"待评价"])
-        {
-            HSQMyOrderHomeViewController *MyOrderHomeVC = [[HSQMyOrderHomeViewController alloc] init];
-            MyOrderHomeVC.indexNumber = @"4";
-            [self.navigationController pushViewController:MyOrderHomeVC animated:YES];
-        }
-        else if ([sender.titleLabel.text isEqualToString:@"退换/售后"])
-        {
-            HSQReturnGoodsViewController *ReturnGoodsVC = [[HSQReturnGoodsViewController alloc] init];
-            [self.navigationController pushViewController:ReturnGoodsVC animated:YES];
-        }
-    }
-}
-
-
-
-
-
 
 
 @end

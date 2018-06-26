@@ -14,8 +14,6 @@
 
 - (void)ToPrepareLoginAction:(UIButton *)sender;
 
-- (void)UnderLogineCustomeButtonClickAction:(UIButton *)sender;
-
 @end
 
 @interface HSQHeaderCollectionReusableView : UICollectionReusableView

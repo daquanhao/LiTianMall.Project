@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *UserName_TextField;
 
 @property (weak, nonatomic) IBOutlet UIButton *FinshButton;
+
 @end
 
 @implementation HSQRealNameViewController

@@ -80,7 +80,7 @@
     }
     else if ([dataModel.itemType isEqualToString:@"home3"]) // 双列多行图片模块，不限制数量图片每行2张320×85
     {
-        return CGSizeMake((KScreenWidth - 2)/2, KScreenWidth * 85 / 640);
+        return CGSizeMake((KScreenWidth - 2)/2, KScreenWidth * 85 / 320);
     }
     else
     {
@@ -107,7 +107,7 @@
     }
     else if ([dataModel.itemType isEqualToString:@"text"]) // 跑马灯
     {
-        return CGSizeMake(KScreenWidth, 50);
+        return CGSizeMake(KScreenWidth, 40);
     }
     else if ([dataModel.itemType isEqualToString:@"home8"]) // 五列单行小图模块
     {

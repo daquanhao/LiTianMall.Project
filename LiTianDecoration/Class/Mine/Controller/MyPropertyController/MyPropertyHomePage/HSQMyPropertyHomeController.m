@@ -71,9 +71,7 @@
     tableView.dataSource = self;
     
     tableView.delegate = self;
-    
-    [tableView setContentInset:UIEdgeInsetsMake(10, 0, 0, 0)];
-    
+        
     [self.view addSubview:tableView];
     
     self.tableView = tableView;
@@ -174,12 +172,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 75;
+    return 60;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 75;
+    return 60;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -203,7 +201,7 @@
     if (indexPath.row == 0) // 账户余额
     {
         HSQMyAccountBalanceViewController *MyAccountBalanceVC = [[HSQMyAccountBalanceViewController alloc] init];
-        
+                
         [self.navigationController pushViewController:MyAccountBalanceVC animated:YES];
     }
     else if (indexPath.row == 1) // 店铺券

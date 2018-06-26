@@ -10,6 +10,7 @@
 #import "MyBalanceViewController.h"
 #import "TopUpDetailViewController.h"
 #import "HSQWithdrawalViewController.h"
+#import "HSQAccountTool.h"
 
 @interface HSQMyAccountBalanceViewController ()<UIScrollViewDelegate>
 
@@ -41,6 +42,8 @@
     
     self.navigationItem.title = @"预存款账户";
     
+    [self requestUserCenterDataFromeserver];
+    
     // 1.初始化子控制器
     [self setupChildVces];
     
@@ -50,6 +53,44 @@
     // 3.设置底布滚动控制器
     [self setupContentView];
 }
+
+/**
+ * @brief 请求用户中心的数据
+ */
+- (void)requestUserCenterDataFromeserver{
+    
+    HSQAccount *account = [HSQAccountTool account];
+    
+    if (account.token.length == 0) return;
+    
+    [[HSQProgressHUDManger Manger] ShowLoadingDataFromeServer:nil ToView:self.view IsClearColor:NO];
+    
+    NSDictionary *diction = @{@"token":account.token};
+    
+    AFNetworkRequestTool *RequestTool = [AFNetworkRequestTool shareRequestTool];
+    
+    [RequestTool.manger POST:UrlAdress(KUserCenterDataUrl) parameters:diction progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *responseObject) {
+        
+        HSQLog(@"=用户中心的数据==%@",responseObject);
+        
+        [[HSQProgressHUDManger Manger] DismissProgressHUD];
+        
+        if ([responseObject[@"code"] integerValue] == 200)
+        {
+           NSString *predepositAvailable = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"memberInfo"][@"predepositAvailable"]];
+            
+            self.MyMonery_Label.text = [NSString stringWithFormat:@"¥%.2f",predepositAvailable.floatValue];
+        }
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
+    }];
+}
+
 
 /**
  * @brief 初始化子控制器
@@ -112,7 +153,7 @@
         
         [button setTitleColor:RGB(255, 83, 63) forState:UIControlStateDisabled];
         
-        button.titleLabel.font = [UIFont systemFontOfSize:KTextFont_(15)];
+        button.titleLabel.font = [UIFont systemFontOfSize:KTextFont_(14)];
         
         [button addTarget:self action:@selector(titleClick:) forControlEvents:UIControlEventTouchUpInside];
         

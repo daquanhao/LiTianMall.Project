@@ -14,6 +14,9 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *AgrenPassWord_TextField;
 
+@property (weak, nonatomic) IBOutlet UILabel *TopPlacher_Label;
+
+
 @end
 
 @implementation HSQChangePassWordViewController

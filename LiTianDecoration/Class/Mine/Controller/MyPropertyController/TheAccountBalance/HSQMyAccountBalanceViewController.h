@@ -10,4 +10,5 @@
 
 @interface HSQMyAccountBalanceViewController : UIViewController
 
+
 @end

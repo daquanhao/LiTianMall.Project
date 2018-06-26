@@ -155,7 +155,7 @@
     // 3.右边的退出按钮
     UIButton *right_button = [UIButton buttonWithType:(UIButtonTypeCustom)];
     right_button.frame = CGRectMake(KScreenWidth - KPlacherLabelHeight, 0, KPlacherLabelHeight, KPlacherLabelHeight);
-    right_button.backgroundColor = [UIColor orangeColor];
+    [right_button setImage:KImageName(@"TuiChuButton") forState:(UIControlStateNormal)];
     [right_button addTarget:self action:@selector(dismissAdressView) forControlEvents:(UIControlEventTouchUpInside)];
     [BgView addSubview:right_button];
     
