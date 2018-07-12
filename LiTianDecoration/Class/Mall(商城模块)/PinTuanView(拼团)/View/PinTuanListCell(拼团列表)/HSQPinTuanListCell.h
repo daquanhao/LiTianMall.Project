@@ -12,6 +12,9 @@
 
 @interface HSQPinTuanListCell : UITableViewCell
 
+/**
+ * @brief 数据模型
+ */
 @property (nonatomic, strong) HSQPinTuanListModel *model;
 
 @end

@@ -47,7 +47,7 @@
         UILabel *name_label = [[UILabel alloc] init];
         name_label.text = @"匿名用户";
         name_label.textColor = [UIColor blackColor];
-        name_label.font = [UIFont systemFontOfSize:KTextFont_(14)];
+        name_label.font = [UIFont systemFontOfSize:14.0];
         [self.contentView addSubview:name_label];
         self.name_label = name_label;
         
@@ -55,7 +55,7 @@
         UILabel *time_label = [[UILabel alloc] init];
         time_label.text = @"2018-04-13 16:06";
         time_label.textColor = [UIColor grayColor];
-        time_label.font = [UIFont systemFontOfSize:KTextFont_(14)];
+        time_label.font = [UIFont systemFontOfSize:14.0];
         [self.contentView addSubview:time_label];
         self.time_label = time_label;
         
@@ -63,7 +63,7 @@
         UILabel *goodsName_label = [[UILabel alloc] init];
         goodsName_label.text = @"MacBook Pro 13.3英寸苹果笔记本电脑（I5  2.7GHz  8G  128G）";
         goodsName_label.textColor = [UIColor blackColor];
-        goodsName_label.font = [UIFont systemFontOfSize:KTextFont_(13)];
+        goodsName_label.font = [UIFont systemFontOfSize:13.0];
         [self.contentView addSubview:goodsName_label];
         self.goodsName_label = goodsName_label;
         
@@ -77,7 +77,7 @@
         UILabel *content_label = [[UILabel alloc] init];
         content_label.textColor = [UIColor blackColor];
         content_label.numberOfLines = 0;
-        content_label.font = [UIFont systemFontOfSize:KTextFont_(13)];
+        content_label.font = [UIFont systemFontOfSize:13.0];
         [self.contentView addSubview:content_label];
         self.content_label = content_label;
         

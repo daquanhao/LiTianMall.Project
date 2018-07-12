@@ -12,8 +12,6 @@
 
 @property (nonatomic, strong) UIView *BgView; // 白色背景图
 
-@property (nonatomic, strong) UIImageView *RightImageView; // 右边的按钮
-
 @property (nonatomic, strong) UILabel *PlacherLabel;  // 提示文字
 
 @end

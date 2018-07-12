@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIView *finishTime_BgView;
 
 @property (weak, nonatomic) IBOutlet UIView *BgView;
+
 @end
 
 @implementation HSQPointExchangeOrderDetailFooterView
@@ -35,6 +36,9 @@
     [super awakeFromNib];
     
     self.BgView.backgroundColor = KViewBackGroupColor;
+    
+    self.totalPoints_Label.font = self.OrderNumber_Label.font = self.createTime_Label.font = self.sendTime_Label.font = self.finishTime_Label.font = [UIFont systemFontOfSize:12.0];
+        
 }
 
 - (void)setModel:(HSQPointsOrdersListModel *)model{

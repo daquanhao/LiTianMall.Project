@@ -139,13 +139,13 @@
         
         [title_btn setTitleColor:[UIColor redColor] forState:(UIControlStateDisabled)];
         
-        title_btn.titleLabel.font = [UIFont systemFontOfSize:KTextFont_(13)];
+        title_btn.titleLabel.font = [UIFont systemFontOfSize:KLabelFont(14.0, 12.0)];
         
         title_btn.tag = i;
         
 //        title_btn.frame = CGRectMake(i * self.scrollerView.size.width / KShowCount, 0, self.scrollerView.size.width / KShowCount, self.scrollerView.size.height - self.indicatorView.size.height);
         
-        CGSize Title_Size = [NSString SizeOfTheText:model.categoryName font:[UIFont systemFontOfSize:KTextFont_(13)] MaxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
+        CGSize Title_Size = [NSString SizeOfTheText:model.categoryName font:[UIFont systemFontOfSize:KLabelFont(14.0, 12.0)] MaxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
         
         if (i == 0)
         {
@@ -155,7 +155,7 @@
         {
             HSQLeftCategoryModel *model = title_array[i - 1];
             
-            CGSize Title_Size = [NSString SizeOfTheText:model.categoryName font:[UIFont systemFontOfSize:KTextFont_(13)] MaxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
+            CGSize Title_Size = [NSString SizeOfTheText:model.categoryName font:[UIFont systemFontOfSize:KLabelFont(14.0, 12.0)] MaxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
             
             ButtonX = ButtonX + Title_Size.width + 10;
         }
@@ -182,7 +182,7 @@
         
         HSQLeftCategoryModel *Max_model = title_array.lastObject;
         
-        CGSize Max_Title_Size = [NSString SizeOfTheText:Max_model.categoryName font:[UIFont systemFontOfSize:KTextFont_(13)] MaxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
+        CGSize Max_Title_Size = [NSString SizeOfTheText:Max_model.categoryName font:[UIFont systemFontOfSize:KLabelFont(14.0, 12.0)] MaxSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
         
         contentW = ButtonX + Max_Title_Size.width + 10;
     }
@@ -229,7 +229,7 @@
         
         [title_btn setTitleColor:[UIColor redColor] forState:(UIControlStateDisabled)];
         
-        title_btn.titleLabel.font = [UIFont systemFontOfSize:KTextFont_(12.0)];
+        title_btn.titleLabel.font = [UIFont systemFontOfSize:KLabelFont(14.0, 12.0)];
         
         title_btn.backgroundColor = [UIColor whiteColor];
         

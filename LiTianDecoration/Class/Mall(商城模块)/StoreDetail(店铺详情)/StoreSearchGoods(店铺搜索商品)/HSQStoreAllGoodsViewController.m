@@ -10,8 +10,12 @@
 #import "HSQStoreAllGoodsViewController.h"
 #import "HSQTopShaiXuanView.h"
 #import "HSQClassSecondGoodsListCell.h"
+#import "HSQGoodsDataListModel.h"
+#import "HSQAccountTool.h"
+#import "HSQLoginHomeViewController.h"
+#import "MVGoodsDetailHomeViewController.h"
 
-@interface HSQStoreAllGoodsViewController ()<HSQTopShaiXuanViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
+@interface HSQStoreAllGoodsViewController ()<HSQTopShaiXuanViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource,HSQClassSecondGoodsListCellDelegate>
 
 @property (nonatomic, strong) HSQTopShaiXuanView *TopShaiXuanView;
 
@@ -53,7 +57,6 @@
     return _NoDataView;
 }
 
-
 - (void)viewDidLoad {
     
     [super viewDidLoad];
@@ -83,14 +86,23 @@
 - (void)AddHeadSearchBtnView{
     
     UIButton *SearchBar = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    
     [SearchBar setTitle:@"搜索店铺商品" forState:(UIControlStateNormal)];
-    SearchBar.titleLabel.font = [UIFont systemFontOfSize:14];
+    
+    SearchBar.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    
     [SearchBar setTitleColor:RGB(150, 150, 150) forState:(UIControlStateNormal)];
+    
     [SearchBar setImage:[UIImage imageNamed:@"6DE36884-837C-44C3-B808-CE7F7D8C4FFA"] forState:(UIControlStateNormal)];
+    
     [SearchBar setBackgroundImage:[UIImage ReturnAPictureOfStretching:@"7D99DFED-F3B6-4DB1-9F77-E24CA867DD17"] forState:(UIControlStateNormal)];
+    
     SearchBar.frame = CGRectMake(0, 0, KScreenWidth * 0.7, 30);
+    
     [SearchBar setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
+    
     [SearchBar addTarget:self action:@selector(TopSearchBarClickAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    
     self.navigationItem.titleView = SearchBar;
 }
 
@@ -197,16 +209,33 @@
         
         [[HSQProgressHUDManger Manger] DismissProgressHUD];
         
+        HSQLog(@"==responseObject===%@",responseObject);
+        
         // 总页数
         self.totalPage = [NSString stringWithFormat:@"%@",responseObject[@"pageEntity"][@"totalPage"]];
         
         if ([responseObject[@"code"] integerValue] == 200)
         {
-            NSArray *array = responseObject[@"datas"][@"goodsCommonList"];
+            NSArray *goodsList = responseObject[@"datas"][@"goodsCommonList"];
             
-            if (array.count != 0)
+            if (goodsList.count != 0)
             {
-                [self.dataSource addObjectsFromArray:array];
+                for (NSInteger i = 0 ; i < goodsList.count; i++) {
+                    
+                    NSDictionary *diction = goodsList[i];
+                    
+                    HSQGoodsDataListModel *model = [[HSQGoodsDataListModel alloc] init];
+                    
+                    model.isGrid = self.isGrid;
+                    
+                    model.IsOpen = 0;
+                    
+                    model.IsShowCollectionView = 0;
+                    
+                    [model setValuesForKeysWithDictionary:diction];
+                    
+                    [self.dataSource addObject:model];
+                }
             }
             else
             {
@@ -228,7 +257,7 @@
         
         [self.collectionView addSubview:self.NoDataView];
         
-        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"数据加载失败" SuperView:self.view];
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
         
     }];
 }
@@ -271,7 +300,22 @@
             {
                 NSArray *array = responseObject[@"datas"][@"goodsCommonList"];
                 
-                [self.dataSource addObjectsFromArray:array];
+                for (NSInteger i = 0 ; i < array.count; i++) {
+                    
+                    NSDictionary *diction = array[i];
+                    
+                    HSQGoodsDataListModel *model = [[HSQGoodsDataListModel alloc] init];
+                    
+                    model.isGrid = self.isGrid;
+                    
+                    model.IsOpen = 0;
+                    
+                    model.IsShowCollectionView = 0;
+                    
+                    [model setValuesForKeysWithDictionary:diction];
+                    
+                    [self.dataSource addObject:model];
+                }
             }
             else
             {
@@ -286,7 +330,7 @@
             
             [self.collectionView.mj_footer endRefreshing];
             
-            [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"数据加载失败" SuperView:self.view];
+            [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
             
         }];
     }
@@ -333,16 +377,24 @@
     
     cell.isGrid = _isGrid;
     
-    cell.dataDiction = self.dataSource[indexPath.row];
+    cell.model = self.dataSource[indexPath.row];
     
     cell.DiscountBtn.hidden = YES;
+    
+    cell.delegate = self;
     
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
+    HSQGoodsDataListModel *model = self.dataSource[indexPath.row];
     
+    MVGoodsDetailHomeViewController *GoodsDetailVC = [[MVGoodsDetailHomeViewController alloc] init];
+    
+    GoodsDetailVC.commond_id = model.commonId;
+    
+    [self.navigationController pushViewController:GoodsDetailVC animated:YES];
 }
 
 /**
@@ -406,12 +458,153 @@
         self.isGrid = YES;
     }
     
+    for (HSQGoodsDataListModel *model in self.dataSource) {
+        
+        model.isGrid = _isGrid;
+        
+    }
+    
     [self.collectionView reloadData];
 }
 
+/**
+ * @brief 展开
+ */
+- (void)ExpandViewButtonClickAction:(UIButton *)sender{
+    
+    HSQClassSecondGoodsListCell *cell = (HSQClassSecondGoodsListCell *)sender.superview.superview;
+    
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+    
+    for (NSInteger i = 0; i < self.dataSource.count; i ++) {
+        
+        HSQGoodsDataListModel *model = self.dataSource[i];
+        
+        if (indexPath.row == i)
+        {
+            model.IsShowCollectionView = 1;
+            
+            [self WhetherGoodsAreCollectedWithGoods_id:model];
+        }
+        else
+        {
+            model.IsShowCollectionView = 0;
+            
+            [self.collectionView reloadData];
+        }
+    }
+}
 
+/**
+ * @brief 商品是否被收藏
+ */
+- (void)WhetherGoodsAreCollectedWithGoods_id:(HSQGoodsDataListModel *)model{
+    
+    NSString *token = [HSQAccountTool account].token;
+    
+    if (token.length == 0) return;
+    
+    NSDictionary *params = @{@"token":token,@"commonId":model.commonId};
+    
+    AFNetworkRequestTool *requestTool = [AFNetworkRequestTool shareRequestTool];
+    
+    [requestTool.manger POST:UrlAdress(KCheckIsCollectionGoodsUrl) parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        HSQLog(@"==是否收藏==%@",responseObject);
+        
+        if ([responseObject[@"code"] integerValue] == 200)
+        {
+            NSString *isExist = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"isExist"]];
+            
+            model.isExist = isExist;
+        }
+        else
+        {
+            NSString *errorString = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"error"]];
+            
+            [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:errorString SuperView:self.view];
+        }
+        
+        [self.collectionView reloadData];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
+    }];
+}
 
+/**
+ * @brief 商品收藏按钮的点击
+ */
+- (void)StoreGoodsCollectionButtonClickAction:(UIButton *)sender{
+    
+    HSQClassSecondGoodsListCell *cell = (HSQClassSecondGoodsListCell *)sender.superview.superview.superview;
+    
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+    
+    HSQGoodsDataListModel *model = self.dataSource[indexPath.row];
+    
+    HSQAccount *account = [HSQAccountTool account];
+    
+    if (account.token.length == 0)  // 没有登录
+    {
+        HSQLoginHomeViewController *LoginVC = [[HSQLoginHomeViewController alloc] init];
+        
+        [self.navigationController pushViewController:LoginVC animated:YES];
+    }
+    else
+    {
+        if (model.isExist.integerValue == 0) // 没有收藏，点击收藏
+        {
+            [self AddCollectionGoodsToServer:account.token State:1 Url:UrlAdress(KAddCollectionGoodsUrl) GoodModel:model];
+        }
+        else // 已经收藏，点击取消收藏
+        {
+            [self AddCollectionGoodsToServer:account.token State:0 Url:UrlAdress(KCancelCollectionGoodsUrl) GoodModel:model];
+        }
+    }
+}
 
+/**
+ * @brief 收藏或者取消某商品
+ */
+- (void)AddCollectionGoodsToServer:(NSString *)token State:(NSInteger)CollectionState Url:(NSString *)GoodsUrl GoodModel:(HSQGoodsDataListModel *)model{
+    
+    [[HSQProgressHUDManger Manger] ShowLoadingDataFromeServer:@"" ToView:self.view IsClearColor:YES];
+    
+    NSDictionary *params = @{@"token":token,@"commonId":model.commonId};
+    
+    AFNetworkRequestTool *requestTool = [AFNetworkRequestTool shareRequestTool];
+    
+    [requestTool.manger POST:GoodsUrl parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        HSQLog(@"==收藏商品==%@==%ld",responseObject,CollectionState);
+        
+        [[HSQProgressHUDManger Manger] DismissProgressHUD];
+        
+        if ([responseObject[@"code"] integerValue] == 200)
+        {
+            model.isExist = [NSString stringWithFormat:@"%ld",CollectionState];
+            
+            [self.collectionView reloadData];
+        }
+        else
+        {
+            NSString *errorString = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"error"]];
+            
+            [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:errorString SuperView:self.view];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
+    }];
+    
+}
 
 
 

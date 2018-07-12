@@ -10,10 +10,14 @@
 
 @interface HSQStoreAllGoodsViewController : UIViewController
 
-/** 店铺的id*/
+/**
+ * @brief 店铺的id
+ */
 @property (nonatomic, copy) NSString *storeId;
 
-/** 搜索的关键字*/
+/**
+ * @brief 搜索的关键字
+ */
 @property (nonatomic, copy) NSString *KeyWord;
 
 @end

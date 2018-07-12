@@ -147,7 +147,7 @@
     UILabel *placher_Label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, KPlacherLabelHeight)];
     placher_Label.textColor = [UIColor grayColor];
     placher_Label.backgroundColor = [UIColor clearColor];
-    placher_Label.font = [UIFont systemFontOfSize:15.0];
+    placher_Label.font = [UIFont systemFontOfSize:14.0];
     placher_Label.textAlignment = NSTextAlignmentCenter;
     [BgView addSubview:placher_Label];
     self.placher_Label = placher_Label;
@@ -275,6 +275,8 @@
     [mangerTool.manger GET:UrlAdress(KGetAdressInfoUrl) parameters:@{@"areaId":areaId} progress:^(NSProgress * _Nonnull downloadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        HSQLog(@"===我的市级数据===%@",responseObject);
         
         self.cityDataSouce = [HSQAdressListModel mj_objectArrayWithKeyValuesArray:responseObject[@"datas"][@"areaList"]];
         
@@ -480,7 +482,6 @@
     }
     return indexPath;
 }
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 

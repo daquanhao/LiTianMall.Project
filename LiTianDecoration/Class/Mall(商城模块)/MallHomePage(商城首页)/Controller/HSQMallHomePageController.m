@@ -25,6 +25,8 @@
 #import "HSQIntegralCenterViewController.h" // 积分中心
 #import "HSQSearchBarViewController.h"
 
+#import "MVGoodsDetailHomeViewController.h"
+
 @interface HSQMallHomePageController ()<UICollectionViewDelegate,UICollectionViewDataSource,HSQMallHomeHeadViewDelegate,HSQModelViewReusableViewDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -294,6 +296,7 @@
         else
         {
             NSDictionary *diction = model.itemDataSource[indexPath.row];
+            
             cell.ImageUrl = diction[@"imageUrl"];
         }
     
@@ -303,7 +306,18 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
+    HSQMallHomeDataModel *model = self.dataSource[indexPath.section];
     
+    NSDictionary *itemDataSource = model.itemDataSource[indexPath.row];
+    
+    if ([model.itemType isEqualToString:@"goods"])  // 为你推荐的商品列表
+    {
+        MVGoodsDetailHomeViewController *GoodsDetailVC = [[MVGoodsDetailHomeViewController alloc] init];
+        
+        GoodsDetailVC.commond_id = itemDataSource[@"commonId"];
+        
+        [self.navigationController pushViewController:GoodsDetailVC animated:YES];
+    }
 }
 
 
@@ -332,35 +346,45 @@
     if ([typeString isEqualToString:@"category"])  // 跳转到分类
     {
         HSQClassViewController *classVC = [[HSQClassViewController alloc] init];
+        
         [self.navigationController pushViewController:classVC animated:YES];
     }
     else if ([typeString isEqualToString:@"cart"]) //跳转到购物车
     {
         HSQMallShopCarViewController *ShopCarVC = [[HSQMallShopCarViewController alloc] init];
+        
         ShopCarVC.source = @"200";
+        
         [self.navigationController pushViewController:ShopCarVC animated:YES];
     }
     else if ([typeString isEqualToString:@"group"]) //跳转到拼团页面
     {
         HSQPinTuanViewController *PinTuanVC = [[HSQPinTuanViewController alloc] init];
+        
         PinTuanVC.NavtionTitle = @"拼团";
+        
         [self.navigationController pushViewController:PinTuanVC animated:YES];
     }
     else if ([typeString isEqualToString:@"voucherCenter"]) //跳转到领券中心
     {
         HSQCouponsCenterViewController *CouponsCenterVC = [[HSQCouponsCenterViewController alloc] init];
+        
         [self.navigationController pushViewController:CouponsCenterVC animated:YES];
     }
     else if ([typeString isEqualToString:@"distPage"]) //跳转到推广页面
     {
         HSQToPromoteViewController *ToPromoteVC = [[HSQToPromoteViewController alloc] init];
+        
         ToPromoteVC.NavtionTitle = @"推广分佣";
+        
         [self.navigationController pushViewController:ToPromoteVC animated:YES];
     }
     else if ([typeString isEqualToString:@"pointsCenter"]) //跳转到积分中心
     {
         HSQIntegralCenterViewController *IntegralCenterVC = [[HSQIntegralCenterViewController alloc] init];
+        
         IntegralCenterVC.NavtionTitle = @"积分中心";
+        
         [self.navigationController pushViewController:IntegralCenterVC animated:YES];
     }
         

@@ -11,7 +11,8 @@
 
 #import "HSQMyCollectionHomeViewController.h"
 #import "HSQGoodsCollectionViewController.h"
-#import "HSQStoreCollectionViewController.h"
+//#import "HSQStoreCollectionViewController.h"
+#import "HSQMyStoreCollectionListViewController.h"
 #import "HSQTopNavtionView.h"
 
 @interface HSQMyCollectionHomeViewController ()<UIScrollViewDelegate,HSQTopNavtionViewDelegate>
@@ -61,7 +62,11 @@
     GoodsCollectionVC.title = @"商品";
     [self addChildViewController:GoodsCollectionVC];
     
-    HSQStoreCollectionViewController *StoreCollectionVC = [[HSQStoreCollectionViewController alloc] init];
+//    HSQStoreCollectionViewController *StoreCollectionVC = [[HSQStoreCollectionViewController alloc] init];HSQMyStoreCollectionListViewController
+//    StoreCollectionVC.title = @"店铺";
+//    [self addChildViewController:StoreCollectionVC];
+    
+    HSQMyStoreCollectionListViewController *StoreCollectionVC = [[HSQMyStoreCollectionListViewController alloc] init];
     StoreCollectionVC.title = @"店铺";
     [self addChildViewController:StoreCollectionVC];
 }

@@ -201,7 +201,7 @@
                 <constraint firstAttribute="bottom" secondItem="n75-fd-68t" secondAttribute="bottom" id="bET-2Z-e7c"/>
                 <constraint firstAttribute="trailing" secondItem="n75-fd-68t" secondAttribute="trailing" id="yPq-rx-GLO"/>
             </constraints>
-            <point key="canvasLocation" x="-422" y="20"/>
+            <point key="canvasLocation" x="-318" y="-49"/>
         </view>
     </objects>
     <resources>

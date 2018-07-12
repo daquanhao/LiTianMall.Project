@@ -59,17 +59,17 @@
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4V7-Gn-YfF" customClass="ZZCircleProgress">
-                                        <rect key="frame" x="5" y="5" width="50" height="32"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QJq-vW-nep">
+                                        <rect key="frame" x="0.0" y="0.0" width="60" height="42"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.77254901960784317" green="0.45882352941176469" blue="0.16862745098039217" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstItem="4V7-Gn-YfF" firstAttribute="top" secondItem="jl6-c4-GHs" secondAttribute="top" constant="5" id="EyR-Rn-LSM"/>
-                                    <constraint firstItem="hxP-xM-XzX" firstAttribute="top" secondItem="4V7-Gn-YfF" secondAttribute="bottom" constant="5" id="SxP-rJ-1LE"/>
-                                    <constraint firstAttribute="trailing" secondItem="4V7-Gn-YfF" secondAttribute="trailing" constant="5" id="VnN-Vz-JPf"/>
-                                    <constraint firstItem="4V7-Gn-YfF" firstAttribute="leading" secondItem="jl6-c4-GHs" secondAttribute="leading" constant="5" id="WG0-0l-bmU"/>
+                                    <constraint firstItem="hxP-xM-XzX" firstAttribute="top" secondItem="QJq-vW-nep" secondAttribute="bottom" id="6vk-7g-ajz"/>
+                                    <constraint firstAttribute="trailing" secondItem="QJq-vW-nep" secondAttribute="trailing" id="B2w-ru-1Qk"/>
+                                    <constraint firstItem="QJq-vW-nep" firstAttribute="top" secondItem="jl6-c4-GHs" secondAttribute="top" id="DJi-Qc-mhA"/>
+                                    <constraint firstItem="QJq-vW-nep" firstAttribute="leading" secondItem="jl6-c4-GHs" secondAttribute="leading" id="pVc-v2-eDV"/>
                                     <constraint firstAttribute="bottom" secondItem="hxP-xM-XzX" secondAttribute="bottom" constant="5" id="t3W-Hg-g17"/>
                                     <constraint firstItem="hxP-xM-XzX" firstAttribute="centerX" secondItem="jl6-c4-GHs" secondAttribute="centerX" id="wb2-Ld-dtO"/>
                                     <constraint firstAttribute="width" constant="60" id="xPb-rk-9t3"/>
@@ -143,13 +143,13 @@
                 <outlet property="GetTheConditions_Label" destination="pEc-dT-iTP" id="H4S-F3-su6"/>
                 <outlet property="hasReceived_Btn" destination="hxP-xM-XzX" id="EnP-zS-waw"/>
                 <outlet property="limitAmount_Label" destination="rFS-2m-4P6" id="mPn-Wh-to8"/>
-                <outlet property="progressView" destination="4V7-Gn-YfF" id="mlZ-pI-mm6"/>
+                <outlet property="progress_BgView" destination="QJq-vW-nep" id="oge-Gg-sJY"/>
                 <outlet property="templatePrice_Label" destination="5pU-nm-M0x" id="G8x-oy-uhX"/>
                 <outlet property="templateTitle_Label" destination="4zw-K6-Pjm" id="veV-9b-b9G"/>
                 <outlet property="usableClientTypeText_Label" destination="bOD-WD-cEq" id="Jfs-rG-Thd"/>
                 <outlet property="useEndTimeText_Label" destination="NhX-16-C0L" id="pYU-Ri-smS"/>
             </connections>
-            <point key="canvasLocation" x="-1598" y="-222"/>
+            <point key="canvasLocation" x="-2151" y="-299"/>
         </collectionViewCell>
     </objects>
 </document>

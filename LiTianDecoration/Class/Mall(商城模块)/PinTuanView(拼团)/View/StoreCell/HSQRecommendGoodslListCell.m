@@ -6,11 +6,9 @@
 //  Copyright © 2018年 administrator. All rights reserved.
 //
 
-#define KNumber 6 // 一页显示多少个商品
-#define KRows 3  // 一行显示几列
-
 #import "HSQRecommendGoodslListCell.h"
 #import "PublieTuiJianGoodsListView.h"
+#import "HSQGoodsDataListModel.h"
 
 @interface HSQRecommendGoodslListCell ()<UIScrollViewDelegate,PublieTuiJianGoodsListViewDelegate>
 
@@ -50,11 +48,12 @@
     UIButton *leftBtn = [UIButton buttonWithType:(UIButtonTypeSystem)];
     [leftBtn setTitle:@"为你推荐" forState:(UIControlStateNormal)];
     [leftBtn setTitle:@"为你推荐" forState:(UIControlStateDisabled)];
-    leftBtn.enabled = NO;
     [leftBtn setTitleColor:RGB(150, 150, 150) forState:(UIControlStateNormal)];
     [leftBtn setTitleColor:RGB(238, 58, 68) forState:(UIControlStateDisabled)];
     leftBtn.titleLabel.font = [UIFont systemFontOfSize:14.0];
-    leftBtn.frame = CGRectMake(0, 0, KScreenWidth/2, 50);
+    leftBtn.frame = CGRectMake(0, 0, KScreenWidth/2, 45);
+    leftBtn.tag = 101;
+    [leftBtn addTarget:self action:@selector(RecommendToYouBtnClickAction:) forControlEvents:(UIControlEventTouchUpInside)];
     [self.contentView addSubview:leftBtn];
     self.Left_Button = leftBtn;
     
@@ -64,10 +63,13 @@
     [Right_Button setTitleColor:RGB(150, 150, 150) forState:(UIControlStateNormal)];
     [Right_Button setTitleColor:RGB(238, 58, 68) forState:(UIControlStateDisabled)];
     Right_Button.titleLabel.font = [UIFont systemFontOfSize:14.0];
-    Right_Button.frame = CGRectMake(KScreenWidth/2, 0, KScreenWidth/2, 50);
+    Right_Button.frame = CGRectMake(CGRectGetMaxX(leftBtn.frame), 0, leftBtn.mj_w, leftBtn.mj_h);
+    Right_Button.tag = 102;
+    [Right_Button addTarget:self action:@selector(RecommendToYouBtnClickAction:) forControlEvents:(UIControlEventTouchUpInside)];
     [self.contentView addSubview:Right_Button];
     self.Right_Button = Right_Button;
     
+    // 底部的滚动式图
     UIScrollView *scrollerView = [[UIScrollView alloc] init];
     scrollerView.showsVerticalScrollIndicator = NO;
     scrollerView.showsHorizontalScrollIndicator = NO;
@@ -76,6 +78,7 @@
     [self.contentView addSubview:scrollerView];
     self.scrollerView = scrollerView;
     
+    // 分页控制器
     UIPageControl *PageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(scrollerView.frame), KScreenWidth, 20)];
     PageControl.backgroundColor = [UIColor orangeColor];
     PageControl.currentPageIndicatorTintColor = [UIColor blackColor];
@@ -83,7 +86,7 @@
     PageControl.currentPage = 0;
     [self.contentView addSubview:PageControl];
     self.pageControl = PageControl;
-    
+
     self.scrollerView.sd_layout.leftSpaceToView(self.contentView, 0).topSpaceToView(self.contentView, 50).rightSpaceToView(self.contentView, 0).bottomSpaceToView(self.contentView, 20);
     
     self.pageControl.sd_layout.leftSpaceToView(self.contentView, 0).topSpaceToView(self.scrollerView, 0).rightSpaceToView(self.contentView, 0).bottomSpaceToView(self.contentView, 0);
@@ -96,37 +99,63 @@
     
     _DataSource = DataSource;
     
-    for (NSInteger i = 0; i < DataSource.count; i++) {
-        
-        // 计算商品的页数
-        NSInteger PageCount = (DataSource.count + KNumber - 1) / KNumber;
-        
-        self.pageControl.hidden = (PageCount == 1 ? YES : NO);
-        
-        self.pageControl.numberOfPages = PageCount;
-        
-         self.scrollerView.contentSize = CGSizeMake(KScreenWidth * PageCount , 0);
-        
-        for (NSInteger i = 0; i < DataSource.count; i++) {
-            
-            NSDictionary *diction = DataSource[i];
-            
-            CGSize GoodsSize = CGSizeMake(KScreenWidth / KRows, KScreenWidth/2);
+    // 计算商品的页数
+    NSInteger PageCount = (DataSource.count + KRecommendNumber - 1) / KRecommendNumber;
 
-            NSInteger Page = i / KNumber;  // 表示第几页
-            
-            CGFloat GoodsX = (i % KRows) * GoodsSize.width + Page * KScreenWidth;
-            
-            CGFloat GoodsY =  ((i - Page * KNumber) / KRows)  * GoodsSize.height;
-            
-            PublieTuiJianGoodsListView *GoodsListView = [[PublieTuiJianGoodsListView alloc] initWithFrame:CGRectMake(GoodsX, GoodsY, GoodsSize.width, GoodsSize.height)];
-            
-            GoodsListView.dataDiction = diction;
-            
-            GoodsListView.delegate = self;
+    self.pageControl.hidden = (PageCount == 1 ? YES : NO);
+
+    self.pageControl.numberOfPages = PageCount;
+
+     self.scrollerView.contentSize = CGSizeMake(KScreenWidth * PageCount , 0);
+
+    // 创建足够数量的图片控件
+    while (self.scrollerView.subviews.count < DataSource.count) {
+        
+        PublieTuiJianGoodsListView *GoodsListView = [[PublieTuiJianGoodsListView alloc] init];
+        
+        GoodsListView.delegate = self;
+        
+        [self.scrollerView addSubview:GoodsListView];
+    }
     
-            [self.scrollerView addSubview:GoodsListView];
+    // 遍历所有的图片控件，设置图片
+    for (int i = 0; i < self.scrollerView.subviews.count; i++)
+    {
+        PublieTuiJianGoodsListView *GoodsListView = self.scrollerView.subviews[i];
+        
+        if (i < DataSource.count) { // 显示
+            
+            GoodsListView.model = DataSource[i];
+            
+            GoodsListView.hidden = NO;
         }
+        else // 隐藏
+        {
+            GoodsListView.hidden = YES;
+        }
+    }
+}
+
+- (void)layoutSubviews{
+    
+    [super layoutSubviews];
+    
+    // 设置图片的尺寸和位置
+    NSUInteger photosCount = self.DataSource.count;
+    
+    for (int i = 0; i < photosCount; i++) {
+        
+        PublieTuiJianGoodsListView *GoodsListView = self.scrollerView.subviews[i];
+        
+        CGSize GoodsSize = CGSizeMake(KScreenWidth / KRecommendRows, KScreenWidth/2);
+
+        NSInteger Page = i / KRecommendNumber;  // 表示第几页
+
+        CGFloat GoodsX = (i % KRecommendRows) * GoodsSize.width + Page * KScreenWidth;
+
+        CGFloat GoodsY =  ((i - Page * KRecommendNumber) / KRecommendRows)  * GoodsSize.height;
+
+        GoodsListView.frame = CGRectMake(GoodsX, GoodsY, GoodsSize.width, GoodsSize.height);
         
     }
 }
@@ -153,10 +182,38 @@
     
 }
 
+/**
+ * @brief 为你推荐或者排行榜按钮的点击
+ */
+- (void)RecommendToYouBtnClickAction:(UIButton *)sender{
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(RecommendOrRankButtonClickForYou:)]) {
+        
+        [self.delegate RecommendOrRankButtonClickForYou:sender];
+    }
+}
 
-
-
-
+/**
+ * @brief 选中的第几个
+ */
+- (void)setSelect_Index:(NSInteger)Select_Index{
+    
+    _Select_Index = Select_Index;
+    
+    if (Select_Index == 101)
+    {
+        self.Left_Button.enabled = NO;
+        
+        self.Right_Button.enabled = YES;
+        
+    }
+    else
+    {
+        self.Left_Button.enabled = YES;
+        
+        self.Right_Button.enabled = NO;
+    }
+}
 
 
 

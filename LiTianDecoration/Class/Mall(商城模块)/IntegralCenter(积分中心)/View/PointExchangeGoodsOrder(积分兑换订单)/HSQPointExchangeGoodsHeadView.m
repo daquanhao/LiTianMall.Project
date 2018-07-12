@@ -47,7 +47,7 @@
         // 店铺的名字
         UILabel *StoreName_Label = [[UILabel alloc] init];
         StoreName_Label.textColor = [UIColor blackColor];
-        StoreName_Label.font = [UIFont systemFontOfSize:14.0];
+        StoreName_Label.font = [UIFont systemFontOfSize:12.0];
         [BgView addSubview:StoreName_Label];
         self.StoreName_Label = StoreName_Label;
         
@@ -60,7 +60,7 @@
         UILabel *OrderState_Label = [[UILabel alloc] init];
         OrderState_Label.textColor = RGB(238, 58, 68);
         OrderState_Label.textAlignment = NSTextAlignmentRight;
-        OrderState_Label.font = [UIFont systemFontOfSize:14.0];
+        OrderState_Label.font = [UIFont systemFontOfSize:12.0];
         [BgView addSubview:OrderState_Label];
         self.OrderState_Label = OrderState_Label;
         

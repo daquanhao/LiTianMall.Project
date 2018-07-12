@@ -46,6 +46,8 @@
  */
 - (void)ShowProgressHUDPromptText:(NSString *)string SupView:(UIView *)SuperView{
     
+    [self DismissProgressHUD];
+    
      MBProgressHUD *HUD = [[MBProgressHUD alloc] init];
     [SuperView addSubview:HUD];
     
@@ -120,7 +122,7 @@
     
     // 修改文字的颜色
     hud.label.textColor = [UIColor whiteColor];
-    hud.label.font = [UIFont systemFontOfSize:15.0f];
+    hud.label.font = [UIFont systemFontOfSize:14.0f];
     hud.label.text = text;
     
     // 隐藏时候从父控件中移除
@@ -167,7 +169,7 @@
     if (loadText.length != 0 || loadText != nil)
     {
         self.HUD.label.textColor = [UIColor whiteColor];
-        self.HUD.label.font = [UIFont systemFontOfSize:15];
+        self.HUD.label.font = [UIFont systemFontOfSize:14.0];
         self.HUD.label.text = loadText;
     }
 

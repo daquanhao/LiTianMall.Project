@@ -25,12 +25,19 @@
         
         // 支付按钮
         UIButton *PayMonery_Btn = [UIButton buttonWithType:(UIButtonTypeSystem)];
+        
         [PayMonery_Btn setTitle:@"支付订单" forState:(UIControlStateNormal)];
+        
         [PayMonery_Btn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+        
         PayMonery_Btn.titleLabel.font = [UIFont systemFontOfSize:14.0];
+        
         [PayMonery_Btn setBackgroundImage:KImageName(@"LoginButton_Image") forState:(UIControlStateNormal)];
+        
         [PayMonery_Btn addTarget:self action:@selector(PayMonery_BtnClickAction:) forControlEvents:(UIControlEventTouchUpInside)];
+        
         [self.contentView addSubview:PayMonery_Btn];
+        
         self.PayMonery_Btn = PayMonery_Btn;
         
         // 设置约束

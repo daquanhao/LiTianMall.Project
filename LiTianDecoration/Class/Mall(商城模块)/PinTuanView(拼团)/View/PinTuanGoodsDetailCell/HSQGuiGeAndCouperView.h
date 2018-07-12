@@ -10,24 +10,48 @@
 
 @protocol HSQGuiGeAndCouperViewDelegate <NSObject>
 
-- (void)ChooseGuiGeAndCoupter:(NSIndexPath *)indexPath;
+/**
+ * @brief 领取优惠券
+ */
+- (void)ChooseGuiGeAndCoupter:(NSIndexPath *)indexPath templateId:(NSString *)templateId;
 
 @end
 
 @interface HSQGuiGeAndCouperView : UIView
 
-/** 初始化视图 */
+/**
+ * @brief 初始化视图
+ */
 + (instancetype)initGuiGeAndCouperView;
 
-/** 区分视图的类型 100代表 优惠券 200代表 规格*/
+/**
+ * @brief  区分视图的类型 100代表 优惠券 200代表 规格
+ */
 @property (nonatomic, copy) NSString *TypeString;
 
-/** 头部的标题*/
+/**
+ * @brief 头部的标题
+ */
 @property (nonatomic, copy) NSString *placherString;
 
-/** 显示视图 */
+/**
+ * @brief 店铺ID
+ */
+@property (nonatomic, copy) NSString *storeId;
+
+/**
+ * @brief 显示视图
+ */
 - (void)ShowGuiGeAndCouperView;
 
+/**
+ * @brief 隐藏视图
+ */
+- (void)dismissAdressView;
+
+/**
+ * @brief 设置代理
+ */
 @property (nonatomic, weak) id<HSQGuiGeAndCouperViewDelegate>delegate;
 
 @end

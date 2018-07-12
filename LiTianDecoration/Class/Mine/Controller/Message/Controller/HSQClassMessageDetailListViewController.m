@@ -14,6 +14,8 @@
 #import "HSQMyAccountBalanceViewController.h"
 #import "HSQCommissionHomeViewController.h"
 #import "HSQTuiGoodAndMoneryDetailViewController.h"
+#import "HSQMessageDetailListHeaderView.h"
+#import "HSQMyStoreCollectionFooterView.h"
 
 @interface HSQClassMessageDetailListViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -59,7 +61,7 @@
  */
 - (void)CreatTableView{
     
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight - KSafeTopeHeight - KSafeBottomHeight) style:(UITableViewStylePlain)];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight - KSafeTopeHeight - KSafeBottomHeight) style:(UITableViewStyleGrouped)];
     
     tableView.backgroundColor = [UIColor clearColor];
     
@@ -69,7 +71,11 @@
     
     tableView.dataSource = self;
     
-    [tableView registerNib:[UINib nibWithNibName:@"HSQMessgaeDetailDataListCell" bundle:nil] forCellReuseIdentifier:@"HSQMessgaeDetailDataListCell"];
+    [tableView registerClass:[HSQMessgaeDetailDataListCell class] forCellReuseIdentifier:@"HSQMessgaeDetailDataListCell"];
+    
+    [tableView registerClass:[HSQMessageDetailListHeaderView class] forHeaderFooterViewReuseIdentifier:@"HSQMessageDetailListHeaderView"];
+    
+    [tableView registerClass:[HSQMyStoreCollectionFooterView class] forHeaderFooterViewReuseIdentifier:@"HSQMyStoreCollectionFooterView"];
     
     [self.view addSubview:tableView];
     
@@ -213,11 +219,6 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
     if (self.currentPage == self.totalPage.integerValue || self.totalPage.integerValue == 0)
     {
         self.tableView.mj_footer.hidden = YES;
@@ -230,19 +231,66 @@
     return self.dataSource.count;
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section{
+    
+    return 40;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    return 40;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
+    HSQMessageDetailListHeaderView *HeaderView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"HSQMessageDetailListHeaderView"];
+    
+    HSQClassMessageListModel *model = self.dataSource[section];
+    
+    HeaderView.MessageTime_Label.textAlignment = NSTextAlignmentCenter;
+    
+    HeaderView.MessageTime_Label.text = model.addTime;
+    
+    return HeaderView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForFooterInSection:(NSInteger)section{
+    
+    return 10;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    
+    return 10;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    
+    HSQMyStoreCollectionFooterView *FooterView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"HSQMyStoreCollectionFooterView"];
+    
+    return FooterView;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    HSQClassMessageListModel *model = self.dataSource[indexPath.row];
+    HSQClassMessageListModel *model = self.dataSource[indexPath.section];
     
-    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
+    return [self.tableView cellHeightForIndexPath:indexPath model:model keyPath:@"model" cellClass:[HSQMessgaeDetailDataListCell class] contentViewWidth:KScreenWidth] + 5;
     
-    paraStyle.lineSpacing = 8;
-    
-    NSDictionary *dic = @{NSFontAttributeName:[UIFont systemFontOfSize:14.0], NSParagraphStyleAttributeName:paraStyle, NSKernAttributeName:@1.0f};
-    
-    CGSize size = [model.messageContent boundingRectWithSize:CGSizeMake(KScreenWidth - 30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
-    
-    return size.height + 60;
+//    NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
+//
+//    paraStyle.lineSpacing = 8;
+//
+//    NSDictionary *dic = @{NSFontAttributeName:[UIFont systemFontOfSize:14.0], NSParagraphStyleAttributeName:paraStyle, NSKernAttributeName:@1.0f};
+//
+//    CGSize size = [model.messageContent boundingRectWithSize:CGSizeMake(KScreenWidth - 30, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+//
+//    return size.height + 60;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -251,8 +299,11 @@
     
     if (self.dataSource.count != 0)
     {
-        cell.model = self.dataSource[indexPath.row];
+        cell.model = self.dataSource[indexPath.section];
     }
+    
+    // 此步设置用于实现cell的frame缓存，可以让tableview滑动更加流畅
+    [cell useCellFrameCacheWithIndexPath:indexPath tableView:tableView];
     
     return cell;
 }

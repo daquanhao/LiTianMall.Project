@@ -53,11 +53,11 @@
     
     if ([dataModel.itemType isEqualToString:@"goods"]) // 为你推荐的商品列表
     {
-        return CGSizeMake((KScreenWidth-2)/2, (KScreenWidth-5)/2);
+        return CGSizeMake((KScreenWidth-2)/2, (KScreenWidth-5)/2 + 50);
     }
    else if ([dataModel.itemType isEqualToString:@"home10"]) // 四列单行图片模块，4张图片160×210
     {
-        return CGSizeMake((KScreenWidth - 3) / 4, (KScreenWidth - 3) / 4 * (21 / 16));
+        return CGSizeMake((KScreenWidth - 3) / 4, ((KScreenWidth - 3) / 4) * 21 / 16);
     }
     else if ([dataModel.itemType isEqualToString:@"home9"]) // 左一右二竖排模块，3张图片，左侧1张大图320×210，右侧2张小图160×210
     {
@@ -99,7 +99,7 @@
     }
     else if ([dataModel.itemType isEqualToString:@"home7"]) // 标题或间隔型模块
     {
-        return CGSizeMake(KScreenWidth, KScreenWidth * 5 / 64);
+        return CGSizeMake(KScreenWidth, KScreenWidth * 8 / 64);
     }
     else if ([dataModel.itemType isEqualToString:@"home1"]) // 单列单张大图模块
     {
@@ -107,7 +107,7 @@
     }
     else if ([dataModel.itemType isEqualToString:@"text"]) // 跑马灯
     {
-        return CGSizeMake(KScreenWidth, 40);
+        return CGSizeMake(KScreenWidth, 30);
     }
     else if ([dataModel.itemType isEqualToString:@"home8"]) // 五列单行小图模块
     {

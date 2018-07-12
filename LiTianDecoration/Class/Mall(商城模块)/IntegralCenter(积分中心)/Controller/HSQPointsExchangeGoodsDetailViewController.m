@@ -425,7 +425,7 @@
 /**
  * @brief 商品的规格及数量选好的回调
  */
--(void)hsqGoodsModelViewBottomBtnClickAction:(UIButton *)sender GoodsCount:(NSString *)Count Type:(NSString *)typeString goods_id:(NSString *)goodsId GoodsKunCun:(NSString *)goodsStorage goodsSpecString:(NSString *)goodsSpecString{
+-(void)hsqGoodsModelViewBottomBtnClickActionWithGoodsCount:(NSString *)Count Type:(NSString *)typeString goods_id:(NSString *)goodsId GoodsKunCun:(NSString *)goodsStorage goodsSpecString:(NSString *)goodsSpecString{
     
     HSQLog(@"==选好的商品个数==%@==%@==%@==%@",Count,typeString,goodsId,goodsSpecString);
     

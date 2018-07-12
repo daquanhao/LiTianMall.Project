@@ -7,6 +7,8 @@
 //  Copyright © 2018年 administrator. All rights reserved.
 //
 
+#define KZongHeViewH KScreenHeight - KSafeTopeHeight - KSafeBottomHeight - 50
+
 #import "HSQToPromoteViewController.h"
 #import "HSQLoginHomeViewController.h"
 #import "HSQToPromoteListCell.h"
@@ -16,8 +18,10 @@
 #import "HSQPlatformAuditViewController.h"
 #import "HSQMySelectionBankHomeViewController.h"  // 我的选品库首页
 #import "HSQMobilePromotionProductsView.h"
+#import "HSQCustomButton.h"
+#import "HSQZongHeMenuView.h"  // 综合排序的下拉菜单视图
 
-@interface HSQToPromoteViewController ()<UITableViewDataSource,UITableViewDelegate,HSQToPromoteListCellDelegate>
+@interface HSQToPromoteViewController ()<UITableViewDataSource,UITableViewDelegate,HSQToPromoteListCellDelegate,HSQZongHeMenuViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -82,8 +86,25 @@
 // 加入选品库的商品个数
 @property (nonatomic, strong) NSMutableArray *SelectGoodsCount_array;
 
-// 需要添加的商品
-@property (nonatomic, strong) NSString *commonIds;
+@property (nonatomic, strong) NSString *commonIds; // 需要添加的商品
+
+@property (weak, nonatomic) IBOutlet UIView *Button_BgView; // 按钮背景图
+
+@property (nonatomic, strong) UIButton *selectedButton;
+
+@property (nonatomic, strong) HSQZongHeMenuView *ZongHeMenuView;
+
+@property (nonatomic, assign) NSInteger ZongHeClick; //综合是否被点击
+
+@property (nonatomic, assign) NSInteger Select_Index; //综合选中的第几个
+
+@property (nonatomic, strong) NSMutableArray *Zonghe_array;
+
+@property (nonatomic, strong) NSMutableArray *ZongheString_array;
+
+@property (nonatomic, strong) NSMutableArray *ZongheShowString_array;
+
+@property (nonatomic, strong) UIButton *zonghe_Button;
 
 @end
 
@@ -119,6 +140,36 @@
     return _SelectGoodsCount_array;
 }
 
+- (NSMutableArray *)Zonghe_array{
+    
+    if (_Zonghe_array == nil) {
+        
+        self.Zonghe_array = [NSMutableArray arrayWithObjects:@"综合排序",@"评价有多到少排序",@"收入比率",@"推广量从高到低",@"支出佣金从高到低", nil];
+    }
+    
+    return _Zonghe_array;
+}
+
+- (NSMutableArray *)ZongheShowString_array{
+    
+    if (_ZongheShowString_array == nil) {
+        
+        self.ZongheShowString_array = [NSMutableArray arrayWithObjects:@"综合",@"评价",@"收入比率",@"推广量",@"支出佣金", nil];
+    }
+    
+    return _ZongheShowString_array;
+}
+
+- (NSMutableArray *)ZongheString_array{
+    
+    if (_ZongheString_array == nil) {
+        
+        self.ZongheString_array = [NSMutableArray arrayWithObjects:@"",@"comment_desc",@"commission_desc",@"diffusion_desc",@"commission_desc", nil];
+    }
+    
+    return _ZongheString_array;
+}
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
@@ -133,12 +184,201 @@
     
     [self.tableView registerClass:[HSQToPromoteListCell class] forCellReuseIdentifier:@"HSQToPromoteListCell"];
     
+    // 添加头部筛选按钮
+    [self AddTheHeaderFilterButton];
+    
     // 综合排序
     self.sort = @"";
+    
+    self.ZongHeClick = 0;
+    
+    self.Select_Index = 0;
     
     // 请求推广分佣的数据
     [self AddRateRefuentView];
     
+}
+
+/**
+ * @brief 添加头部筛选按钮
+ */
+- (void)AddTheHeaderFilterButton{
+    
+    NSArray *array = @[@"综合",@"销量",@"价格",@"筛选"];
+    
+    // 内部的子标签
+    CGFloat width = KScreenWidth / array.count;
+    
+    CGFloat height = self.Button_BgView.mj_h;
+    
+    for (NSInteger i = 0; i < array.count; i++) {
+        
+        HSQCustomButton *button = [HSQCustomButton buttonWithType:(UIButtonTypeCustom)];
+        
+        button.tag = i;
+        
+        button.mj_h = height;
+        
+        button.mj_w = width;
+        
+        button.mj_x = i * width;
+        
+        [button setTitle:[NSString stringWithFormat:@"%@ ",array[i]] forState:UIControlStateNormal];
+        
+        if (i == 0 || i == 2)
+        {
+            button.alignmentType = Button_AlignmentStatusRight;
+            
+            [button setImage:[UIImage imageNamed:@"F29714FE-BAB1-48BE-AED0-4825E2E9BFB6"] forState:(UIControlStateNormal)];
+        }
+        else if (i == 3)
+        {
+            button.alignmentType = Button_AlignmentStatusRight;
+            
+            [button setImage:[UIImage imageNamed:@"2B4072B2-E0E0-4834-8297-81D825E5CF66"] forState:(UIControlStateNormal)];
+        }
+        
+        [button setTitleColor:RGB(131, 131, 131) forState:UIControlStateNormal];
+        
+        [button setTitleColor:RGB(255, 83, 63) forState:UIControlStateSelected];
+        
+        button.titleLabel.font = [UIFont systemFontOfSize:KLabelFont(14.0, 14.0)];
+        
+        [button addTarget:self action:@selector(titleClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.Button_BgView addSubview:button];
+        
+        // 默认点击了第一个按钮
+        if (i == 0)
+        {
+            button.selected = YES;
+            
+            self.selectedButton = button;
+            
+            self.zonghe_Button = button;
+            
+            // 让按钮内部的label根据文字内容来计算尺寸
+            [button.titleLabel sizeToFit];
+        }
+    }
+    
+    // 添加综合的下拉菜单视图
+    HSQZongHeMenuView *ZongHeMenuView = [[HSQZongHeMenuView alloc] initWithFrame:CGRectMake(0, 50, KScreenWidth, KZongHeViewH)];
+    
+    ZongHeMenuView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+    
+    ZongHeMenuView.alpha = 0.0;
+    
+    ZongHeMenuView.Menu_Source = self.Zonghe_array;
+    
+    ZongHeMenuView.delegate = self;
+    
+    [self.view addSubview:ZongHeMenuView];
+    
+    self.ZongHeMenuView = ZongHeMenuView;
+}
+
+/**
+ * @brief 顶部按钮的点击事件
+ */
+- (void)titleClick:(UIButton *)button{
+    
+    // 修改按钮状态
+    self.selectedButton.selected = NO;
+    
+    button.selected = YES;
+    
+    self.selectedButton = button;
+    
+    if (button.tag == 0) // 综合排序
+    {
+        if (self.ZongHeClick == 0)
+        {
+           [self ShowAndDismissZongHeViewWith:1 Height:KZongHeViewH];
+        }
+        else
+        {
+            [self ShowAndDismissZongHeViewWith:0 Height:0];
+        }
+    }
+    else if (button.tag == 1) // 你点击了销量
+    {
+        if (![self.sort isEqualToString:@"sale_desc"])
+        {
+            self.sort = @"sale_desc";
+            
+            [self.tableView.mj_header beginRefreshing];
+            
+            // 隐藏综合菜单式图
+            [self ShowAndDismissZongHeViewWith:0 Height:0];
+        }
+    }
+    else if (button.tag == 2) // 你点击了价格
+    {
+        // 价格从高到低：price_desc；价格从低到高：price_asc
+        if ([self.sort isEqualToString:@"price_desc"]) // 价格从高到低
+        {
+            self.sort = @"price_asc";
+        }
+        else
+        {
+            self.sort = @"price_desc";
+        }
+        
+        // 隐藏综合菜单式图
+         [self ShowAndDismissZongHeViewWith:0 Height:0];
+        
+         [self.tableView.mj_header beginRefreshing];
+    }
+    else if (button.tag == 3) // 筛选
+    {
+        HSQLog(@"===你点击了筛选");
+        
+        // 隐藏综合菜单式图
+        [self ShowAndDismissZongHeViewWith:0 Height:0];
+    }
+    
+}
+
+/**
+ * @brief 隐藏综合菜单式图
+ */
+- (void)ShowAndDismissZongHeViewWith:(NSInteger)IsSelect Height:(NSInteger)height{
+    
+    self.ZongHeClick = IsSelect;
+    
+    self.ZongHeMenuView.Index = self.Select_Index;
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        
+        self.ZongHeMenuView.alpha = IsSelect;
+        
+    }completion:^(BOOL finished) {
+        
+    }];
+}
+
+/**
+ * @brief 综合菜单式图的点击
+ */
+- (void)SelectZongHeTiaoJian:(NSString *)Select_String Index:(NSInteger)Select_Index{
+    
+    self.Select_Index = Select_Index;
+    
+    // 隐藏综合菜单式图
+    [self ShowAndDismissZongHeViewWith:0 Height:0];
+    
+    self.sort = self.ZongheString_array[Select_Index];
+    
+    NSString *string = self.ZongheShowString_array[Select_Index];
+    
+    [self.zonghe_Button setTitle:string forState:(UIControlStateNormal)];
+    
+     [self.zonghe_Button setTitle:string forState:(UIControlStateSelected)];
+    
+    [self.tableView.mj_header beginRefreshing];
+    
+    HSQLog(@"=隐藏综合菜单式图===%@====%@",Select_String,self.sort);
 }
 
 /**

@@ -62,7 +62,7 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"检测是否收藏数据加载失败" SuperView:SupView];
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:SupView];
     }];
     
     return self.IsCollection;

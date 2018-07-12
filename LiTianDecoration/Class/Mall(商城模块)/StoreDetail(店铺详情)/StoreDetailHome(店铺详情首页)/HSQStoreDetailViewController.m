@@ -26,8 +26,10 @@
 #import "HSQContactTheMerchantController.h"
 #import "HSQFreeCouponRedemptionView.h"
 #import "HSQGoodsDataListModel.h"
+#import "HSQGuiGeAndCouperView.h"
+#import "MVGoodsDetailHomeViewController.h"
 
-@interface HSQStoreDetailViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,HSQStoreDetailHomeHeadReusableViewDelegate,HSQAllGoodsModelTitleCollectionReusableViewDelegate,HSQClassSecondGoodsListCellDelegate>
+@interface HSQStoreDetailViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,HSQStoreDetailHomeHeadReusableViewDelegate,HSQAllGoodsModelTitleCollectionReusableViewDelegate,HSQClassSecondGoodsListCellDelegate,HSQGuiGeAndCouperViewDelegate,HSQStoreRecommendedCollectionViewCellDelegate>
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *BottomViewLayOut;
 
@@ -60,6 +62,8 @@
 @property (nonatomic, strong) NSMutableArray *conformList; // 满优惠数组
 
 @property (nonatomic, strong) NSMutableArray *discountList; // 限时折扣数组
+
+@property (nonatomic, strong) HSQGuiGeAndCouperView *GuiGeAndCouperView;
 
 @end
 
@@ -164,7 +168,7 @@
     
     [SearchBar setTitle:@"搜索店铺商品" forState:(UIControlStateNormal)];
     
-    SearchBar.titleLabel.font = [UIFont systemFontOfSize:14];
+    SearchBar.titleLabel.font = [UIFont systemFontOfSize:14.0];
     
     [SearchBar setTitleColor:RGB(150, 150, 150) forState:(UIControlStateNormal)];
     
@@ -531,11 +535,38 @@
  * @brief 免费领券
  */
 - (IBAction)FreeCouponButtonClickAction:(UIButton *)sender {
+//
+//    HSQFreeCouponRedemptionView *FreeCouponView = [HSQFreeCouponRedemptionView initFreeCouponRedemptionView];
+//
+//    [FreeCouponView ShowFreeCouponRedemptionView];
     
-    HSQFreeCouponRedemptionView *FreeCouponView = [HSQFreeCouponRedemptionView initFreeCouponRedemptionView];
+    HSQGuiGeAndCouperView *GuiGeAndCouperView = [HSQGuiGeAndCouperView initGuiGeAndCouperView];
     
-    [FreeCouponView ShowFreeCouponRedemptionView];
+    GuiGeAndCouperView.placherString = @"可领优惠券";
+    
+    GuiGeAndCouperView.delegate = self;
+    
+    GuiGeAndCouperView.TypeString = @"100";
+    
+    GuiGeAndCouperView.storeId = self.storeId;
+    
+    [GuiGeAndCouperView ShowGuiGeAndCouperView];
+    
+    self.GuiGeAndCouperView = GuiGeAndCouperView;
 }
+
+/**
+ * @brief 领取优惠券
+ */
+- (void)ChooseGuiGeAndCoupter:(NSIndexPath *)indexPath templateId:(NSString *)templateId{
+    
+    [self.GuiGeAndCouperView dismissAdressView];
+    
+    HSQLoginHomeViewController *LoginVC = [[HSQLoginHomeViewController alloc] init];
+    
+    [self.navigationController pushViewController:LoginVC animated:YES];
+}
+
 
 /**
  * @brief 联系客服
@@ -704,7 +735,7 @@
     {
         if (self.isGrid == YES)
         {
-            return CGSizeMake((KScreenWidth - 6) / 2, (KScreenWidth - 6) / 2 + 70);
+            return CGSizeMake((KScreenWidth - 5) / 2, (KScreenWidth - 5) / 2 + 70);
         }
         else
         {
@@ -713,7 +744,7 @@
     }
     else  if (self.ModelType.integerValue == 3) // 商品上新
     {
-        return CGSizeMake((KScreenWidth - 2)/2, (KScreenWidth - 2)/2);
+        return CGSizeMake((KScreenWidth - 2)/2, (KScreenWidth - 2)/2 + 50);
     }
     else // 店铺活动
     {
@@ -756,6 +787,8 @@
             HSQStoreRecommendedCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HSQStoreRecommendedCollectionViewCell" forIndexPath:indexPath];
             
             cell.dataDiction = self.datadiction;
+            
+            cell.delegate = self;
             
             return cell;
         }
@@ -815,7 +848,43 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    
+     if (self.ModelType.integerValue == 1)  // 店铺首页
+     {
+         if (indexPath.section == 1)
+         {
+
+         }
+         else
+         {
+             NSDictionary *diction = self.dataSource[indexPath.row];
+             
+             MVGoodsDetailHomeViewController *GoodsDetailVC = [[MVGoodsDetailHomeViewController alloc] init];
+         
+             GoodsDetailVC.commond_id = diction[@"commonId"];
+         
+             [self.navigationController pushViewController:GoodsDetailVC animated:YES];
+         }
+     }
+     else if (self.ModelType.integerValue == 2) // 全部商品
+     {
+         HSQGoodsDataListModel *model = self.goodsCommonList[indexPath.row];
+         
+         MVGoodsDetailHomeViewController *GoodsDetailVC = [[MVGoodsDetailHomeViewController alloc] init];
+         
+         GoodsDetailVC.commond_id = model.commonId;
+         
+         [self.navigationController pushViewController:GoodsDetailVC animated:YES];
+     }
+     else if (self.ModelType.integerValue == 3) // 商品上新
+     {
+         NSDictionary *diction = self.storeNewList[indexPath.row];
+         
+         MVGoodsDetailHomeViewController *GoodsDetailVC = [[MVGoodsDetailHomeViewController alloc] init];
+         
+         GoodsDetailVC.commond_id = diction[@"commonId"];
+         
+         [self.navigationController pushViewController:GoodsDetailVC animated:YES];
+     }
 }
 
 /**
@@ -1183,8 +1252,18 @@
     
 }
 
-
-
+/**
+ * @brief 店铺排行榜商品的点击
+ */
+- (void)ShopRankingListOfGoodsClickAction:(UIButton *)sender commid:(NSString *)commid{
+    
+    MVGoodsDetailHomeViewController *GoodsDetailVC = [[MVGoodsDetailHomeViewController alloc] init];
+    
+    GoodsDetailVC.commond_id = commid;
+    
+    [self.navigationController pushViewController:GoodsDetailVC animated:YES];
+    
+}
 
 
 

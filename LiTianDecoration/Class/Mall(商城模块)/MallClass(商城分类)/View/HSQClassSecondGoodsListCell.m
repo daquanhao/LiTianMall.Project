@@ -142,7 +142,7 @@
  * @brief 商品的描述视图
  */
 - (void)SetUpGoodsDescribeView{
-    
+
     // 描述背景视图
     UIView *DescribeView = [[UIView alloc] init];
     DescribeView.backgroundColor = KViewBackGroupColor;
@@ -251,6 +251,8 @@
 - (void)setDataDiction:(NSDictionary *)dataDiction{
     
     _dataDiction = dataDiction;
+    
+    HSQLog(@"===dataDiction=%@",dataDiction);
     
     // 1.商品的图片
     [self.GoodsImageView sd_setImageWithURL:[NSURL URLWithString:dataDiction[@"imageSrc"]] placeholderImage:KGoodsPlacherImage];

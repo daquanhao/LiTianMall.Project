@@ -61,7 +61,7 @@
         
         [button setTitleColor:RGB(255, 83, 63) forState:UIControlStateSelected];
         
-        button.titleLabel.font = [UIFont systemFontOfSize:14];
+        button.titleLabel.font = [UIFont systemFontOfSize:KLabelFont(14.0, 14.0)];
         
         [button addTarget:self action:@selector(titleClick:) forControlEvents:UIControlEventTouchUpInside];
         

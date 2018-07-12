@@ -1348,7 +1348,6 @@
     }
     
     return  [manger toJSONDataString:goods_array];
-
 }
 
 /**

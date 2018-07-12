@@ -12,6 +12,8 @@
 
 #import "HSQGuiGeAndCouperView.h"
 #import "HSQCoupterListCell.h"
+#import "HSQVoucherListModel.h"
+#import "HSQAccountTool.h"
 
 @interface HSQGuiGeAndCouperView ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -23,9 +25,22 @@
 
 @property (nonatomic, strong) UITableView *tableView;
 
+@property (nonatomic, strong) NSMutableArray *dataSource;
+
 @end
 
 @implementation HSQGuiGeAndCouperView
+
+- (NSMutableArray *)dataSource{
+    
+    if (_dataSource == nil) {
+        
+        self.dataSource = [NSMutableArray array];
+    }
+    
+    return _dataSource;
+}
+
 
 /**
  * @brief 初始化视图
@@ -47,14 +62,14 @@
         
         // 1.创建控件
         [self SetUpViews];
-        
     }
     
     return self;
 }
 
-
-// 1.创建控件
+/**
+ * @brief 创建控件
+ */
 - (void)SetUpViews{
     
     // 最底部的点击按钮
@@ -82,7 +97,7 @@
     // 3.右边的退出按钮
     UIButton *right_button = [UIButton buttonWithType:(UIButtonTypeCustom)];
     right_button.frame = CGRectMake(KScreenWidth - KPlacherLabelHeight, 0, KPlacherLabelHeight, KPlacherLabelHeight);
-    right_button.backgroundColor = [UIColor orangeColor];
+    [right_button setImage:KImageName(@"TuiChuButton") forState:(UIControlStateNormal)];
     [right_button addTarget:self action:@selector(dismissAdressView) forControlEvents:(UIControlEventTouchUpInside)];
     [BgView addSubview:right_button];
     
@@ -106,58 +121,199 @@
     [self.tableView reloadData];
 }
 
+/**
+ * @brief 店铺的id
+ */
+- (void)setStoreId:(NSString *)storeId{
+    
+    _storeId = storeId;
+    
+    // 2.请求店铺的优惠券数据
+    [self RequestStoreCouponData];
+}
+
+/**
+ * @brief 请求店铺的优惠券数据
+ */
+- (void)RequestStoreCouponData{
+    
+    [[HSQProgressHUDManger Manger] ShowLoadingDataFromeServer:@"" ToView:self IsClearColor:YES];
+    
+    [self.dataSource removeAllObjects];
+    
+    NSString *token = [HSQAccountTool account].token;
+    
+    if (token.length != 0)
+    {
+        [self WhenLoggedInRequestCouponList:token];
+    }
+    else
+    {
+        [self WhenNotLoggedInRequestCouponList];
+    }
+}
+
+/**
+ * @brief 登录的时候，请求优惠券列表
+ */
+- (void)WhenLoggedInRequestCouponList:(NSString *)token{
+    
+    NSDictionary *params = @{@"storeId":self.storeId,@"token":token};
+    
+    AFNetworkRequestTool *requestTool = [AFNetworkRequestTool shareRequestTool];  // KtemplateFreeUrl
+    
+    [requestTool.manger POST:UrlAdress(KtemplateFreeUrl) parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        [[HSQProgressHUDManger Manger] DismissProgressHUD];
+        
+        HSQLog(@"===优惠券列表数据===%@",[NSString stringWithFormat:@"%@",responseObject]);
+        
+        if ([responseObject[@"code"] integerValue] == 200)
+        {
+            self.dataSource = [HSQVoucherListModel mj_objectArrayWithKeyValuesArray:responseObject[@"datas"][@"voucherTemplateList"]];
+        }
+        else
+        {
+            NSString *errorString = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"error"]];
+            
+            [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:errorString SuperView:self];
+        }
+        
+        [self.tableView reloadData];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        // 提示数据请求失败
+        [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:KErrorPlacherString SupView:self];
+    }];
+}
+
+/**
+ * @brief 没有登录的时候，请求优惠券列表
+ */
+- (void)WhenNotLoggedInRequestCouponList{
+    
+    NSDictionary *params = @{@"storeId":self.storeId};
+    
+    AFNetworkRequestTool *requestTool = [AFNetworkRequestTool shareRequestTool];  // KtemplateFreeUrl
+    
+    [requestTool.manger GET:UrlAdress(KStoreActivityUrl) parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        [[HSQProgressHUDManger Manger] DismissProgressHUD];
+        
+        HSQLog(@"===优惠券列表数据===%@",[NSString stringWithFormat:@"%@",responseObject]);
+        
+        if ([responseObject[@"code"] integerValue] == 200)
+        {
+            self.dataSource = [HSQVoucherListModel mj_objectArrayWithKeyValuesArray:responseObject[@"datas"][@"voucherTemplateList"]];
+        }
+        else
+        {
+            NSString *errorString = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"error"]];
+            
+            [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:errorString SuperView:self];
+        }
+        
+        [self.tableView reloadData];
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        // 提示数据请求失败
+        [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:KErrorPlacherString SupView:self];
+    }];
+}
 
 #pragma mark - TableViewDatasouce
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 10;
+    return self.dataSource.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 80;
+    return 85;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     HSQCoupterListCell * cell = [tableView dequeueReusableCellWithIdentifier:@"HSQCoupterListCell" forIndexPath:indexPath];
     
-    if (self.TypeString.integerValue == 100)
-    {
-        [cell.BgView setHidden:YES];
-    }
-    else
-    {
-         [cell.BgView setHidden:NO];
-    }
+    cell.model = self.dataSource[indexPath.row];
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-        
-    if (self.delegate && [self.delegate respondsToSelector:@selector(ChooseGuiGeAndCoupter:)]) {
-        
-        [self.delegate ChooseGuiGeAndCoupter:indexPath];
+    
+    HSQVoucherListModel *model = self.dataSource[indexPath.row];
+    
+    NSString *token = [HSQAccountTool account].token;
+    
+    if (token.length == 0)
+    {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(ChooseGuiGeAndCoupter:templateId:)]) {
+            
+            [self.delegate ChooseGuiGeAndCoupter:indexPath templateId:model.templateId];
+        }
+    }
+    else
+    {
+        if (model.memberIsReceive.integerValue == 1)
+        {
+            [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:@"您已领取过该优惠券" SupView:self];
+        }
+        else
+        {
+            [self NotifyTheServerToCollectCoupons:model];
+        }
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/**
+ * @brief 领取优惠券
+ */
+- (void)NotifyTheServerToCollectCoupons:(HSQVoucherListModel *)model{
+    
+    [[HSQProgressHUDManger Manger] ShowLoadingDataFromeServer:@"" ToView:self IsClearColor:YES];
+    
+    NSDictionary *params = @{@"token":[HSQAccountTool account].token,@"templateId":model.templateId};
+    
+    AFNetworkRequestTool *requestTool = [AFNetworkRequestTool shareRequestTool];
+    
+    [requestTool.manger POST:UrlAdress(KfreeGetCouponsUrl) parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        HSQLog(@"==领取优惠券==%@===",responseObject);
+        
+        [[HSQProgressHUDManger Manger] DismissProgressHUD];
+        
+        if ([responseObject[@"code"] integerValue] == 200)
+        {
+            model.memberIsReceive = @"1";
+            
+            [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:@"领取成功" SupView:self];
+            
+            [self.tableView reloadData];
+        }
+        else
+        {
+            NSString *errorString = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"error"]];
+            
+            [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:errorString SuperView:self];
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        
+        [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:KErrorPlacherString SupView:self];
+        
+    }];
+}
 
 - (void)setPlacherString:(NSString *)placherString{
     
@@ -166,7 +322,9 @@
     self.placher_Label.text = placherString;
 }
 
-/** 点击背景按钮的点击事件*/
+/**
+ * @brief 点击背景按钮的点击事件
+ */
 - (void)btnClickAction:(UIButton *)sender{
     
     [self dismissAdressView];

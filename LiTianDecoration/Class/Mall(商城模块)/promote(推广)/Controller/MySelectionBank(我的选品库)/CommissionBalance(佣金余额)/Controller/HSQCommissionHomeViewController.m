@@ -110,12 +110,32 @@
     
     // 佣金
     UILabel *Commission_Label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth-10, KTopBgViewHeight)];
-    Commission_Label.text = [NSString stringWithFormat:@"佣金金额\n¥%.2f",payCommission.floatValue];
+    
+    NSString *payCommissionString = [NSString stringWithFormat:@"佣金金额\n¥%.2f",payCommission.floatValue];
+    
+    // 设置行间距
+    NSMutableParagraphStyle  *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    
+    // 行间距设置为30
+    [paragraphStyle  setLineSpacing:10];
+    
+    NSMutableAttributedString  *setString = [[NSMutableAttributedString alloc] initWithString:payCommissionString];
+    
+    [setString  addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [payCommissionString length])];
+    
+    // 设置Label要显示的text
+    [Commission_Label  setAttributedText:setString];
+    
     Commission_Label.numberOfLines = 0;
+    
     Commission_Label.textColor = [UIColor whiteColor];
+    
     Commission_Label.font = [UIFont systemFontOfSize:12.0];
+    
     Commission_Label.textAlignment = NSTextAlignmentRight;
+    
     [BgView addSubview:Commission_Label];
+    
     self.Commission_Label = Commission_Label;
 }
 
@@ -180,7 +200,7 @@
         
         [button setTitleColor:RGB(255, 83, 63) forState:UIControlStateDisabled];
         
-        button.titleLabel.font = [UIFont systemFontOfSize:KTextFont_(14)];
+        button.titleLabel.font = [UIFont systemFontOfSize:KLabelFont(14.0, 12.0)];
         
         [button addTarget:self action:@selector(titleClick:) forControlEvents:UIControlEventTouchUpInside];
         

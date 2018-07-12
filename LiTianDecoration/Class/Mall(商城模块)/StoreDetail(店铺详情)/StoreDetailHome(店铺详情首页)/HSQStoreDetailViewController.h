@@ -10,7 +10,9 @@
 
 @interface HSQStoreDetailViewController : UIViewController
 
-/** 店铺的id*/
+/**
+ * @brief 店铺的id
+ */
 @property (nonatomic, copy) NSString *storeId;
 
 @end

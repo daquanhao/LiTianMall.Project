@@ -32,7 +32,9 @@
     _pointsGoodsDetailVo = pointsGoodsDetailVo;
     
     // 名字
-    self.GoodsName_Label.text = [NSString stringWithFormat:@"%@",pointsGoodsDetailVo[@"goodsName"]];
+    NSString *goodsName = [NSString stringWithFormat:@"%@",pointsGoodsDetailVo[@"goodsName"]];
+    self.GoodsName_Label.text = (goodsName.length == 0 ? @"" : goodsName);
+    
     
     // 卖点
     self.jingle_Label.text = [NSString stringWithFormat:@"%@",pointsGoodsDetailVo[@"jingle"]];
@@ -46,13 +48,19 @@
     
     [attribe addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0] range:NSMakeRange(1, expendPoints.length)];
     
-    self.expendPoints_Label.attributedText = attribe;
+    self.expendPoints_Label.attributedText = (expendPoints.length == 0 ? [[NSMutableAttributedString alloc] initWithString:@""] : attribe);
     
     // 商品的价格
-    self.appPrice0_Label.text = [NSString stringWithFormat:@"%.2f",[pointsGoodsDetailVo[@"appPrice0"] floatValue]];
+    NSString *appPrice0 = [NSString stringWithFormat:@"¥%.2f",[pointsGoodsDetailVo[@"appPrice0"] floatValue]];
+    
+    self.appPrice0_Label.text = (appPrice0.length == 0 ? @"" : appPrice0);
     
     // 所需的等级
-    self.gradeLevel_Label.text = [NSString stringWithFormat:@"会员等级\n%@及以上专用",pointsGoodsDetailVo[@"limitMemberGradeName"]];
+    NSString *limitMemberGradeName = [NSString stringWithFormat:@"%@",pointsGoodsDetailVo[@"limitMemberGradeName"]];
+    
+    NSString *geval = [NSString stringWithFormat:@"会员等级\n%@及以上专用",pointsGoodsDetailVo[@"limitMemberGradeName"]];
+    
+    self.gradeLevel_Label.text = (limitMemberGradeName.length == 0 ? @"" :geval);
 }
 
 /**

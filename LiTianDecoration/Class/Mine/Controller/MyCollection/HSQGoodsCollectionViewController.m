@@ -134,13 +134,19 @@
     
     // 内部的子标签
     CGFloat width = titlesView.mj_w / titlesArray.count;
+    
     CGFloat height = titlesView.mj_h;
+    
     for (NSInteger i = 0; i < titlesArray.count; i++) {
         
         UIButton *button = [UIButton buttonWithType:(UIButtonTypeCustom)];
+        
         button.tag = i;
+        
         button.mj_h = height;
+        
         button.mj_w = width;
+        
         button.mj_x = i * width;
         
         [button setTitle:titlesArray[i] forState:UIControlStateNormal];
@@ -149,7 +155,7 @@
         
         [button setTitleColor:RGB(255, 83, 63) forState:UIControlStateDisabled];
         
-        button.titleLabel.font = [UIFont systemFontOfSize:KTextFont_(14)];
+        button.titleLabel.font = [UIFont systemFontOfSize:14.0];
         
         [button addTarget:self action:@selector(titleClick:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -433,14 +439,6 @@
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
     
-//    HSQGoodsDataListModel *model = self.dataSource[section];
-//
-//    CGSize HeadSize = [NSString SizeOfTheText:model.goodsName font:[UIFont systemFontOfSize:12.0] MaxSize:CGSizeMake(KScreenWidth - 100, MAXFLOAT)];
-//
-//    HSQLog(@"===rrrrrrrrrr=%.2f",HeadSize.height + 85);
-//
-//    return CGSizeMake(KScreenWidth, HeadSize.height + 85);
-    
     return CGSizeMake(KScreenWidth, 120);
 }
 
@@ -558,7 +556,7 @@
 
 }
 
--(void)hsqGoodsModelViewBottomBtnClickAction:(UIButton *)sender GoodsCount:(NSString *)Count Type:(NSString *)typeString goods_id:(NSString *)goodsId GoodsKunCun:(NSString *)goodsStorage goodsSpecString:(NSString *)goodsSpecString{
+-(void)hsqGoodsModelViewBottomBtnClickActionWithGoodsCount:(NSString *)Count Type:(NSString *)typeString goods_id:(NSString *)goodsId GoodsKunCun:(NSString *)goodsStorage goodsSpecString:(NSString *)goodsSpecString{
     
     HSQLog(@"==选好的商品个数==%@==%@==%@",Count,typeString,goodsId);
     

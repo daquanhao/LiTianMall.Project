@@ -9,7 +9,7 @@
 #import "HSQStoreRecommendedCollectionViewCell.h"
 #import "HSQTuiJianGoodsListView.h"
 
-@interface HSQStoreRecommendedCollectionViewCell ()<UIScrollViewDelegate>
+@interface HSQStoreRecommendedCollectionViewCell ()<UIScrollViewDelegate,HSQTuiJianGoodsListViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *TitleViews;
 
@@ -107,11 +107,13 @@
     
     HSQTuiJianGoodsListView *FirstView = [[HSQTuiJianGoodsListView alloc] initTuiJianGoodsListView];
     FirstView.backgroundColor = [UIColor whiteColor];
+    FirstView.delegate = self;
     [self.ScrollerView addSubview:FirstView];
     self.FirstView = FirstView;
     
     HSQTuiJianGoodsListView *SecondView = [[HSQTuiJianGoodsListView alloc] initTuiJianGoodsListView];
     SecondView.backgroundColor = [UIColor whiteColor];
+    SecondView.delegate = self;
     [self.ScrollerView addSubview:SecondView];
     self.SecondView = SecondView;
     
@@ -128,7 +130,9 @@
     
     // 修改按钮状态
     self.selectedButton.enabled = YES;
+    
     button.enabled = NO;
+    
     self.selectedButton = button;
     
     // 动画
@@ -142,7 +146,9 @@
     
     // 滚动
     CGPoint offset = self.ScrollerView.contentOffset;
+    
     offset.x = button.tag * KScreenWidth;
+    
     [self.ScrollerView setContentOffset:offset animated:YES];
     
 }
@@ -172,8 +178,16 @@
     self.SecondView.data_Array = salenumdesc;
 }
 
-
-
+/**
+ * @brief 店铺排行榜按钮的点击事件
+ */
+- (void)ClickOnTheStoreRankingItems:(UIButton *)sender Commid:(NSString *)commid{
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(ShopRankingListOfGoodsClickAction:commid:)]) {
+        
+        [self.delegate ShopRankingListOfGoodsClickAction:sender commid:commid];
+    }
+}
 
 
 

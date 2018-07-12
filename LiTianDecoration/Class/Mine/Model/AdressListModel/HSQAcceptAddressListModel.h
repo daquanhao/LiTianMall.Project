@@ -43,5 +43,7 @@
 /** 地址的id  */
 @property (nonatomic, copy) NSString *addressId;
 
+/** 是否选中  */
+@property (nonatomic, copy) NSString *Select_string;
 
 @end

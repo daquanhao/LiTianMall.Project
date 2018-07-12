@@ -35,7 +35,7 @@
     self.LineViewFrame = CGRectMake(self.iconFrame.origin.x, CGRectGetMaxY(self.GoodsNameFrame)+10, KScreenWidth - 20, 1);
     
     // 6.评论的内容
-    CGSize size = [NSString SizeOfTheText:model.reportContent font:[UIFont systemFontOfSize:KTextFont_(13)] MaxSize:CGSizeMake(KScreenWidth - 20, MAXFLOAT)];
+    CGSize size = [NSString SizeOfTheText:model.reportContent font:[UIFont systemFontOfSize:KLabelFont(14.0, 12.0)] MaxSize:CGSizeMake(KScreenWidth - 20, MAXFLOAT)];
     self.ContentFrame = CGRectMake(self.iconFrame.origin.x, CGRectGetMaxY(self.LineViewFrame)+10, KScreenWidth - 20, size.height);
     
     // 7.评论图片的尺寸

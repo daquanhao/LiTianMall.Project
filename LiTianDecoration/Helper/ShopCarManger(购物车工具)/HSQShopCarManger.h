@@ -71,4 +71,9 @@
  */
 - (NSMutableArray *)getAllGoodsModel;
 
+/**
+ * @brief 清除所有的数据
+ */
+- (void)ClearAllDataFromeFMDB;
+
 @end

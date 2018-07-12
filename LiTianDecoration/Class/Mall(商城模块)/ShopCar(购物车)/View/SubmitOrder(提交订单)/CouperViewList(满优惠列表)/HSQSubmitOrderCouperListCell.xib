@@ -68,7 +68,7 @@
                 <outlet property="Reason_Label" destination="vXz-Hn-EXD" id="W7H-0d-0fH"/>
                 <outlet property="ShengMonery_Label" destination="tC8-zf-yPg" id="1vX-YO-DYf"/>
             </connections>
-            <point key="canvasLocation" x="-557" y="-50"/>
+            <point key="canvasLocation" x="-931" y="-43"/>
         </tableViewCell>
     </objects>
     <resources>

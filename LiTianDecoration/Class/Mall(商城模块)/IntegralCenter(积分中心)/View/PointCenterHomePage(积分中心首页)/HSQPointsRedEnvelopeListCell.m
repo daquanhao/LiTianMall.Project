@@ -8,7 +8,7 @@
 
 #import "HSQPointsRedEnvelopeListCell.h"
 #import "HSQRedEnvelopeListDataModel.h"
-#import "ZZCircleProgress.h"
+#import "XLCircleProgress.h"
 
 @interface HSQPointsRedEnvelopeListCell ()
 
@@ -26,7 +26,9 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *hasReceived_Btn; // 会员已经领取红包标记
 
-@property (weak, nonatomic) IBOutlet ZZCircleProgress *progressView;
+@property (weak, nonatomic) IBOutlet UIView *progress_BgView; // 进度条背景图
+
+@property (nonatomic, strong) XLCircleProgress *Progress_View;
 
 @end
 
@@ -67,33 +69,38 @@
         [self.hasReceived_Btn setTitle:@"已兑换" forState:(UIControlStateDisabled)];
     }
     
-
-    // 填充色
-    self.progressView.pathFillColor = [UIColor whiteColor];
-    
-    self.progressView.startAngle = -90;
-    
-    // 改变线宽
-    self.progressView.strokeWidth = 4.0;
-    
-    //是否显示圆点
-    self.progressView.showPoint = NO;
-    
     // 领取红包的数量
     CGFloat progress = model.giveoutNum.integerValue / model.totalNum.floatValue;
-    
-    self.progressView.progress = progress;
-
+        
+    if (progress > 0 && progress < 0.01)
+    {
+        self.Progress_View.progress = 0.01;
+    }
+    else
+    {
+        self.Progress_View.progress = progress;
+    }
 }
 
 - (void)awakeFromNib {
     
     [super awakeFromNib];
     
-    self.progressView.pathBackColor = RGB(150, 150, 150);
+    CGFloat circleWidth = self.progress_BgView.mj_h - 2 * 5;
     
-    // 进度值
-    self.progressView.progressLabel.font = [UIFont systemFontOfSize:10.0];
+    XLCircleProgress *Progress_View = [[XLCircleProgress alloc] initWithFrame:CGRectMake(0, 0, circleWidth, circleWidth)];
+    
+    Progress_View.center = self.progress_BgView.center;
+    
+    Progress_View.lineWidth = 4;
+    
+    Progress_View.PlacherFont = [UIFont systemFontOfSize:10.0];
+    
+    Progress_View.PlacherColor = [UIColor blackColor];
+    
+    [self.progress_BgView addSubview:Progress_View];
+    
+    self.Progress_View = Progress_View;
 }
 
 

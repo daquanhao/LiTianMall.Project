@@ -44,6 +44,8 @@
 
 @property (nonatomic, copy) NSString *goodsSpecString; // 商品规格
 
+@property (nonatomic, copy) NSString *goodsPriceString; // 商品价格
+
 @end
 
 @implementation HSQGoodsModelView
@@ -332,6 +334,78 @@
     [self.collectionView reloadData];
 }
 
+/**
+ * @brief 普通商品详情的规格数据
+ */
+- (void)setOrdinary_DatasDiction:(NSDictionary *)Ordinary_DatasDiction{
+    
+    _Ordinary_DatasDiction = Ordinary_DatasDiction;
+    
+    NSDictionary *GoodsDiction = [Ordinary_DatasDiction[@"goodsDetail"][@"specJson"] firstObject];
+    
+    // 商品的图片
+    [self.GoodsImageView sd_setImageWithURL:[NSURL URLWithString:GoodsDiction[@"specValueList"][0][@"imageSrc"]] placeholderImage:KGoodsPlacherImage];
+    
+    // 购买的价格及库存
+    NSArray *GoodsListArray = Ordinary_DatasDiction[@"goodsDetail"][@"goodsList"];
+    NSDictionary *FirstGoodsDiction = GoodsListArray[0];
+    
+    // 已选的规格
+    self.goodsSpecString = [NSString stringWithFormat:@"%@",FirstGoodsDiction[@"goodsSpecString"]];
+    NSString *GuiGeString = [NSString stringWithFormat:@"已选: %@",FirstGoodsDiction[@"goodsSpecString"]];
+    CGSize GuiGeSize = [NSString SizeOfTheText:GuiGeString font:[UIFont systemFontOfSize:12.0] MaxSize:CGSizeMake(KScreenWidth - CGRectGetMaxX(self.GoodsImageView.frame)-20, MAXFLOAT)];
+    self.YiXuanGoods.text = GuiGeString;
+    self.YiXuanGoods.frame = CGRectMake(CGRectGetMaxX(self.GoodsImageView.frame)+10, CGRectGetMaxY(self.GoodsImageView.frame) - GuiGeSize.height, KScreenWidth -CGRectGetMaxX(self.GoodsImageView.frame) -20 , GuiGeSize.height);
+    
+    // 价格及库存
+    self.GoodsPrice.text = [NSString stringWithFormat:@"¥%@(库存: %@%@)",FirstGoodsDiction[@"appPrice0"],FirstGoodsDiction[@"goodsStorage"],Ordinary_DatasDiction[@"goodsDetail"][@"unitName"]];
+    self.GoodsPrice.frame = CGRectMake(self.YiXuanGoods.mj_x, self.YiXuanGoods.mj_y - 25, self.YiXuanGoods.mj_w , 20);
+    self.GoodsKuCunString = [NSString stringWithFormat:@"%@",FirstGoodsDiction[@"goodsStorage"]];
+    
+    if (self.TypeString.integerValue == 400)
+    {
+         [self.BottomClickBtn setTitle:@"加入购物车" forState:(UIControlStateNormal)];
+    }
+    else
+    {
+         [self.BottomClickBtn setTitle:@"立即购买" forState:(UIControlStateNormal)];
+    }
+    
+    // 商品的id
+    self.Goods_id = [NSString stringWithFormat:@"%@",FirstGoodsDiction[@"goodsId"]];
+
+    if (self.Source == 200) // 收藏列表详情跳转过里的
+    {
+        [self.BottomClickBtn setTitle:@"加入购物车" forState:(UIControlStateNormal)];
+    }
+    
+    // 中间的规格列表
+    for (NSDictionary *dict in Ordinary_DatasDiction[@"goodsDetail"][@"specJson"])
+    {
+        // 外层数据
+        HSQGoodsGuiGeTypeModel *ReceiveModel = [[HSQGoodsGuiGeTypeModel alloc] initWithDictionary:dict error:nil];
+        
+        ReceiveModel.specValueList = [NSMutableArray array];
+        
+        [self.dataSource addObject:ReceiveModel];
+        
+        // 内层数据
+        for (NSInteger i = 0; i < [dict[@"specValueList"] count] ; i++) {
+            
+            NSDictionary *ModelDiction = dict[@"specValueList"][i];
+            
+            HSQGoodsGuiGeListModel *ListModel = [[HSQGoodsGuiGeListModel alloc] init];
+            
+            [ListModel setValuesForKeysWithDictionary:ModelDiction];
+            
+            ListModel.IsSelect = (i == 0 ? @"1" : @"0");
+            
+            [ReceiveModel.specValueList addObject:ListModel];
+        }
+    }
+    
+    [self.collectionView reloadData];
+}
 
 #pragma mark - UICollectionViewDelegate,UICollectionViewDataSource
 
@@ -454,9 +528,13 @@
     {
         goodsList = self.PointDatasDiction[@"pointsGoodsDetailVo"][@"goodsList"];
     }
+    else  if (self.TypeString.integerValue == 400 || self.TypeString.integerValue == 500)
+    {
+       goodsList = self.Ordinary_DatasDiction[@"goodsDetail"][@"goodsList"];
+    }
     else
     {
-       goodsList = self.dataDiction[@"groupGoodsDetailVo"][@"goodsList"];
+        goodsList = self.dataDiction[@"groupGoodsDetailVo"][@"goodsList"];
     }
     
     for (NSInteger i = 0; i < goodsList.count ; i++) {
@@ -478,15 +556,23 @@
             self.YiXuanGoods.frame = CGRectMake(CGRectGetMaxX(self.GoodsImageView.frame)+10, CGRectGetMaxY(self.GoodsImageView.frame) - GuiGeSize.height, KScreenWidth -CGRectGetMaxX(self.GoodsImageView.frame) -20 , GuiGeSize.height);
             
             // 价格及库存
-            NSString *Keys = (self.TypeString.integerValue == 100 ? @"appPrice0":@"groupPrice");
-            
             if (self.TypeString.integerValue == 300)
             {
-                self.GoodsPrice.text = [NSString stringWithFormat:@"¥%@(库存: %@%@)",GoodsDiction[Keys],GoodsDiction[@"goodsStorage"],self.PointDatasDiction[@"pointsGoodsDetailVo"][@"unitName"]];
+                self.GoodsPrice.text = [NSString stringWithFormat:@"¥%@(库存: %@%@)",GoodsDiction[@"groupPrice"],GoodsDiction[@"goodsStorage"],self.PointDatasDiction[@"pointsGoodsDetailVo"][@"unitName"]];
+                
+                self.goodsPriceString = [NSString stringWithFormat:@"%@",GoodsDiction[@"groupPrice"]];
+            }
+            else  if (self.TypeString.integerValue == 400 || self.TypeString.integerValue == 500)
+            {
+                 self.GoodsPrice.text = [NSString stringWithFormat:@"¥%@(库存: %@%@)",GoodsDiction[@"appPrice0"],GoodsDiction[@"goodsStorage"],self.Ordinary_DatasDiction[@"goodsDetail"][@"unitName"]];
+                
+                self.goodsPriceString = [NSString stringWithFormat:@"%@",GoodsDiction[@"appPrice0"]];
             }
             else
             {
-                self.GoodsPrice.text = [NSString stringWithFormat:@"¥%@(库存: %@%@)",GoodsDiction[Keys],GoodsDiction[@"goodsStorage"],self.dataDiction[@"groupGoodsDetailVo"][@"unitName"]];
+                self.GoodsPrice.text = [NSString stringWithFormat:@"¥%@(库存: %@%@)",GoodsDiction[@"appPrice0"],GoodsDiction[@"goodsStorage"],self.dataDiction[@"groupGoodsDetailVo"][@"unitName"]];
+                
+                self.goodsPriceString = [NSString stringWithFormat:@"%@",GoodsDiction[@"appPrice0"]];
             }
             
             self.GoodsPrice.frame = CGRectMake(self.YiXuanGoods.mj_x, self.YiXuanGoods.mj_y - 25, self.YiXuanGoods.mj_w , 20);
@@ -498,7 +584,13 @@
             
             // 商品的id
             self.Goods_id = [NSString stringWithFormat:@"%@",GoodsDiction[@"goodsId"]];
+        
         }
+    }
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(hsqGoodsModelViewCollectionCellClickActionWithGoodsCount:Type:goods_id:GoodsKunCun:goodsSpecString:goodsPrice:)]) {
+        
+        [self.delegate hsqGoodsModelViewCollectionCellClickActionWithGoodsCount:self.SelectKuCunString Type:self.TypeString goods_id:self.Goods_id GoodsKunCun:self.GoodsKuCunString goodsSpecString:self.goodsSpecString goodsPrice:self.goodsPriceString];
     }
 }
 
@@ -551,12 +643,15 @@
     }
     else
     {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(hsqGoodsModelViewBottomBtnClickAction:GoodsCount:Type:goods_id:GoodsKunCun:goodsSpecString:)]) {
-            
-            [self.delegate hsqGoodsModelViewBottomBtnClickAction:sender GoodsCount:self.SelectKuCunString Type:self.TypeString goods_id:self.Goods_id GoodsKunCun:self.GoodsKuCunString goodsSpecString:self.goodsSpecString];
-        }
+         [self dismissAdressView];
         
-        [self dismissAdressView];
+        [UIView animateWithDuration:0.25 animations:^{
+            
+            if (self.delegate && [self.delegate respondsToSelector:@selector(hsqGoodsModelViewBottomBtnClickActionWithGoodsCount:Type:goods_id:GoodsKunCun:goodsSpecString:goodsPrice:)]) {
+                
+                [self.delegate hsqGoodsModelViewBottomBtnClickActionWithGoodsCount:self.SelectKuCunString Type:self.TypeString goods_id:self.Goods_id GoodsKunCun:self.GoodsKuCunString goodsSpecString:self.goodsSpecString goodsPrice:self.goodsPriceString];
+            }
+        }];
     }
 }
 
@@ -609,6 +704,13 @@
         [self removeFromSuperview];
     }];
 }
+
+
+
+
+
+
+
 
 
 @end

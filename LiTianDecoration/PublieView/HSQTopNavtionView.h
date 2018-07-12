@@ -16,17 +16,35 @@
 
 @interface HSQTopNavtionView : UIView
 
-/** 装有标题的数组*/
+/**
+ * @brief 装有标题的数组
+ */
 @property (nonatomic, strong) NSArray *TitlesArray;
 
-/** 设置代理*/
+/**
+ * @brief 设置代理
+ */
 @property (nonatomic, weak) id<HSQTopNavtionViewDelegate>delegate;
 
-// 当前选中的按钮
+/**
+ * @brief 当前选中的按钮
+ */
 @property (nonatomic, weak) UIButton *selectedButton;
 
-// 标签栏底部的红色指示器
+/**
+ * @brief 标签栏底部的红色指示器
+ */
 @property (nonatomic, weak) UIImageView *indicatorView;
+
+/**
+ * @brief 按钮的背景图
+ */
+@property (nonatomic, strong) UIView *Title_View;
+
+/**
+ * @brief 是否隐藏
+ */
+@property (nonatomic, assign) BOOL IsHidden_TitleView;
 
 
 @end

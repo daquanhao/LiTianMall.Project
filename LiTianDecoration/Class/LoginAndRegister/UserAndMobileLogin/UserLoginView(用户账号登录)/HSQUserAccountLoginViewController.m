@@ -39,6 +39,9 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = KViewBackGroupColor;
+    
+    // 1.获取图片验证码
+    [self LoginCodeButtonImageFromeServer:self.CodeImage_Btn];
 }
 
 /**

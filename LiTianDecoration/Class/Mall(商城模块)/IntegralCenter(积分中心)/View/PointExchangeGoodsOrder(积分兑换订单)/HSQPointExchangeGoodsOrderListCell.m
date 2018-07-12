@@ -55,7 +55,7 @@
         // 商品的规格
         UILabel *goodsFullSpecs_Label = [[UILabel alloc] init];
         goodsFullSpecs_Label.textColor = RGB(150, 150, 150);
-        goodsFullSpecs_Label.font = [UIFont systemFontOfSize:12.0];
+        goodsFullSpecs_Label.font = [UIFont systemFontOfSize:10.0];
         goodsFullSpecs_Label.numberOfLines = 0;
         [self.contentView addSubview:goodsFullSpecs_Label];
         self.goodsFullSpecs_Label = goodsFullSpecs_Label;

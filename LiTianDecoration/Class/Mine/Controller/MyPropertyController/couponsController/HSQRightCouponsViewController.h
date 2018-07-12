@@ -10,8 +10,10 @@
 
 @interface HSQRightCouponsViewController : UIViewController
 
-/** 区分是平台券，还是店铺券 100代表店铺券  200代表平台券*/
-@property (nonatomic, copy) NSString *ID_Number;
+/**
+ * @brief 区分是平台券，还是店铺券 100代表店铺券  200代表平台券(就是红包)
+ */
+@property (nonatomic, assign) NSInteger Source;
 
 
 @end

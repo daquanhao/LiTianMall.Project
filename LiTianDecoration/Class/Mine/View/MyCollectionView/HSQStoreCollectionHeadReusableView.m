@@ -7,7 +7,7 @@
 //
 
 #import "HSQStoreCollectionHeadReusableView.h"
-#import "HSQStoreCollectionDataListModel.h"
+#import "HSQStoreCollectionListDataModel.h"
 
 @interface HSQStoreCollectionHeadReusableView ()
 
@@ -41,14 +41,14 @@
         [bgView addSubview:Select_ImageView];
         self.Select_ImageView = Select_ImageView;
         
-        // 1.商品的图片
+        // 1.店铺的图片
         UIImageView *StoreImageView = [[UIImageView alloc] init];
         [bgView addSubview:StoreImageView];
         self.StoreImageView = StoreImageView;
         
         // 2.店铺的名字
         UILabel *storeName_Label = [[UILabel alloc] init];
-        storeName_Label.font = [UIFont systemFontOfSize:12.0];
+        storeName_Label.font = [UIFont systemFontOfSize:KLabelFont(14.0, 12.0)];
         storeName_Label.textColor = RGB(51, 51, 51);
         storeName_Label.numberOfLines = 0;
         [bgView addSubview:storeName_Label];
@@ -83,7 +83,9 @@
     self.Select_ImageView.sd_layout.leftSpaceToView(self.BgView, 5).centerYEqualToView(self.BgView).heightIs(20).widthEqualToHeight();
 
     // 1.商品的图片
-    self.StoreImageView.sd_layout.leftSpaceToView(self.BgView, 10).topSpaceToView(self.BgView, 5).bottomSpaceToView(self.BgView, 5).widthEqualToHeight();
+    self.StoreImageView.sd_layout.leftSpaceToView(self.BgView, 10).topSpaceToView(self.BgView, 10).bottomSpaceToView(self.BgView, 10).widthEqualToHeight();
+    
+    [self.StoreImageView setSd_cornerRadiusFromWidthRatio:@(0.5)];
 
     // 2.店铺的名字
     self.storeName_Label.sd_layout.leftSpaceToView(self.StoreImageView, 10).topSpaceToView(self.BgView, 1).bottomSpaceToView(self.BgView, 1).rightSpaceToView(self.BgView, 10);
@@ -92,7 +94,7 @@
 /**
  * @brief 店铺的数据模型
  */
--(void)setStoreModel:(HSQStoreCollectionDataListModel *)StoreModel{
+-(void)setStoreModel:(HSQStoreCollectionListDataModel *)StoreModel{
     
     _StoreModel = StoreModel;
     
@@ -117,8 +119,6 @@
         // 1.店铺的图片 sd_resetLayout 重新设置约束
         self.StoreImageView.sd_resetLayout.leftSpaceToView(self.Select_ImageView, 10).topSpaceToView(self.BgView, 10).bottomSpaceToView(self.BgView, 10).widthEqualToHeight();
     }
-    
-    HSQLog(@"==编辑=%@",StoreModel.IsEditState);
     
     // 是否选中
     if (StoreModel.IsSelectState.integerValue == 1) // 没有选中

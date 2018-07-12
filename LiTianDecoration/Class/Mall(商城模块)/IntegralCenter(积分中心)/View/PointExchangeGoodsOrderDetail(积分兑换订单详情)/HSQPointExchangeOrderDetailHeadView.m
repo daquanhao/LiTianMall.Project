@@ -23,9 +23,23 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *receiverMessageHeight;
 
+@property (weak, nonatomic) IBOutlet UILabel *JiaoYiState_Label;
+
+@property (weak, nonatomic) IBOutlet UILabel *BuyMessage_Label;
+
 @end
 
 @implementation HSQPointExchangeOrderDetailHeadView
+
+- (void)awakeFromNib{
+    
+    [super awakeFromNib];
+    
+    self.JiaoYiState_Label.font = self.BuyMessage_Label.font = self.OrderState_Label.font = self.receiverName_Label.font = self.receiverMessage_Label.font = self.StoreName_Label.font = [UIFont systemFontOfSize:12.0];
+    
+    self.receiverAreaInfo_Label.font = [UIFont systemFontOfSize:10.0];
+    
+}
 
 - (void)setModel:(HSQPointsOrdersListModel *)model{
     

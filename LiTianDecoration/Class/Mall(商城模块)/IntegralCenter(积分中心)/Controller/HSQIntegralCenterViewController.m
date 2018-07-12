@@ -17,6 +17,7 @@
 #import "HSQPointsGoodsListViewCell.h"
 #import "HSQPointsExchangeGoodsDetailViewController.h"
 #import "HSQLoginHomeViewController.h"
+#import "HSQNoPointPlatformCell.h"
 
 @interface HSQIntegralCenterViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,HSQPointsExchangeFooterReusableViewDelegate,HSQPointsExchangeHeadReusableViewDelegate>
 
@@ -207,9 +208,11 @@
     UINib *FooterNib = [UINib nibWithNibName:@"HSQPointsExchangeFooterReusableView" bundle:nil];
     [collectionView registerNib:FooterNib forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"HSQPointsExchangeFooterReusableView"];
     
-    [collectionView registerNib:[UINib nibWithNibName:@"HSQPointsGoodsListViewCell" bundle:nil] forCellWithReuseIdentifier:@"HSQPointsGoodsListViewCell"];
+    [collectionView registerClass:[HSQPointsGoodsListViewCell class] forCellWithReuseIdentifier:@"HSQPointsGoodsListViewCell"];
 
     [collectionView registerNib:[UINib nibWithNibName:@"HSQPointsRedEnvelopeListCell" bundle:nil] forCellWithReuseIdentifier:@"HSQPointsRedEnvelopeListCell"];
+    
+    [collectionView registerNib:[UINib nibWithNibName:@"HSQNoPointPlatformCell" bundle:nil] forCellWithReuseIdentifier:@"HSQNoPointPlatformCell"];
     
     [self.view addSubview:collectionView];
     
@@ -506,7 +509,14 @@
     
     if (section == 0)
     {
-         return self.RedEnvelope_Source.count;
+        if (self.RedEnvelope_Source.count == 0)
+        {
+            return 1;
+        }
+        else
+        {
+            return self.RedEnvelope_Source.count;
+        }
     }
     else
     {
@@ -588,11 +598,18 @@
    
     if (indexPath.section == 0)
     {
-        return CGSizeMake(KScreenWidth, 70);
+        if (self.RedEnvelope_Source.count == 0)
+        {
+            return CGSizeMake(KScreenWidth, 100);
+        }
+        else
+        {
+             return CGSizeMake(KScreenWidth, 75);
+        }
     }
     else
     {
-        return CGSizeMake((KScreenWidth - 5) / 2, (KScreenWidth - 5) / 2 + 80);
+        return CGSizeMake((KScreenWidth - 5) / 2, (KScreenWidth - 5) / 2 + 70);
     }
     
 }
@@ -613,11 +630,20 @@
     
     if (indexPath.section == 0)
     {
-        HSQPointsRedEnvelopeListCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HSQPointsRedEnvelopeListCell" forIndexPath:indexPath];
-        
-        cell.model = self.RedEnvelope_Source[indexPath.row];
-        
-        return cell;
+        if (self.RedEnvelope_Source.count == 0)
+        {
+            HSQNoPointPlatformCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HSQNoPointPlatformCell" forIndexPath:indexPath];
+            
+            return cell;
+        }
+        else
+        {
+            HSQPointsRedEnvelopeListCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HSQPointsRedEnvelopeListCell" forIndexPath:indexPath];
+            
+            cell.model = self.RedEnvelope_Source[indexPath.row];
+            
+            return cell;
+        }
     }
     else
     {
@@ -656,7 +682,8 @@
     
     self.memberGrade = ListModel.gradeLevel;
     
-    [self.collectionView.mj_header beginRefreshing];
+//    [self.collectionView.mj_header beginRefreshing];
+    [self LoadNewPointsExchangedForGoodsListData];
 }
 
 /**

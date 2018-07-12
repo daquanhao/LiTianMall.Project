@@ -103,7 +103,7 @@
                 <constraint firstItem="Ht5-MQ-fsE" firstAttribute="leading" secondItem="2M3-hm-Dh2" secondAttribute="trailing" id="yYE-uN-znZ"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
-            <point key="canvasLocation" x="-439" y="-85"/>
+            <point key="canvasLocation" x="-402" y="-186"/>
         </view>
     </objects>
 </document>

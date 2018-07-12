@@ -159,7 +159,7 @@
                 <outlet property="sendTime_Label" destination="pL8-93-A6a" id="Wx7-15-Gxe"/>
                 <outlet property="totalPoints_Label" destination="BQu-bC-7eP" id="DAK-qo-JRz"/>
             </connections>
-            <point key="canvasLocation" x="-505" y="-26"/>
+            <point key="canvasLocation" x="-435" y="-33"/>
         </view>
     </objects>
 </document>

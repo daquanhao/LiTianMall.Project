@@ -332,7 +332,7 @@
     
     if (self.ShowType == 100)
     {
-        return CGSizeMake((KScreenWidth-5)/2, (KScreenWidth-5)/2);
+        return CGSizeMake((KScreenWidth-5)/2, (KScreenWidth-5)/2 + 50);
     }
     else
     {

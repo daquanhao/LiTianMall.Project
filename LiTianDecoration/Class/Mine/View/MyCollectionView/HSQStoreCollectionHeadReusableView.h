@@ -8,20 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
-@class HSQStoreCollectionDataListModel;
+@class HSQStoreCollectionListDataModel;
 
 @protocol HSQStoreCollectionHeadReusableViewDelegate <NSObject>
 
 @optional
 
-/**编辑时选中按钮的点击事件*/
+/**
+ * @brief 编辑时选中按钮的点击事件
+ */
 - (void)SelectTheClickEventOfTheButtonWhenEditing:(UIButton *)sender;
 
 @end
 
 @interface HSQStoreCollectionHeadReusableView : UICollectionReusableView
 
-@property (nonatomic, strong) HSQStoreCollectionDataListModel *StoreModel;
+@property (nonatomic, strong) HSQStoreCollectionListDataModel *StoreModel;
 
 @property (nonatomic, assign) NSInteger section;
 

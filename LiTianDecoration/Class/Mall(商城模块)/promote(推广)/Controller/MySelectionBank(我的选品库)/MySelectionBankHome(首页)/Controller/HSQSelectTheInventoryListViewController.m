@@ -15,6 +15,10 @@
 #import "HSQAccountTool.h"
 #import "HSQMobilePromotionProductsView.h"
 
+#import <UShareUI/UShareUI.h>
+
+#import "HSQQRCodeShareView.h" // 二维码分享视图
+
 @interface HSQSelectTheInventoryListViewController ()<UITableViewDelegate,UITableViewDataSource,HSQSelectGroupGoodsListHeadViewDelegate,HSQSelectGroupGoodsListFooterViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -453,8 +457,108 @@
     HSQGoodsDataListModel *model = self.dataSource[footerView.section];
     
     HSQLog(@"=====你点击了立即推广===%@",model.goodsName);
+    
+     [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine),@(UMSocialPlatformType_QQ),@(UMSocialPlatformType_Qzone)]];
+    
+    [UMSocialUIManager addCustomPlatformWithoutFilted:UMSocialPlatformType_UserDefine_Begin + 1  withPlatformIcon:[UIImage imageNamed:@"icon1"] withPlatformName:@"二维码"];
+    
+    [UMSocialShareUIConfig shareInstance].sharePageGroupViewConfig.sharePageGroupViewPostionType = UMSocialSharePageGroupViewPositionType_Bottom;
+
+    [UMSocialShareUIConfig shareInstance].sharePageScrollViewConfig.shareScrollViewPageItemStyleType = UMSocialPlatformItemViewBackgroudType_IconAndBGRoundAndSuperRadius;
+    
+    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+
+        //在回调里面获得点击的
+        if (platformType == UMSocialPlatformType_UserDefine_Begin + 1) // 你点击了二维码分享
+        {
+            NSLog(@"你点击了二维码分享");
+            
+            [self QRCodeShareClickAction:model];
+        }
+        else
+        {
+            [self shareImageAndTextToPlatformType:platformType model:model];
+        }
+    }];
 }
 
+/**
+ * @brief 二维码分享
+ */
+- (void)QRCodeShareClickAction:(HSQGoodsDataListModel *)model{
+    
+    [[HSQProgressHUDManger Manger] ShowLoadingDataFromeServer:@"" ToView:self.view IsClearColor:YES];
+    
+    NSString *Url = [NSString stringWithFormat:@"http://10.1.8.238/wap/tmpl/product_detail.html?commonId=%@&distributionGoodsId=%@",model.commonId,model.distributorGoodsId];
+
+    NSDictionary *params = @{@"text":model.goodsName,@"imageUrl":model.imageSrc,@"price":model.appPriceMin,@"url":Url};
+    
+    HSQLog(@"=参数==%@",params);
+
+    AFNetworkRequestTool *requestTool = [AFNetworkRequestTool shareRequestTool];
+
+    [requestTool.manger POST:UrlAdress(KQRCodeShareUrl) parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+
+        [[HSQProgressHUDManger Manger] DismissProgressHUD];
+
+        HSQLog(@"==二维码分享==%@",responseObject);
+
+        if ([responseObject[@"code"] integerValue] == 200)
+        {
+            HSQQRCodeShareView *shareView = [[HSQQRCodeShareView alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight - KSafeBottomHeight)];
+            
+            shareView.shareQRUrl = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"shareQRUrl"]];
+        
+            [[[UIApplication sharedApplication] keyWindow] addSubview:shareView];
+        }
+        else
+        {
+            NSString *errorString = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"error"]];
+
+            [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:errorString SuperView:self.view];
+        }
+
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+
+        [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:KErrorPlacherString SupView:self.view];
+
+    }];
+}
+
+/**
+ * @brief 分享网页
+ */
+- (void)shareImageAndTextToPlatformType:(UMSocialPlatformType)platformType model:(HSQGoodsDataListModel *)model{
+    
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    
+    //创建网页内容对象
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"云树家具" descr:model.goodsName thumImage:model.imageSrc];
+    
+    // 设置网页地址
+    shareObject.webpageUrl =@"http://mobile.umeng.com/social";
+    
+    //分享消息对象设置分享内容对象
+    messageObject.shareObject = shareObject;
+    
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        
+        if (error)
+        {
+            NSLog(@"************Share fail with error %@*********",error);
+            [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:@"分享失败" SupView:self.view];
+        }
+        else
+        {
+            NSLog(@"response data is %@",data);
+            [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:@"分享成功" SupView:self.view];
+        }
+    }];
+}
 
 - (void)dealloc{
     

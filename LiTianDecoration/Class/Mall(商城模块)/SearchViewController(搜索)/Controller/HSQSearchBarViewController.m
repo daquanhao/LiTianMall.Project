@@ -386,7 +386,7 @@
          [headView.BottomView setHidden:NO];
     }
     
-    headView.title_label.font = [UIFont systemFontOfSize:15.0];
+    headView.title_label.font = [UIFont systemFontOfSize:14.0];
     
     return headView;
 }

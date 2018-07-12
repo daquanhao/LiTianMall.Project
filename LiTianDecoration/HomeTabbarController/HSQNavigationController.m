@@ -23,13 +23,13 @@
     // key：NS****AttributeName
     NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
     textAttrs[NSForegroundColorAttributeName] = [[UIColor blackColor] colorWithAlphaComponent:0.8];
-    textAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:15];
+    textAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:14.0];
     [item setTitleTextAttributes:textAttrs forState:UIControlStateNormal];
     
     // 高亮状态
     NSMutableDictionary *Highlighted_TextAttrs = [NSMutableDictionary dictionary];
     Highlighted_TextAttrs[NSForegroundColorAttributeName] = [[UIColor blackColor] colorWithAlphaComponent:0.8];
-    Highlighted_TextAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:15];
+    Highlighted_TextAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:14.0];
     [item setTitleTextAttributes:Highlighted_TextAttrs forState:UIControlStateHighlighted];
     
     // 设置不可用状态
@@ -44,10 +44,10 @@
     [super viewDidLoad];
     
     // 1.设置导航栏上文字的颜色
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor], NSFontAttributeName : [UIFont systemFontOfSize:KTextFont_(16)]}];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [[UIColor whiteColor] colorWithAlphaComponent:0.5], NSFontAttributeName : [UIFont systemFontOfSize:KLabelFont(16.0, 14.0)]}];
 
     // 2.设置导航栏的背景图
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage ImageWithColor:[UIColor whiteColor]] forBarMetrics:(UIBarMetricsDefault)];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage ImageWithColor:[UIColor colorWithRed:33/255.0 green:36/255.0 blue:46/255.0 alpha:1.0]] forBarMetrics:(UIBarMetricsDefault)];
 
     // 3.去掉底部的黑线
 //    [[UINavigationBar appearance] setShadowImage:[UIImage new]];

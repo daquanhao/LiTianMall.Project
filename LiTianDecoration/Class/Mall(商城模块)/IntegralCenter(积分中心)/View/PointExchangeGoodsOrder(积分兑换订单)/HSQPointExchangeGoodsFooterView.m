@@ -39,7 +39,7 @@
         // 订单的总积分
         UILabel *OrderTotalMonery_Label = [[UILabel alloc] init];
         OrderTotalMonery_Label.textColor = [UIColor blackColor];
-        OrderTotalMonery_Label.font = [UIFont systemFontOfSize:14.0];
+        OrderTotalMonery_Label.font = [UIFont systemFontOfSize:12.0];
         OrderTotalMonery_Label.textAlignment = NSTextAlignmentRight;
         OrderTotalMonery_Label.textColor = RGB(238, 58, 68);
         [BgView addSubview:OrderTotalMonery_Label];
@@ -54,7 +54,7 @@
         // 进入店铺详情的按钮
         UIButton *Cancel_Button = [UIButton buttonWithType:(UIButtonTypeSystem)];
         [Cancel_Button setBackgroundImage:[UIImage ReturnAPictureOfStretching:@"7D99DFED-F3B6-4DB1-9F77-E24CA867DD17"] forState:(UIControlStateNormal)];
-        Cancel_Button.titleLabel.font = [UIFont systemFontOfSize:14.0];
+        Cancel_Button.titleLabel.font = [UIFont systemFontOfSize:12.0];
         [Cancel_Button setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
         [Cancel_Button addTarget:self action:@selector(Cancel_ButtonAction:) forControlEvents:(UIControlEventTouchUpInside)];
         [Button_BgView addSubview:Cancel_Button];

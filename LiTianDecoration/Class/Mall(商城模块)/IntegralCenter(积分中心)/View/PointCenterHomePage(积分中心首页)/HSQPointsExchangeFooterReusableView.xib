@@ -43,7 +43,7 @@
             <connections>
                 <outlet property="Placher_Label" destination="tSs-aY-jqV" id="fkZ-YF-UWU"/>
             </connections>
-            <point key="canvasLocation" x="-1434" y="-114"/>
+            <point key="canvasLocation" x="-1311" y="-125"/>
         </collectionReusableView>
     </objects>
 </document>

@@ -8,7 +8,7 @@
 
 #import "HSQMyCollectionHeaderView.h"
 #import "HSQGoodsDataListModel.h"
-#import "HSQStoreCollectionDataListModel.h"
+#import "HSQStoreCollectionListDataModel.h"
 
 @interface HSQMyCollectionHeaderView ()
 
@@ -83,7 +83,7 @@
         
         // 3.折扣商品降价
         UIButton *Price_Button = [UIButton buttonWithType:(UIButtonTypeCustom)];
-        Price_Button.titleLabel.font = [UIFont systemFontOfSize:12.0];
+        Price_Button.titleLabel.font = [UIFont systemFontOfSize:KLabelFont(12.0, 10.0)];
         Price_Button.enabled = NO;
         [Price_Button setTitleColor:RGB(150, 150, 150) forState:(UIControlStateDisabled)];
         [Price_Button setImage:KImageName(@"123") forState:(UIControlStateDisabled)];
@@ -101,7 +101,7 @@
         
         // 5.商品的价格
         UILabel *GoodsPriceLabel = [[UILabel alloc] init];
-        GoodsPriceLabel.font = [UIFont systemFontOfSize:KTextFont_(14)];
+        GoodsPriceLabel.font = [UIFont systemFontOfSize:KLabelFont(14.0, 12.0)];
         GoodsPriceLabel.textColor = RGB(238, 48, 51);
         GoodsPriceLabel.numberOfLines = 0;
         [bgView addSubview:GoodsPriceLabel];
@@ -118,7 +118,7 @@
         
         // 7.按钮的背景视图
         UIView *Btn_View = [[UIView alloc] init];
-        Btn_View.backgroundColor = [UIColor whiteColor];
+        Btn_View.backgroundColor = KViewBackGroupColor;
         [bgView addSubview:Btn_View];
         self.Btn_View = Btn_View;
         
@@ -127,7 +127,7 @@
         [Share_Button setBackgroundImage:[UIImage ImageWithColor:[UIColor orangeColor]] forState:(UIControlStateNormal)];
         [Share_Button setTitle:@"立即分享" forState:(UIControlStateNormal)];
         [Share_Button setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        Share_Button.titleLabel.font = [UIFont systemFontOfSize:12.0];
+        Share_Button.titleLabel.font = [UIFont systemFontOfSize:KLabelFont(12.0, 10.0)];
         [Share_Button addTarget:self action:@selector(Share_ButtonClickAction:) forControlEvents:(UIControlEventTouchUpInside)];
         [Btn_View addSubview:Share_Button];
         self.Share_Button = Share_Button;
@@ -137,7 +137,7 @@
         [Cancel_Button setBackgroundImage:[UIImage ImageWithColor:[UIColor purpleColor]] forState:(UIControlStateNormal)];
         [Cancel_Button setTitle:@"加入购物车" forState:(UIControlStateNormal)];
         [Cancel_Button setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        Cancel_Button.titleLabel.font = [UIFont systemFontOfSize:12.0];
+        Cancel_Button.titleLabel.font = [UIFont systemFontOfSize:KLabelFont(12.0, 10.0)];
         [Cancel_Button addTarget:self action:@selector(Cancel_ButtonClickAction:) forControlEvents:(UIControlEventTouchUpInside)];
         [Btn_View addSubview:Cancel_Button];
         self.Cancel_Button = Cancel_Button;
@@ -180,7 +180,7 @@
     self.GoodsNameLabel.sd_layout.leftSpaceToView(self.GoodsImageView, 5).topEqualToView(self.GoodsImageView).rightSpaceToView(self.BgView, 10).autoHeightRatio(0);
     
     // 3.商品的标签
-    self.Mark_Button.sd_layout.leftEqualToView(self.GoodsNameLabel).topSpaceToView(self.GoodsNameLabel, 5).widthIs(50).heightIs(15);
+    self.Mark_Button.sd_layout.leftEqualToView(self.GoodsNameLabel).topSpaceToView(self.GoodsNameLabel, 5).widthIs(60).heightIs(20);
     
     // 3.1.折扣商品降价
     self.Price_Button.sd_layout.leftEqualToView(self.Mark_Button).topSpaceToView(self.Mark_Button, 5).rightSpaceToView(self.BgView, 10).heightIs(20);
@@ -189,10 +189,10 @@
     self.Right_Button.sd_layout.rightSpaceToView(self.BgView, 0).bottomEqualToView(self.BgView).widthIs(60).heightIs(30);
     
     // 4.商品的价格
-    self.GoodsPriceLabel.sd_layout.leftEqualToView(self.GoodsNameLabel).bottomEqualToView(self.GoodsImageView).rightSpaceToView(self.Right_Button, 10).autoHeightRatio(0);
+    self.GoodsPriceLabel.sd_layout.leftEqualToView(self.GoodsNameLabel).bottomSpaceToView(self.BgView, 5).rightSpaceToView(self.Right_Button, 10).autoHeightRatio(0);
     
     // 5.按钮的背景视图
-    self.Btn_View.sd_layout.leftEqualToView(self.GoodsNameLabel).topEqualToView(self.GoodsImageView).bottomEqualToView(self.GoodsImageView).rightSpaceToView(self.BgView, 0);
+    self.Btn_View.sd_layout.leftEqualToView(self.GoodsNameLabel).topEqualToView(self.BgView).bottomEqualToView(self.BgView).rightSpaceToView(self.BgView, 0);
     
     // 5.1.左边的分享按钮
     self.Share_Button.sd_layout.leftSpaceToView(self.Btn_View, 0).centerYEqualToView(self.Btn_View).heightIs(70).widthEqualToHeight();
@@ -231,16 +231,18 @@
     
     if (promotionType.integerValue == 1)
     {
-        self.Mark_Button.hidden = NO;
-         self.Price_Button.hidden = NO;
+        self.Mark_Button.hidden = self.Price_Button.hidden = NO;
+        
         [self.Mark_Button setTitle:model.goodsCommon[@"promotionTypeText"] forState:(UIControlStateDisabled)];
+        
         [self.Price_Button setTitle:[NSString stringWithFormat:@"比加入收藏时降%@元",GoodsPrce] forState:(UIControlStateDisabled)];
     }
     else
     {
-         self.Mark_Button.hidden = YES;
-        self.Price_Button.hidden = YES;
+         self.Mark_Button.hidden = self.Price_Button.hidden =  YES;
+        
         [self.Mark_Button setTitle:@"" forState:(UIControlStateDisabled)];
+        
         [self.Price_Button setTitle:@"" forState:(UIControlStateDisabled)];
     }
     

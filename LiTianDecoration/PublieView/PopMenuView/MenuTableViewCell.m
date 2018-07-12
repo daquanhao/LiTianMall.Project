@@ -11,7 +11,9 @@
 @implementation MenuTableViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    
     if (self == [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        
         [self setUpUI];
     }
     return self;
@@ -20,14 +22,16 @@
 - (void)setUpUI{
     
     UIView *lineView = [[UIView alloc] init];
-//    lineView.backgroundColor = [UIColor lightGrayColor];
+    
     lineView.backgroundColor = [UIColor colorWithRed:180/255.0 green:180/255.0 blue:180/255.0 alpha:1.0];
+    
     self.lineView = lineView;
+    
     [self addSubview:lineView];
     
     self.backgroundColor = [UIColor clearColor];
     
-    self.textLabel.font = [UIFont systemFontOfSize:14];
+    self.textLabel.font = [UIFont systemFontOfSize:KLabelFont(14.0, 12.0)];
     
     self.textLabel.textColor = [UIColor blackColor];
     

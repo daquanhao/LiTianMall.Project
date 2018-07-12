@@ -57,7 +57,7 @@
                 <constraint firstItem="Mhw-jO-Emf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="o2g-c5-Wfb"/>
                 <constraint firstAttribute="trailing" secondItem="Mhw-jO-Emf" secondAttribute="trailing" id="rJY-M9-Tth"/>
             </constraints>
-            <point key="canvasLocation" x="-679.5" y="-408.5"/>
+            <point key="canvasLocation" x="-394" y="-418"/>
         </view>
     </objects>
     <resources>

@@ -47,6 +47,8 @@
 
 @property (nonatomic, strong) NSMutableArray *title_array;  // 标题数组
 
+@property (nonatomic, strong) NSMutableArray *Icon_array;  // 图标数组
+
 @property (nonatomic, strong) NSMutableArray *LikeGoods_array;  // 猜你喜欢的数组
 
 @end
@@ -88,6 +90,16 @@
     return _title_array;
 }
 
+-(NSMutableArray *)Icon_array{
+    
+    if (_Icon_array == nil) {
+        
+        self.Icon_array = [NSMutableArray arrayWithObjects:@"WaitPay",@"ToCollected",@"ToEvaluate",@"AfterSales",@"MineOrder",@"预存款",@"优惠券",@"红包",@"积分",@"MyProperty",@"xin",@"YuYueDaoDian",@"BrowseFootprint",@"CommodityConsult",@"PointExchange",@"TheTrial",@"shaibao",@"TuiGuang",@"ShippingAddress",@"Person",@"LoginBand",@"MessageInfo",@"Seting", nil];
+    }
+    
+    return _Icon_array;
+}
+
 - (NSMutableArray *)LikeGoods_array{
     
     if (_LikeGoods_array == nil) {
@@ -118,8 +130,11 @@
     // 5.监听用户的退出登录
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UserLoginOutSuccessful:) name:@"UserLoginOutSuccessful" object:nil];
     
-    // 5.判断用户是否登录
-    [self requestUserCenterDataFromeserver];
+    // 6.监听用户解绑
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UnbindSuccessful) name:@"UnbindSuccessful" object:nil];
+    
+    // 5.添加刷新控件
+    [self AddRefreshControl];
    
     // 请求猜你喜欢的数据
     [self AskForYourFavoriteData];
@@ -234,39 +249,67 @@
 }
 
 /**
+ * @brief 监听用户解绑微信或者QQ
+ */
+- (void)UnbindSuccessful{
+    
+    [self.collectionView.mj_header beginRefreshing];
+}
+
+/**
+ * @brief 添加刷新控件
+ */
+- (void)AddRefreshControl{
+    
+    // 1.下拉加载更多的数据
+    self.collectionView.mj_header  = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestUserCenterDataFromeserver)];
+    
+    [self.collectionView.mj_header beginRefreshing];
+}
+
+/**
  * @brief 请求用户中心的数据
  */
 - (void)requestUserCenterDataFromeserver{
     
     HSQAccount *account = [HSQAccountTool account];
     
-    if (account.token.length == 0) return;
-    
-    [[HSQProgressHUDManger Manger] ShowLoadingDataFromeServer:nil ToView:self.view IsClearColor:NO];
-    
-    NSDictionary *diction = @{@"token":account.token};
-    
-    AFNetworkRequestTool *RequestTool = [AFNetworkRequestTool shareRequestTool];
-    
-    [RequestTool.manger POST:UrlAdress(KUserCenterDataUrl) parameters:diction progress:^(NSProgress * _Nonnull uploadProgress) {
+    if (account.token.length == 0)
+    {
+        [self.collectionView.mj_header endRefreshing];
+    }
+    else
+    {
+        [[HSQProgressHUDManger Manger] ShowLoadingDataFromeServer:nil ToView:self.view IsClearColor:YES];
         
-    } success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *responseObject) {
+        NSDictionary *diction = @{@"token":account.token};
         
-        HSQLog(@"=用户中心的数据==%@",responseObject);
-
-        [[HSQProgressHUDManger Manger] DismissProgressHUD];
+        AFNetworkRequestTool *RequestTool = [AFNetworkRequestTool shareRequestTool];
         
-        if ([responseObject[@"code"] integerValue] == 200)
-        {
-            [self.UserInfoDiction setDictionary:responseObject[@"datas"]];
-        }
-        
-        [self.collectionView reloadData];
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"网络出问题啦！" SuperView:self.view];
-    }];
+        [RequestTool.manger POST:UrlAdress(KUserCenterDataUrl) parameters:diction progress:^(NSProgress * _Nonnull uploadProgress) {
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *responseObject) {
+            
+            HSQLog(@"=用户中心的数据==%@",responseObject);
+            
+            [[HSQProgressHUDManger Manger] DismissProgressHUD];
+            
+            if ([responseObject[@"code"] integerValue] == 200)
+            {
+                [self.UserInfoDiction setDictionary:responseObject[@"datas"]];
+            }
+            
+            [self.collectionView.mj_header endRefreshing];
+            
+            [self.collectionView reloadData];
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+            [self.collectionView.mj_header endRefreshing];
+            
+            [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
+        }];
+    }
 }
 
 /**
@@ -381,28 +424,9 @@
     return reusableView;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    if (indexPath.section == 0)
-    {
-        if (indexPath.row == 10 || indexPath.row == 11 ||indexPath.row == 12 || indexPath.row == 13  || indexPath.row == 14 || indexPath.row == 15 ||indexPath.row == 16 ||indexPath.row == 17)
-        {
-            return CGSizeMake(KScreenWidth/4, 60);
-        }
-        else
-        {
-            return CGSizeMake(KScreenWidth/5, 60);
-        }
-    }
-    else
-    {
-        return CGSizeMake((KScreenWidth-5)/2, (KScreenWidth-5)/2);
-    }
-}
-
 // 两个cell之间的最小间距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-{
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
+    
     if (section == 0)
     {
         return 0;
@@ -414,9 +438,28 @@
 }
 
 // 行间距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
-{
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
+    
     return 5;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.section == 0)
+    {
+        if (indexPath.row == 10 || indexPath.row == 11 ||indexPath.row == 12 || indexPath.row == 13  || indexPath.row == 14 || indexPath.row == 15 ||indexPath.row == 16 ||indexPath.row == 17)
+        {
+            return CGSizeMake(KScreenWidth/4, 60);
+        }
+        else
+        {
+            return CGSizeMake((KScreenWidth - 1)/5, 60);
+        }
+    }
+    else
+    {
+        return CGSizeMake((KScreenWidth-5)/2, (KScreenWidth-5)/2 + 50);
+    }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -426,6 +469,8 @@
         HSQMIneCollectionViewListCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"HSQMIneCollectionViewListCell" forIndexPath:indexPath];
         
         cell.Title_Label.text = [NSString stringWithFormat:@"%@",self.title_array[indexPath.row]];
+        
+        cell.Icon_ImageView.image = [UIImage imageNamed:self.Icon_array[indexPath.row]];
         
         if (indexPath.row == 5 || indexPath.row == 6 ||indexPath.row == 7 ||indexPath.row == 8)
         {
@@ -508,31 +553,41 @@
     if (indexPath.row == 0) // 待支付
     {
         HSQMyOrderHomeViewController *MyOrderHomeVC = [[HSQMyOrderHomeViewController alloc] init];
+        
         MyOrderHomeVC.indexNumber = @"1";
+        
         [self.navigationController pushViewController:MyOrderHomeVC animated:YES];
     }
     else if (indexPath.row == 1) // 待收/取货
     {
         HSQMyOrderHomeViewController *MyOrderHomeVC = [[HSQMyOrderHomeViewController alloc] init];
+        
         MyOrderHomeVC.indexNumber = @"3";
+        
         [self.navigationController pushViewController:MyOrderHomeVC animated:YES];
     }
     else if (indexPath.row == 2) // 待评价
     {
         HSQMyOrderHomeViewController *MyOrderHomeVC = [[HSQMyOrderHomeViewController alloc] init];
+        
         MyOrderHomeVC.indexNumber = @"4";
+        
         [self.navigationController pushViewController:MyOrderHomeVC animated:YES];
     }
     else if (indexPath.row == 3) // 退换/售后
     {
         HSQReturnGoodsViewController *ReturnGoodsVC = [[HSQReturnGoodsViewController alloc] init];
+        
         [self.navigationController pushViewController:ReturnGoodsVC animated:YES];
     }
     else if (indexPath.row == 4) // 我的订单
     {
         HSQMyOrderHomeViewController *MyOrderHomeVC = [[HSQMyOrderHomeViewController alloc] init];
+        
         MyOrderHomeVC.indexNumber = @"0";
+        
         MyOrderHomeVC.JumpType_string = @"200";
+        
         [self.navigationController pushViewController:MyOrderHomeVC animated:YES];
     }
     else if (indexPath.row == 5) // 预存款
@@ -586,11 +641,13 @@
     else if (indexPath.row == 9) //我的财产
     {
         HSQMyPropertyHomeController *MyPropertyVC = [[HSQMyPropertyHomeController alloc] init];
+        
         [self.navigationController pushViewController:MyPropertyVC animated:YES];
     }
     else if (indexPath.row == 10) // 我的收藏
     {
         HSQMyCollectionHomeViewController *MyCollectionVC = [[HSQMyCollectionHomeViewController alloc] init];
+        
         [self.navigationController pushViewController:MyCollectionVC animated:YES];
     }
     else if (indexPath.row == 11) // 预约到店
@@ -600,6 +657,7 @@
     else if (indexPath.row == 12) // 浏览足迹
     {
         BrowseFootprintViewController *BrowseFootprintVC = [[BrowseFootprintViewController alloc] init];
+        
         [self.navigationController pushViewController:BrowseFootprintVC animated:YES];
     }
     else if (indexPath.row == 13) // 商品咨询
@@ -648,6 +706,8 @@
     else if (indexPath.row == 20) // 登录绑定
     {
         HSQLoginBandViewController *LoginBandVC = [[HSQLoginBandViewController alloc] init];
+        
+        LoginBandVC.UserInfo_Diction = self.UserInfoDiction;
         
         [self.navigationController pushViewController:LoginBandVC animated:YES];
     }

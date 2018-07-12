@@ -212,6 +212,8 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="BuyMessage_Label" destination="mtw-Ef-Vw6" id="pGU-GS-79b"/>
+                <outlet property="JiaoYiState_Label" destination="pgT-cA-N16" id="I4E-jr-b9a"/>
                 <outlet property="OrderState_Label" destination="Ewq-cY-iEF" id="bCK-4a-ESW"/>
                 <outlet property="StoreName_Label" destination="SD4-Uw-8hk" id="GoN-0e-if1"/>
                 <outlet property="receiverAreaInfo_Label" destination="B7m-0O-ErV" id="Lbh-k8-4Na"/>
@@ -219,7 +221,7 @@
                 <outlet property="receiverMessage_Label" destination="zhm-2b-aBy" id="NVu-wt-0D1"/>
                 <outlet property="receiverName_Label" destination="LRu-cC-bSi" id="z2h-U6-cRg"/>
             </connections>
-            <point key="canvasLocation" x="-674" y="-240"/>
+            <point key="canvasLocation" x="-797" y="-236"/>
         </view>
     </objects>
     <resources>

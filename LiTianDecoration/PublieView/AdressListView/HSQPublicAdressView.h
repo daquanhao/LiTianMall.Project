@@ -10,20 +10,34 @@
 
 @interface HSQPublicAdressView : UIView
 
-/** 初始化视图 */
+/**
+ * @brief 初始化视图
+ */
 + (instancetype)initAdressView;
 
-/** 顶部的提示文字*/
+/**
+ * @brief 顶部的提示文字
+ */
 @property (nonatomic, copy) NSString *placherString;
 
-/**省级别数据源*/
+/**
+ * @brief 省级别数据源
+ */
 @property (nonatomic, strong) NSMutableArray *dataSource;
 
+/**
+ * @brief 选中地址的回调
+ */
 @property (nonatomic, copy) void(^chooseFinish)(id string, id proId, id cityId, id areaId);
 
+/**
+ * @brief 选中地址
+ */
 @property (nonatomic, copy) NSString * address;
 
-/** 显示视图 */
+/**
+ * @brief 显示视图
+ */
 - (void)ShowAdressView;
 
 @end

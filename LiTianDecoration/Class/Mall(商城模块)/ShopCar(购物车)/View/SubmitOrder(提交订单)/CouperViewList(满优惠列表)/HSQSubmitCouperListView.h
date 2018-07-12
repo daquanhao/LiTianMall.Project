@@ -10,10 +10,14 @@
 
 @interface HSQSubmitCouperListView : UIView
 
-/** 初始化视图 */
+/**
+* @brief 初始化视图
+*/
 + (instancetype)initSubmitCouperListView;
 
-/** 显示视图 */
+/**
+ * @brief 显示视图
+ */
 - (void)ShowSubmitCouperListView;
 
 /**

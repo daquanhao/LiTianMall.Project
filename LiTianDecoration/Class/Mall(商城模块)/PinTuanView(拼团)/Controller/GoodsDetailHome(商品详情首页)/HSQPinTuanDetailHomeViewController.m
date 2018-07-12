@@ -83,6 +83,8 @@
     // 4.查看本地购物车中商品的个数
     [self LookUpShopCarCount];
     
+    
+    
 }
 
 /**
@@ -160,7 +162,7 @@
         
         [[HSQProgressHUDManger Manger] DismissProgressHUD];
         
-//        HSQLog(@"=拼团数据=%@",responseObject);
+        HSQLog(@"=拼团数据=%@",responseObject);
         if ([responseObject[@"code"] integerValue] == 200)
         {
             self.DataDiction = responseObject[@"datas"];
@@ -363,7 +365,7 @@
     HSQGoodsImageDetailViewController *ImageDetailVC = [[HSQGoodsImageDetailViewController alloc] init];
     ImageDetailVC.title = @"详情";
     ImageDetailVC.commonId = self.commonId;
-    ImageDetailVC.goodsImageList = diction[@"groupGoodsDetailVo"][@"goodsImageList"];
+//    ImageDetailVC.goodsImageList = diction[@"groupGoodsDetailVo"][@"goodsImageList"];
     [self addChildViewController:ImageDetailVC];
     
      HSQGoodsDetailCommentsViewController *GoodsDetailCommentsVC = [[HSQGoodsDetailCommentsViewController alloc] init];
@@ -480,7 +482,7 @@
 /**
  * @brief 商品的规格及数量选好的回调
  */
-- (void)hsqGoodsModelViewBottomBtnClickAction:(UIButton *)sender GoodsCount:(NSString *)Count Type:(NSString *)typeString goods_id:(NSString *)goodsId GoodsKunCun:(NSString *)goodsStorage goodsSpecString:(NSString *)goodsSpecString{
+-(void)hsqGoodsModelViewBottomBtnClickActionWithGoodsCount:(NSString *)Count Type:(NSString *)typeString goods_id:(NSString *)goodsId GoodsKunCun:(NSString *)goodsStorage goodsSpecString:(NSString *)goodsSpecString{
     
     HSQLog(@"==选好的商品个数==%@==%@==%@",Count,typeString,goodsId);
     
@@ -593,7 +595,7 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"购物车添加失败" SuperView:self.view];
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
     }];
 }
 
@@ -622,7 +624,7 @@
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"购物车数据同步失败" SuperView:self.view];
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
         
     }];
     

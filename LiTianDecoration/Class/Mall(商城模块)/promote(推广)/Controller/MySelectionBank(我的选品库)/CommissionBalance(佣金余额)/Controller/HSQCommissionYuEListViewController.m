@@ -64,7 +64,7 @@
  */
 - (void)CreatTableView{
     
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight - KSafeTopeHeight - KSafeBottomHeight - 100 - 44) style:(UITableViewStylePlain)];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight - KSafeTopeHeight - KSafeBottomHeight - 100) style:(UITableViewStylePlain)];
     
     tableView.backgroundColor = [UIColor clearColor];
     

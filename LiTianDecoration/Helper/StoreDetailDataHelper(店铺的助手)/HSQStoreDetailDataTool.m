@@ -173,7 +173,7 @@
         }
         else
         {
-            return  CGSizeMake((KScreenWidth-2)/2, (KScreenWidth-2)/2);
+            return  CGSizeMake((KScreenWidth-2)/2, (KScreenWidth-2)/2 + 50);
         }
     }
     else
