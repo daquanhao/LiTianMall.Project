@@ -43,14 +43,14 @@
         [self addSubview:scrollLabelView];
         self.scrollLabelView = scrollLabelView;
         scrollLabelView.scrollSpace = 10;
-        scrollLabelView.font = [UIFont systemFontOfSize:KLabelFont(14.0, 12.0)];
+        scrollLabelView.font = [UIFont systemFontOfSize:14];
         scrollLabelView.textAlignment = NSTextAlignmentLeft;
         scrollLabelView.backgroundColor = [UIColor clearColor];
         scrollLabelView.scrollTitleColor = RGB(74, 74, 74);
         
         self.OneImageView.sd_layout.leftSpaceToView(self, 0).rightSpaceToView(self, 0).topSpaceToView(self, 0).bottomSpaceToView(self, 0);
         
-        self.LeftHeader_Image.sd_layout.leftSpaceToView(self, 10).centerYEqualToView(self).widthIs(70).heightIs(30);
+        self.LeftHeader_Image.sd_layout.leftSpaceToView(self, 10).topSpaceToView(self, 10).widthIs(70).heightIs(30);
         
         // 跑马灯文本视图
         self.scrollLabelView.sd_layout.leftSpaceToView(self.LeftHeader_Image, 10).rightSpaceToView(self, 10).centerYEqualToView(self.LeftHeader_Image).heightIs(30);

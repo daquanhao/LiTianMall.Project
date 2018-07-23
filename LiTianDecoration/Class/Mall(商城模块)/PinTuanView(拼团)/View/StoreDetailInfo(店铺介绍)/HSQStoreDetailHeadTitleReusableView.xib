@@ -18,9 +18,9 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D18-gM-pE4">
                     <rect key="frame" x="0.0" y="10" width="320" height="40"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iL5-hm-viF">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="店铺推荐" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iL5-hm-viF">
                             <rect key="frame" x="10" y="0.0" width="300" height="40"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -45,7 +45,7 @@
                 <outlet property="BgView" destination="D18-gM-pE4" id="s3Y-Yd-h3p"/>
                 <outlet property="Title_Label" destination="iL5-hm-viF" id="rVn-HN-DpK"/>
             </connections>
-            <point key="canvasLocation" x="-2197" y="-123"/>
+            <point key="canvasLocation" x="-1692" y="-40"/>
         </collectionReusableView>
     </objects>
 </document>

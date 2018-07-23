@@ -260,8 +260,6 @@
     [_db close];
 }
 
-
-
 /**
  * @brief 更新商品的数据
  */
@@ -313,26 +311,7 @@
 
 }
 
-/**
- * @brief 清除所有的数据
- */
-- (void)ClearAllDataFromeFMDB{
-    
-    [_db open];
-    
-    BOOL Successful = [_db executeUpdate:@"DELETE FROM person"];
-    
-    if (Successful == YES)
-    {
-        HSQLog(@"====数据库删除成功");
-    }
-    else
-    {
-        HSQLog(@"====数据库删除失败");
-    }
-    
-    [_db close];
-}
+
 
 
 

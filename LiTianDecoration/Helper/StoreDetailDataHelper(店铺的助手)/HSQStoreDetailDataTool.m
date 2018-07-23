@@ -97,8 +97,7 @@
 //            NSDictionary *diction = array[section - 1];
 //
 //            return [diction[@"goodsList"] count];
-            
-            return array.count;
+            return 9;
         }
     }
     else // 店铺活动
@@ -150,7 +149,7 @@
         }
         else
         {
-            return CGSizeMake(KScreenWidth,10);
+            return CGSizeMake(KScreenWidth,50);
         }
     }
 }
@@ -173,7 +172,7 @@
         }
         else
         {
-            return  CGSizeMake((KScreenWidth-2)/2, (KScreenWidth-2)/2 + 50);
+            return  CGSizeMake((KScreenWidth-2)/2, (KScreenWidth-2)/2);
         }
     }
     else

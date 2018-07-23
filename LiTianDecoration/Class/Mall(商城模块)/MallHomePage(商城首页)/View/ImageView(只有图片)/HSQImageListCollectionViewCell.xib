@@ -73,7 +73,7 @@
                 <outlet property="ShowImageView" destination="smz-kc-SYw" id="qMN-t0-vXQ"/>
                 <outlet property="Third_ImageView" destination="Xw0-2b-mCe" id="t1U-cY-dfZ"/>
             </connections>
-            <point key="canvasLocation" x="-722" y="-54"/>
+            <point key="canvasLocation" x="-1024" y="0.0"/>
         </collectionViewCell>
     </objects>
 </document>

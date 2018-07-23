@@ -169,9 +169,6 @@
     [self.navigationController pushViewController:SearchBarVC animated:YES];
 }
 
-/**
- * @brief 进入消息界面
- */
 - (void)ItemClickAction:(UIBarButtonItem *)sender{
     
     HSQMessageListViewController *MessageListVC = [[HSQMessageListViewController alloc] init];

@@ -7,9 +7,10 @@
 //
 
 #import "PublieTuiJianGoodsListView.h"
-#import "HSQGoodsDataListModel.h"
 
 @interface PublieTuiJianGoodsListView ()
+
+@property (nonatomic, strong) UIView *BgView;
 
 @property (nonatomic, strong) UILabel *GoodsNameLabel; // 商品的名字
 
@@ -54,14 +55,19 @@
     // 商品的名字
     UILabel *GoodsNameLabel = [[UILabel alloc] init];
     GoodsNameLabel.textColor = RGB(71, 71, 71);
-    GoodsNameLabel.font = [UIFont systemFontOfSize:KLabelFont(14.0, 12.0)];
+    GoodsNameLabel.font = [UIFont systemFontOfSize:14.0];
     GoodsNameLabel.numberOfLines = 2;
     [self addSubview:GoodsNameLabel];
     self.GoodsNameLabel = GoodsNameLabel;
     
+    // 商品图片的背景图
+    UIView *BgView = [[UIView alloc] init];
+    [self addSubview:BgView];
+    self.BgView = BgView;
+    
     // 商品的图片
     UIImageView *GoodsImage = [[UIImageView alloc] init];
-    [self addSubview:GoodsImage];
+    [BgView addSubview:GoodsImage];
     self.GoodsImage = GoodsImage;
     
     // 按钮
@@ -77,17 +83,19 @@
  */
 - (void)SetUpGoodsViewLayOut{
     
-    // 商品的图片
-    self.GoodsImage.sd_layout.leftSpaceToView(self, 5).topSpaceToView(self, 5).rightSpaceToView(self, 5).heightEqualToWidth();
+    // 商品的价格
+    self.GoodsPriceLabel.sd_layout.leftSpaceToView(self, 5).rightSpaceToView(self, 5).bottomSpaceToView(self, 5).autoHeightRatio(0);
     
     // 商品的名字
-    self.GoodsNameLabel.sd_layout.leftEqualToView(self.GoodsImage).rightEqualToView(self.GoodsImage).topSpaceToView(self.GoodsImage, 5).autoHeightRatio(0);
-    
+    self.GoodsNameLabel.sd_layout.leftEqualToView(self.GoodsPriceLabel).rightEqualToView(self.GoodsPriceLabel).bottomSpaceToView(self.GoodsPriceLabel, 5).autoHeightRatio(0);
     [self.GoodsNameLabel setMaxNumberOfLinesToShow:2];
     
-    // 商品的价格
-    self.GoodsPriceLabel.sd_layout.leftEqualToView(self.GoodsImage).rightEqualToView(self.GoodsImage).topSpaceToView(self.GoodsNameLabel, 5).autoHeightRatio(0);
-
+    // 商品图片的背景图
+    self.BgView.sd_layout.leftSpaceToView(self, 0).topSpaceToView(self, 0).rightSpaceToView(self, 0).bottomSpaceToView(self.GoodsNameLabel, 0);
+    
+    // 商品的图片
+    self.GoodsImage.sd_layout.leftSpaceToView(self.BgView, 2).rightSpaceToView(self.BgView, 2).centerYEqualToView(self.BgView).heightEqualToWidth();
+    
     // 商品的图片按钮
     self.GoodsBtn.sd_layout.leftSpaceToView(self, 0).topSpaceToView(self, 0).rightSpaceToView(self, 0).bottomSpaceToView(self, 0);
 }
@@ -95,18 +103,18 @@
 /**
  * @brief 控件赋值
  */
-- (void)setModel:(HSQGoodsDataListModel *)model{
+- (void)setDataDiction:(NSDictionary *)dataDiction{
     
-    _model = model;
+    _dataDiction = dataDiction;
     
     // 商品的价格
-    self.GoodsPriceLabel.text = [NSString stringWithFormat:@"¥%.2f",model.appPrice0.floatValue];
+    self.GoodsPriceLabel.text = [NSString stringWithFormat:@"¥%@",dataDiction[@"appPrice0"]];
 
     // 商品的名字
-    self.GoodsNameLabel.text = model.goodsName;
+     self.GoodsNameLabel.text = [NSString stringWithFormat:@"%@",dataDiction[@"goodsName"]];
 
     // 商品的图片
-    [self.GoodsImage sd_setImageWithURL:[NSURL URLWithString:model.imageSrc] placeholderImage:KGoodsPlacherImage];
+    [self.GoodsImage sd_setImageWithURL:[NSURL URLWithString:dataDiction[@"imageSrc"]] placeholderImage:KGoodsPlacherImage];
 }
 
 /**
@@ -116,7 +124,7 @@
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(TuiJianGoodsListClickAction:commonId:)]) {
         
-        [self.delegate TuiJianGoodsListClickAction:sender commonId:self.model.commonId];
+        [self.delegate TuiJianGoodsListClickAction:sender commonId:self.dataDiction[@"commonId"]];
     }
 }
 

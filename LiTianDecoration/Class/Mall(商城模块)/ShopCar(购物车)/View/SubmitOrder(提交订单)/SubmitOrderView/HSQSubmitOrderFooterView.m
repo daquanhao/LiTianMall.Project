@@ -12,11 +12,15 @@
 
 @interface HSQSubmitOrderFooterView ()
 
+@property (weak, nonatomic) IBOutlet UIView *CouponsView; //满优惠视图
+
 @property (weak, nonatomic) IBOutlet UILabel *YunFei_Label; // 运费
 
 @property (weak, nonatomic) IBOutlet UIView *LeaveMessage;// 买家留言
 
 @property (weak, nonatomic) IBOutlet UILabel *TotalMonery_Label; // 商品总的价格
+
+@property (weak, nonatomic) IBOutlet UILabel *PayType_Label;  // 支付方式
 
 @end
 
@@ -49,19 +53,24 @@
     
     // 带有提示文字的输入框
     HSQCustomTextView *textView = [[HSQCustomTextView alloc] initWithFrame:CGRectMake(10, 5, self.LeaveMessage.mj_w - 20, self.LeaveMessage.mj_h - 10)];
-    
     textView.placeholder = @"选填：给商家留言（100字以内）";
-    
     textView.placeholderColor = RGB(180, 180, 180);
-    
     textView.returnKeyType = UIReturnKeyDone;
-    
     textView.backgroundColor = [UIColor clearColor];
-    
     [self.LeaveMessage addSubview:textView];
-    
     self.textView = textView;
     
+}
+
+/**
+ * @brief 选择优惠活动
+ */
+- (IBAction)ChooseCouperActivityBtnClickAction:(UIButton *)sender {
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(ChooseABusinessDiscountButtonClickAction:)]) {
+
+        [self.delegate ChooseABusinessDiscountButtonClickAction:sender];
+    }
 }
 
 /**
@@ -100,27 +109,24 @@
 }
 
 
+
+
+
+
+
+
+
 /**
- * @brief 选择优惠活动
+ * @brief 选择发票
  */
-- (IBAction)ChooseCouperActivityBtnClickAction:(UIButton *)sender {
+- (IBAction)ChooseFaPiaoInfonBtnClickAction:(UIButton *)sender {
     
-    if (self.delegate && [self.delegate respondsToSelector:@selector(ChooseABusinessDiscountButtonClickAction:)]) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(SelectInvoiceInformationBtnClickAction:)]) {
         
-        [self.delegate ChooseABusinessDiscountButtonClickAction:sender];
+        [self.delegate SelectInvoiceInformationBtnClickAction:sender];
     }
 }
 
-/**
- * @brief 选择店铺券
- */
-- (IBAction)XuanZeDianPuQuanBtnClickAction:(UIButton *)sender {
-    
-    if (self.delegate && [self.delegate respondsToSelector:@selector(ChooseShopCouponBtnClickAction:)]) {
-        
-        [self.delegate ChooseShopCouponBtnClickAction:sender];
-    }
-}
 
 
 

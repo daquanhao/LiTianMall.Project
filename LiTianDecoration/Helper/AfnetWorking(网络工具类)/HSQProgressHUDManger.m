@@ -46,8 +46,6 @@
  */
 - (void)ShowProgressHUDPromptText:(NSString *)string SupView:(UIView *)SuperView{
     
-    [self DismissProgressHUD];
-    
      MBProgressHUD *HUD = [[MBProgressHUD alloc] init];
     [SuperView addSubview:HUD];
     
@@ -59,9 +57,8 @@
     
     //3,设置提示信息 信息颜色，字体
     HUD.label.textColor = [UIColor whiteColor];
-    HUD.label.font = [UIFont systemFontOfSize:14];
+    HUD.label.font = [UIFont systemFontOfSize:15];
     HUD.label.text = string;
-    HUD.label.numberOfLines = 0;
     
     //4，设置提示框的相对于父视图中心点的便宜，正值 向右下偏移，负值左上
     [HUD setOffset:CGPointMake(0, -64)];
@@ -122,7 +119,7 @@
     
     // 修改文字的颜色
     hud.label.textColor = [UIColor whiteColor];
-    hud.label.font = [UIFont systemFontOfSize:14.0f];
+    hud.label.font = [UIFont systemFontOfSize:15.0f];
     hud.label.text = text;
     
     // 隐藏时候从父控件中移除
@@ -169,7 +166,7 @@
     if (loadText.length != 0 || loadText != nil)
     {
         self.HUD.label.textColor = [UIColor whiteColor];
-        self.HUD.label.font = [UIFont systemFontOfSize:14.0];
+        self.HUD.label.font = [UIFont systemFontOfSize:15];
         self.HUD.label.text = loadText;
     }
 

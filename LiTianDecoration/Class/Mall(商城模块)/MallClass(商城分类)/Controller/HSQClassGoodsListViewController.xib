@@ -54,18 +54,13 @@
                                 <action selector="ClickOnTheSalesButton:" destination="-1" eventType="touchUpInside" id="8Ut-VX-U9c"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GTB-Ww-dZd">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GTB-Ww-dZd">
                             <rect key="frame" x="187.5" y="0.0" width="93.5" height="50"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <inset key="titleEdgeInsets" minX="-30" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <inset key="imageEdgeInsets" minX="50" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="价格" image="F29714FE-BAB1-48BE-AED0-4825E2E9BFB6">
+                            <state key="normal" title="价格">
                                 <color key="titleColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <state key="disabled">
-                                <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <state key="selected">
                                 <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
@@ -116,7 +111,7 @@
                 <constraint firstAttribute="trailing" secondItem="EHt-Bh-4OI" secondAttribute="trailing" id="Vy6-ri-Pd2"/>
                 <constraint firstItem="EHt-Bh-4OI" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ZJO-WM-Ir5"/>
             </constraints>
-            <point key="canvasLocation" x="-410" y="-670"/>
+            <point key="canvasLocation" x="-546" y="-702"/>
         </view>
     </objects>
     <resources>

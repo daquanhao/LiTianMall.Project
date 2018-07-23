@@ -8,22 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@class HSQGoodsDataListModel;
-
-@protocol HSQClassSecondGoodsListCellDelegate <NSObject>
-
-@optional
-
-- (void)ExpandViewButtonClickAction:(UIButton *)sender;
-
-- (void)JoinStoreDetailButtonClickAction:(UIButton *)sender;
-
-- (void)StoreClosingScoreButtonClickAction:(UIButton *)sender;
-
-- (void)StoreGoodsCollectionButtonClickAction:(UIButton *)sender;
-
-@end
-
 @interface HSQClassSecondGoodsListCell : UICollectionViewCell
 
 /**
@@ -40,15 +24,5 @@
  * @brief 右边按钮的标题
  */
 @property (nonatomic, strong) UIButton *DiscountBtn;
-
-/**
- * @brief 数据模型
- */
-@property (nonatomic, strong) HSQGoodsDataListModel *model;
-
-/**
- * @brief 设置代理
- */
-@property (nonatomic, weak) id<HSQClassSecondGoodsListCellDelegate>delegate;
 
 @end

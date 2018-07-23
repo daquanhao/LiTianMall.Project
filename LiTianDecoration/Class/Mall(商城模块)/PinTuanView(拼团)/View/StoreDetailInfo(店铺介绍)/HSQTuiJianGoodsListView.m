@@ -76,38 +76,10 @@
 
 }
 
-/**
- * @brief 左边大图按钮的点击事件
- */
-- (IBAction)FirstBtnClickAction:(UIButton *)sender {
-    
-    if (self.delegate && [self.delegate respondsToSelector:@selector(ClickOnTheStoreRankingItems:Commid:)]) {
-        
-        [self.delegate ClickOnTheStoreRankingItems:sender Commid:self.data_Array[0][@"commonId"]];
-    }
-}
 
-/**
- * @brief 右边上图按钮的点击事件
- */
-- (IBAction)SecondBtnClickAction:(UIButton *)sender {
-    
-    if (self.delegate && [self.delegate respondsToSelector:@selector(ClickOnTheStoreRankingItems:Commid:)]) {
-        
-        [self.delegate ClickOnTheStoreRankingItems:sender Commid:self.data_Array[1][@"commonId"]];
-    }
-}
 
-/**
- * @brief 右边下图按钮的点击事件
- */
-- (IBAction)ThirdBtnClickAction:(UIButton *)sender {
-    
-    if (self.delegate && [self.delegate respondsToSelector:@selector(ClickOnTheStoreRankingItems:Commid:)]) {
-        
-        [self.delegate ClickOnTheStoreRankingItems:sender Commid:self.data_Array[2][@"commonId"]];
-    }
-}
+
+
 
 
 

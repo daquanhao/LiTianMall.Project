@@ -33,18 +33,16 @@
     _model = model;
     
     // 1.名字
-    self.NameLabel.text = model.operationStageText;
+    self.NameLabel.text = model.descriptionString;
     
     // 2.描述
-    self.DescribeLabel.text = model.descriptionString;
+    self.DescribeLabel.text = model.operationStageText;
     
     // 3.时间
     self.DateTimeLabel.text = model.addTime;
     
     // 4.数量
     self.CountLabel.text = model.points.integerValue > 0 ? [NSString stringWithFormat:@"+%@",model.points] : [NSString stringWithFormat:@"%@",model.points];
-    
-    self.CountLabel.textColor = (model.points.integerValue > 0 ? [UIColor redColor] : [UIColor greenColor]);
 }
 
 - (void)setFrame:(CGRect)frame{

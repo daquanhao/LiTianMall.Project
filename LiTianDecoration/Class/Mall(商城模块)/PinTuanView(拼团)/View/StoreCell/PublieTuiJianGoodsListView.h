@@ -8,29 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-@class HSQGoodsDataListModel;
-
 @protocol PublieTuiJianGoodsListViewDelegate <NSObject>
 
 @optional
 
-/**
- * @brief 为你推荐商品的点击
- */
+/** 为你推荐商品的点击 */
 - (void)TuiJianGoodsListClickAction:(UIButton *)sender commonId:(NSString *)GoodsId;
 
 @end
 
 @interface PublieTuiJianGoodsListView : UIView
 
-/**
- * @brief 数据模型
- */
-@property (nonatomic, strong) HSQGoodsDataListModel *model;
+@property (nonatomic, strong) NSDictionary *dataDiction;
 
-/**
- * @brief 设置代理
- */
 @property (nonatomic, weak) id<PublieTuiJianGoodsListViewDelegate>delegate;
 
 @end

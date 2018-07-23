@@ -7,11 +7,8 @@
 //
 
 #define PageCount 10  // 一页显示多少个模块
-
-#define KNumber 10 // 一页显示多少个商品
-
-#define KRows 5  // 一行显示几列
-
+#define KCol 2  // 行数
+#define KRow 5 // 列数
 #define KScrollerViewHeight KScreenWidth * 0.4
 
 #import "HSQModelViewReusableView.h"
@@ -96,13 +93,23 @@
         
         HSQCustomButton *btn = [HSQCustomButton buttonWithType:(UIButtonTypeCustom)];
         
-        btn.mj_size = CGSizeMake(KScreenWidth / KRows, KScreenWidth / KRows);
+        btn.mj_size = CGSizeMake(KScreenWidth / KRow, KScreenWidth / KRow);
         
-        NSInteger Page = i / KNumber;  // 表示第几页
-        
-        btn.mj_x = (i % KRows) * btn.mj_size.width + Page * KScreenWidth;
-        
-        btn.mj_y =  ((i - Page * KNumber) / KRows)  * btn.mj_size.height;
+        if (i < 10)
+        {
+            btn.mj_x = i % KRow * btn.mj_w;
+            btn.mj_y =  i / KRow * btn.mj_h;
+        }
+        else if ( i < 20)
+        {
+            btn.mj_x = (i - 10) % KRow * btn.mj_w + ( i / 10 * KScreenWidth);
+            btn.mj_y =  (i - 10) / KRow * btn.mj_h;
+        }
+        else if ( i < 30)
+        {
+            btn.mj_x = (i - 20) % KRow * btn.mj_w + ( (i / 20 + 1) * KScreenWidth);
+            btn.mj_y =  (i - 20) / KRow * btn.mj_h;
+        }
         
         btn.tag = i + 190;
         
@@ -112,8 +119,8 @@
         
         btn.titleLabel.font = [UIFont systemFontOfSize:12.0];
         
-        [btn sd_setBackgroundImageWithURL:[NSURL URLWithString:diction[@"imageUrl"]] forState:(UIControlStateNormal)];
-//        [btn setTitle:diction[@"type"] forState:(UIControlStateNormal)];
+//        [btn sd_setBackgroundImageWithURL:[NSURL URLWithString:diction[@"imageUrl"]] forState:(UIControlStateNormal)];
+        [btn setTitle:diction[@"type"] forState:(UIControlStateNormal)];
         
         [btn addTarget:self action:@selector(CustomButtonClickAction:) forControlEvents:(UIControlEventTouchUpInside)];
         

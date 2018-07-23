@@ -8,13 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@class HSQVoucherListModel;
-
 @interface HSQCoupterListCell : UITableViewCell
 
-/**
- * @brief 数据模型
- */
-@property (nonatomic, strong) HSQVoucherListModel *model;
+@property (weak, nonatomic) IBOutlet UIView *BgView;
+
 
 @end

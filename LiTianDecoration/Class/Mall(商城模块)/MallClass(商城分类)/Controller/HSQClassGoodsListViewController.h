@@ -10,9 +10,4 @@
 
 @interface HSQClassGoodsListViewController : UIViewController
 
-/**
- * @brief 搜索的关键字
- */
-@property (nonatomic, copy) NSString *SearchKeywords;
-
 @end

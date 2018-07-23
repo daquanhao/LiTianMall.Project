@@ -11,7 +11,7 @@
 
 #import "HSQPinTuanDetailHomeViewController.h"
 #import "HSQPinTuanDetailGoodsListModel.h"
-#import "HSQLoginHomeViewController.h"
+#import "HSQLoginViewController.h"
 #import "HSQAccountTool.h"
 #import "HSQPinTuanDataDealTool.h"
 #import "HSQTopNavtionView.h"
@@ -82,8 +82,6 @@
     
     // 4.查看本地购物车中商品的个数
     [self LookUpShopCarCount];
-    
-    
     
 }
 
@@ -162,7 +160,7 @@
         
         [[HSQProgressHUDManger Manger] DismissProgressHUD];
         
-        HSQLog(@"=拼团数据=%@",responseObject);
+//        HSQLog(@"=拼团数据=%@",responseObject);
         if ([responseObject[@"code"] integerValue] == 200)
         {
             self.DataDiction = responseObject[@"datas"];
@@ -188,7 +186,7 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"数据加载失败" SuperView:self.view];
         
     }];
 }
@@ -200,11 +198,8 @@
     
     // 1.拼团的价格和所需的人数
     self.GoodsArray = [HSQPinTuanDetailGoodsListModel mj_objectArrayWithKeyValuesArray:diction[@"groupGoodsDetailVo"][@"goodsList"]];
-    
     HSQPinTuanDetailGoodsListModel *model = [self.GoodsArray firstObject];
-    
     NSString *count = [NSString stringWithFormat:@"%@",diction[@"groupGoodsDetailVo"][@"groups"][@"groupRequireNum"]];
-    
     self.KaiTuanCount_Label.text = [NSString stringWithFormat:@"¥%@\n%@人团",model.groupPrice,count];
     
     // 2.单独购买
@@ -237,7 +232,7 @@
     
     if (account.token.length == 0)  // 没有登录
     {
-        HSQLoginHomeViewController *LoginVC = [[HSQLoginHomeViewController alloc] init];
+        HSQLoginViewController *LoginVC = [[HSQLoginViewController alloc] init];
         
         [self.navigationController pushViewController:LoginVC animated:YES];
     }
@@ -299,7 +294,7 @@
         
         self.IsCollection = CollectionState;
         
-        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"数据加载失败" SuperView:self.view];
     }];
     
 }
@@ -365,7 +360,7 @@
     HSQGoodsImageDetailViewController *ImageDetailVC = [[HSQGoodsImageDetailViewController alloc] init];
     ImageDetailVC.title = @"详情";
     ImageDetailVC.commonId = self.commonId;
-//    ImageDetailVC.goodsImageList = diction[@"groupGoodsDetailVo"][@"goodsImageList"];
+    ImageDetailVC.goodsImageList = diction[@"groupGoodsDetailVo"][@"goodsImageList"];
     [self addChildViewController:ImageDetailVC];
     
      HSQGoodsDetailCommentsViewController *GoodsDetailCommentsVC = [[HSQGoodsDetailCommentsViewController alloc] init];
@@ -482,7 +477,7 @@
 /**
  * @brief 商品的规格及数量选好的回调
  */
--(void)hsqGoodsModelViewBottomBtnClickActionWithGoodsCount:(NSString *)Count Type:(NSString *)typeString goods_id:(NSString *)goodsId GoodsKunCun:(NSString *)goodsStorage goodsSpecString:(NSString *)goodsSpecString{
+- (void)hsqGoodsModelViewBottomBtnClickAction:(UIButton *)sender GoodsCount:(NSString *)Count Type:(NSString *)typeString goods_id:(NSString *)goodsId GoodsKunCun:(NSString *)goodsStorage{
     
     HSQLog(@"==选好的商品个数==%@==%@==%@",Count,typeString,goodsId);
     
@@ -595,7 +590,7 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"购物车添加失败" SuperView:self.view];
     }];
 }
 
@@ -624,7 +619,7 @@
 
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"购物车数据同步失败" SuperView:self.view];
         
     }];
     

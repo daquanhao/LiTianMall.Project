@@ -92,11 +92,8 @@
 /** 提交订单界面 有多少个商品**/
 @property (nonatomic, strong) NSMutableArray<Optional>*buyGoodsSpuVoList;
 
-/** 提交订单界面，满优惠列表**/
-@property (nonatomic, strong) NSArray <Optional> *conformList;
-
 /** 提交订单界面，优惠券列表**/
-@property (nonatomic, strong) NSArray <Optional> *voucherVoList;
+@property (nonatomic, strong) NSArray <Optional> *conformList;
 
 /** 提交订单界面商品的总金额*/
 @property (nonatomic, strong) NSString<Optional> *buyItemAmount;
@@ -107,22 +104,7 @@
 /** 提交订单界面--优惠活动的id*/
 @property (nonatomic, strong) NSString<Optional> *conformId;
 
-/** 提交订单界面--店铺券的id*/
-@property (nonatomic, strong) NSString<Optional> *voucherId;
 
-/** 提交订单界面--满优惠是否被选中*/
-@property (nonatomic, strong) NSString<Optional> *IsConform;
-
-/**
- * @brief 店铺券是否被选中
- */
-@property (nonatomic, strong) NSString<Optional> *IsVoucher;
-
-
-/**
- * @brief 选中的平台红包
- */
-@property (nonatomic, strong) NSMutableArray<Optional> *redPackageVoList;
 
 
 @end

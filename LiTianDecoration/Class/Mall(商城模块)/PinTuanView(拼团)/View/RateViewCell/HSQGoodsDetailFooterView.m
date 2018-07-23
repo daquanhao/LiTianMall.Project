@@ -12,6 +12,8 @@
 
 @property (nonatomic, strong) UIView *BgView; // 白色背景图
 
+@property (nonatomic, strong) UIImageView *RightImageView; // 右边的按钮
+
 @property (nonatomic, strong) UILabel *PlacherLabel;  // 提示文字
 
 @end
@@ -79,19 +81,14 @@
     if (PlacherString.length == 0)
     {
         self.BgView.hidden = YES;
-        
         self.RightImageView.hidden = YES;
-        
         self.PlacherLabel.hidden = YES;
     }
     else
     {
         self.BgView.hidden = NO;
-        
         self.RightImageView.hidden = NO;
-        
         self.PlacherLabel.hidden = NO;
-        
         self.PlacherLabel.text = PlacherString;
     }
 }

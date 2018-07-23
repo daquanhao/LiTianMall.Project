@@ -147,19 +147,22 @@
             NSArray *array1 = [HSQIntegralListModel mj_objectArrayWithKeyValuesArray:responseObject[@"datas"][@"logList"]];
             
             [self.dataSource addObjectsFromArray:array1];
+            
+            // 3,停止加载
+            [self.tableView.mj_footer endRefreshing];
         }
         else
         {
             NSString *errorString = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"error"]];
             
             [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:errorString SuperView:self.view];
+            
+            // 3,停止加载
+            [self.tableView.mj_footer endRefreshing];
         }
         
         // 2.刷新数据
         [self.tableView reloadData];
-        
-        // 3,停止加载
-        [self.tableView.mj_footer endRefreshing];
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         

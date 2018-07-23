@@ -152,7 +152,7 @@
         
         [self.view addSubview:self.NoDataView];
         
-        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"地址列表的数据加载失败" SuperView:self.view];
     }];
 }
 

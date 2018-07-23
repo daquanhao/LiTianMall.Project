@@ -26,16 +26,16 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号：" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tBK-9B-AJd">
-                            <rect key="frame" x="10" y="0.0" width="60" height="50"/>
+                            <rect key="frame" x="10" y="0.0" width="80" height="50"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="60" id="tJ8-Qi-EuW"/>
+                                <constraint firstAttribute="width" constant="80" id="Lbo-1k-URV"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="cIc-Ac-04T">
-                            <rect key="frame" x="70" y="0.0" width="295" height="50"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <rect key="frame" x="90" y="0.0" width="275" height="50"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="r1U-DJ-D5X"/>
@@ -58,13 +58,16 @@
                     <rect key="frame" x="0.0" y="52" width="375" height="50"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="验证码：" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DDO-FD-ATc">
-                            <rect key="frame" x="10" y="0.0" width="60" height="50"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <rect key="frame" x="10" y="0.0" width="80" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="80" id="wY7-Gf-7eD"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入图形验证码" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="Lar-qN-Off">
-                            <rect key="frame" x="70" y="0.0" width="205" height="50"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <rect key="frame" x="90" y="0.0" width="185" height="50"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="UPy-tM-Avl"/>
@@ -107,32 +110,22 @@
                         <action selector="NextButtonClickAction:" destination="-1" eventType="touchUpInside" id="l36-Aj-jfl"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小提示：通过手机验证后，可用于快速找回登录密码及支付密码，接收账户资产变更等提醒。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LTC-Py-jDD">
-                    <rect key="frame" x="10" y="187" width="355" height="29"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <color key="textColor" red="0.58823529409999997" green="0.58823529409999997" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <color key="backgroundColor" red="0.58081901069999997" green="0.088427625600000004" blue="0.31863921880000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="uZE-P2-9LT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="1ks-Cr-nsd"/>
-                <constraint firstItem="DDO-FD-ATc" firstAttribute="width" secondItem="tBK-9B-AJd" secondAttribute="width" id="4d9-Fz-2Xa"/>
                 <constraint firstItem="Z52-2a-0FZ" firstAttribute="top" secondItem="66C-bU-7a8" secondAttribute="bottom" constant="2" id="7Bv-Eq-CKE"/>
                 <constraint firstItem="uZE-P2-9LT" firstAttribute="top" secondItem="Z52-2a-0FZ" secondAttribute="bottom" constant="20" id="Ccv-9X-hrU"/>
-                <constraint firstItem="LTC-Py-jDD" firstAttribute="top" secondItem="uZE-P2-9LT" secondAttribute="bottom" constant="20" id="Ki7-lq-njR"/>
-                <constraint firstItem="LTC-Py-jDD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="NoL-f9-LCY"/>
                 <constraint firstAttribute="trailing" secondItem="Z52-2a-0FZ" secondAttribute="trailing" id="O3H-4y-dv1"/>
                 <constraint firstItem="66C-bU-7a8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="SkN-hn-rVo"/>
                 <constraint firstItem="Z52-2a-0FZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="XH5-DZ-7k9"/>
                 <constraint firstItem="uZE-P2-9LT" firstAttribute="top" secondItem="Z52-2a-0FZ" secondAttribute="bottom" constant="20" id="aHk-eu-RGF"/>
                 <constraint firstItem="66C-bU-7a8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="jQ6-0d-rm4"/>
-                <constraint firstAttribute="trailing" secondItem="LTC-Py-jDD" secondAttribute="trailing" constant="10" id="lTJ-zw-9tr"/>
                 <constraint firstAttribute="trailing" secondItem="66C-bU-7a8" secondAttribute="trailing" id="q3m-x1-fH2"/>
                 <constraint firstItem="Z52-2a-0FZ" firstAttribute="top" secondItem="66C-bU-7a8" secondAttribute="bottom" constant="2" id="sWu-Jc-6wK"/>
                 <constraint firstAttribute="trailing" secondItem="uZE-P2-9LT" secondAttribute="trailing" constant="20" id="t0l-fy-eoM"/>
             </constraints>
-            <point key="canvasLocation" x="-286" y="-205"/>
+            <point key="canvasLocation" x="-345" y="-59"/>
         </view>
     </objects>
     <resources>

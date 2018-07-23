@@ -25,13 +25,9 @@
         self.contentView.backgroundColor = [UIColor whiteColor];
         
         UILabel *StoreName_Label = [[UILabel alloc] init];
-        
         StoreName_Label.textColor = RGB(71, 71, 71);
-        
-        StoreName_Label.font = [UIFont systemFontOfSize:KLabelFont(14.0, 12.0)];
-        
+        StoreName_Label.font = [UIFont systemFontOfSize:14.0];
         [self.contentView addSubview:StoreName_Label];
-        
         self.StoreName_Label = StoreName_Label;
         
         self.StoreName_Label.sd_layout.leftSpaceToView(self.contentView, 10).topSpaceToView(self.contentView, 0).bottomSpaceToView(self.contentView, 0).rightSpaceToView(self.contentView, 10);

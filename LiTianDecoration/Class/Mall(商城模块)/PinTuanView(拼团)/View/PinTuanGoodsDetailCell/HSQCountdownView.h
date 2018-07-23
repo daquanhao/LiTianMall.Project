@@ -12,34 +12,15 @@
 
 - (HSQCountdownView *)initCountdownViewWithXIB;
 
-/**
- * @brief 拼团的数据
- */
+/** 接收上面的数据*/
 @property (nonatomic, strong) NSDictionary *dataDiction;
 
-/**
- * @brief 限时折扣的数据
- */
-@property (nonatomic, strong) NSDictionary *discount_diction;
-
-/**
- * @brief 倒计时--天数
- */
 @property (weak, nonatomic) IBOutlet UILabel *dayLabel;
 
-/**
- * @brief 倒计时--小时
- */
 @property (weak, nonatomic) IBOutlet UILabel *hourLabel;
 
-/**
- * @brief 倒计时--分钟
- */
 @property (weak, nonatomic) IBOutlet UILabel *minuteLabel;
 
-/**
- * @brief 倒计时--秒数
- */
 @property (weak, nonatomic) IBOutlet UILabel *secondLabel;
 
 @end

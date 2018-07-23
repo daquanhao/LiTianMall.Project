@@ -37,32 +37,29 @@
 
 - (void)SetValueWithDiction:(NSDictionary *)diction indexPath:(NSIndexPath *)indexPath{
     
-    if (diction.allKeys.count != 0)
+    if (indexPath.row == 0) // 账户余额
     {
-        if (indexPath.row == 0) // 账户余额
-        {
-            self.Count_Label.text = [NSString stringWithFormat:@"%@元",diction[@"predepositAvailable"]];
-        }
-        else if (indexPath.row == 1) // 店铺券
-        {
-            self.Count_Label.text = [NSString stringWithFormat:@"%@张",diction[@"voucher"]];
-        }
-        else if (indexPath.row == 2) // 平台券
-        {
-            self.Count_Label.text = [NSString stringWithFormat:@"%@个",diction[@"redpacket"]];
-        }
-        else if (indexPath.row == 3) // 会员经验值
-        {
-            self.Count_Label.text = [NSString stringWithFormat:@"%@经验",diction[@"expPoints"]];
-        }
-        else if (indexPath.row == 4) // 会员积分
-        {
-            self.Count_Label.text = [NSString stringWithFormat:@"%@分",diction[@"points"]];
-        }
-        else if (indexPath.row == 5) // 会员奖品
-        {
-            self.Count_Label.text = [NSString stringWithFormat:@"%@个",diction[@"prize"]];
-        }
+        self.Count_Label.text = [NSString stringWithFormat:@"%@元",diction[@"predepositAvailable"]];
+    }
+    else if (indexPath.row == 1) // 店铺券
+    {
+        self.Count_Label.text = [NSString stringWithFormat:@"%@张",diction[@"voucher"]];
+    }
+    else if (indexPath.row == 2) // 平台券
+    {
+        self.Count_Label.text = [NSString stringWithFormat:@"%@个",diction[@"redpacket"]];
+    }
+    else if (indexPath.row == 3) // 会员经验值
+    {
+        self.Count_Label.text = [NSString stringWithFormat:@"%@经验",diction[@"expPoints"]];
+    }
+    else if (indexPath.row == 4) // 会员积分
+    {
+        self.Count_Label.text = [NSString stringWithFormat:@"%@分",diction[@"points"]];
+    }
+    else if (indexPath.row == 5) // 会员奖品
+    {
+        self.Count_Label.text = [NSString stringWithFormat:@"%@个",diction[@"prize"]];
     }
 }
 

@@ -20,7 +20,9 @@
         
         UILabel *nameLabel = [[UILabel alloc] init];
         
-        nameLabel.font = [UIFont systemFontOfSize:12.0];
+        nameLabel.text = @"苹果";
+        
+        nameLabel.font = [UIFont systemFontOfSize:14.0];
         
         nameLabel.textColor = RGB(51, 51, 51);
         
@@ -28,7 +30,7 @@
         
         self.nameLabel = nameLabel;
         
-        self.nameLabel.sd_layout.leftSpaceToView(self.contentView, 5).rightSpaceToView(self.contentView, 5).centerYEqualToView(self.contentView).heightIs(30);
+        self.nameLabel.sd_layout.leftSpaceToView(self.contentView, 10).rightSpaceToView(self.contentView, 10).centerYEqualToView(self.contentView).heightIs(30);
     }
     
     return self;

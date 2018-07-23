@@ -77,9 +77,8 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
         HSQLog(@"==%@",error.description);
-        [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:@"网络出问题啦！" SupView:self.view];
+ 
     }];
-
 }
 
 - (void)didReceiveMemoryWarning {

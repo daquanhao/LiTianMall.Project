@@ -9,26 +9,22 @@
 #import "AppDelegate.h"
 #import "HSQHomeTabBarController.h"
 
-#import <UMShare/UMShare.h>  // 友盟SDK
-
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     // 1.初始化键盘
     [self CreatJianPan];
     
-    [self.window makeKeyAndVisible];
-    
-    // 初始化友盟SDK
-    [self SetUMSDK];
-    
     // 1.设置窗口的根视图控制器
     [self SetTheRootViewControllerForTheWindow];
+    
+    [self.window makeKeyAndVisible];
     
     return YES;
 }
@@ -70,49 +66,6 @@
     
     keyboardManager.toolbarDoneBarButtonItemText = @"完成";  // 工具条有显示的文字
 }
-
-/**
- * @brief 配置友盟的SDK
- */
-- (void)SetUMSDK{
-    
-    //设置AppKey，是在友盟注册之后给到的key
-    [[UMSocialManager defaultManager] setUmSocialAppkey:KUMKEY];
-    
-    // 打开图片水印
-    [UMSocialGlobal shareInstance].isUsingWaterMark = YES;
-    
-    // 关闭强制验证https，可允许http图片分享，但需要在info.plist设置安全域名
-    [UMSocialGlobal shareInstance].isUsingHttpsWhenShareContent = NO;
-    
-    // 设置微信的appKey和appSecret
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wx4235d41fdc3b78e2" appSecret:@"eeb29aaa56fd8048b585878867255e5c" redirectURL:@"http://mobile.umeng.com/social"];
-    
-    // 移除相应平台的分享，如微信收藏
-    [[UMSocialManager defaultManager] removePlatformProviderWithPlatformTypes:@[@(UMSocialPlatformType_WechatFavorite)]];
-    
-    // 设置分享到QQ互联的appID U-Share SDK为了兼容大部分平台命名，统一用appKey和appSecret进行参数设置，而QQ平台仅需将appID作为U-Share的appKey参数传进即可。
-//    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1105821097"/*设置QQ平台的appID*/  appSecret:nil redirectURL:@"http://mobile.umeng.com/social"];
-    
-}
-
-/**
- * @brief iOS系统版本回调
- */
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options{
-    
-    //6.3的新的API调用，是为了兼容国外平台(例如:新版facebookSDK,VK等)的调用[如果用6.2的api调用会没有回调],对国内平台没有影响
-    BOOL result = [[UMSocialManager defaultManager]  handleOpenURL:url options:options];
-    
-    if (!result)
-    {
-        // 其他如支付等SDK的回调
-    }
-    return result;
-}
-
-
-
 
 
 

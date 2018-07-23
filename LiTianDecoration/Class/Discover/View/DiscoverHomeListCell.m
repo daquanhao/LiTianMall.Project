@@ -55,21 +55,21 @@
         // 2.标题
         UILabel *title_Label = [[UILabel alloc] init];
         title_Label.textColor = [UIColor whiteColor];
-        title_Label.font = [UIFont systemFontOfSize:14.0];
+        title_Label.font = [UIFont systemFontOfSize:KTextFont_(15)];
         [BigImageView addSubview:title_Label];
         self.Title_Label = title_Label;
         
         // 3.作者
         UILabel *author_Label = [[UILabel alloc] init];
         author_Label.textColor = [UIColor whiteColor];
-        author_Label.font = [UIFont systemFontOfSize:14.0];
+        author_Label.font = [UIFont systemFontOfSize:KTextFont_(15)];
         [BigImageView addSubview:author_Label];
         self.author_Label = author_Label;
         
         // 4.阅读数量
         UILabel *ReadCount_Label = [[UILabel alloc] init];
         ReadCount_Label.textColor = [UIColor whiteColor];
-        ReadCount_Label.font = [UIFont systemFontOfSize:14.0];
+        ReadCount_Label.font = [UIFont systemFontOfSize:KTextFont_(15)];
         [BigImageView addSubview:ReadCount_Label];
         self.ReadCount_Label = ReadCount_Label;
         
@@ -80,7 +80,7 @@
         [likeCount_Btn setTitleEdgeInsets:UIEdgeInsetsMake(0, 5, 0, 0)];
         [likeCount_Btn setContentHorizontalAlignment:(UIControlContentHorizontalAlignmentRight)];
         likeCount_Btn.enabled = NO;
-        likeCount_Btn.titleLabel.font = [UIFont systemFontOfSize:14.0];
+        likeCount_Btn.titleLabel.font = [UIFont systemFontOfSize:KTextFont_(15)];
         [BigImageView addSubview:likeCount_Btn];
         self.LikeCount_Button = likeCount_Btn;
         

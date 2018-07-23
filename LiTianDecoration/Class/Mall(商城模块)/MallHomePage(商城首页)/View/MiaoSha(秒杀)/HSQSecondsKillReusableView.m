@@ -54,7 +54,7 @@
         [self addSubview:scrollLabelView];
         self.scrollLabelView = scrollLabelView;
         scrollLabelView.scrollSpace = 10;
-        scrollLabelView.font = [UIFont systemFontOfSize:KLabelFont(14.0, 12.0)];
+        scrollLabelView.font = [UIFont systemFontOfSize:14];
         scrollLabelView.textAlignment = NSTextAlignmentLeft;
         scrollLabelView.backgroundColor = [UIColor clearColor];
         scrollLabelView.scrollTitleColor = RGB(74, 74, 74);

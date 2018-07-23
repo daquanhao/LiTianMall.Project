@@ -9,7 +9,6 @@
 #import "HSQCouponsHomeViewController.h"
 #import "HSQLeftCouponsViewController.h"
 #import "HSQRightCouponsViewController.h"
-#import "HSQRedEnvelopeListViewController.h"
 
 @interface HSQCouponsHomeViewController ()<UIScrollViewDelegate>
 
@@ -45,12 +44,6 @@
     
     // 3.设置底布滚动控制器
     [self setupContentView];
-    
-    // 监听卡密码红包领取成功的消息
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(RedEnvelopeWasSuccessfullyReceivedNotif:) name:@"RedEnvelopeWasSuccessfullyReceivedNotif" object:nil];
-    
-    // 监听卡密码优惠券领取成功的消息
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(RedEnvelopeWasSuccessfullyReceivedNotif:) name:@"VoucherWasSuccessfullyReceivedNotif" object:nil];
 }
 
 /**
@@ -58,32 +51,13 @@
  */
 - (void)setupChildVces{
     
-    if (self.ID_Number.integerValue == 100) // 店铺券
-    {
-        HSQLeftCouponsViewController *LeftCouponsVC = [[HSQLeftCouponsViewController alloc] init];
-        
-        LeftCouponsVC.title = self.LeftTop_Title;
-        
-        LeftCouponsVC.Source = self.ID_Number.integerValue;
-        
-        [self addChildViewController:LeftCouponsVC];
-    }
-    else
-    {
-        HSQRedEnvelopeListViewController *LeftCouponsVC = [[HSQRedEnvelopeListViewController alloc] init];
-        
-        LeftCouponsVC.title = self.LeftTop_Title;
-                
-        [self addChildViewController:LeftCouponsVC];
-    }
+    HSQLeftCouponsViewController *LeftCouponsVC = [[HSQLeftCouponsViewController alloc] init];
+    LeftCouponsVC.title = self.LeftTop_Title;
+    [self addChildViewController:LeftCouponsVC];
     
-    // 卡密码领取红包或者优惠券
     HSQRightCouponsViewController *RightCouponsVC = [[HSQRightCouponsViewController alloc] init];
-    
     RightCouponsVC.title = self.RightTop_Title;
-    
-    RightCouponsVC.Source = self.ID_Number.integerValue;
-    
+    RightCouponsVC.ID_Number = self.ID_Number;
     [self addChildViewController:RightCouponsVC];
     
 }
@@ -127,7 +101,7 @@
         
         [button setTitleColor:RGB(255, 83, 63) forState:UIControlStateDisabled];
         
-        button.titleLabel.font = [UIFont systemFontOfSize:14.0];
+        button.titleLabel.font = [UIFont systemFontOfSize:KTextFont_(15)];
         
         [button addTarget:self action:@selector(titleClick:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -243,19 +217,10 @@
     // Dispose of any resources that can be recreated.
 }
 
-/**
- * @brief 监听卡密码红包领取成功
- */
-- (void)RedEnvelopeWasSuccessfullyReceivedNotif:(NSNotification *)notification{
-    
-    [self titleClick:self.titlesView.subviews[0]];
-}
 
 
--(void)dealloc{
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
+
+
 
 
 

@@ -12,16 +12,11 @@
 
 @protocol HSQSubmitOrderFooterViewDelegate <NSObject>
 
-/**
- * @brief 选择商家的优惠活动
- */
+/** 选择商家的优惠活动*/
 - (void)ChooseABusinessDiscountButtonClickAction:(UIButton *)sender;
 
-/**
- * @brief 选择店铺券
- */
-- (void)ChooseShopCouponBtnClickAction:(UIButton *)sender;
-
+/** 选择发票信息*/
+- (void)SelectInvoiceInformationBtnClickAction:(UIButton *)sender;
 
 @end
 
@@ -31,40 +26,14 @@
 
 @property (nonatomic, strong) NSDictionary *diction;
 
-@property (nonatomic, assign) NSInteger Section;
+@property (nonatomic, strong) HSQCustomTextView *textView; // 带有提示文字的输入框
 
-@property (nonatomic, strong) HSQShopCarVCGoodsDataModel *ShopCarModel;
-
-/**
- * @brief 带有提示文字的输入框
- */
-@property (nonatomic, strong) HSQCustomTextView *textView;
-
-
-/**
- * @brief 店铺券
- */
-@property (weak, nonatomic) IBOutlet UIView *voucherVoList_BgView;
-
-@property (weak, nonatomic) IBOutlet UILabel *voucher_Label;
-
-/**
- * @brief 满优惠
- */
-@property (weak, nonatomic) IBOutlet UIView *CouponsView;
+@property (nonatomic, copy) NSString *Section;
 
 @property (weak, nonatomic) IBOutlet UILabel *YouHuiContent_Label; // 优惠内容
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *TopMargin;
+@property (weak, nonatomic) IBOutlet UILabel *FaPiaoInfo_Label; // 发票信息
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *freightAmountTopMargin;
-
-
-
-
-
-
-
-
+@property (nonatomic, strong) HSQShopCarVCGoodsDataModel *ShopCarModel;
 
 @end

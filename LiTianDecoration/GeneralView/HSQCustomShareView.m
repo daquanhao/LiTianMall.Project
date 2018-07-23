@@ -60,8 +60,6 @@
         
         [CustomButton setImage:[UIImage imageNamed:diction[@"icon"]] forState:(UIControlStateNormal)];
         
-        [CustomButton addTarget:self action:@selector(CustomButtonClickAction:) forControlEvents:(UIControlEventTouchUpInside)];
-        
         CGFloat marginX = (self.frame.size.width - ColumnNum * Button_WH - (ColumnNum - 1) * KBtnMargin) / 2;
         
         NSInteger col = i % ColumnNum;
@@ -107,7 +105,7 @@
     
     placeholder_Label.textColor = [UIColor colorWithRed:74 / 255.0 green:74 / 255.0 blue:74 / 255.0 alpha:1.0];
     
-    placeholder_Label.font = [UIFont systemFontOfSize:14.0];
+    placeholder_Label.font = [UIFont systemFontOfSize:15.0];
     
     placeholder_Label.text = @"请选择您要分享的平台";
     
@@ -120,7 +118,7 @@
     
     [canleBtn setTitle:@"取 消" forState:UIControlStateNormal];
     
-    canleBtn.titleLabel.font = [UIFont systemFontOfSize:14.0];
+    canleBtn.titleLabel.font = [UIFont systemFontOfSize:16];
     
     [canleBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     
@@ -193,16 +191,6 @@
         [self removeFromSuperview];
         
     }];
-}
-
-- (void)CustomButtonClickAction:(UIButton *)sender{
-    
-    [self TapGRClickAction];
-    
-    if (self.delegate && [self.delegate respondsToSelector:@selector(CustomShareButtonClickEvent:)]) {
-        
-        [self.delegate CustomShareButtonClickEvent:sender];
-    }
 }
 
 

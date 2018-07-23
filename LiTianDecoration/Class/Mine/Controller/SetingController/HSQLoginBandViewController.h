@@ -10,10 +10,4 @@
 
 @interface HSQLoginBandViewController : UIViewController
 
-/**
- * @brief 用户个人信息
- */
-@property (nonatomic, strong) NSDictionary *UserInfo_Diction;
-
-
 @end

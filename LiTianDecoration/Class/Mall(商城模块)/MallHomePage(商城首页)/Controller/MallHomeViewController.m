@@ -396,7 +396,7 @@
     
     if (self.dataSource != 0)
     {
-//        HSQMallHomeDataModel *model = [self.dataSource lastObject];
+        HSQMallHomeDataModel *model = [self.dataSource lastObject];
         
         //            cell.Diction = model.itemDataSource[indexPath.row];
     }

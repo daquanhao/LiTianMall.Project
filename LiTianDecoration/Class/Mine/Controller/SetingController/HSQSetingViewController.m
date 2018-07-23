@@ -17,17 +17,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *MobilePayLabel;
 
-@property (nonatomic, copy) NSString *mobileIsBind;  // 手机号是否绑定 0未绑定 1已绑定
+@property (nonatomic, copy) NSString *state;
 
-@property (nonatomic, copy) NSString *emailIsBind;  // 邮箱是否绑定 0未绑定 1已绑定
-
-@property (nonatomic, copy) NSString *payPwdIsExist;  // 是否已设置支付密码 0未设置 1已设置
-
-@property (weak, nonatomic) IBOutlet UIView *BgView;
-
-@property (nonatomic, strong) NSDictionary *datas;
-
-@property (weak, nonatomic) IBOutlet UILabel *PhoneState_Label;
 
 @end
 
@@ -41,71 +32,47 @@
     
     self.view.backgroundColor = KViewBackGroupColor;
     
-    self.datas = [NSDictionary dictionary];
-  
-    // 请求用户中心的数据
-    [self requestUserCenterDataFromeserver];
+    // 验证手机是否绑定
+    [self VerifyThatThePhoneIsBinding];
+    
 }
 
 /**
- * @brief 请求用户中心的数据
+ * @brief 验证手机是否绑定
  */
-- (void)requestUserCenterDataFromeserver{
-    
-    HSQAccount *account = [HSQAccountTool account];
-    
-    if (account.token.length == 0) return;
+- (void)VerifyThatThePhoneIsBinding{
     
     [[HSQProgressHUDManger Manger] ShowLoadingDataFromeServer:@"" ToView:self.view IsClearColor:YES];
     
-    NSDictionary *diction = @{@"token":account.token};
+    NSDictionary *diction = @{@"token":[HSQAccountTool account].token};
     
     AFNetworkRequestTool *RequestTool = [AFNetworkRequestTool shareRequestTool];
     
-    [RequestTool.manger POST:UrlAdress(KUserCenterDataUrl) parameters:diction progress:^(NSProgress * _Nonnull uploadProgress) {
+    [RequestTool.manger POST:UrlAdress(KLookMobileBandStateUrl) parameters:diction progress:^(NSProgress * _Nonnull uploadProgress) {
         
-    } success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *responseObject) {
-        
-        HSQLog(@"=用户中心的数据==%@",responseObject);
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         [[HSQProgressHUDManger Manger] DismissProgressHUD];
         
-        self.BgView.hidden = YES;
-        
-        self.datas = responseObject[@"datas"];
-        
+        HSQLog(@"==查看手机绑定状态=%@",responseObject);
         if ([responseObject[@"code"] integerValue] == 200)
         {
-            // 手机是否绑定 1-已绑定，0-未绑定
-            self.mobileIsBind = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"memberInfo"][@"mobileIsBind"]];
+            // 1-已绑定，0-未绑定
+            self.state = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"state"]];
+        }
+        else
+        {
+            NSString *message = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"error"]];
             
-            if (self.mobileIsBind.integerValue == 0)
-            {
-                self.MobilePlacherLabel.text = @"未绑定";
-            }
-            else
-            {
-                NSString *Mobile = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"memberInfo"][@"mobile"]];
-                NSString *phoneString = [Mobile stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
-                self.MobilePlacherLabel.text = phoneString;
-            }
-            
-            // 邮箱是否绑定 1-已绑定，0-未绑定
-            self.emailIsBind = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"memberInfo"][@"emailIsBind"]];
-            
-            // 支付密码是否绑定 1-已绑定，0-未绑定
-            self.payPwdIsExist = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"memberInfo"][@"payPwdIsExist"]];
-            
-            self.MobilePayLabel.text = (self.payPwdIsExist.integerValue == 0 ? @"未设置":@"");
-            
+            [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:message SuperView:self.view];
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"状态查看失败" SuperView:self.view];
+        
     }];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -117,44 +84,23 @@
  */
 - (IBAction)ChangeLoginPassWordClickAction:(UIButton *)sender {
     
-    if (self.mobileIsBind.integerValue == 0) // 未绑定手机，提示绑定手机
-    {
-        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"设置支付密码需先绑定手机立即绑定手机吗？" message:nil preferredStyle:(UIAlertControllerStyleAlert)];
-        
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:nil];
-        
-        UIAlertAction *DeafulAction = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-            
-            HSQBandMobileViewController *BandMobileVC = [[HSQBandMobileViewController alloc] init];
-            
-            BandMobileVC.NavtionTitle = @"绑定手机";
-            
-            BandMobileVC.sendType = @"4";
-            
-            BandMobileVC.Source = 100;
-            
-            [self.navigationController pushViewController:BandMobileVC animated:YES];
-        }];
-        
-        [alertVC addAction:cancelAction];
-        
-        [alertVC addAction:DeafulAction];
-        
-        [self presentViewController:alertVC animated:YES completion:nil];
-    }
-    else
+    if (self.state.integerValue == 0) // 未绑定手机
     {
         HSQBandMobileViewController *BandMobileVC = [[HSQBandMobileViewController alloc] init];
         
-        BandMobileVC.NavtionTitle = @"手机安全验证";
+        BandMobileVC.NavtionTitle = @"绑定手机";
         
-        BandMobileVC.sendType = @"5";
-        
-        BandMobileVC.Source = 100;
-        
-        BandMobileVC.MobileString = [NSString stringWithFormat:@"%@",self.datas[@"memberInfo"][@"mobile"]];
+        BandMobileVC.sendType = @"4";
         
         [self.navigationController pushViewController:BandMobileVC animated:YES];
+    }
+    else  // 已绑定手机
+    {
+        HSQYanZhengMobileViewController *YanZhengVC = [[HSQYanZhengMobileViewController alloc] init];
+        
+        YanZhengVC.Navtion_Title = @"手机安全验证";
+        
+        [self.navigationController pushViewController:YanZhengVC animated:YES];
     }
 }
 
@@ -163,32 +109,24 @@
  */
 - (IBAction)PhoneVerificationButtonClickAction:(UIButton *)sender {
     
-    HSQBandMobileViewController *BandMobileVC = [[HSQBandMobileViewController alloc] init];
-    
-    if (self.mobileIsBind.integerValue == 0) // 未绑定手机
+    if (self.state.integerValue == 0) // 未绑定手机
     {
+        HSQBandMobileViewController *BandMobileVC = [[HSQBandMobileViewController alloc] init];
+        
         BandMobileVC.NavtionTitle = @"绑定手机";
         
         BandMobileVC.sendType = @"4";
         
-        BandMobileVC.Source = 200;
-        
-        BandMobileVC.MobileString = @"";
+        [self.navigationController pushViewController:BandMobileVC animated:YES];
     }
     else  // 已绑定手机
     {
-        BandMobileVC.NavtionTitle = @"手机安全验证";
+        HSQYanZhengMobileViewController *YanZhengVC = [[HSQYanZhengMobileViewController alloc] init];
         
-        BandMobileVC.sendType = @"5";
+        YanZhengVC.Navtion_Title = @"手机安全验证";
         
-        BandMobileVC.Source = 400;
-        
-        BandMobileVC.MobileString = [NSString stringWithFormat:@"%@",self.datas[@"memberInfo"][@"mobile"]];
+        [self.navigationController pushViewController:YanZhengVC animated:YES];
     }
-    
-    [self.navigationController pushViewController:BandMobileVC animated:YES];
-    
-
 }
 
 /**
@@ -196,45 +134,27 @@
  */
 - (IBAction)ChangeThePaymentPassword:(UIButton *)sender {
     
-    if (self.mobileIsBind.integerValue == 0) // 未绑定手机，提示绑定手机
-    {
-        UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:@"设置支付密码需先绑定手机立即绑定手机吗？" message:nil preferredStyle:(UIAlertControllerStyleAlert)];
+    
+}
+
+/**
+ * @brief 清除图片缓存
+ */
+- (IBAction)ClearPictureMemoryClickAction:(UIButton *)sender {
+    
+    [[HSQProgressHUDManger Manger] ShowLoadingDataFromeServer:@"" ToView:self.view IsClearColor:NO];
+    
+    //异步清除图片缓存 （磁盘中的）
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:(UIAlertActionStyleCancel) handler:nil];
-        
-        UIAlertAction *DeafulAction = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+        [[SDImageCache sharedImageCache] clearDiskOnCompletion:^{
             
-            HSQBandMobileViewController *BandMobileVC = [[HSQBandMobileViewController alloc] init];
-            
-            BandMobileVC.NavtionTitle = @"绑定手机";
-            
-            BandMobileVC.sendType = @"4";
-            
-            BandMobileVC.Source = 300;
-            
-            [self.navigationController pushViewController:BandMobileVC animated:YES];
+            [[HSQProgressHUDManger Manger] DismissProgressHUD];
+
+            [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:@"图片缓存已被清除" SupView:self.view];
         }];
         
-        [alertVC addAction:cancelAction];
-        
-        [alertVC addAction:DeafulAction];
-        
-        [self presentViewController:alertVC animated:YES completion:nil];
-    }
-    else
-    {
-        HSQBandMobileViewController *BandMobileVC = [[HSQBandMobileViewController alloc] init];
-        
-        BandMobileVC.NavtionTitle = @"设置支付密码";
-        
-        BandMobileVC.sendType = @"5";
-        
-        BandMobileVC.Source = 300;
-        
-        BandMobileVC.MobileString = [NSString stringWithFormat:@"%@",self.datas[@"memberInfo"][@"mobile"]];
-        
-        [self.navigationController pushViewController:BandMobileVC animated:YES];
-    }
+    });
 }
 
 /**
@@ -252,7 +172,6 @@
     }];
     
     [alertVC addAction:cancelAction];
-    
     [alertVC addAction:DeafulAction];
     
     [self presentViewController:alertVC animated:YES completion:nil];
@@ -299,7 +218,9 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"网络出问题啦！" SuperView:self.view];
+        HSQLog(@"==%@",error.description);
+        
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"退出登录失败" SuperView:self.view];
     }];
 }
 
@@ -316,25 +237,7 @@
 
 
 
-///**
-// * @brief 清除图片缓存
-// */
-//- (IBAction)ClearPictureMemoryClickAction:(UIButton *)sender {
-//
-//    [[HSQProgressHUDManger Manger] ShowLoadingDataFromeServer:@"" ToView:self.view IsClearColor:NO];
-//
-//    //异步清除图片缓存 （磁盘中的）
-//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//
-//        [[SDImageCache sharedImageCache] clearDiskOnCompletion:^{
-//
-//            [[HSQProgressHUDManger Manger] DismissProgressHUD];
-//
-//            [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:@"图片缓存已被清除" SupView:self.view];
-//        }];
-//
-//    });
-//}
+
 
 
 

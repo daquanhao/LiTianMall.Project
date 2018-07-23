@@ -47,14 +47,14 @@
     // 用户的名字
     UILabel *nameLabel = [[UILabel alloc] init];
     nameLabel.textColor = [UIColor blackColor];
-    nameLabel.font = [UIFont systemFontOfSize:14.0];
+    nameLabel.font = [UIFont systemFontOfSize:15.0];
     [self.contentView addSubview:nameLabel];
     self.nameLabel = nameLabel;
     
     // 用户的地址
     UILabel *adressLabel = [[UILabel alloc] init];
     adressLabel.textColor = [UIColor blackColor];
-    adressLabel.font = [UIFont systemFontOfSize:12.0];
+    adressLabel.font = [UIFont systemFontOfSize:15.0];
     adressLabel.numberOfLines = 0;
     [self.contentView addSubview:adressLabel];
     self.adressLabel = adressLabel;
@@ -69,16 +69,16 @@
     
     // 分割线
     UIImageView *LineView = [[UIImageView alloc] init];
-    LineView.backgroundColor =KViewBackGroupColor;
+    LineView.backgroundColor = RGB(180, 180, 180);
     [self.contentView addSubview:LineView];
     self.LineView = LineView;
     
     // 删除按钮
     UIButton *Delete_Button = [UIButton buttonWithType:(UIButtonTypeCustom)];
     [Delete_Button setTitle:@"删除" forState:(UIControlStateNormal)];
-    Delete_Button.titleLabel.font = [UIFont systemFontOfSize:12.0];
+    Delete_Button.titleLabel.font = [UIFont systemFontOfSize:14];
     [Delete_Button setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
-    [Delete_Button setImage:KImageName(@"E40551FD-B428-45CB-B91D-FF4D678D0EF7") forState:(UIControlStateNormal)];
+    [Delete_Button setImage:KImageName(@"123") forState:(UIControlStateNormal)];
     [Delete_Button setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     [Delete_Button addTarget:self action:@selector(Delete_ButtonClickAction:) forControlEvents:(UIControlEventTouchUpInside)];
     [self.contentView addSubview:Delete_Button];
@@ -87,9 +87,9 @@
     // 编辑按钮
     UIButton *Edit_Button = [UIButton buttonWithType:(UIButtonTypeCustom)];
     [Edit_Button setTitle:@"编辑" forState:(UIControlStateNormal)];
-    Edit_Button.titleLabel.font = [UIFont systemFontOfSize:12.0];
+    Edit_Button.titleLabel.font = [UIFont systemFontOfSize:14];
     [Edit_Button setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
-    [Edit_Button setImage:KImageName(@"E40551FD-B428-45CB-B91D-FF4D678D0EF7") forState:(UIControlStateNormal)];
+    [Edit_Button setImage:KImageName(@"123") forState:(UIControlStateNormal)];
     [Edit_Button setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     [Edit_Button addTarget:self action:@selector(Edit_ButtonClickAction:) forControlEvents:(UIControlEventTouchUpInside)];
     [self.contentView addSubview:Edit_Button];
@@ -112,10 +112,10 @@
     self.LineView.sd_layout.leftSpaceToView(self.contentView, 50).topSpaceToView(self.adressLabel, 10).rightSpaceToView(self.contentView, 0).heightIs(1);
     
     // 删除按钮
-    self.Delete_Button.sd_layout.rightSpaceToView(self.contentView, 10).topSpaceToView(self.LineView, 5).heightIs(25).widthIs(60);
+    self.Delete_Button.sd_layout.rightSpaceToView(self.contentView, 15).topSpaceToView(self.LineView, 10).heightIs(30).widthIs(80);
     
     // 编辑按钮
-    self.Edit_Button.sd_layout.rightSpaceToView(self.Delete_Button, 10).topEqualToView(self.Delete_Button).bottomEqualToView(self.Delete_Button).widthRatioToView(self.Delete_Button, 1.0);
+    self.Edit_Button.sd_layout.rightSpaceToView(self.Delete_Button, 20).topEqualToView(self.Delete_Button).bottomEqualToView(self.Delete_Button).widthRatioToView(self.Delete_Button, 1.0);
     
     // 用户的地址是否是默认
     self.isDefault_Label.sd_layout.leftEqualToView(self.nameLabel).centerYEqualToView(self.Delete_Button).widthIs(80).heightIs(20);
@@ -140,7 +140,7 @@
         [self.isDefault_Label setHidden:NO];
     }
     
-    [self setupAutoHeightWithBottomView:self.Delete_Button bottomMargin:5];
+    [self setupAutoHeightWithBottomView:self.Delete_Button bottomMargin:10];
 }
 
 - (void)setFrame:(CGRect)frame{

@@ -10,14 +10,7 @@
 
 @interface HSQGoodsDetailFooterView : UITableViewHeaderFooterView
 
-/**
- * @brief 提示文字
- */
+/** 提示文字*/
 @property (nonatomic, copy) NSString *PlacherString;
-
-/**
- * @brief 右边的按钮
- */
-@property (nonatomic, strong) UIImageView *RightImageView; 
 
 @end

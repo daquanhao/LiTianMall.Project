@@ -33,21 +33,13 @@
         
         // 提示文字
         UILabel *titleLabel = [[UILabel alloc] init];
-        
         titleLabel.textColor = RGB(148, 178, 200);
-        
-        titleLabel.font = [UIFont systemFontOfSize:14.0];
-        
+        titleLabel.font = [UIFont systemFontOfSize:KTextFont_(14)];
         titleLabel.textAlignment = NSTextAlignmentCenter;
-        
         titleLabel.backgroundColor = [UIColor clearColor];
-        
         titleLabel.numberOfLines = 0;
-        
         titleLabel.text = title;
-        
         [self addSubview:titleLabel];
-        
         self.titleLabel = titleLabel;
         
         self.Logo.sd_layout.widthIs(KlogImageHW).heightEqualToWidth().centerXEqualToView(self).centerYIs((KScreenHeight-KlogImageHW)/2 - Loginheight);

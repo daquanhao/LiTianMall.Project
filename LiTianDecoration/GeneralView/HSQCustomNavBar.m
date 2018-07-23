@@ -47,7 +47,7 @@
         UILabel *title_Label = [[UILabel alloc] init];
         title_Label.frame = CGRectMake(([UIScreen mainScreen].bounds.size.width - 100) * 0.5, KSafeTopeHeight - 10 - 30, 100, 30);
         title_Label.textAlignment = NSTextAlignmentCenter;
-        title_Label.font = [UIFont systemFontOfSize:KLabelFont(16.0, 14.0)];
+        title_Label.font = [UIFont systemFontOfSize:16.0];
         [self addSubview:title_Label];
         self.title_Label = title_Label;
         

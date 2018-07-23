@@ -13,7 +13,6 @@
             <connections>
                 <outlet property="CodeImage_Button" destination="CHe-0s-Plm" id="EMb-i6-1Mo"/>
                 <outlet property="Code_TextField" destination="WbO-59-fFf" id="pFV-7u-XNC"/>
-                <outlet property="LeftPlacher_Label" destination="7at-HF-Og2" id="9Xn-GZ-wsU"/>
                 <outlet property="Name_TextField" destination="kAd-hY-7dK" id="fAx-TK-3Wo"/>
                 <outlet property="Placher_Label" destination="pGV-Ph-BW5" id="tBW-3X-otb"/>
                 <outlet property="SecondPlacherLabel" destination="GvG-bo-0e4" id="uxI-XA-U2A"/>
@@ -26,16 +25,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tBy-6F-FDs">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGV-Ph-BW5">
-                            <rect key="frame" x="10" y="0.0" width="355" height="25"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <rect key="frame" x="10" y="0.0" width="355" height="32"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GvG-bo-0e4">
-                            <rect key="frame" x="10" y="25" width="355" height="25"/>
+                            <rect key="frame" x="10" y="32" width="355" height="32"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -51,14 +50,14 @@
                         <constraint firstItem="pGV-Ph-BW5" firstAttribute="leading" secondItem="tBy-6F-FDs" secondAttribute="leading" constant="10" id="TGk-xP-N1k"/>
                         <constraint firstAttribute="bottom" secondItem="GvG-bo-0e4" secondAttribute="bottom" id="WLA-84-VF2"/>
                         <constraint firstItem="GvG-bo-0e4" firstAttribute="leading" secondItem="pGV-Ph-BW5" secondAttribute="leading" id="c1A-hU-UQJ"/>
-                        <constraint firstAttribute="height" constant="50" id="h1g-dE-WOR"/>
+                        <constraint firstAttribute="height" constant="64" id="h1g-dE-WOR"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9rh-Bd-6yD">
-                    <rect key="frame" x="0.0" y="60" width="375" height="45"/>
+                    <rect key="frame" x="0.0" y="74" width="375" height="60"/>
                     <subviews>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入店铺优惠券卡密号" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="kAd-hY-7dK">
-                            <rect key="frame" x="85" y="0.0" width="280" height="45"/>
+                            <rect key="frame" x="75" y="0.0" width="290" height="60"/>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" returnKeyType="next"/>
@@ -66,8 +65,8 @@
                                 <outlet property="delegate" destination="-1" id="ksh-HM-psD"/>
                             </connections>
                         </textField>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="红包卡密：" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7at-HF-Og2">
-                            <rect key="frame" x="10" y="13" width="75" height="20"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="卡密：" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7at-HF-Og2">
+                            <rect key="frame" x="10" y="20.5" width="65" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="HFN-1S-EEw"/>
                             </constraints>
@@ -78,7 +77,7 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="45" id="7WC-s9-Sda"/>
+                        <constraint firstAttribute="height" constant="60" id="7WC-s9-Sda"/>
                         <constraint firstAttribute="bottom" secondItem="kAd-hY-7dK" secondAttribute="bottom" id="JTL-i3-wvw"/>
                         <constraint firstItem="kAd-hY-7dK" firstAttribute="top" secondItem="9rh-Bd-6yD" secondAttribute="top" id="Xob-uU-PQB"/>
                         <constraint firstAttribute="trailing" secondItem="kAd-hY-7dK" secondAttribute="trailing" constant="10" id="Ynt-YZ-ycK"/>
@@ -86,10 +85,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="okS-LA-fsw">
-                    <rect key="frame" x="0.0" y="107" width="375" height="45"/>
+                    <rect key="frame" x="0.0" y="136" width="375" height="60"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHe-0s-Plm">
-                            <rect key="frame" x="265" y="2.5" width="100" height="40"/>
+                            <rect key="frame" x="265" y="10" width="100" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="100" id="Pdm-lO-HhQ"/>
                                 <constraint firstAttribute="height" constant="40" id="sTI-py-lpo"/>
@@ -99,17 +98,17 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="验证码：" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UXz-dQ-Od7">
-                            <rect key="frame" x="10" y="12.5" width="75" height="20"/>
+                            <rect key="frame" x="10" y="20" width="65" height="20"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="75" id="SfI-Lu-B6z"/>
+                                <constraint firstAttribute="width" constant="65" id="SfI-Lu-B6z"/>
                                 <constraint firstAttribute="height" constant="20" id="bhY-0O-D4I"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入验证码" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="WbO-59-fFf">
-                            <rect key="frame" x="85" y="0.0" width="175" height="45"/>
+                            <rect key="frame" x="75" y="0.0" width="185" height="60"/>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" returnKeyType="done"/>
@@ -131,7 +130,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EcF-jd-ds3">
-                    <rect key="frame" x="20" y="172" width="335" height="45"/>
+                    <rect key="frame" x="20" y="216" width="335" height="45"/>
                     <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="Epx-mB-6se"/>
@@ -163,7 +162,7 @@
                 <constraint firstItem="okS-LA-fsw" firstAttribute="top" secondItem="9rh-Bd-6yD" secondAttribute="bottom" constant="2" id="oVz-RY-gKb"/>
                 <constraint firstItem="9rh-Bd-6yD" firstAttribute="top" secondItem="tBy-6F-FDs" secondAttribute="bottom" constant="10" id="x8O-6V-dpK"/>
             </constraints>
-            <point key="canvasLocation" x="-1955" y="-280"/>
+            <point key="canvasLocation" x="-1146" y="-339"/>
         </view>
     </objects>
 </document>

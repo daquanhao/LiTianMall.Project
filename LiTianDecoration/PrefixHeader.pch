@@ -13,29 +13,14 @@
 
 #define KScreenWidth [UIScreen mainScreen].bounds.size.width
 
-//友盟的KEY
-#define KUMKEY @"5b3476928f4a9d6a76000029"
-
-#define KUMAppMasterSecret @"1si24kubhhyvdthvctms5lsy8xpky9dw"
-
-// 在腾讯开放平台申请应用的appId
-#define KAPPID @""
-
 // 客户端类型
 #define KClientType @"ios"
 
-// 为你推荐
-#define KRecommendNumber 6 // 一页显示多少个商品
-
-#define KRecommendRows 3  // 一行显示几列
-
 #define RGB(r, g, b) [UIColor colorWithRed:r / 255.0 green:g/255.0 blue:b/255.0 alpha:1.0]
 
-//#define KTextFont_(X)  X * KScreenWidth / 375 // 根据屏幕的宽度自适应文字的大小
+#define KTextFont_(X)  X * KScreenWidth / 375 // 根据屏幕的宽度自适应文字的大小
 
 #define KViewBackGroupColor  [UIColor colorWithRed:240 / 255.0 green:242 / 255.0 blue:245 / 255.0 alpha:1.0] // 默认的背景色
-
-#define KViewBackGlobalGroupColor  [UIColor colorWithRed:33 / 255.0 green:36 / 255.0 blue:46 / 255.0 alpha:1.0] // 默认的背景色
 
 #define KImageName(name)  [UIImage imageNamed:name] // 简化加载图片的名字
 
@@ -51,8 +36,6 @@
 
 #define KSecondViewHeight 200  // 秒杀专区的高度
 
-#define KLabelFont(k6PlusFont,kotherFont)  ([UIDevice iPhonesModel] == iPhone6Plus ? k6PlusFont : kotherFont) // label文字大小
-
 #ifdef DEBUG  // 调式环境下的打印
 
 #define HSQLog(...) NSLog(__VA_ARGS__)
@@ -63,9 +46,6 @@
 
 #endif
 
-// 数据加载失败的提示语
-#define KErrorPlacherString @"网络出问题啦！"
-
 // 当ios是11.0版本以上的时候，系统会自动为视图设置安全区域，如果不想要的话，可以添加一下代码取消
 #define KCancelSafeSet(view)  if (@available(iOS 11.0, *)){if ([view respondsToSelector:@selector(setContentInsetAdjustmentBehavior:)]){view.contentInsetAdjustmentBehavior =UIScrollViewContentInsetAdjustmentNever;}}
 
@@ -73,7 +53,7 @@
 #define KIconPlacherImage [UIImage imageNamed:@"icon4"]
 
 // 商品的替代图片
-#define KGoodsPlacherImage [UIImage imageNamed:@"productImg"]
+#define KGoodsPlacherImage [UIImage imageNamed:@"icon4"]
 
 // 购物车规格列表的高度
 #define KGoodsShopCarGuiGeHeight 60
@@ -107,7 +87,6 @@
 #import "HSQParameterTool.h"
 #import "HSQCustomTextView.h"
 #import "IQKeyboardManager.h"
-#import "UIFont+adapt.h"
 
 /****************************** 全局通用的接口 *****************************/
  
@@ -139,16 +118,13 @@
 
 // 完整的接口 
 #define UrlAdress(url) [NSString stringWithFormat:@"%@%@",@"http://10.1.8.238/api",url] // 经军校的服务器
-//#define UrlAdress(url) [NSString stringWithFormat:@"%@%@",@"http://10.1.8.236/api",url]   // 王璐璐的服务器
-
-// 第三方账号及手机登录开关状态
-#define KLoginStateUrl @"/loginconnect/state"
+//#define UrlAdress(url) [NSString stringWithFormat:@"%@%@",@"http://10.1.8.30/api",url]   // 王璐璐的服务器
 
 // 普通登录接口
 #define KNormalLoginUrl @"/login"
 
 // 手机号登录的接口
-#define KMobileLoginUrl @"/loginconnect/mobile/login"
+#define KMobileLoginUrl @" /loginconnect/mobile/login"
 
 // 普通注册的接口
 #define KNormalRegisterUrl @"/register/general"
@@ -157,25 +133,7 @@
 #define KMobileRegisterUrl @"/loginconnect/mobile/register"
 
 // 手机找回密码
-#define KMobilForgetPassWordUrl @"/loginconnect/mobile/findpwd"
-
-// App微信登录(友盟android、ios)
-#define KWeChatLoginUrl @"/loginconnect/umeng/weixin"
-
-//App微信登录绑定新账号(友盟android、ios)
-#define KWeChatBandNewAccountUrl @"/loginconnect/umeng/weixin/register/mobile/bind"
-
-// App微信登录绑定已有账号(友盟android、ios)
-#define KWeiChatBandAccountUrl @"/loginconnect/umeng/weixin/login/bind"
-
-// App QQ登录（友盟android、ios）
-#define KQQLoginUrl @"/loginconnect/umeng/qq"
-
-// App QQ登录绑定新账号(友盟android、ios)
-#define KQQBandNewAccountUrl @"/loginconnect/umeng/qq/register/mobile/bind"
-
-// App QQ登录绑定已有账号(友盟android、ios)
-#define KQQBandAccountUrl @"/loginconnect/umeng/qq/login/bind"
+#define KMobilForgetPassWordUrl @" /loginconnect/mobile/findpwd"
 
 // 退出登录的接口
 #define KLoginOutUrl @"/logout"
@@ -203,12 +161,6 @@
 
 // 会员收货地址添加
 #define KAddNewAdressUrl @"/member/address/add"
-
-// 会员修改登录密码
-#define KChangeLoginPassWordUrl @"/member/security/edit/pwd"
-
-// 会员修改支付密码
-#define KChangePaymentPasswordsUrl @"/member/security/edit/payPwd"
 
 // 会员地址列表的数据
 #define KadressListUrl @"/member/address/list"
@@ -238,70 +190,13 @@
 #define KNewBrowsingFootprintUrl @"/goodsbrowse/add"
 
 // 清空浏览足迹
-#define KClearMineBrownerFootUrl @"/member/goodsbrowse/clearall"
+#define KClearMineBrownerFootUrl @" /member/goodsbrowse/clearall"
 
 // 会员的财产
 #define KMineMoneryUrl @"/member/asset"
 
 // 会员的积分列表
 #define KIntegralListCell @"/member/points/log"
-
-// 积分兑换商品列表
-#define KListPointsExchangedGoodsUrl @"/points/goods"
-
-// 积分兑换商品列表
-#define KListPointsRedPageUrl @"/red/package"
-
-// 会员等级列表
-#define KMembershipListDataUrl @"/get/member/grade"
-
-// 积分兑换商品详情
-#define KPointChangeGoodsDetailUrl @"/points/goods/"
-
-// 积分商品购买----确认订单
-#define KPointGoodsBuyUrl @"/member/points/orders/buy"
-
-// 积分商品购买----提交订单
-#define KPointGoodsBuySaveUrl @"/member/points/orders/buy/save"
-
-// 积分兑换商品列表
-#define KpointExchangeGoodsOrderListUrl @"/member/points/orders"
-
-// 积分兑换订单取消
-#define KCancelPointGoodsOrderUrl @"/member/points/orders/cancel"
-
-// 积分兑换订单确认收货
-#define KPointGoodsQRShouHuoUrl @"/member/points/orders/receive"
-
-//积分兑换商品详情
-#define KPointExchangeOrderDetailUrl @"/member/points/orders/info"
-
-// 会员红包列表
-#define KMemberRedBaoListUrl @"/member/redpackage/list"
-
-// 免费红包领取
-#define KFreeReceiveRedPageUrl @"/member/redpackage/receive"
-
-// 卡密领取红包
-#define KreceivesredenvelopesPWDUrl @"/member/redpackage/receive/pwd"
-
-// 获取领券中心首页相关信息
-#define KvoucheHomeUrl @"/voucher_center/index"
-
-// 获取领券中心列表相关信息
-#define KvouchListUrl @"/voucher_center/voucher/list"
-
-// 商品详细信息 配送及运费信息(和拼团共用)
-#define KGoodsDetailSendInfo @"/goods/calc/freight"
-
-// 会员优惠券列表
-#define KMembershipCouponListUrl @"/member/voucher/list"
-
-// 卡密领取优惠券
-#define KGetVoucherpwdUrl @"/member/voucher/receive/pwd"
-
-// 免费领取优惠券
-#define KfreeGetCouponsUrl @"/member/voucher/receive/free"
 
 // 会员的经验值
 #define KExperienceValueUrl @"/member/exppoints/log"
@@ -315,38 +210,14 @@
 // 会员取消收藏商品
 #define KCancelCollectionGoodsUrl @"/member/goods/favorite/delete"
 
-// 会员解绑微信
-#define KUnbindWeiXin @"/member/unbind/weixin"
-
-// 会员解绑QQ
-#define KUnbindQQ @"/member/unbind/qq"
-
 // 商品电脑版描述、手机版描述、属性参数、售后保障(和拼团共用)
 #define KGoodsDetailAftersalesUrl @"/goods/extend/"
-
-// 商品的详细信息
-#define KGoodsDetailInfoUrl @"/goods/"
 
 // 电脑版详情
 #define KComputerGoodsDetailUrl @"/goods/body/"
 
 // 商品的评论列表
 #define KGoodsRateListUrl @"/goods/evaluate/queryGoodsEvaluate"
-
-// 商品收藏列表
-#define KGoodsCollectionListUrl @"/member/goods/favorite/list"
-
-// 会员批量取消收藏商品
-#define KBatchDeleteGoodsUrl @"/member/goods/favorite/multi_delete"
-
-// 会员收藏店铺列表
-#define KMyCollectionStoreListUrl @"/member/store/favorite/list"
-
-// 批量取消收藏店铺
-#define KBatchDeteStoreCollectionUrl @"/member/store/favorite/multi_delete"
-
-// 会员预存款提现申请
-#define KWithdrawalApplication @"/member/predeposit/cash/save"
 
 /******************** 分类相关的接口  *****************/
 #define KClassDataUrl @"/category/list"
@@ -356,9 +227,6 @@
 
 // 热搜的关键词
 #define KHotSearchUrl @"/search/default/keyword"
-
-// 商品搜索
-#define KGoodsSearchUrl @"/search"
 
 // 拼团的列表数据
 #define KPinTuanListDataUrl @"/group/list"
@@ -375,17 +243,8 @@
 // 店铺介绍
 #define KStoreIntroducedUrl @"/store/introduce"
 
-// 会员可领取某店铺免费优惠券活动列表
-#define KtemplateFreeUrl @"/member/voucher/template/free"
-
 // 店铺内商品搜索
 #define KSearchGoodsInStoreUrl @"/store/search/goods"
-
-// 店铺搜索
-#define KStoreSearchUrl @"/search/store"
-
-// 店铺动态评分
-#define KStoreDynamicScoreUrl @"/search/store/evaluate"
 
 // 店铺活动的接口
 #define KStoreActivityUrl @"/store/voucher"
@@ -416,9 +275,6 @@
 
 // 购买的第一步：显示商品的信息
 #define KBuyGoodsFirstBuUrl @"/member/buy/step1"
-
-// 购买第一步：请求可用的红包列表
-#define KRedEnvelopesAvailableUrl @"/member/buy/red/package/list"
 
 // 购买第二步：计算运费
 #define KBuyGoodsSecondBuUrl @"/member/buy/calc/freight"
@@ -529,112 +385,6 @@
 
 // 添加发票
 #define KAddFapiaoUrl @"/member/invoice/add"
-
-
-/*************************************** 我的财产  *************************************/
-
-// 账户余额列表
-#define KMyMoneryListUrl @"/member/predeposit/log"
-
-// 会员预存款提现列表
-#define KWithdrawalListUrl @"/member/predeposit/cash/list"
-
-
-/*************************************** 推广分佣  *************************************/
-
-// 推广商品搜索
-#define KPromotionSearchDataUrl @"/distribution/search"
-
-// 添加单个推广商品
-#define KAddPromotionalItemUrl @"/member/distributor/goods/add"
-
-// 批量添加推广商品
-#define KAddPromotionalItemsInBulkUrl @"/member/distributor/goods/addmulti"
-
-// 获取推广会员信息
-#define KGetPromotionMemberInformationUrl @"/member/distributor/info"
-
-// 获取平台推广协议
-#define KGetPromotionAgreementUrl @"/member/distributor/join/get_agreement"
-
-// 会员申请推广资格认证保存
-#define KSaveApplyCertificationInfoUrl @"/member/distributor/join/save"
-
-// 获取推广会员的申请信息
-#define KGetMemberZiGeInfoUrl @"/member/distributor/join/info"
-
-// 获取选品库分组列表
-#define KGetsListofSelectedGroupsUrl @"/member/distributor/favorites/list"
-
-// 添加一个新的选品库分组
-#define KaddNewSelectLibraryUrl @"/member/distributor/favorites/add"
-
-// 编辑选品库分组
-#define KEditSelectLibraryUrl @"/member/distributor/favorites/modname"
-
-// 删除选品库分组
-#define KDeteleSelectLibraryUrl @"/member/distributor/favorites/del"
-
-//获取选品库分组的详细信息
-#define KSelectedGroupsDetailUrl @"/member/distributor/favorites/info"
-
-//获取选品库分组下的推广商品
-#define KselectionBankGroupGoodsListUrl @"/member/distributor/goods/list"
-
-// 删除推广商品
-#define KRemovePromotionalItemsUrl @"/member/distributor/goods/del"
-
-// 移动一个商品至其他分组
-#define KMoveGoodsToOtherGroupUrl @"/member/distributor/goods/movefavorites"
-
-// 推广佣金提现时显示的相关信息
-#define KInformationPromotionCommissionUrl @"/member/distributor/commission/cash/apply"
-
-// 保存佣金提现记录
-#define KSaveCommissionWithdrawalRecordsUrl @"/member/distributor/commission/cash/save"
-
-//推广佣金提现提现详情
-#define KPromotionCommissionDetailDataUrl @"/member/distributor/commission/cash/info"
-
-// 推广佣金提现列表
-#define KCommissionWithdrawalListUrl @"/member/distributor/commission/cash/list"
-
-// 推广佣金变更日志列表
-#define KPromotionChangeLogListUrl @"/member/distributor/commission/list"
-
-// 推广会员推广订单列表
-#define KPromoteOrderListDataUrl @"/member/distributor/orders/list"
-
-// 二维码分享
-#define KQRCodeShareUrl @"/getshareqr"
-
-/************************************************************** 消息  ******************************************************/
-
-// 分类消息列表
-#define KClassMessageListUrl @"/member/message/class"
-
-// 消息列表
-#define KMessageListUrl @"/member/message/list"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

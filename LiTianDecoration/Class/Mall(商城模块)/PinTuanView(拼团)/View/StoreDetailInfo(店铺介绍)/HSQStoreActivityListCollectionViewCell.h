@@ -11,13 +11,8 @@
 @interface HSQStoreActivityListCollectionViewCell : UICollectionViewCell
 
 /**
- * @brief 店铺限时折扣活动的数据
+ * @brief 店铺活动的数据
  */
-@property (nonatomic, strong) NSDictionary *discountList_diction;
-
-/**
- * @brief  店铺优惠券活动的数据
- */
-@property (nonatomic, strong) NSDictionary *conformList_diction;
+@property (nonatomic, strong) NSDictionary *dataDiction;
 
 @end

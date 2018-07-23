@@ -10,9 +10,7 @@
 
 @interface HSQPinTuanDetailHomeViewController : UIViewController
 
-/**
- * @brief 商品SPU编号
- */
+/**  商品SPU编号*/
 @property (nonatomic, copy) NSString *commonId;
 
 @end

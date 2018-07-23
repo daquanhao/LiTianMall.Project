@@ -8,6 +8,7 @@
 
 #import "HSQBandMobileViewController.h"
 #import "HSQNextBandPhoneViewController.h"
+#import "HSQNextBandPhoneViewController.h"
 
 @interface HSQBandMobileViewController ()<UITextFieldDelegate>
 
@@ -18,10 +19,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *Code_Button;
 
 @property (nonatomic, copy) NSString *captchaKey;
-
-@property (weak, nonatomic) IBOutlet UILabel *BottomPlacher_Label; // 底部的提示标语
-
-@property (weak, nonatomic) IBOutlet UIButton *BottomClick_Btn;
 
 @end
 
@@ -34,33 +31,6 @@
     self.view.backgroundColor = KViewBackGroupColor;
     
     self.navigationItem.title = self.NavtionTitle;
-    
-    if (self.MobileString.length != 0)
-    {
-        NSString *phoneString = [self.MobileString stringByReplacingCharactersInRange:NSMakeRange(3, 4) withString:@"****"];
-        
-        self.Phone_TextField.text = phoneString;
-    }
-    
-    // 隐藏底部提示标语
-    if (self.Source == 500)
-    {
-        self.BottomPlacher_Label.hidden = NO;
-        
-        self.BottomPlacher_Label.text = @"请填写已经绑定过的手机号码。";
-        
-        self.BottomPlacher_Label.textAlignment = NSTextAlignmentCenter;
-        
-        [self.BottomClick_Btn setTitle:@"获取动态码" forState:(UIControlStateNormal)];
-    }
-    else if (self.Source == 200)
-    {
-        self.BottomPlacher_Label.hidden = NO;
-    }
-    else
-    {
-        self.BottomPlacher_Label.hidden = YES;
-    }
     
     // 请求验证码的图片
     [self RegisterCodeButtonImageFromeServer];
@@ -92,6 +62,8 @@
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
+        HSQLog(@"==验证码=%@",responseObject);
+        
         [[HSQProgressHUDManger Manger] DismissProgressHUD];
         
         self.captchaKey = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"captchaKey"]];
@@ -104,7 +76,7 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"数据加载失败" SuperView:self.view];
     }];
 }
 
@@ -117,7 +89,7 @@
     {
         [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:@"请输入您的手机号" SupView:self.view];
     }
-    else if (self.Phone_TextField.text.isPhone == NO && self.Source == 200)
+    else if (self.Phone_TextField.text.isPhone == NO)
     {
          [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:@"手机格式不正确" SupView:self.view];
     }
@@ -136,52 +108,47 @@
  */
 - (void)VerifyTheImageVerificationCode{
     
-    NSString *phone = (self.MobileString.length == 0 ? self.Phone_TextField.text : self.MobileString);
+//    [[HSQProgressHUDManger Manger] ShowLoadingDataFromeServer:@"" ToView:self.view IsClearColor:YES];
+//
+//    NSDictionary *diction = @{@"mobile":self.Phone_TextField.text,@"captchaVal":self.Code_TextField.text,@"sendType":self.sendType,@"captchaKey":self.captchaKey};
+//
+//    AFNetworkRequestTool *RequestTool = [AFNetworkRequestTool shareRequestTool];
+//
+//    [manger POST:UrlAdress(KValidationBtnCodeImageUrl) parameters:diction progress:^(NSProgress * _Nonnull uploadProgress) {
+//
+//    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//
+//        [[HSQProgressHUDManger Manger] DismissProgressHUD];
+//
+//        HSQLog(@"===%@",responseObject);
+//        if ([responseObject[@"code"] integerValue] == 200)
+//        {
+//
+//        }
+//        else
+//        {
+//            NSString *message = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"error"]];
+//
+//            [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:message SuperView:self.view];
+//        }
+//
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//
+//        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"数据验证失败！" SuperView:self.view];
+//
+//    }];
     
-    [[HSQProgressHUDManger Manger] ShowLoadingDataFromeServer:@"" ToView:self.view IsClearColor:YES];
-
-    NSDictionary *diction = @{@"mobile":phone,@"captchaVal":self.Code_TextField.text,@"sendType":self.sendType,@"captchaKey":self.captchaKey};
+    HSQNextBandPhoneViewController *NextBandPhoneVC = [[HSQNextBandPhoneViewController alloc] init];
     
-    AFNetworkRequestTool *RequestTool = [AFNetworkRequestTool shareRequestTool];
-
-    [RequestTool.manger GET:UrlAdress(KValidationBtnCodeImageUrl) parameters:diction progress:^(NSProgress * _Nonnull uploadProgress) {
-
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-
-        [[HSQProgressHUDManger Manger] DismissProgressHUD];
-
-        HSQLog(@"===%@",responseObject);
-        if ([responseObject[@"code"] integerValue] == 200)
-        {
-            HSQNextBandPhoneViewController *NextBandPhoneVC = [[HSQNextBandPhoneViewController alloc] init];
-            
-            NextBandPhoneVC.NavtionTitle =  (self.Source == 500 ? @"提交验证码":self.navigationItem.title);
-            
-            NextBandPhoneVC.authCodeValidTime = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"authCodeValidTime"]];
-            
-            NextBandPhoneVC.authCodeResendTime = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"authCodeResendTime"]];
-            
-            NextBandPhoneVC.UserMobile = phone;
-            
-            NextBandPhoneVC.Source = self.Source;
-            
-            NextBandPhoneVC.sendType = self.sendType;
-            
-            [self.navigationController pushViewController:NextBandPhoneVC animated:YES];
-        }
-        else
-        {
-            NSString *message = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"error"]];
-
-            [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:message SuperView:self.view];
-            
-            [self RegisterCodeButtonImageFromeServer];
-        }
-
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-
-        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
-    }];
+    NextBandPhoneVC.NavtionTitle = @"绑定手机";
+    
+    NextBandPhoneVC.authCodeValidTime = @"10";
+    
+    NextBandPhoneVC.authCodeResendTime = @"60";
+    
+    NextBandPhoneVC.UserMobile = self.Phone_TextField.text;
+    
+    [self.navigationController pushViewController:NextBandPhoneVC animated:YES];
 }
 
 

@@ -42,15 +42,15 @@
     
     // 2.分类
     HSQClassViewController *ClassVC = [[HSQClassViewController alloc] init];
-    [self SetupChildVC:ClassVC Title:@"设计案例" NormalImage:@"HomePage_Normal" SelectImage:@"HomePage_Select"];
+    [self SetupChildVC:ClassVC Title:@"分类" NormalImage:@"HomePage_Normal" SelectImage:@"HomePage_Select"];
     
     // 3.发现
     DiscoverViewController *DiscoverVC = [[DiscoverViewController alloc] init];
-    [self SetupChildVC:DiscoverVC Title:@"家具讲堂" NormalImage:@"discover_Normal" SelectImage:@"discover_Select"];
+    [self SetupChildVC:DiscoverVC Title:@"发现" NormalImage:@"discover_Normal" SelectImage:@"discover_Select"];
     
     // 4.购物车
     HSQHomePageViewController *ShopCarVC = [[HSQHomePageViewController alloc] init];
-    [self SetupChildVC:ShopCarVC Title:@"在施工地" NormalImage:@"HomePage_Normal" SelectImage:@"HomePage_Select"];
+    [self SetupChildVC:ShopCarVC Title:@"购物车" NormalImage:@"HomePage_Normal" SelectImage:@"HomePage_Select"];
     
     // 5.我的
     HSQMineViewController *MineVC = [[HSQMineViewController alloc] init];
@@ -71,12 +71,12 @@
     ChildVC.tabBarItem.selectedImage = [[UIImage imageNamed:SelectName] imageWithRenderingMode:(UIImageRenderingModeAlwaysOriginal)];
 
     // 3.改变tabbar上选择时，文字的颜色
-    [ChildVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [[UIColor whiteColor] colorWithAlphaComponent:0.5]} forState:(UIControlStateNormal)];
+    [ChildVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithRed:74/255.0 green:74/255.0 blue:74/255.0 alpha:1.0]} forState:(UIControlStateNormal)];
 
-    [ChildVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithRed:220/255.0 green:82/255.0 blue:38/255.0 alpha:1.0]} forState:(UIControlStateSelected)];
+    [ChildVC.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor colorWithRed:241/255.0 green:48/255.0 blue:48/255.0 alpha:1.0]} forState:(UIControlStateSelected)];
     
     // 4.设置tabbar的背景图片
-    [self.tabBar setBackgroundImage:[UIImage ImageWithColor:[UIColor colorWithRed:33/255.0 green:36/255.0 blue:46/255.0 alpha:1.0]]];
+    [self.tabBar setBackgroundImage:[UIImage ImageWithColor:[UIColor whiteColor]]];
     
     // 5.将视图包装成导航视图
     HSQNavigationController *NavigationVC = [[HSQNavigationController alloc] initWithRootViewController:ChildVC];

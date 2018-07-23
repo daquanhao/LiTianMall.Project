@@ -29,12 +29,13 @@
         
         // 1.商品的图片
         UIImageView *GoodsImageView = [[UIImageView alloc] init];
+        GoodsImageView.image = KImageName(@"icon4");
         [self.contentView addSubview:GoodsImageView];
         self.GoodsImageView = GoodsImageView;
         
         // 2.商品的名字
         UILabel *nameLabel = [[UILabel alloc] init];
-        nameLabel.font = [UIFont systemFontOfSize:12.0];
+        nameLabel.font = [UIFont systemFontOfSize:KTextFont_(15)];
         nameLabel.textColor = RGB(51, 51, 51);
         nameLabel.numberOfLines = 0;
         nameLabel.text = @"我的苹果手机";
@@ -43,9 +44,10 @@
         
         // 3.商品的价格
         UILabel *GoodsPriceLabel = [[UILabel alloc] init];
-        GoodsPriceLabel.font = [UIFont systemFontOfSize:14.0];
+        GoodsPriceLabel.font = [UIFont systemFontOfSize:KTextFont_(16)];
         GoodsPriceLabel.textColor = RGB(238, 48, 51);
         GoodsPriceLabel.numberOfLines = 0;
+        GoodsPriceLabel.text = @"¥3099.00";
         [self.contentView addSubview:GoodsPriceLabel];
         self.GoodsPrice_Label = GoodsPriceLabel;
         
@@ -65,10 +67,10 @@
     self.GoodsImageView.sd_layout.leftSpaceToView(self.contentView, 5).topSpaceToView(self.contentView, 5).bottomSpaceToView(self.contentView, 5).widthEqualToHeight();
     
     // 2.商品的名字
-    self.GoodsName_Label.sd_layout.leftSpaceToView(self.GoodsImageView, 10).topEqualToView(self.GoodsImageView).rightSpaceToView(self.contentView, 10).autoHeightRatio(0);
+    self.GoodsName_Label.sd_layout.leftSpaceToView(self.GoodsImageView, 10).topSpaceToView(self.contentView, 10).rightSpaceToView(self.contentView, 10).autoHeightRatio(0);
     
     // 3.商品的价格
-    self.GoodsPrice_Label.sd_layout.leftSpaceToView(self.GoodsImageView, 10).bottomEqualToView(self.GoodsImageView).rightSpaceToView(self.contentView, 10).autoHeightRatio(0);
+    self.GoodsPrice_Label.sd_layout.leftSpaceToView(self.GoodsImageView, 10).bottomEqualToView(self.GoodsImageView).rightSpaceToView(self.contentView, 10).heightIs(20);
     
     
 }
@@ -99,9 +101,9 @@
 
 - (void)setFrame:(CGRect)frame{
     
-    frame.origin.y += 2;
+    frame.origin.y += 1;
     
-    frame.size.height -= 4;
+    frame.size.height -= 2;
     
     [super setFrame:frame];
 }

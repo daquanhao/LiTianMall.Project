@@ -16,9 +16,7 @@
 
 @property (nonatomic, strong) HSQAcceptAddressListModel *model;
 
-/**
- * @brief 区分是修改地址，还是编辑地址
- */
+/** 区分是修改地址，还是编辑地址*/
 @property (nonatomic, copy) NSString *Adress_Url;
 
 @end

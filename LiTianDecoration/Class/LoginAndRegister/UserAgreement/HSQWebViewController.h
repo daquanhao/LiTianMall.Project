@@ -20,5 +20,4 @@
  */
 @property (nonatomic, copy) NSString *Url;
 
-
 @end

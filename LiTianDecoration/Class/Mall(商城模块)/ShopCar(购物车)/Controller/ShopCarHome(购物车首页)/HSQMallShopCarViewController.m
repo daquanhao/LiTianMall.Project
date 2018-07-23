@@ -19,7 +19,7 @@
 #import "HSQShopCarVCGoodsDataModel.h"
 #import "HSQShopCarGoodsTypeListModel.h"
 #import "HSQSubmitOrdersViewController.h"  // 确认订单
-#import "HSQLoginHomeViewController.h"  // 登录界面
+#import "HSQLoginViewController.h"  // 登录界面
 #import "HSQMineViewController.h"
 
 @interface HSQMallShopCarViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,HSQShopCartListDataCollectionViewCellDelegate,HSQShopCarGoodsGuiGeDataViewDelegate,HSQShopCarHeadListReusableViewDelegate>
@@ -1073,7 +1073,7 @@
     
     if (account.token.length == 0)
     {
-        HSQLoginHomeViewController *LoginVC = [[HSQLoginHomeViewController alloc] init];
+        HSQLoginViewController *LoginVC = [[HSQLoginViewController alloc] init];
         
         [self.navigationController pushViewController:LoginVC animated:YES];
     }
@@ -1348,6 +1348,7 @@
     }
     
     return  [manger toJSONDataString:goods_array];
+
 }
 
 /**

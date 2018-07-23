@@ -6,10 +6,6 @@
 //  Copyright © 2018年 administrator. All rights reserved.
 //
 
-#define KPayType @"KPayType"
-#define KFaPiao    @"KFaPiao"
-#define KRedPage @"RedPage"
-
 #import "HSQSubmitOrdersViewController.h"
 #import "HSQAccountTool.h"
 #import "HSQHeadSendAdressCell.h"
@@ -28,13 +24,6 @@
 #import "HSQAvailableToPayTypeView.h"  // 可用的支付方式
 #import "HSQMyOrderHomeViewController.h"  // 全部的订单
 #import "HSQPayMonerySuccessViewController.h" // 支付成功的界面
-
-#import "HSQShopCarManger.h"  // 购物车管理工具
-#import "HSQVoucherListModel.h"
-#import "HSQRedEnvelopeListModel.h"  // 红包的数据模型
-#import "HSQVoucherVoListView.h"  // 店铺券
-#import "HSQSubmitGoodsFooterCell.h"
-#import "HSQRedPageListView.h"  // 平台红包
 
 @interface HSQSubmitOrdersViewController ()<UITableViewDelegate,UITableViewDataSource,HSQSubmitOrderHeadAdressViewDelegate,HSQSubmitOrderFooterViewDelegate,UITextViewDelegate,HSQAvailableToPayTypeViewDelegate>
 
@@ -58,9 +47,7 @@
 
 @property (nonatomic, strong) NSMutableArray *YunFei_Array; // 运费数组
 
-@property (nonatomic, copy) NSString *SelectCouper_String; // 选中的满优惠
-
-@property (nonatomic, copy) NSString *SelectVoucherr_String; // 选中的店铺券
+@property (nonatomic, copy) NSString *SelectCouper_String; // 选中的优惠券
 
 @property (nonatomic, strong) NSMutableArray *SelectCouperDataSourcen; // 选中的优惠券的数据
 
@@ -76,14 +63,6 @@
 
 @property (nonatomic, copy) NSString *payId;  // 支付id
 
-@property (nonatomic, strong) NSMutableArray *redPackageVoList; // 平台的红包
-
-@property (nonatomic, copy) NSString *redPackage_String; // 选择的红包
-
-@property (nonatomic, copy) NSString *redPackage_ID; // 选择的红包id
-
-@property (nonatomic, strong) NSMutableArray *BottomSection; // 底部分区cell的个数
-
 @end
 
 @implementation HSQSubmitOrdersViewController
@@ -96,16 +75,6 @@
     }
     
     return _SelectCouperDataSourcen;
-}
-
--(NSMutableArray *)redPackageVoList{
-    
-    if (_redPackageVoList == nil) {
-        
-        self.redPackageVoList = [NSMutableArray array];
-    }
-    
-    return _redPackageVoList;
 }
 
 -(NSMutableArray *)adressSource{
@@ -136,16 +105,6 @@
     }
     
     return _YunFei_Array;
-}
-
-- (NSMutableArray *)BottomSection{
-    
-    if (_BottomSection == nil) {
-        
-        self.BottomSection = [NSMutableArray arrayWithObjects:KPayType,KFaPiao, nil];
-    }
-    
-    return _BottomSection;
 }
 
 - (void)viewDidLoad {
@@ -187,8 +146,6 @@
     
     NSDictionary *diction = @{@"token":account.token,@"clientType":KClientType,@"buyData":self.buyData,@"isCart":self.isCart,@"isExistBundling":self.isExistBundling,@"isGroup":self.isGroup};
     
-    NSLog(@"===我的参数===%@",diction);
-    
     AFNetworkRequestTool *requestTool = [AFNetworkRequestTool shareRequestTool];
     
     [requestTool.manger POST:UrlAdress(KBuyGoodsFirstBuUrl) parameters:diction progress:^(NSProgress * _Nonnull uploadProgress) {
@@ -197,7 +154,7 @@
         
         [[HSQProgressHUDManger Manger] DismissProgressHUD];
         
-//        HSQLog(@"=提交订单==%@",responseObject);
+        HSQLog(@"=提交订单==%@",responseObject);
         
         if ([responseObject[@"code"] integerValue] == 200)
         {
@@ -214,15 +171,6 @@
             
             // 优惠券的数据
             [self CouperDataWithRequestData:responseObject[@"datas"]];
-            
-            for (NSDictionary *dic in responseObject[@"datas"][@"buyStoreVoList"]) {
-                
-                HSQLog(@"==tijiao===%@",dic.allKeys);
-            }
-            
-            // 计算商品的总价格
-            [self CalculateTheTotalPriceOfTheGoods:responseObject];
-            
         }
         else
         {
@@ -235,33 +183,9 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"数据加载失败" SuperView:self.view];
         
     }];
-}
-
-/**
- * @brief 计算商品的总价格
- */
-- (void)CalculateTheTotalPriceOfTheGoods:(NSDictionary *)responseObject{
-    
-    NSArray *buyStoreVoList = responseObject[@"datas"][@"buyStoreVoList"];
-    
-    CGFloat Totalmonery = 0;
-    
-    for (NSInteger i = 0; i < buyStoreVoList.count; i++) {
-        
-        NSDictionary *Goods_Diction = buyStoreVoList[i];
-        
-        NSString *buyItemAmount = [NSString stringWithFormat:@"%@",Goods_Diction[@"buyItemAmount"]];
-        
-        Totalmonery = Totalmonery + buyItemAmount.floatValue;
-    }
-    
-    NSLog(@"=商品的而总价格====%.2f",Totalmonery);
-    
-    // 请求平台可用的红包
-    [self RequestListOfAvailableRedEnvelopesWithgoodsAmount:Totalmonery];
 }
 
 /**
@@ -350,18 +274,13 @@
     for (NSInteger i = 0; i < array.count; i++) {
         
         HSQSubmitOrderSelectCouperModel *model = [[HSQSubmitOrderSelectCouperModel alloc] init];
-        
         model.IsSelect = @"0";
-        
-        model.IsVoucher = @"0";
-        
-        model.voucherVoList = [NSMutableArray array];
-        
-        model.conformList = [NSMutableArray array];
+        model.couper_Source = [NSMutableArray array];
         
         [self.SelectCouperDataSourcen addObject:model];
     }
 }
+
 
 /**
  * @brief 创建tableView
@@ -378,13 +297,7 @@
     
     tableView.dataSource = self;
     
-    tableView.showsVerticalScrollIndicator = NO;
-    
-    tableView.showsHorizontalScrollIndicator = NO;
-    
     [tableView registerClass:[HSQSubmitOrderGoodsListCell class] forCellReuseIdentifier:@"HSQSubmitOrderGoodsListCell"];
-    
-    [tableView registerClass:[HSQSubmitGoodsFooterCell class] forCellReuseIdentifier:@"HSQSubmitGoodsFooterCell"];
     
     [tableView registerClass:[HSQSubmitOrderHeaderView class] forHeaderFooterViewReuseIdentifier:@"HSQSubmitOrderHeaderView"];
     
@@ -396,14 +309,12 @@
     
     // 顶部的收货地址
     HSQSubmitOrderHeadAdressView *HeadAdressView = [[HSQSubmitOrderHeadAdressView alloc] init];
-    
     HeadAdressView.delegate = self;
-    
     [self.view addSubview:HeadAdressView];
-    
     self.HeadAdressView = HeadAdressView;
     
 }
+
 
 /**
  * @brief 收货地址与商品信息组成的json串。
@@ -412,7 +323,7 @@
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
    
-    if (responseObject[@"address"] != [NSNull null]) // 没有地址，这时不能请求运费
+    if (responseObject[@"datas"][@"address"] != [NSNull null]) // 没有地址，这时不能请求运费
     {
         // 设置配送的地址
          params[@"addressId"] = responseObject[@"address"][@"addressId"];
@@ -448,9 +359,9 @@
     
     NSString *buyData = [NSString toJSONDataString:params];
     
-    if (responseObject[@"address"] != [NSNull null]) // 没有地址，这时不能请求运费
+    if (responseObject[@"datas"][@"address"] != [NSNull null]) // 没有地址，这时不能请求运费
     {
-        [self CalculateTheFreightWithGroup:responseObject[@"isGroup"] buyData:buyData];
+        [self CalculateTheFreightWithGroup:@"1" buyData:buyData];
     }
 }
 
@@ -463,8 +374,11 @@
     [[HSQProgressHUDManger Manger] ShowLoadingDataFromeServer:@"" ToView:self.view IsClearColor:YES];
     
     HSQAccount *account = [HSQAccountTool account];
-    
-    NSDictionary *params = @{@"token":account.token,@"clientType":KClientType,@"isGroup":isGroup,@"buyData":buyData};
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"token"] = account.token;
+    params[@"clientType"] = KClientType;
+    params[@"isGroup"] = isGroup;
+    params[@"buyData"] = buyData;
     
     AFNetworkRequestTool *requestTool = [AFNetworkRequestTool shareRequestTool];
     
@@ -528,321 +442,126 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return self.dataSource.count + 1;
+    return self.dataSource.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    if (section == self.dataSource.count)
-    {
-        return self.BottomSection.count;
-    }
-    else
-    {
-        HSQShopCarVCGoodsDataModel *model = self.dataSource[section];
-        
-        return model.buyGoodsSpuVoList.count;
-    }
+    HSQShopCarVCGoodsDataModel *model = self.dataSource[section];
+    
+    return model.buyGoodsSpuVoList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section{
     
-    if (section == self.dataSource.count)
-    {
-        return 5;
-    }
-    else
-    {
-        return 45;
-    }
+     return 45;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     
-    if (section == self.dataSource.count)
-    {
-        return 5;
-    }
-    else
-    {
-        return 45;
-    }
+    return 45;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    if (section == self.dataSource.count)
-    {
-        return nil;
-    }
-    else
-    {
-        HSQSubmitOrderHeaderView *HeaderView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"HSQSubmitOrderHeaderView"];
-        
-        HSQShopCarVCGoodsDataModel *model = self.dataSource[section];
-        
-        HeaderView.model = model;
-        
-        return HeaderView;
-    }
+    HSQSubmitOrderHeaderView *HeaderView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"HSQSubmitOrderHeaderView"];
+    
+     HSQShopCarVCGoodsDataModel *model = self.dataSource[section];
+    
+    HeaderView.model = model;
+    
+    return HeaderView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForFooterInSection:(NSInteger)section{
     
-    if (section == self.dataSource.count)
-    {
-         return 5;
-    }
-    else
-    {
-        // 判断店铺券是否存在,满优惠是否存在
-        HSQShopCarVCGoodsDataModel *model = self.dataSource[section];
-        
-        if (model.voucherVoList.count == 0 && model.conformList.count == 0)
-        {
-            return 170;
-        }
-        else if (model.voucherVoList.count == 0 || model.conformList.count == 0)
-        {
-            return 210;
-        }
-        else
-        {
-            return 260;
-        }
-    }
+    return 310;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     
-    if (section == self.dataSource.count)
-    {
-         return 5;
-    }
-    else
-    {
-        // 判断店铺券是否存在,满优惠是否存在
-        HSQShopCarVCGoodsDataModel *model = self.dataSource[section];
-        
-        if (model.voucherVoList.count == 0 && model.conformList.count == 0)
-        {
-            return 170;
-        }
-        else if (model.voucherVoList.count == 0 || model.conformList.count == 0)
-        {
-            return 210;
-        }
-        else
-        {
-             return 260;
-        }
-    }
+    return 310;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     
-    if (section == self.dataSource.count)
+    HSQSubmitOrderFooterView *FooterView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"HSQSubmitOrderFooterView"];
+    
+    FooterView.delegate = self;
+    
+    if (self.YunFei_Array.count != 0)
     {
-        return nil;
+        FooterView.diction = self.YunFei_Array[section];
+    }
+    
+    FooterView.textView.delegate = self;
+    
+    FooterView.Section = [NSString stringWithFormat:@"%ld",section];
+
+    // 选择的优惠券
+    HSQSubmitOrderSelectCouperModel *couperModel = self.SelectCouperDataSourcen[section];
+    
+    if (couperModel.IsSelect.integerValue != 0)
+    {
+        NSDictionary *dataDiction = couperModel.couper_Source[0];
+         FooterView.YouHuiContent_Label.text = [NSString stringWithFormat:@"参加%@%@",dataDiction[@"conformName"],dataDiction[@"shortRule"]];
     }
     else
     {
-        HSQSubmitOrderFooterView *FooterView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"HSQSubmitOrderFooterView"];
-        
-        FooterView.delegate = self;
-        
-        if (self.YunFei_Array.count != 0) {
-            
-            FooterView.diction = self.YunFei_Array[section];
-        }
-        
-        FooterView.textView.delegate = self;
-        
-        FooterView.Section = section;
-        
-        // 判断店铺券是否存在
-        HSQShopCarVCGoodsDataModel *model = self.dataSource[section];
-        
-        if (model.voucherVoList.count == 0)
-        {
-            FooterView.voucherVoList_BgView.hidden = YES;
-            
-            FooterView.TopMargin.constant = -40;
-        }
-        else
-        {
-            FooterView.voucherVoList_BgView.hidden = NO;
-            
-            FooterView.TopMargin.constant = 2;
-        }
-        
-        // 判断满优惠是否存在
-        if (model.conformList.count == 0)
-        {
-            FooterView.CouponsView.hidden = YES;
-            
-            FooterView.freightAmountTopMargin.constant = -40;
-        }
-        else
-        {
-            FooterView.CouponsView.hidden = NO;
-            
-            FooterView.freightAmountTopMargin.constant = 2;
-        }
-        
-        // 选择的店铺券
-        HSQSubmitOrderSelectCouperModel *couperModel = self.SelectCouperDataSourcen[section];
-        
-        if (couperModel.IsVoucher.integerValue != 0)
-        {
-            NSDictionary *dataDiction = couperModel.voucherVoList[0];
-            
-            FooterView.voucher_Label.text = [NSString stringWithFormat:@"使用店铺券省¥%.2f",[dataDiction[@"price"] floatValue]];
-        }
-        else
-        {
-            FooterView.voucher_Label.text = @"不使用优惠";
-        }
-        
-        // 选择的满优惠
-        if (couperModel.IsSelect.integerValue != 0)
-        {
-            NSDictionary *dataDiction = couperModel.conformList[0];
-            
-            FooterView.YouHuiContent_Label.text = [NSString stringWithFormat:@"参加%@%@",dataDiction[@"conformName"],dataDiction[@"shortRule"]];
-        }
-        else
-        {
-            FooterView.YouHuiContent_Label.text = @"不使用优惠";
-        }
-        
-        // 金额小计
-        HSQShopCarVCGoodsDataModel *GoodsDataModel = self.dataSource[section];
-        
-        FooterView.ShopCarModel = GoodsDataModel;
-        
-        return FooterView;
+        FooterView.YouHuiContent_Label.text = @"不使用优惠券";
     }
+    
+    // 选中的发票
+    NSString *type = [NSString stringWithFormat:@"%@",self.FaPiaoDiction[@"type"]];
+    
+    if (type.integerValue == 1)
+    {
+        FooterView.FaPiaoInfo_Label.text = @"不需要发票";
+    }
+    else
+    {
+        FooterView.FaPiaoInfo_Label.text = [NSString stringWithFormat:@"普通发票 %@ %@",self.FaPiaoDiction[@"title"],self.FaPiaoDiction[@"content"]];
+    }
+    
+    // 金额小计
+    HSQShopCarVCGoodsDataModel *model = self.dataSource[section];
+    
+    FooterView.ShopCarModel = model;
+    
+    return FooterView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.section == self.dataSource.count)
-    {
-        return 55;
-    }
-    else
-    {
-        HSQShopCarVCGoodsDataModel *model = self.dataSource[indexPath.section];
-        
-        HSQShopCarVCSecondGoodsDataModel *SecondModel = model.buyGoodsSpuVoList[indexPath.row];
-        
-        CGSize photosSize = [HSQShopCarGoodsGuiGeListView SizeWithDataModelArray:SecondModel.buyGoodsItemVoListSource];
-        
-        return KGoodsImageShopCaHeight + 40 + photosSize.height;
-    }
+    return 90;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.section == self.dataSource.count)
-    {
-        return 55;
-    }
-    else
-    {
-        HSQShopCarVCGoodsDataModel *model = self.dataSource[indexPath.section];
-        
-        HSQShopCarVCSecondGoodsDataModel *SecondModel = model.buyGoodsSpuVoList[indexPath.row];
-        
-        CGSize photosSize = [HSQShopCarGoodsGuiGeListView SizeWithDataModelArray:SecondModel.buyGoodsItemVoListSource];
-        
-        return KGoodsImageShopCaHeight + 40 + photosSize.height;
-    }
+    HSQShopCarVCGoodsDataModel *model = self.dataSource[indexPath.section];
+    
+    HSQShopCarVCSecondGoodsDataModel *SecondModel = model.buyGoodsSpuVoList[indexPath.row];
+    
+    CGSize photosSize = [HSQShopCarGoodsGuiGeListView SizeWithDataModelArray:SecondModel.buyGoodsItemVoListSource];
+    
+    return KGoodsImageShopCaHeight + 40 + photosSize.height;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.section == self.dataSource.count)
-    {
-        HSQSubmitGoodsFooterCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HSQSubmitGoodsFooterCell" forIndexPath:indexPath];
-        
-        NSString *type = self.BottomSection[indexPath.row];
-        
-        if ([type isEqualToString:KPayType])
-        {
-            cell.Placher_Label.text = @"支付方式";
-            
-            cell.Text_Label.text = @"在线支付";
-            
-            cell.Right_ImageView.hidden = YES;
-        }
-        else if ([type isEqualToString:KFaPiao])
-        {
-             cell.Placher_Label.text = @"发票信息";
-            
-            cell.Right_ImageView.hidden = NO;
-            
-            // 选中的发票
-            NSString *type = [NSString stringWithFormat:@"%@",self.FaPiaoDiction[@"type"]];
-            
-            if (type.integerValue == 1)
-            {
-                cell.Text_Label.text = @"不需要发票";
-            }
-            else
-            {
-                cell.Text_Label.text = [NSString stringWithFormat:@"普通发票 %@ %@",self.FaPiaoDiction[@"title"],self.FaPiaoDiction[@"content"]];
-            }
-            
-        }
-        else if ([type isEqualToString:KRedPage])
-        {
-            cell.Placher_Label.text = @"平台红包";
-            
-            cell.Right_ImageView.hidden = NO;
-            
-            if (self.redPackage_String.length == 0)
-            {
-                cell.Text_Label.text = @"不使用优惠";
-            }
-            else
-            {
-                cell.Text_Label.text = [NSString stringWithFormat:@"使用平台红包省¥%.2f",self.redPackage_String.floatValue];
-            }
-        }
-        
-        return cell;
-    }
-    else
-    {
-        HSQSubmitOrderGoodsListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HSQSubmitOrderGoodsListCell" forIndexPath:indexPath];
-        
-        HSQShopCarVCGoodsDataModel *model = self.dataSource[indexPath.section];
-        
-        cell.SecondModel = model.buyGoodsSpuVoList[indexPath.row];
-        
-        return cell;
-    }
+    HSQSubmitOrderGoodsListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"HSQSubmitOrderGoodsListCell" forIndexPath:indexPath];
+    
+    HSQShopCarVCGoodsDataModel *model = self.dataSource[indexPath.section];
+    
+    cell.SecondModel = model.buyGoodsSpuVoList[indexPath.row];
+    
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-    if (indexPath.section == self.dataSource.count)
-    {
-        NSString *type = self.BottomSection[indexPath.row];
-        
-         if ([type isEqualToString:KFaPiao]) // 选择发票
-        {
-            [self SelectInvoiceInformationBtnClickAction];
-        }
-        else if ([type isEqualToString:KRedPage]) // 选择红包
-        {
-            [self SelectPlatformRedEnvelopeClickAction];
-        }
-    }
     
 }
 
@@ -873,20 +592,15 @@
         AdressListVC.SelectAdressModel = ^(HSQAcceptAddressListModel *model) {
 
             NSString *adress = [NSString stringWithFormat:@"%@%@",model.areaInfo,model.address];
-            
             CGSize AdressSize = [NSString SizeOfTheText:adress font:[UIFont systemFontOfSize:14.0] MaxSize:CGSizeMake(KScreenWidth - 80, MAXFLOAT)];
-            
             self.HeadAdressView.frame = CGRectMake(0, 0, KScreenWidth, AdressSize.height + 50);
-            
             self.Orgin_Frame = self.HeadAdressView.frame;
-            
             self.HeadAdressView.model = model;
             
             // 地址的id
             self.addressId = model.addressId;
             
             self.TableView.contentInset = UIEdgeInsetsMake( self.Orgin_Frame.size.height, 0, 0, 0);
-            
             [self.TableView reloadData];
             
            // 计算运费
@@ -897,15 +611,63 @@
 }
 
 /**
+ * @brief 选择用户的优惠券
+ */
+- (void)ChooseABusinessDiscountButtonClickAction:(UIButton *)sender{
+    
+    HSQSubmitOrderFooterView *footerView = (HSQSubmitOrderFooterView *)sender.superview.superview;
+    
+     HSQShopCarVCGoodsDataModel *model = self.dataSource[footerView.Section.integerValue];
+    
+    // 优惠券的数据模型
+    HSQSubmitOrderSelectCouperModel *CouperModel = self.SelectCouperDataSourcen[footerView.Section.integerValue];
+    
+    // 优惠券的展示界面
+    HSQSubmitCouperListView *coupListView = [HSQSubmitCouperListView initSubmitCouperListView];
+    
+    [coupListView SetValueDataWithArray:model.conformList Select_Index:self.SelectCouper_String];
+    
+    coupListView.SelectCouperDataBlock = ^(NSIndexPath *indexPath) {
+                
+        if (indexPath.row == 0)
+        {
+            CouperModel.IsSelect = @"0";
+            [CouperModel.couper_Source removeAllObjects];
+            self.SelectCouper_String = @"-200";
+        }
+        else
+        {
+             CouperModel.IsSelect = @"1";
+            
+             [CouperModel.couper_Source removeAllObjects];
+            
+            NSDictionary *dict = model.conformList[indexPath.row - 1];
+            
+            self.SelectCouper_String = [NSString stringWithFormat:@"%@",dict[@"conformId"]];
+            
+            [CouperModel.couper_Source addObject:dict];
+            
+            model.conformId = [NSString stringWithFormat:@"%@",dict[@"conformId"]];
+        }
+        
+        [self.TableView reloadData];
+        
+    };
+    
+    [coupListView ShowSubmitCouperListView];
+
+}
+
+/**
  * @brief 买家留言
  */
 - (void)textViewDidEndEditing:(UITextView *)textView{
     
     HSQSubmitOrderFooterView *footerView = (HSQSubmitOrderFooterView *)textView.superview.superview.superview;
     
-    HSQLog(@"===编辑结束==%ld===%@",footerView.Section,textView.text);
+    HSQLog(@"===编辑结束==%@===%@",footerView.Section,textView.text);
     
-    HSQShopCarVCGoodsDataModel *firstModel = self.dataSource[footerView.Section];
+    HSQShopCarVCGoodsDataModel *firstModel = self.dataSource[footerView.Section.integerValue];
     
     firstModel.receiverMessage = textView.text;
 }
@@ -913,7 +675,7 @@
 /**
  * @brief 选择发票信息
  */
-- (void)SelectInvoiceInformationBtnClickAction{
+- (void)SelectInvoiceInformationBtnClickAction:(UIButton *)sender{
     
     HSQSelecttheInvoiceViewController *InvoiceInformationVC = [[HSQSelecttheInvoiceViewController alloc] init];
 
@@ -929,191 +691,6 @@
     [self.navigationController pushViewController:InvoiceInformationVC animated:YES];
 
 }
-
-/**
- * @brief 选择满优惠
- */
-- (void)ChooseABusinessDiscountButtonClickAction:(UIButton *)sender{
-    
-    HSQSubmitOrderFooterView *footerView = (HSQSubmitOrderFooterView *)sender.superview.superview;
-    
-    HSQShopCarVCGoodsDataModel *model = self.dataSource[footerView.Section];
-    
-    // 优惠券的数据模型
-    HSQSubmitOrderSelectCouperModel *CouperModel = self.SelectCouperDataSourcen[footerView.Section];
-    
-    // 优惠券的展示界面
-    HSQSubmitCouperListView *coupListView = [HSQSubmitCouperListView initSubmitCouperListView];
-    
-    [coupListView SetValueDataWithArray:model.conformList Select_Index:self.SelectCouper_String];
-    
-    coupListView.SelectCouperDataBlock = ^(NSIndexPath *indexPath) {
-        
-        if (indexPath.row == 0)
-        {
-            CouperModel.IsSelect = @"0";
-            
-            [CouperModel.conformList removeAllObjects];
-            
-            self.SelectCouper_String = @"-200";
-        }
-        else
-        {
-            CouperModel.IsSelect = @"1";
-            
-            [CouperModel.conformList removeAllObjects];
-            
-            NSDictionary *dict = model.conformList[indexPath.row - 1];
-            
-            self.SelectCouper_String = [NSString stringWithFormat:@"%@",dict[@"conformId"]];
-            
-            [CouperModel.conformList addObject:dict];
-            
-            model.conformId = [NSString stringWithFormat:@"%@",dict[@"conformId"]];
-        }
-        
-        [self.TableView reloadData];
-        
-    };
-    
-    [coupListView ShowSubmitCouperListView];
-    
-}
-
-
-/**
- * @brief 选择店铺券
- */
-- (void)ChooseShopCouponBtnClickAction:(UIButton *)sender{
-    
-    HSQSubmitOrderFooterView *footerView = (HSQSubmitOrderFooterView *)sender.superview.superview;
-    
-    HSQShopCarVCGoodsDataModel *model = self.dataSource[footerView.Section];
-    
-    // 优惠券的数据模型
-    HSQSubmitOrderSelectCouperModel *VoucherModel = self.SelectCouperDataSourcen[footerView.Section];
-    
-    // 优惠券的展示界面
-    HSQVoucherVoListView *VoucherVoListView = [HSQVoucherVoListView initSubmitVoucherListView];
-    
-    [VoucherVoListView SetValueDataWithArray:model.voucherVoList Select_Index:self.SelectVoucherr_String];
-    
-    VoucherVoListView.SelectVoucherDataBlock  = ^(NSIndexPath *indexPath) {
-        
-        if (indexPath.row == 0)
-        {
-            VoucherModel.IsVoucher = @"0";
-            
-            [VoucherModel.voucherVoList removeAllObjects];
-            
-            self.SelectVoucherr_String = @"-200";
-        }
-        else
-        {
-            VoucherModel.IsVoucher = @"1";
-            
-            [VoucherModel.voucherVoList removeAllObjects];
-            
-            NSDictionary *dict = model.voucherVoList[indexPath.row - 1];
-            
-            self.SelectVoucherr_String = [NSString stringWithFormat:@"%@",dict[@"voucherId"]];
-            
-            [VoucherModel.voucherVoList addObject:dict];
-            
-            model.voucherId = [NSString stringWithFormat:@"%@",dict[@"voucherId"]];
-        }
-        
-        NSLog(@"===youhui==%@",VoucherModel.voucherVoList);
-        
-        [self.TableView reloadData];
-        
-    };
-    
-    [VoucherVoListView ShowSubmitVoucherListView];
-}
-
-/**
- * @brief 选择平台红包
- */
-- (void)SelectPlatformRedEnvelopeClickAction{
-    
-    HSQRedPageListView *RedPageListView = [HSQRedPageListView initSubmitRedPageListView];
-    
-    [RedPageListView SetValueDataWithArray:self.redPackageVoList Select_Index:self.redPackage_ID];
-    
-    RedPageListView.SelectRedPageDataBlock = ^(NSIndexPath *indexPath) {
-        
-        if (indexPath.row == 0)
-        {
-            self.redPackage_String = @"";
-            
-            self.redPackage_ID = @"";
-        }
-        else
-        {
-            HSQRedEnvelopeListModel *model = self.redPackageVoList[indexPath.row - 1];
-            
-            self.redPackage_String = [NSString stringWithFormat:@"%@",model.redPackagePrice];
-            
-            self.redPackage_ID = model.redPackageId;
-        }
-        
-        NSLog(@"===红包==%@",self.redPackage_String);
-        
-        [self.TableView reloadData];
-    };
-    
-    [RedPageListView ShowSubmitRedPageListView];
-}
-
-/**
- * @brief 请求平台的可用红包
- */
-- (void)RequestListOfAvailableRedEnvelopesWithgoodsAmount:(CGFloat)goodsAmount{
-    
-    [[HSQProgressHUDManger Manger] ShowLoadingDataFromeServer:@"" ToView:self.view IsClearColor:YES];
-    
-    HSQAccount *account = [HSQAccountTool account];
-    
-    NSDictionary *diction = @{@"token":account.token,@"clientType":KClientType,@"goodsAmount":@(goodsAmount)};
-    
-    NSLog(@"===我的参数===%@",diction);
-    
-    AFNetworkRequestTool *requestTool = [AFNetworkRequestTool shareRequestTool];
-    
-    [requestTool.manger POST:UrlAdress(KRedEnvelopesAvailableUrl) parameters:diction progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
-        [[HSQProgressHUDManger Manger] DismissProgressHUD];
-        
-        HSQLog(@"=平台红包==%@",responseObject);
-        
-        if ([responseObject[@"code"] integerValue] == 200)
-        {
-            self.redPackageVoList = [HSQRedEnvelopeListModel mj_objectArrayWithKeyValuesArray:responseObject[@"datas"][@"redPackageVoList"]];
-        }
-        else
-        {
-            NSString *errorString = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"error"]];
-            
-            [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:errorString SuperView:self.view];
-        }
-        
-        if (self.redPackageVoList.count != 0)
-        {
-            [self.BottomSection addObject:KRedPage];
-        }
-        
-        [self.TableView reloadData];
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
-        
-    }];
-}
-
 
 /**
  * @brief 点击输入框return键的时候
@@ -1229,10 +806,7 @@
             NSMutableArray *goodsList = [NSMutableArray array];
 
             for (HSQShopCarVCSecondGoodsDataModel *secondModel in FirstModel.buyGoodsSpuVoList) {
-                
-                // 从本地购物车删除数据
-                 [[HSQShopCarManger sharedShopCarManger] RemoveGoodsModel:secondModel.commonId];
-                
+
                 for (HSQShopCarGoodsTypeListModel *ThirdModel in secondModel.buyGoodsItemVoListSource) {
 
                     // 商品的参数
@@ -1257,7 +831,7 @@
             Store_params[@"storeId"] = FirstModel.storeId;
             Store_params[@"receiverMessage"] = FirstModel.receiverMessage;  // 买家留言
             Store_params[@"conformId"] = (FirstModel.conformId.length == 0 ? @"":FirstModel.conformId);  // 优惠活动id
-            Store_params[@"voucherId"] = (FirstModel.voucherId.length == 0 ? @"":FirstModel.voucherId);;  // 优惠券Id,可为空
+            Store_params[@"voucherId"] = @"";  // 优惠券Id,可为空
 
             [storeList addObject:Store_params];
 
@@ -1296,7 +870,7 @@
             Submit_Params[@"invoiceCode"] = [NSString stringWithFormat:@"%@",self.FaPiaoDiction[@"code"]]; //  纳税人识别号
         }
 
-        Submit_Params[@"redPackageId"] = (self.redPackage_ID.length == 0 ? @"" : self.redPackage_ID); //  红包Id,选填，不使用时留空
+        Submit_Params[@"redPackageId"] = @""; //  红包Id,选填，不使用时留空
         Submit_Params[@"isExistTrys"] = [NSString stringWithFormat:@"%@",self.dataDiction[@"isExistTrys"]];; //  是否含有拥有试用资格的商品。由buy/step1接口返回不作更改原样提交
         Submit_Params[@"isExistBundling"] = @"0"; // 购买的商品是否含有优惠套装（1–是 0–否）
 
@@ -1333,15 +907,6 @@
             
             // 获取可用的支付方式
             [self GetsAListOfPaymentOptionsAvailable:payId];
-            
-             // 从本地购物车删除数据
-            for (HSQShopCarVCGoodsDataModel *FirstModel in self.dataSource) {
-                
-                for (HSQShopCarVCSecondGoodsDataModel *secondModel in FirstModel.buyGoodsSpuVoList) {
-                    
-                    [[HSQShopCarManger sharedShopCarManger] RemoveGoodsModel:secondModel.commonId];
-                }
-            }
         }
         else
         {
@@ -1352,7 +917,7 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"网络出问题啦！" SuperView:self.view];
         
     }];
 }
@@ -1402,7 +967,7 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"网络出问题啦！" SuperView:self.view];
         
     }];
 }
@@ -1476,11 +1041,23 @@
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
+        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:@"网络出问题啦！" SuperView:self.view];
         
     }];
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 - (void) dealloc{

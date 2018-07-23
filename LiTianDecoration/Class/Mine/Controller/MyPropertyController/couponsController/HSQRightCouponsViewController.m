@@ -7,7 +7,6 @@
 //
 
 #import "HSQRightCouponsViewController.h"
-#import "HSQAccountTool.h"
 
 @interface HSQRightCouponsViewController ()<UITextFieldDelegate>
 
@@ -23,7 +22,6 @@
 
 @property (nonatomic, copy) NSString *captchaKey;
 
-@property (weak, nonatomic) IBOutlet UILabel *LeftPlacher_Label;
 
 @end
 
@@ -51,25 +49,17 @@
  */
 - (void)setUpPlacherString{
     
-    if (self.Source == 100)  // 店铺券
+    if (self.ID_Number.integerValue == 100)  // 店铺券
     {
         self.Placher_Label.text = @"请输入卡密领取优惠券";
-        
         self.SecondPlacherLabel.text = @"领取优惠券后可以在购买商品下单时抵扣订单金额";
-        
         self.Name_TextField.placeholder = @"请输入店铺优惠券卡密号";
-        
-        self.LeftPlacher_Label.text = @"卡密：";
     }
     else  // 平台券
     {
         self.Placher_Label.text = @"请输入平台红包卡密号码";
-        
         self.SecondPlacherLabel.text = @"确认生效后可在购物车使用折扣现金支付";
-        
         self.Name_TextField.placeholder = @"请输入平台红包卡密号";
-        
-        self.LeftPlacher_Label.text = @"红包卡密:";
     }
 }
 
@@ -114,105 +104,13 @@
  * @brief 确认提交的点击事件
  */
 - (IBAction)ConfirmToSubmitButtonClickAction:(UIButton *)sender {
-    
-    if (self.Name_TextField.text.length == 0)
-    {
-        [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:@"请输入卡密码" SupView:self.view];
-    }
-    else if (self.Code_TextField.text.length == 0)
-    {
-        [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:@"请输入验证码" SupView:self.view];
-    }
-    else
-    {
-        if (self.Source == 200)
-        {
-            [self GetRedEnvelopeWithYourCardNumber];
-        }
-        else if (self.Source == 100)
-        {
-            [self GetCouponsWithYourCardPassword];
-        }
-    }
 }
 
-/**
- * @brief 通过卡密码领取红包
- */
 
-- (void)GetRedEnvelopeWithYourCardNumber{
-    
-    [[HSQProgressHUDManger Manger] ShowLoadingDataFromeServer:nil ToView:self.view IsClearColor:NO];
-    
-    NSDictionary *params = @{@"token":[HSQAccountTool account].token,@"pwdCode":self.Name_TextField.text,@"captchaVal":self.Code_TextField.text,@"captchaKey":self.captchaKey};
-    
-    AFNetworkRequestTool *RequestTool = [AFNetworkRequestTool shareRequestTool];
-    
-    [RequestTool.manger POST:UrlAdress(KreceivesredenvelopesPWDUrl) parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *responseObject) {
-        
-        HSQLog(@"=通过卡密码领取红包==%@",responseObject);
-        
-        [[HSQProgressHUDManger Manger] DismissProgressHUD];
-        
-        if ([responseObject[@"code"] integerValue] == 200)
-        {
-            [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:@"领取成功！" SupView:self.view];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"RedEnvelopeWasSuccessfullyReceivedNotif" object:self];
-        }
-        else
-        {
-            NSString *errorString = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"error"]];
-            
-            [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:errorString SuperView:self.view];
-        }
 
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
-    }];
-    
-}
 
-/**
- * @brief 通过卡密码领取优惠券
- */
-- (void)GetCouponsWithYourCardPassword{
-    
-    [[HSQProgressHUDManger Manger] ShowLoadingDataFromeServer:nil ToView:self.view IsClearColor:NO];
-    
-    NSDictionary *params = @{@"token":[HSQAccountTool account].token,@"pwdCode":self.Name_TextField.text,@"captchaVal":self.Code_TextField.text,@"captchaKey":self.captchaKey};
-    
-    AFNetworkRequestTool *RequestTool = [AFNetworkRequestTool shareRequestTool];
-    
-    [RequestTool.manger POST:UrlAdress(KGetVoucherpwdUrl) parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *responseObject) {
-        
-        HSQLog(@"=通过卡密码领取优惠券==%@",responseObject);
-        
-        [[HSQProgressHUDManger Manger] DismissProgressHUD];
-        
-        if ([responseObject[@"code"] integerValue] == 200)
-        {
-            [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:@"领取成功！" SupView:self.view];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"VoucherWasSuccessfullyReceivedNotif" object:self];
-        }
-        else
-        {
-            NSString *errorString = [NSString stringWithFormat:@"%@",responseObject[@"datas"][@"error"]];
-            
-            [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:errorString SuperView:self.view];
-        }
-        
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-        [[HSQProgressHUDManger Manger] ShowDisplayFailedToLoadData:KErrorPlacherString SuperView:self.view];
-    }];
-}
+
+
 
 
 
@@ -237,11 +135,6 @@
     }
     
     return YES;
-}
-
-- (void)dealloc{
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 

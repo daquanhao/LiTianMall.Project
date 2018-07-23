@@ -187,7 +187,7 @@
         [self.tableView addSubview:self.noDataView];
         
         // 提示数据请求失败
-        [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:KErrorPlacherString SupView:self.view];
+        [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:@"网络出现问题" SupView:self.view];
     }];
 }
 
@@ -241,7 +241,7 @@
         [self.tableView.mj_footer endRefreshing];
         
         // 提示数据请求失败
-        [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:KErrorPlacherString SupView:self.view];
+        [[HSQProgressHUDManger Manger] ShowProgressHUDPromptText:@"网络出现问题" SupView:self.view];
     }];
     
 }
